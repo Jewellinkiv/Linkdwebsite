@@ -886,12 +886,31 @@ textarea:focus {
   padding: clamp(18px, 5vw, 72px);
 }
 
+.not-found-page {
+  align-items: center;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(215, 189, 130, 0.2), transparent 30%),
+    linear-gradient(135deg, #07111f, #121a38);
+  color: var(--white);
+  display: flex;
+  min-height: 100vh;
+  padding: clamp(18px, 5vw, 72px);
+}
+
 .login-shell {
   display: grid;
   gap: 34px;
   grid-template-columns: minmax(0, 0.9fr) minmax(360px, 440px);
   margin: 0 auto;
   max-width: 1040px;
+  width: 100%;
+}
+
+.not-found-shell {
+  display: grid;
+  gap: 34px;
+  margin: 0 auto;
+  max-width: 760px;
   width: 100%;
 }
 
@@ -914,6 +933,16 @@ textarea:focus {
 }
 
 .login-copy p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.not-found-shell h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+}
+
+.not-found-shell p {
   color: rgba(255, 255, 255, 0.72);
   font-size: 1.08rem;
   line-height: 1.7;

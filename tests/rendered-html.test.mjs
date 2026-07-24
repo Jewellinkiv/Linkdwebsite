@@ -34,7 +34,18 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /JewelLink CRM/i);
   assert.match(html, /The system of record behind every jewelry retail workflow/i);
   assert.match(html, /Linkd \+ CountRetail AI/i);
+  assert.match(html, /application\/ld\+json/i);
+  assert.match(html, /SoftwareApplication/i);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview/i);
+});
+
+test("renders a branded not-found page", async () => {
+  const response = await render("/missing-launch-page");
+  assert.equal(response.status, 404);
+
+  const html = await response.text();
+  assert.match(html, /Back to the operational core/i);
+  assert.match(html, /Return to Linkd/i);
 });
 
 test("keeps Postmark configuration documented in code", async () => {

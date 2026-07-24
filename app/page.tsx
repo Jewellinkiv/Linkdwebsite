@@ -144,9 +144,51 @@ const partnerPaths = [
   },
 ];
 
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Linkd",
+    url: "https://www.linkd.com/",
+    logo: "https://www.linkd.com/assets/brand/linkd-logo-main.png",
+    description:
+      "Luxury POS, inventory, security, accounting, and store operations for modern jewelry retailers.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Linkd",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: "https://www.linkd.com/",
+    image: "https://www.linkd.com/assets/screenshots/linkd-login-tagline-devices.png",
+    description:
+      "The operational core for modern jewelry retail, connecting POS, inventory, house accounts, security, reporting, and luxury retail integrations.",
+    audience: {
+      "@type": "Audience",
+      audienceType: "Luxury retail jewelers",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Linkd",
+    url: "https://www.linkd.com/",
+    potentialAction: {
+      "@type": "ContactAction",
+      target: "https://www.linkd.com/#early-access",
+      name: "Request Linkd early release access",
+    },
+  },
+];
+
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <header className="site-header">
         <Link className="brand-lockup" href="#top" aria-label="Linkd home">
           <span className="brand-logo-crop">
