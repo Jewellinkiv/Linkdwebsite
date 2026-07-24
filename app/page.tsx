@@ -64,6 +64,7 @@ export default function Home() {
               width={5334}
               height={3205}
               priority
+              unoptimized
             />
           </span>
         </Link>
@@ -118,44 +119,21 @@ export default function Home() {
         </div>
 
         <div className="product-stage" aria-label="Linkd product preview">
-          <div className="product-topbar">
-            <span></span>
-            <strong>Linkd Operations Console</strong>
-            <small>Placeholder preview</small>
-          </div>
-          <div className="product-grid">
-            <div className="pos-panel">
-              <p>Active sale</p>
-              <h2>$18,420.00</h2>
-              <div className="line-item">
-                <span>Oval diamond ring</span>
-                <strong>$14,900</strong>
-              </div>
-              <div className="line-item">
-                <span>Service plan</span>
-                <strong>$895</strong>
-              </div>
-              <div className="line-item">
-                <span>Tax estimate</span>
-                <strong>$1,421</strong>
-              </div>
-              <button type="button">Complete checkout</button>
-            </div>
-            <div className="signal-panel inventory-panel">
-              <span className="mini-label">Inventory</span>
-              <strong>12 aging exceptions</strong>
-              <p>RFID case scan aligned at 9:42 AM</p>
-            </div>
-            <div className="signal-panel account-panel">
-              <span className="mini-label">House account</span>
-              <strong>Net 30 review</strong>
-              <p>Interest model pending manager approval</p>
-            </div>
-            <div className="signal-panel audit-panel">
-              <span className="mini-label">Security</span>
-              <strong>Audit trail linked</strong>
-              <p>Camera timestamp and POS action matched</p>
-            </div>
+          <Image
+            className="hero-device-image"
+            src="/assets/screenshots/linkd-login-tagline-devices.png"
+            alt="Linkd login and workspace shown on a MacBook and iPad"
+            width={1536}
+            height={1024}
+            priority
+            unoptimized
+          />
+          <div className="hero-visual-signals" aria-label="Core Linkd workflows">
+            <span>POS</span>
+            <span>Inventory</span>
+            <span>Services</span>
+            <span>Security</span>
+            <span>Reporting</span>
           </div>
         </div>
       </section>
@@ -219,6 +197,7 @@ export default function Home() {
               alt="JewelLink"
               width={12500}
               height={6250}
+              unoptimized
             />
           </a>
           <a href="https://www.countretail.com/" target="_blank" rel="noreferrer">
@@ -227,6 +206,7 @@ export default function Home() {
               alt="CountRetail AI"
               width={3538}
               height={504}
+              unoptimized
             />
           </a>
         </div>

@@ -18,6 +18,7 @@ export default function LoginPage() {
               width={5334}
               height={3205}
               priority
+              unoptimized
             />
           </span>
         </Link>

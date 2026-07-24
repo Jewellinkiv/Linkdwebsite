@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.linkd.com"),
   title: {
     default: "Linkd | The Operational Core for Modern Jewelry Retail",
     template: "%s | Linkd",
@@ -28,13 +29,25 @@ export const metadata: Metadata = {
     description:
       "Luxury POS, inventory, security, accounting, and store operations built for modern jewelry retailers.",
     type: "website",
-    url: "https://linkd.com",
+    url: "/",
+    images: [
+      {
+        url: "/assets/screenshots/linkd-login-tagline-devices.png",
+        width: 1536,
+        height: 1024,
+        alt: "Linkd luxury jewelry retail POS on desktop and tablet",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Linkd | The Operational Core for Modern Jewelry Retail",
     description:
       "Luxury POS, inventory, security, accounting, and store operations built for modern jewelry retailers.",
+    images: ["/assets/screenshots/linkd-login-tagline-devices.png"],
+  },
+  alternates: {
+    canonical: "/",
   },
 };
 
