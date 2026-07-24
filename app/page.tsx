@@ -25,6 +25,30 @@ const pillars = [
   },
 ];
 
+const productShots = [
+  {
+    label: "POS",
+    title: "Counter workflows built around jewelry sales.",
+    copy: "Checkout, client selection, service add-ons, tender controls, parking, register permissions, and manager review live in one workspace.",
+    image: "/assets/screenshots/linkd-pos-register-devices.png",
+    alt: "Linkd POS register shown on laptop and tablet",
+  },
+  {
+    label: "Inventory",
+    title: "A live view of every item, transfer, and exception.",
+    copy: "Search, serialized inventory, RFID readiness, purchasing, receiving, aging, and movement history stay close to the daily store flow.",
+    image: "/assets/screenshots/linkd-inventory-search-devices.png",
+    alt: "Linkd inventory search shown on laptop and tablet",
+  },
+  {
+    label: "CRM context",
+    title: "Customer history connected to the operational record.",
+    copy: "Linkd keeps store activity, finance status, service history, and customer context ready for JewelLink CRM and clienteling workflows.",
+    image: "/assets/screenshots/linkd-customers-crm-devices.png",
+    alt: "Linkd customer management shown on laptop and tablet",
+  },
+];
+
 const securityRows = [
   "RFID inventory integrations through TrackTech",
   "Store camera and CountRetail audit trail alignment",
@@ -138,6 +162,36 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section-light product-showcase-section" aria-label="Linkd product screens">
+        <div className="section-copy">
+          <p className="eyebrow">Product preview</p>
+          <h2>One operational workspace from the sales floor to the back office.</h2>
+          <p>
+            Early screenshot studies are being shaped into launch visuals for
+            the first release. The product story starts with the workflows
+            luxury jewelers run every day: sell, track, secure, and follow up.
+          </p>
+        </div>
+        <div className="product-shot-grid">
+          {productShots.map((shot) => (
+            <article className="product-shot-card" key={shot.label}>
+              <Image
+                src={shot.image}
+                alt={shot.alt}
+                width={1536}
+                height={1024}
+                unoptimized
+              />
+              <div>
+                <span>{shot.label}</span>
+                <h3>{shot.title}</h3>
+                <p>{shot.copy}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section-light intro-band" id="platform">
         <div className="section-copy">
           <p className="eyebrow">Platform</p>
@@ -209,6 +263,24 @@ export default function Home() {
               unoptimized
             />
           </a>
+        </div>
+        <div className="partner-notes">
+          <article>
+            <span>JewelLink</span>
+            <p>
+              Clienteling, training, follow-up, texting, and CRM context can
+              sit beside Linkd POS data instead of living in a disconnected
+              sales process.
+            </p>
+          </article>
+          <article>
+            <span>CountRetail AI</span>
+            <p>
+              Store traffic, camera intelligence, marketing attribution, and
+              inventory pressure signals can support the operational decisions
+              Linkd records.
+            </p>
+          </article>
         </div>
         <div className="integration-cloud" aria-label="Planned integrations">
           {integrations.map((integration) => (
