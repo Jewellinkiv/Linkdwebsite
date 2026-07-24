@@ -25,15 +25,19 @@ export default function LoginPage() {
 
         <div className="login-copy">
           <p className="eyebrow">POS access</p>
-          <h1>Sign in to Linkd.</h1>
+          <h1>pos.linkd.com</h1>
           <p>
-            This placeholder route is ready for the future
-            <strong> pos.linkd.com/login </strong>
-            handoff when authentication is connected.
+            This page is prepared as the Linkd POS portal handoff for store
+            teams. When authentication is connected, this experience can move
+            behind <strong>pos.linkd.com/login</strong>.
           </p>
         </div>
 
         <form className="login-form">
+          <div className="portal-note">
+            <span>Operator portal</span>
+            <p>Secure POS, inventory, reports, and integration access for approved retailers.</p>
+          </div>
           <label>
             Email
             <input type="email" autoComplete="email" placeholder="you@store.com" />

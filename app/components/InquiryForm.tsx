@@ -15,6 +15,14 @@ const interestOptions = [
   "Open API or custom integrations",
 ];
 
+const demoFocusOptions = [
+  "Linkd POS early release",
+  "Linkd + JewelLink CRM",
+  "Linkd + CountRetail AI",
+  "Full luxury operations stack",
+  "Migration planning",
+];
+
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
 export default function InquiryForm() {
@@ -54,6 +62,7 @@ export default function InquiryForm() {
       company: String(data.get("company") || ""),
       locations: String(data.get("locations") || ""),
       currentPos: String(data.get("currentPos") || ""),
+      demoFocus: String(data.get("demoFocus") || ""),
       timeline: String(data.get("timeline") || ""),
       preferredContact: String(data.get("preferredContact") || ""),
       notes: String(data.get("notes") || ""),
@@ -133,6 +142,14 @@ export default function InquiryForm() {
         <label>
           Current POS
           <input name="currentPos" placeholder="EDGE, Lightspeed, custom, etc." />
+        </label>
+        <label>
+          Demo focus
+          <select name="demoFocus" defaultValue="Linkd POS early release">
+            {demoFocusOptions.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
         </label>
         <label>
           Timeline

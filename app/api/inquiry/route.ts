@@ -10,6 +10,7 @@ type InquiryPayload = {
   company?: unknown;
   locations?: unknown;
   currentPos?: unknown;
+  demoFocus?: unknown;
   timeline?: unknown;
   preferredContact?: unknown;
   notes?: unknown;
@@ -40,6 +41,7 @@ export async function POST(request: Request) {
     company: field(payload.company),
     locations: field(payload.locations),
     currentPos: field(payload.currentPos),
+    demoFocus: field(payload.demoFocus),
     timeline: field(payload.timeline),
     preferredContact: field(payload.preferredContact),
     notes: field(payload.notes),
@@ -143,6 +145,7 @@ function buildTextEmail(inquiry: Required<Omit<InquiryPayload, "interests" | "we
     `Store: ${inquiry.company}`,
     `Locations: ${inquiry.locations}`,
     `Current POS: ${inquiry.currentPos || "Not provided"}`,
+    `Demo focus: ${inquiry.demoFocus || "Not provided"}`,
     `Timeline: ${inquiry.timeline || "Not provided"}`,
     `Preferred contact: ${inquiry.preferredContact || "Not provided"}`,
     `Interests: ${inquiry.interests.join(", ") || "Not provided"}`,
@@ -160,6 +163,7 @@ function buildHtmlEmail(inquiry: Required<Omit<InquiryPayload, "interests" | "we
     ["Store", inquiry.company],
     ["Locations", inquiry.locations],
     ["Current POS", inquiry.currentPos || "Not provided"],
+    ["Demo focus", inquiry.demoFocus || "Not provided"],
     ["Timeline", inquiry.timeline || "Not provided"],
     ["Preferred contact", inquiry.preferredContact || "Not provided"],
     ["Interests", inquiry.interests.join(", ") || "Not provided"],

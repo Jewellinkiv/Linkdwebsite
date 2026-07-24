@@ -63,6 +63,45 @@ const productShots = [
   },
 ];
 
+const featureExplainers = [
+  {
+    label: "POS",
+    title: "Counter checkout and service intake",
+    copy: "Run fine jewelry sales, repairs, appraisals, special orders, quotes, layaway payments, and tender controls from a workspace built around the customer at the counter.",
+    bullets: ["Fast item lookup", "Parked sales", "Manager approvals"],
+  },
+  {
+    label: "Inventory",
+    title: "Serialized inventory with movement history",
+    copy: "Track diamonds, watches, bridal, estate, repairs, and memo goods with audit-ready receiving, transfers, aging, vendor context, and RFID-ready security events.",
+    bullets: ["Receiving and transfers", "Aging views", "RFID readiness"],
+  },
+  {
+    label: "Customer",
+    title: "Operational customer context",
+    copy: "Keep purchase history, service work, finance status, warranties, wishlists, and POS context available for associates and ready for JewelLink clienteling workflows.",
+    bullets: ["Purchase history", "Repair timelines", "JewelLink-ready CRM context"],
+  },
+  {
+    label: "Finance",
+    title: "House accounts, layaway, and accounting",
+    copy: "Support house account aging, interest rules, specialty financing, deposits, split tenders, and accounting handoff without forcing the store back into spreadsheets.",
+    bullets: ["Account aging", "Layaway schedules", "QuickBooks and Xero paths"],
+  },
+  {
+    label: "Security",
+    title: "Permissions and exception review",
+    copy: "Connect sensitive POS actions, item movements, register events, employee roles, location context, and CountRetail camera intelligence into reviewable operational evidence.",
+    bullets: ["Role permissions", "Exception queues", "Camera-aligned events"],
+  },
+  {
+    label: "Reports",
+    title: "Owner and manager reporting",
+    copy: "Give operators clean reporting across sales, tenders, inventory, staff performance, benchmarking, payroll, commissions, and integration health.",
+    bullets: ["Sales and tender reports", "Commission support", "Provider sync health"],
+  },
+];
+
 const securityRows = [
   "RFID inventory integrations through TrackTech",
   "Store camera and CountRetail audit trail alignment",
@@ -90,6 +129,21 @@ const releaseSignals = [
   "Retailers who want POS, CRM, cameras, and accounting connected",
 ];
 
+const partnerPaths = [
+  {
+    name: "JewelLink",
+    href: "https://www.jewellink.com/demo/",
+    label: "CRM and clienteling",
+    copy: "For retailers who want Linkd POS history to feed sales follow-up, training, texting, bridal workflows, and AI clienteling.",
+  },
+  {
+    name: "CountRetail AI",
+    href: "https://www.countretail.com/demo/",
+    label: "Traffic and owner cockpit",
+    copy: "For retailers who want Linkd operational data connected with store traffic, Vision AI, inventory pressure, and marketing attribution.",
+  },
+];
+
 export default function Home() {
   return (
     <main>
@@ -108,6 +162,7 @@ export default function Home() {
         </Link>
         <nav className="nav-links" aria-label="Primary navigation">
           <Link href="#platform">Platform</Link>
+          <Link href="#features">Features</Link>
           <Link href="#security">Security</Link>
           <Link href="#integrations">Integrations</Link>
           <Link href="#early-access">Early Release</Link>
@@ -129,8 +184,7 @@ export default function Home() {
           <p className="hero-subtitle">
             Linkd brings point of sale, inventory control, house accounts,
             layaway, accounting, security audits, and multi-store operations
-            into one cloud platform built with feedback from leading jewelry
-            retailers.
+            into one cloud platform built for luxury jewelry operators.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
@@ -227,6 +281,31 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section-white feature-section" id="features">
+        <div className="section-copy">
+          <p className="eyebrow">Feature explainers</p>
+          <h2>The system of record behind every jewelry retail workflow.</h2>
+          <p>
+            Linkd is the operating layer for the work that has to be accurate
+            before AI, CRM, reporting, and accounting can trust the data.
+          </p>
+        </div>
+        <div className="feature-grid">
+          {featureExplainers.map((feature) => (
+            <article className="feature-card" key={feature.label}>
+              <span>{feature.label}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.copy}</p>
+              <ul>
+                {feature.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section-dark security-section" id="security">
         <div className="security-copy">
           <p className="eyebrow">Security and audits</p>
@@ -296,6 +375,23 @@ export default function Home() {
             </p>
           </article>
         </div>
+        <div className="partner-action-grid" aria-label="Partner demo paths">
+          {partnerPaths.map((partner) => (
+            <article key={partner.name}>
+              <span>{partner.label}</span>
+              <h3>Linkd + {partner.name}</h3>
+              <p>{partner.copy}</p>
+              <div>
+                <Link className="button button-primary" href="#early-access">
+                  Request Linkd Access
+                </Link>
+                <a className="partner-link" href={partner.href} target="_blank" rel="noreferrer">
+                  Partner demo form
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
         <div className="integration-cloud" aria-label="Planned integrations">
           {integrations.map((integration) => (
             <span key={integration}>{integration}</span>
@@ -332,7 +428,8 @@ export default function Home() {
             <p>
               The early list should prioritize retailers who can give direct
               feedback on luxury POS workflows, inventory movement, accounting,
-              store security, and ecosystem integrations.
+              store security, migration, and ecosystem integrations with
+              JewelLink and CountRetail.
             </p>
             <div className="release-signals">
               {releaseSignals.map((signal) => (
@@ -351,6 +448,7 @@ export default function Home() {
         </div>
         <nav aria-label="Footer navigation">
           <Link href="#platform">Platform</Link>
+          <Link href="#features">Features</Link>
           <Link href="#security">Security</Link>
           <Link href="#early-access">Early Release</Link>
           <Link href="/login">Login</Link>

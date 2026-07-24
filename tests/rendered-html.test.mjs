@@ -32,6 +32,8 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /The operational core for modern jewelry retail\./i);
   assert.match(html, /Request early access/i);
   assert.match(html, /JewelLink CRM/i);
+  assert.match(html, /The system of record behind every jewelry retail workflow/i);
+  assert.match(html, /Linkd \+ CountRetail AI/i);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview/i);
 });
 
@@ -45,4 +47,5 @@ test("keeps Postmark configuration documented in code", async () => {
   assert.match(route, /POSTMARK_FROM_EMAIL/);
   assert.match(route, /LINKD_ALERT_TO_EMAIL/);
   assert.match(route, /x-postmark-server-token/i);
+  assert.match(route, /Demo focus/);
 });
