@@ -47,6 +47,20 @@ const productShots = [
     image: "/assets/screenshots/linkd-customers-crm-devices.png",
     alt: "Linkd customer management shown on laptop and tablet",
   },
+  {
+    label: "Reporting",
+    title: "Business intelligence operators can actually run.",
+    copy: "Sales, tender, inventory, benchmarking, payroll, and commission reporting are organized for owners and managers who need answers quickly.",
+    image: "/assets/screenshots/linkd-reports-home-devices.png",
+    alt: "Linkd reports catalog shown on laptop and tablet",
+  },
+  {
+    label: "Integrations",
+    title: "Provider health, mapping, and sync controls in one place.",
+    copy: "Accounting exports, Shopify, QuickBooks, Striven, Xero, documents, and provider handoffs get explicit status instead of becoming invisible back-office risk.",
+    image: "/assets/screenshots/linkd-settings-integrations-devices.png",
+    alt: "Linkd integrations settings shown on laptop and tablet",
+  },
 ];
 
 const securityRows = [
