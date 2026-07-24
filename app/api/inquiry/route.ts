@@ -62,10 +62,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const postmarkToken = process.env.POSTMARK_SERVER_TOKEN;
-  const fromEmail = process.env.POSTMARK_FROM_EMAIL;
-  const toEmail = process.env.LINKD_ALERT_TO_EMAIL;
-  const messageStream = process.env.POSTMARK_MESSAGE_STREAM || "outbound";
+  const runtime = await loadRuntimeEnv();
+  const postmarkToken = runtimeEnv(runtime, "POSTMARK_SERVER_TOKEN");
+  const fromEmail = runtimeEnv(runtime, "POSTMARK_FROM_EMAIL");
+  const toEmail = runtimeEnv(runtime, "LINKD_ALERT_TO_EMAIL");
+  const messageStream = runtimeEnv(runtime, "POSTMARK_MESSAGE_STREAM") || "outbound";
 
   if (!postmarkToken || !fromEmail || !toEmail) {
     return NextResponse.json(
@@ -113,6 +114,19 @@ export async function POST(request: Request) {
 
 function field(value: unknown) {
   return typeof value === "string" ? value.trim().slice(0, MAX_FIELD_LENGTH) : "";
+}
+
+function runtimeEnv(runtime: Record<string, string | undefined>, key: string) {
+  return runtime[key] ?? process.env[key];
+}
+
+async function loadRuntimeEnv() {
+  try {
+    const cloudflare = await import("cloudflare:workers");
+    return cloudflare.env;
+  } catch {
+    return {};
+  }
 }
 
 function isEmail(value: string) {
