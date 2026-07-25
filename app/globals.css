@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #07111f;
-  --ink-2: #111827;
-  --navy: #15204c;
-  --blue: #1f6fba;
-  --blue-2: #2b3f91;
-  --champagne: #d7bd82;
-  --champagne-2: #f0dfb6;
-  --paper: #f7f9fc;
+  --ink: #1a2540;
+  --ink-2: #314263;
+  --navy: #1a2540;
+  --blue: #4a90e2;
+  --blue-2: #2f6fc5;
+  --champagne: #c8d8e8;
+  --champagne-2: #e6f1fb;
+  --paper: #edf3f8;
   --white: #ffffff;
-  --muted: #647084;
-  --line: #dfe6f1;
+  --muted: #556882;
+  --line: #c8d8e8;
   --success: #1f7a55;
   --danger: #b42318;
 }
@@ -26,7 +26,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
+  background: var(--paper);
   color: var(--ink-2);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
@@ -50,10 +50,10 @@ textarea {
 
 .site-header {
   align-items: center;
-  background: rgba(7, 17, 31, 0.86);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--white);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
   display: flex;
   gap: 28px;
   justify-content: space-between;
@@ -101,14 +101,14 @@ textarea {
 
 .nav-links a,
 .text-button {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--muted);
   font-size: 0.92rem;
   font-weight: 650;
 }
 
 .nav-links a:hover,
 .text-button:hover {
-  color: var(--white);
+  color: var(--ink);
 }
 
 .button {
@@ -133,22 +133,23 @@ textarea {
 
 .button-primary {
   background: linear-gradient(135deg, var(--blue), var(--blue-2));
-  box-shadow: 0 18px 38px rgba(31, 111, 186, 0.26);
+  box-shadow: 0 18px 38px rgba(74, 144, 226, 0.26);
   color: var(--white);
 }
 
 .button-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: var(--white);
+  background: rgba(74, 144, 226, 0.08);
+  border: 1px solid rgba(74, 144, 226, 0.28);
+  color: var(--ink);
 }
 
 .hero-section {
   align-items: center;
   background:
-    radial-gradient(circle at 20% 10%, rgba(31, 111, 186, 0.22), transparent 28%),
-    linear-gradient(135deg, #07111f 0%, #101833 55%, #08121f 100%);
-  color: var(--white);
+    radial-gradient(circle at 18% 8%, rgba(74, 144, 226, 0.18), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(200, 216, 232, 0.64), transparent 32%),
+    linear-gradient(135deg, #f7fafc 0%, #edf3f8 62%, #ffffff 100%);
+  color: var(--ink);
   display: grid;
   gap: clamp(28px, 5vw, 70px);
   grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1fr);
@@ -170,10 +171,14 @@ textarea {
 }
 
 .section-dark .eyebrow,
-.hero-section .eyebrow,
-.section-blue .eyebrow,
-.login-page .eyebrow {
+.section-blue .eyebrow {
   color: var(--champagne-2);
+}
+
+.hero-section .eyebrow,
+.login-page .eyebrow,
+.not-found-page .eyebrow {
+  color: var(--blue);
 }
 
 h1,
@@ -204,7 +209,7 @@ h3 {
 }
 
 .hero-subtitle {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--muted);
   font-size: clamp(1.08rem, 1.7vw, 1.3rem);
   line-height: 1.65;
   max-width: 680px;
@@ -226,29 +231,29 @@ h3 {
 }
 
 .hero-metrics div {
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid rgba(49, 66, 99, 0.16);
   padding-top: 15px;
 }
 
 .hero-metrics dt {
-  color: var(--champagne-2);
+  color: var(--blue);
   font-size: 1.05rem;
   font-weight: 850;
 }
 
 .hero-metrics dd {
-  color: rgba(255, 255, 255, 0.64);
+  color: var(--muted);
   font-size: 0.9rem;
   margin: 4px 0 0;
 }
 
 .product-stage {
   background:
-    linear-gradient(150deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
-    rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+    linear-gradient(150deg, rgba(255, 255, 255, 0.95), rgba(247, 250, 252, 0.9)),
+    var(--white);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 30px 80px rgba(49, 66, 99, 0.16);
   display: grid;
   min-height: 0;
   overflow: hidden;
@@ -259,7 +264,7 @@ h3 {
 .hero-device-image {
   align-self: center;
   border-radius: 8px;
-  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.26));
+  filter: drop-shadow(0 24px 50px rgba(49, 66, 99, 0.18));
   height: auto;
   justify-self: center;
   width: min(100%, 860px);
@@ -277,10 +282,10 @@ h3 {
 
 .hero-visual-signals span {
   backdrop-filter: blur(14px);
-  background: rgba(7, 17, 31, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: var(--navy);
+  border: 1px solid rgba(26, 37, 64, 0.12);
   border-radius: 99px;
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--white);
   font-size: 0.78rem;
   font-weight: 800;
   padding: 8px 11px;
@@ -383,12 +388,12 @@ h3 {
 }
 
 .section-dark {
-  background: var(--ink);
+  background: var(--navy);
   color: var(--white);
 }
 
 .section-blue {
-  background: linear-gradient(135deg, #1e3b6f, #15204c);
+  background: linear-gradient(135deg, var(--blue), var(--blue-2));
   color: var(--white);
 }
 
@@ -562,7 +567,7 @@ h3 {
 }
 
 .security-row span {
-  background: var(--champagne);
+  background: var(--blue);
   border-radius: 99px;
   height: 10px;
   width: 10px;
@@ -845,7 +850,7 @@ textarea:focus {
 
 .site-footer {
   align-items: center;
-  background: #050b14;
+  background: var(--navy);
   color: rgba(255, 255, 255, 0.72);
   display: flex;
   gap: 24px;
@@ -878,9 +883,9 @@ textarea:focus {
 .login-page {
   align-items: center;
   background:
-    radial-gradient(circle at 15% 15%, rgba(31, 111, 186, 0.24), transparent 32%),
-    linear-gradient(135deg, #07111f, #121a38);
-  color: var(--white);
+    radial-gradient(circle at 15% 15%, rgba(74, 144, 226, 0.18), transparent 32%),
+    linear-gradient(135deg, #f7fafc, #edf3f8);
+  color: var(--ink);
   display: flex;
   min-height: 100vh;
   padding: clamp(18px, 5vw, 72px);
@@ -889,9 +894,9 @@ textarea:focus {
 .not-found-page {
   align-items: center;
   background:
-    radial-gradient(circle at 82% 12%, rgba(215, 189, 130, 0.2), transparent 30%),
-    linear-gradient(135deg, #07111f, #121a38);
-  color: var(--white);
+    radial-gradient(circle at 82% 12%, rgba(74, 144, 226, 0.18), transparent 30%),
+    linear-gradient(135deg, #f7fafc, #edf3f8);
+  color: var(--ink);
   display: flex;
   min-height: 100vh;
   padding: clamp(18px, 5vw, 72px);
@@ -933,7 +938,7 @@ textarea:focus {
 }
 
 .login-copy p {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
   font-size: 1.08rem;
   line-height: 1.7;
 }
@@ -943,7 +948,7 @@ textarea:focus {
 }
 
 .not-found-shell p {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
   font-size: 1.08rem;
   line-height: 1.7;
 }
