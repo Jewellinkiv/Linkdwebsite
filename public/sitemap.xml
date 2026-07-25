@@ -16,6 +16,14 @@
       <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
       <image:title>Linkd serialized jewelry inventory search</image:title>
     </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/advertising/linkd-luxury-management-stack.webp</image:loc>
+      <image:title>Linkd, JewelLink, and CountRetail full luxury jewelry management stack</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/advertising/linkd-feature-frames.webp</image:loc>
+      <image:title>Linkd product feature frames for jewelry POS advertising</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://linkd.com/jewelry-pos</loc>
@@ -110,6 +118,10 @@
       <image:loc>https://linkd.com/assets/brand/countretail-logo-main.webp</image:loc>
       <image:title>CountRetail intelligence layer for jewelry retail</image:title>
     </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/advertising/linkd-luxury-management-stack.webp</image:loc>
+      <image:title>Linkd full luxury jewelry management stack with JewelLink and CountRetail</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://linkd.com/integrations</loc>
@@ -127,6 +139,10 @@
     <image:image>
       <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
       <image:title>Linkd customer activity ready for CRM workflows</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/advertising/linkd-feature-frames.webp</image:loc>
+      <image:title>Linkd public-safe product feature frames for integrations</image:title>
     </image:image>
   </url>
   <url>

@@ -563,6 +563,7 @@ h3 {
 
 .platform-section,
 .feature-frame-section,
+.advertising-visual-section,
 .workflow-section,
 .ecosystem-section,
 .seo-path-section {
@@ -934,6 +935,65 @@ h3 {
 .landing-feature-frame-section {
   display: grid;
   gap: 30px;
+}
+
+.advertising-visual-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.advertising-visual-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(23, 33, 58, 0.08);
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 14px 14px 22px;
+}
+
+.advertising-visual-card:hover {
+  border-color: rgba(47, 126, 216, 0.5);
+  transform: translateY(-2px);
+}
+
+.advertising-visual-card img {
+  aspect-ratio: 16 / 10;
+  background: #eef4f8;
+  border-radius: 6px;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.advertising-visual-card span {
+  color: var(--blue);
+  font-size: 0.76rem;
+  font-weight: 850;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.advertising-visual-card:nth-child(2) span {
+  color: var(--teal);
+}
+
+.advertising-visual-card h3 {
+  color: var(--ink);
+  font-size: clamp(1.35rem, 1.8vw, 1.8rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.advertising-visual-card p {
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.48;
+  margin: 0;
+  max-width: 620px;
 }
 
 .seo-path-grid {
@@ -2441,6 +2501,7 @@ textarea:focus-visible {
   .role-strip-grid,
   .feature-frame-grid,
   .seo-path-grid,
+  .advertising-visual-grid,
   .ecosystem-grid,
   .ecosystem-flow,
   .ecosystem-proof-board,
@@ -2596,6 +2657,7 @@ textarea:focus-visible {
   .role-strip-grid,
   .feature-frame-grid,
   .seo-path-grid,
+  .advertising-visual-grid,
   .ecosystem-grid,
   .ecosystem-flow,
   .ecosystem-proof-board,

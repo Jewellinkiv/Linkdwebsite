@@ -64,6 +64,13 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Owner reporting catalog/i);
   assert.match(html, /Luxury management stack/i);
   assert.match(html, /JewelLink context/i);
+  assert.match(html, /Advertising visuals/i);
+  assert.match(html, /id="advertising-visuals"/i);
+  assert.match(html, /Two frames\. Full story/i);
+  assert.match(html, /Full luxury management stack/i);
+  assert.match(html, /Product proof without private records/i);
+  assert.match(html, /linkd-luxury-management-stack\.webp/i);
+  assert.match(html, /linkd-feature-frames\.webp/i);
   assert.match(html, /CountRetail/i);
   assert.match(html, /The difference, fast\./i);
   assert.match(html, /Linkd records the operation/i);
@@ -410,11 +417,23 @@ test("serves lighter web visuals for mobile and SEO pages", async () => {
     new URL("../scripts/optimize-assets.mjs", import.meta.url),
     "utf8",
   );
+  const marketingFrameGenerator = await readFile(
+    new URL("../scripts/generate-marketing-frames.mjs", import.meta.url),
+    "utf8",
+  );
 
   assert.equal(packageJson.scripts["optimize:assets"], "node scripts/optimize-assets.mjs");
+  assert.equal(
+    packageJson.scripts["generate:marketing-frames"],
+    "node scripts/generate-marketing-frames.mjs",
+  );
   assert.match(optimizer, /webp/);
   assert.match(optimizer, /linkd-pos-register-devices\.png/);
   assert.match(optimizer, /jewellink-logo-main\.png/);
+  assert.match(marketingFrameGenerator, /FULL LUXURY JEWELRY MANAGEMENT/);
+  assert.match(marketingFrameGenerator, /Linkd \+ JewelLink/);
+  assert.match(marketingFrameGenerator, /CountRetail/);
+  assert.match(marketingFrameGenerator, /LINKD FEATURE FRAMES/);
 
   const optimizedAssets = [
     "../public/assets/screenshots/linkd-pos-register-devices.webp",
@@ -431,6 +450,17 @@ test("serves lighter web visuals for mobile and SEO pages", async () => {
     const info = await stat(new URL(asset, import.meta.url));
     assert.ok(info.size > 5_000, `${asset} should not be empty`);
     assert.ok(info.size < 70_000, `${asset} should stay lightweight`);
+  }
+
+  const marketingAssets = [
+    "../public/assets/advertising/linkd-luxury-management-stack.webp",
+    "../public/assets/advertising/linkd-feature-frames.webp",
+  ];
+
+  for (const asset of marketingAssets) {
+    const info = await stat(new URL(asset, import.meta.url));
+    assert.ok(info.size > 40_000, `${asset} should contain the rendered frame`);
+    assert.ok(info.size < 90_000, `${asset} should stay lightweight`);
   }
 });
 
@@ -501,6 +531,10 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(css, /\.feature-frame-tabs\s*\{[\s\S]*repeat\(4, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.feature-frame-row\s*\{[\s\S]*min-height: 58px/);
   assert.match(css, /\.feature-frame-card-compact\s*\{[\s\S]*max-width: 980px/);
+  assert.match(css, /\.advertising-visual-section/);
+  assert.match(css, /\.advertising-visual-grid\s*\{[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.advertising-visual-card img\s*\{[\s\S]*aspect-ratio: 16 \/ 10/);
+  assert.match(css, /\.advertising-visual-card h3\s*\{[\s\S]*text-wrap: balance/);
   assert.match(css, /\.mini-chip-row small\s*\{[\s\S]*border-radius: 99px/);
   assert.match(css, /\.operations-map\s*\{[\s\S]*grid-template-columns: 1fr/);
   assert.match(css, /\.operations-map-grid,\s*\.role-strip-grid/);
@@ -648,8 +682,12 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(sitemap, /linkd-customers-crm-devices\.webp/);
   assert.match(sitemap, /linkd-reports-home-devices\.webp/);
   assert.match(sitemap, /linkd-settings-integrations-devices\.webp/);
+  assert.match(sitemap, /linkd-luxury-management-stack\.webp/);
+  assert.match(sitemap, /linkd-feature-frames\.webp/);
   assert.match(sitemap, /jewellink-logo-main\.webp/);
   assert.match(sitemap, /countretail-logo-main\.webp/);
+  assert.match(sitemap, /Linkd, JewelLink, and CountRetail full luxury jewelry management stack/);
+  assert.match(sitemap, /Linkd product feature frames for jewelry POS advertising/);
   assert.match(sitemap, /Linkd customer context and CRM-ready record/);
   assert.match(sitemap, /Linkd provider and integration control settings/);
   assert.match(sitemap, /Linkd jewelry retail ecosystem preview/);

@@ -162,6 +162,25 @@ const workflowProofs = [
   },
 ];
 
+const advertisingVisuals = [
+  {
+    label: "Ecosystem frame",
+    title: "Full luxury management stack",
+    copy: "Linkd, JewelLink, and CountRetail split operations, relationships, and intelligence into clear jobs.",
+    image: "/assets/advertising/linkd-luxury-management-stack.webp",
+    alt: "Linkd, JewelLink, and CountRetail full luxury jewelry management stack visual",
+    href: "/ecosystem",
+  },
+  {
+    label: "Feature frame",
+    title: "Product proof without private records",
+    copy: "Public-safe frames advertise POS, customers, services, inventory, reports, and integrations with minimal text.",
+    image: "/assets/advertising/linkd-feature-frames.webp",
+    alt: "Linkd product feature frame advertising visual for jewelry POS workflows",
+    href: "#feature-frames",
+  },
+];
+
 const seoPathCards = [
   {
     href: "/jewelry-pos",
@@ -423,11 +442,14 @@ const structuredData = [
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     url: "https://linkd.com/",
-    image: "https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp",
+    image: "https://linkd.com/assets/advertising/linkd-luxury-management-stack.webp",
     description:
       "Luxury jewelry POS software connecting checkout, inventory, repairs, house accounts, layaway, reporting, security, and retail integrations.",
     featureList: softwareFeatures,
-    screenshot: workflowProofs.map((workflow) => `https://linkd.com${workflow.image}`),
+    screenshot: [
+      ...advertisingVisuals.map((visual) => `https://linkd.com${visual.image}`),
+      ...workflowProofs.map((workflow) => `https://linkd.com${workflow.image}`),
+    ],
     isRelatedTo: relatedRetailSystems,
     audience: {
       "@type": "Audience",
@@ -596,6 +618,37 @@ export default function Home() {
           </p>
         </div>
         <FeatureFrameGrid frames={productFeatureFrames} />
+      </section>
+
+      <section
+        className="section-light advertising-visual-section"
+        id="advertising-visuals"
+        aria-labelledby="advertising-visual-title"
+      >
+        <div className="section-copy">
+          <p className="eyebrow">Advertising visuals</p>
+          <h2 id="advertising-visual-title">Two frames. Full story.</h2>
+          <p>
+            Visual proof for buyers, search, and sales outreach, without
+            exposing store data.
+          </p>
+        </div>
+        <div className="advertising-visual-grid">
+          {advertisingVisuals.map((visual) => (
+            <Link className="advertising-visual-card" href={visual.href} key={visual.title}>
+              <Image
+                src={visual.image}
+                alt={visual.alt}
+                width={1600}
+                height={1000}
+                unoptimized
+              />
+              <span>{visual.label}</span>
+              <h3>{visual.title}</h3>
+              <p>{visual.copy}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="role-strip-section" aria-labelledby="role-strip-title">
