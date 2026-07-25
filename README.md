@@ -1,98 +1,83 @@
-# vinext-starter
+# Linkd website
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Public marketing site for Linkd, a jewelry POS and operations platform for
+luxury retail jewelers. The site is built with Next/Vinext for OpenAI Sites and
+is configured by `.openai/hosting.json`.
 
-## Prerequisites
+## What The Site Covers
 
-- Node.js `>=22.13.0`
+- Homepage explanation of Linkd, JewelLink, and CountRetail
+- Focused SEO pages for jewelry POS, repairs, inventory, accounting,
+  multi-store operations, security, integrations, and ecosystem comparison
+- Product screenshots, optimized WebP assets, app icons, social preview image,
+  sitemap, robots file, and `llms.txt`
+- Early access inquiry form backed by Postmark
 
-## Quick Start
+## Local Setup
 
 ```bash
 npm install
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+The local preview normally runs at `http://localhost:3000/`.
 
-## Included Shape
+## Environment
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+Copy `.env.example` when setting up local or hosted form delivery:
 
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+POSTMARK_SERVER_TOKEN=
+POSTMARK_FROM_EMAIL="Linkd <no-reply@linkd.com>"
+LINKD_ALERT_TO_EMAIL=
+POSTMARK_MESSAGE_STREAM=outbound
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+The site renders without those values, but the inquiry API returns a launch-safe
+`503` until Postmark credentials and recipient settings are available.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+## Validation
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+Run these before publishing:
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+```bash
+npm test
+npm run lint
+git diff --check
+```
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+`npm test` builds the Vinext output and verifies the rendered pages, structured
+data, SEO metadata, crawl assets, social images, mobile CSS, form behavior, and
+security headers.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+## SEO Surface
 
-## Useful Commands
+Primary crawl routes:
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+- `/`
+- `/jewelry-pos`
+- `/repairs`
+- `/inventory`
+- `/accounting`
+- `/multi-store`
+- `/security`
+- `/integrations`
+- `/ecosystem`
 
-## Learn More
+Supporting files:
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+- `public/sitemap.xml`
+- `public/robots.txt`
+- `public/llms.txt`
+- `public/site.webmanifest`
+- `public/og.png`
+
+## Publishing Notes
+
+This project already has a Sites project id in `.openai/hosting.json`. Before a
+production deployment, make sure:
+
+- the working tree has only intentional Linkd website changes;
+- Postmark runtime values are configured for the hosted environment;
+- the exact source state intended for deployment is committed and pushed; and
+- the production deployment is created from that saved source state.

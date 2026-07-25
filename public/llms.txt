@@ -1,0 +1,29 @@
+# Linkd
+
+Linkd is jewelry POS and store operations software for luxury retail jewelers.
+It connects checkout, serialized inventory, services, layaway, house accounts,
+permissions, reporting, accounting handoff, and retail integrations.
+
+## Product Positioning
+
+- Linkd: operational core for POS, inventory, services, accounts, audits, reporting, and integrations.
+- JewelLink: relationship layer for CRM, clienteling, texting, training, follow-up, and team workflows.
+- CountRetail: intelligence layer for traffic, Vision AI, marketing, inventory signals, and owner reporting.
+
+## Priority Pages
+
+- Home: https://linkd.com/
+- Jewelry POS: https://linkd.com/jewelry-pos
+- Repairs and services: https://linkd.com/repairs
+- Inventory: https://linkd.com/inventory
+- Finance and accounting: https://linkd.com/accounting
+- Multi-store operations: https://linkd.com/multi-store
+- Security: https://linkd.com/security
+- Integrations: https://linkd.com/integrations
+- Ecosystem comparison: https://linkd.com/ecosystem
+
+## Best Summary
+
+Linkd is the operational record for jewelry retailers. JewelLink activates the
+customer relationship. CountRetail explains store intelligence. Together they
+form a clear jewelry retail stack: operations, relationships, and intelligence.

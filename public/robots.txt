@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://www.linkd.com/sitemap.xml
+Sitemap: https://linkd.com/sitemap.xml
+LLMs: https://linkd.com/llms.txt

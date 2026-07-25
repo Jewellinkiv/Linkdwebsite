@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 
 const POSTMARK_ENDPOINT = "https://api.postmarkapp.com/email";
 const MAX_FIELD_LENGTH = 1200;
+const JSON_HEADERS = {
+  "cache-control": "no-store",
+};
 
 type InquiryPayload = {
   name?: unknown;
@@ -15,7 +18,27 @@ type InquiryPayload = {
   preferredContact?: unknown;
   notes?: unknown;
   website?: unknown;
+  sourcePath?: unknown;
+  sourceUrl?: unknown;
+  referrer?: unknown;
   interests?: unknown;
+};
+
+type SanitizedInquiry = {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  locations: string;
+  currentPos: string;
+  demoFocus: string;
+  timeline: string;
+  preferredContact: string;
+  notes: string;
+  sourcePath: string;
+  sourceUrl: string;
+  referrer: string;
+  interests: string[];
 };
 
 export async function POST(request: Request) {
@@ -24,14 +47,11 @@ export async function POST(request: Request) {
   try {
     payload = (await request.json()) as InquiryPayload;
   } catch {
-    return NextResponse.json(
-      { message: "Please check the form and try again." },
-      { status: 400 },
-    );
+    return jsonResponse({ message: "Please check the form and try again." }, 400);
   }
 
   if (field(payload.website)) {
-    return NextResponse.json({ message: "Thanks." });
+    return jsonResponse({ message: "Thanks." });
   }
 
   const inquiry = {
@@ -45,6 +65,9 @@ export async function POST(request: Request) {
     timeline: field(payload.timeline),
     preferredContact: field(payload.preferredContact),
     notes: field(payload.notes),
+    sourcePath: field(payload.sourcePath) || field(request.headers.get("referer")),
+    sourceUrl: field(payload.sourceUrl) || field(request.headers.get("referer")),
+    referrer: field(payload.referrer) || field(request.headers.get("referer")),
     interests: Array.isArray(payload.interests)
       ? payload.interests.map(field).filter(Boolean).slice(0, 20)
       : [],
@@ -58,9 +81,9 @@ export async function POST(request: Request) {
     !inquiry.company ||
     !inquiry.locations
   ) {
-    return NextResponse.json(
+    return jsonResponse(
       { message: "Name, email, phone, store, and locations are required." },
-      { status: 400 },
+      400,
     );
   }
 
@@ -71,12 +94,12 @@ export async function POST(request: Request) {
   const messageStream = runtimeEnv(runtime, "POSTMARK_MESSAGE_STREAM") || "outbound";
 
   if (!postmarkToken || !fromEmail || !toEmail) {
-    return NextResponse.json(
+    return jsonResponse(
       {
         message:
           "This form is ready for Postmark. Add the Postmark alert environment variables before launch.",
       },
-      { status: 503 },
+      503,
     );
   }
 
@@ -103,14 +126,21 @@ export async function POST(request: Request) {
   });
 
   if (!response.ok) {
-    return NextResponse.json(
+    return jsonResponse(
       { message: "Unable to send the alert right now. Please try again." },
-      { status: 502 },
+      502,
     );
   }
 
-  return NextResponse.json({
+  return jsonResponse({
     message: "Thanks. The Linkd team has your request and will follow up soon.",
+  });
+}
+
+function jsonResponse(body: { message: string }, status = 200) {
+  return NextResponse.json(body, {
+    status,
+    headers: JSON_HEADERS,
   });
 }
 
@@ -135,7 +165,7 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function buildTextEmail(inquiry: Required<Omit<InquiryPayload, "interests" | "website">> & { interests: string[] }) {
+function buildTextEmail(inquiry: SanitizedInquiry) {
   return [
     "New Linkd early access request",
     "",
@@ -149,13 +179,16 @@ function buildTextEmail(inquiry: Required<Omit<InquiryPayload, "interests" | "we
     `Timeline: ${inquiry.timeline || "Not provided"}`,
     `Preferred contact: ${inquiry.preferredContact || "Not provided"}`,
     `Interests: ${inquiry.interests.join(", ") || "Not provided"}`,
+    `Source page: ${inquiry.sourcePath || "Not provided"}`,
+    `Source URL: ${inquiry.sourceUrl || "Not provided"}`,
+    `Referrer: ${inquiry.referrer || "Not provided"}`,
     "",
     "Notes:",
     inquiry.notes || "Not provided",
   ].join("\n");
 }
 
-function buildHtmlEmail(inquiry: Required<Omit<InquiryPayload, "interests" | "website">> & { interests: string[] }) {
+function buildHtmlEmail(inquiry: SanitizedInquiry) {
   const rows = [
     ["Name", inquiry.name],
     ["Email", inquiry.email],
@@ -167,6 +200,9 @@ function buildHtmlEmail(inquiry: Required<Omit<InquiryPayload, "interests" | "we
     ["Timeline", inquiry.timeline || "Not provided"],
     ["Preferred contact", inquiry.preferredContact || "Not provided"],
     ["Interests", inquiry.interests.join(", ") || "Not provided"],
+    ["Source page", inquiry.sourcePath || "Not provided"],
+    ["Source URL", inquiry.sourceUrl || "Not provided"],
+    ["Referrer", inquiry.referrer || "Not provided"],
     ["Notes", inquiry.notes || "Not provided"],
   ];
 

@@ -1,13 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
-    <loc>https://www.linkd.com/</loc>
+    <loc>https://linkd.com/</loc>
+    <lastmod>2026-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:title>Linkd jewelry POS register</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:title>Linkd serialized jewelry inventory search</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://www.linkd.com/login</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <loc>https://linkd.com/jewelry-pos</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:title>Linkd jewelry POS register workflow</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:title>Linkd customer context and CRM-ready record</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:title>Linkd reports dashboard for jewelry store operators</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://linkd.com/inventory</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:title>Linkd jewelry inventory management workflow</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:title>Linkd customer history connected to store operations</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:title>Linkd reporting views for jewelry inventory review</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://linkd.com/repairs</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:title>Linkd jewelry repair intake and service workflow</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:title>Linkd customer record with repair and service history</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:title>Linkd reports dashboard for jewelry service review</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://linkd.com/security</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:title>Linkd jewelry store reporting and audit workflow</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:title>Linkd inventory movement and serialized item review</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-settings-integrations-devices.webp</image:loc>
+      <image:title>Linkd provider and integration control settings</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://linkd.com/ecosystem</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/og.png</image:loc>
+      <image:title>Linkd jewelry retail ecosystem preview</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:title>Linkd operational core for jewelry retail</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/brand/jewellink-logo-main.webp</image:loc>
+      <image:title>JewelLink relationship layer for jewelry retail</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/brand/countretail-logo-main.webp</image:loc>
+      <image:title>CountRetail intelligence layer for jewelry retail</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://linkd.com/integrations</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-settings-integrations-devices.webp</image:loc>
+      <image:title>Linkd jewelry retail integrations workflow</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:title>Linkd POS register as the operational source of truth</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:title>Linkd customer activity ready for CRM workflows</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://linkd.com/accounting</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:title>Linkd jewelry store finance and accounting review</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:title>Linkd POS register with tender and sale context</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:title>Linkd customer record with operational account context</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://linkd.com/multi-store</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:title>Linkd multi-store jewelry operations and inventory movement</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-settings-integrations-devices.webp</image:loc>
+      <image:title>Linkd provider and permission settings for multi-store control</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:title>Linkd reporting dashboard for multi-location jewelry operators</image:title>
+    </image:image>
   </url>
 </urlset>

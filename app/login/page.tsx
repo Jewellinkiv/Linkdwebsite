@@ -2,8 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Login",
+  title: "Linkd POS Login",
   description: "Sign in to the Linkd luxury retail POS platform.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function LoginPage() {
@@ -13,7 +17,7 @@ export default function LoginPage() {
         <Link className="login-brand" href="/" aria-label="Linkd home">
           <span className="brand-logo-crop login-logo">
             <Image
-              src="/assets/brand/linkd-logo-main.png"
+              src="/assets/brand/linkd-logo-main.webp"
               alt="Linkd"
               width={5334}
               height={3205}

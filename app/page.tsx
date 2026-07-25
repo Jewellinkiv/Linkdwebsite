@@ -2,145 +2,380 @@ import InquiryForm from "./components/InquiryForm";
 import Image from "next/image";
 import Link from "next/link";
 
-const pillars = [
+const primaryNavItems = [
+  { href: "/jewelry-pos", label: "POS" },
+  { href: "/inventory", label: "Inventory" },
+  { href: "/ecosystem", label: "Ecosystem" },
+  { href: "/security", label: "Security" },
+  { href: "/integrations", label: "Integrations" },
+  { href: "#early-access", label: "Early Release" },
+];
+
+const roleStripCards = [
+  {
+    name: "Linkd",
+    role: "Operations",
+    proof: "POS, inventory, accounts, audits",
+    image: "/assets/screenshots/linkd-pos-register-devices.webp",
+    alt: "Linkd POS register workspace",
+    width: 1536,
+    height: 1024,
+    href: "/jewelry-pos",
+    kind: "screen",
+  },
+  {
+    name: "JewelLink",
+    role: "Relationships",
+    proof: "CRM, clienteling, training",
+    image: "/assets/brand/jewellink-logo-main.webp",
+    alt: "JewelLink logo",
+    width: 12500,
+    height: 6250,
+    href: "https://www.jewellink.com/",
+    kind: "logo",
+  },
+  {
+    name: "CountRetail",
+    role: "Intelligence",
+    proof: "Traffic, Vision AI, analytics",
+    image: "/assets/brand/countretail-logo-main.webp",
+    alt: "CountRetail logo",
+    width: 3538,
+    height: 504,
+    href: "https://www.countretail.com/",
+    kind: "logo",
+  },
+];
+
+const heroProofs = [
+  {
+    value: "POS",
+    label: "Checkout, services, layaway",
+  },
+  {
+    value: "RFID",
+    label: "Serialized item control",
+  },
+  {
+    value: "API",
+    label: "JewelLink and CountRetail ready",
+  },
+];
+
+const operatingSignals = [
   {
     label: "Sell",
-    title: "Point of sale made for luxury retail",
-    copy: "Fast checkout, repairs, services, layaway, appraisals, quotes, and customer purchase context in one daily workflow.",
+    title: "Point of sale",
+    copy: "Fine jewelry checkout, repairs, appraisals, special orders, quotes, deposits, and tenders.",
   },
   {
     label: "Track",
-    title: "Inventory control from case to vault",
-    copy: "Serialized inventory, RFID readiness, transfers, aging, receiving, movements, and item-level audit history.",
+    title: "Inventory control",
+    copy: "Serialized items, transfers, receiving, aging, vendor context, and RFID-ready movement history.",
   },
   {
     label: "Account",
-    title: "House accounts without spreadsheet drift",
-    copy: "Aging criteria, interest on balances or transactions, specialty financing, layaway schedules, and accounting handoff.",
+    title: "Store finance",
+    copy: "House accounts, layaway schedules, specialty financing, balances, interest rules, and accounting handoff.",
   },
   {
     label: "Secure",
-    title: "Permissioned operations for every role",
-    copy: "Role gating, approval paths, geofencing, register controls, and security logs that managers can actually review.",
+    title: "Role-based operations",
+    copy: "Register permissions, approvals, location controls, security logs, and exception review.",
   },
 ];
 
-const productShots = [
+const operationsMap = [
   {
-    label: "POS",
-    title: "Counter workflows built around jewelry sales.",
-    copy: "Checkout, client selection, service add-ons, tender controls, parking, register permissions, and manager review live in one workspace.",
-    image: "/assets/screenshots/linkd-pos-register-devices.png",
-    alt: "Linkd POS register shown on a MacBook screen",
+    label: "Counter",
+    title: "POS",
+    signals: ["Sales", "Services", "Deposits"],
   },
   {
-    label: "Inventory",
-    title: "A live view of every item, transfer, and exception.",
-    copy: "Search, serialized inventory, RFID readiness, purchasing, receiving, aging, and movement history stay close to the daily store flow.",
-    image: "/assets/screenshots/linkd-inventory-search-devices.png",
-    alt: "Linkd inventory search shown on a MacBook screen",
-  },
-  {
-    label: "CRM context",
-    title: "Customer history connected to the operational record.",
-    copy: "Linkd keeps store activity, finance status, service history, and customer context ready for JewelLink CRM and clienteling workflows.",
-    image: "/assets/screenshots/linkd-customers-crm-devices.png",
-    alt: "Linkd customer management shown on a MacBook screen",
-  },
-  {
-    label: "Reporting",
-    title: "Business intelligence operators can actually run.",
-    copy: "Sales, tender, inventory, benchmarking, payroll, and commission reporting are organized for owners and managers who need answers quickly.",
-    image: "/assets/screenshots/linkd-reports-home-devices.png",
-    alt: "Linkd reports catalog shown on a MacBook screen",
-  },
-  {
-    label: "Integrations",
-    title: "Provider health, mapping, and sync controls in one place.",
-    copy: "Accounting exports, Shopify, QuickBooks, Striven, Xero, documents, and provider handoffs get explicit status instead of becoming invisible back-office risk.",
-    image: "/assets/screenshots/linkd-settings-integrations-devices.png",
-    alt: "Linkd integrations settings shown on a MacBook screen",
-  },
-];
-
-const featureExplainers = [
-  {
-    label: "POS",
-    title: "Counter checkout and service intake",
-    copy: "Run fine jewelry sales, repairs, appraisals, special orders, quotes, layaway payments, and tender controls from a workspace built around the customer at the counter.",
-    bullets: ["Fast item lookup", "Parked sales", "Manager approvals"],
-  },
-  {
-    label: "Inventory",
-    title: "Serialized inventory with movement history",
-    copy: "Track diamonds, watches, bridal, estate, repairs, and memo goods with audit-ready receiving, transfers, aging, vendor context, and RFID-ready security events.",
-    bullets: ["Receiving and transfers", "Aging views", "RFID readiness"],
+    label: "Case",
+    title: "Inventory",
+    signals: ["Serialized", "RFID-ready", "Transfers"],
   },
   {
     label: "Customer",
-    title: "Operational customer context",
-    copy: "Keep purchase history, service work, finance status, warranties, wishlists, and POS context available for associates and ready for JewelLink clienteling workflows.",
-    bullets: ["Purchase history", "Repair timelines", "JewelLink-ready CRM context"],
+    title: "Accounts",
+    signals: ["Layaway", "Balances", "History"],
   },
   {
-    label: "Finance",
-    title: "House accounts, layaway, and accounting",
-    copy: "Support house account aging, interest rules, specialty financing, deposits, split tenders, and accounting handoff without forcing the store back into spreadsheets.",
-    bullets: ["Account aging", "Layaway schedules", "QuickBooks and Xero paths"],
+    label: "Back office",
+    title: "Finance",
+    signals: ["Tenders", "Exports", "Review"],
   },
   {
+    label: "Manager",
+    title: "Security",
+    signals: ["Roles", "Approvals", "Audits"],
+  },
+  {
+    label: "Stack",
+    title: "Integrations",
+    signals: ["JewelLink", "CountRetail", "Accounting"],
+  },
+];
+
+const workflowProofs = [
+  {
+    label: "Sell",
+    title: "Counter POS built for jewelry sales.",
+    copy: "Client lookup, service add-ons, manager controls, parked sales, and tender review in one register workspace.",
+    image: "/assets/screenshots/linkd-pos-register-devices.webp",
+    alt: "Linkd POS register shown on a MacBook screen",
+    chips: ["Client lookup", "Repair intake", "Tender controls"],
+  },
+  {
+    label: "Track",
+    title: "Every item has a live operational record.",
+    copy: "Search serialized inventory, review item movement, prepare RFID workflows, and see aging before it becomes a surprise.",
+    image: "/assets/screenshots/linkd-inventory-search-devices.webp",
+    alt: "Linkd inventory search shown on a MacBook screen",
+    chips: ["Serialized stock", "Transfers", "Aging risk"],
+  },
+  {
+    label: "Connect",
+    title: "Customer context stays close to the sale.",
+    copy: "POS history, service work, account status, and activity can feed JewelLink CRM and clienteling workflows.",
+    image: "/assets/screenshots/linkd-customers-crm-devices.webp",
+    alt: "Linkd customer management shown on a MacBook screen",
+    chips: ["POS history", "Service timeline", "CRM-ready data"],
+  },
+  {
+    label: "Report",
+    title: "Owner reporting without a spreadsheet hunt.",
+    copy: "Sales, tenders, inventory, payroll, commissions, and benchmarking live where operators can find them.",
+    image: "/assets/screenshots/linkd-reports-home-devices.webp",
+    alt: "Linkd reports catalog shown on a MacBook screen",
+    chips: ["Sales reports", "Commissions", "Benchmarks"],
+  },
+  {
+    label: "Sync",
+    title: "Integration health is visible, not hidden.",
+    copy: "Accounting, e-commerce, documents, tax, and provider syncs show status before they become back-office risk.",
+    image: "/assets/screenshots/linkd-settings-integrations-devices.webp",
+    alt: "Linkd integrations settings shown on a MacBook screen",
+    chips: ["QuickBooks", "Shopify", "Open APIs"],
+  },
+];
+
+const seoPathCards = [
+  {
+    href: "/jewelry-pos",
+    label: "Jewelry POS",
+    title: "Checkout, services, layaway",
+    copy: "A focused view of Linkd at the counter: clients, repairs, tenders, accounts, and sales flow.",
+    image: "/assets/screenshots/linkd-pos-register-devices.webp",
+    alt: "Linkd jewelry POS register",
+  },
+  {
+    href: "/inventory",
+    label: "Inventory",
+    title: "Serialized item control",
+    copy: "Track receiving, transfers, aging, RFID-ready events, and movement history across the store.",
+    image: "/assets/screenshots/linkd-inventory-search-devices.webp",
+    alt: "Linkd jewelry inventory management",
+  },
+  {
+    href: "/repairs",
+    label: "Repairs",
+    title: "Service work beside POS",
+    copy: "Keep repairs, appraisals, custom work, deposits, and service history tied to the customer.",
+    image: "/assets/screenshots/linkd-pos-register-devices.webp",
+    alt: "Linkd jewelry repair intake and service workflow",
+  },
+  {
+    href: "/security",
     label: "Security",
-    title: "Permissions and exception review",
-    copy: "Connect sensitive POS actions, item movements, register events, employee roles, location context, and CountRetail camera intelligence into reviewable operational evidence.",
-    bullets: ["Role permissions", "Exception queues", "Camera-aligned events"],
+    title: "Permissions and audit trails",
+    copy: "Review sensitive register actions, RFID-ready events, transfers, and CountRetail camera context.",
+    image: "/assets/screenshots/linkd-reports-home-devices.webp",
+    alt: "Linkd jewelry store security and audit reporting",
   },
   {
-    label: "Reports",
-    title: "Owner and manager reporting",
-    copy: "Give operators clean reporting across sales, tenders, inventory, staff performance, benchmarking, payroll, commissions, and integration health.",
-    bullets: ["Sales and tender reports", "Commission support", "Provider sync health"],
+    href: "/integrations",
+    label: "Integrations",
+    title: "CRM, analytics, and accounting",
+    copy: "See how Linkd can connect JewelLink, CountRetail, accounting, e-commerce, RFID, and APIs.",
+    image: "/assets/screenshots/linkd-settings-integrations-devices.webp",
+    alt: "Linkd jewelry retail integrations",
+  },
+  {
+    href: "/accounting",
+    label: "Finance",
+    title: "House accounts and layaway",
+    copy: "Keep deposits, balances, tender review, and accounting handoff closer to the POS record.",
+    image: "/assets/screenshots/linkd-reports-home-devices.webp",
+    alt: "Linkd jewelry store finance and accounting review",
+  },
+  {
+    href: "/multi-store",
+    label: "Multi-Store",
+    title: "Transfers, roles, and reporting",
+    copy: "Connect locations with cleaner inventory movement, employee controls, and owner reporting.",
+    image: "/assets/screenshots/linkd-inventory-search-devices.webp",
+    alt: "Linkd multi-store jewelry operations and inventory movement",
   },
 ];
 
-const securityRows = [
-  "RFID inventory integrations through TrackTech",
-  "Store camera and CountRetail audit trail alignment",
-  "Permission logs for sensitive POS actions",
-  "Inventory aging and movement exception reporting",
-  "Multi-store transfers with controlled handoff history",
+const ecosystemCards = [
+  {
+    name: "Linkd",
+    role: "Operational core",
+    logo: "/assets/brand/linkd-logo-main.webp",
+    alt: "Linkd",
+    width: 5334,
+    height: 3205,
+    copy: "Records the daily truth: sales, services, inventory, house accounts, permissions, and accounting handoff.",
+    href: "#early-access",
+  },
+  {
+    name: "JewelLink",
+    role: "Relationship layer",
+    logo: "/assets/brand/jewellink-logo-main.webp",
+    alt: "JewelLink",
+    width: 12500,
+    height: 6250,
+    copy: "Turns customer context into clienteling, texting, training, bridal workflows, and AI-assisted follow-up.",
+    href: "https://www.jewellink.com/",
+  },
+  {
+    name: "CountRetail",
+    role: "Intelligence layer",
+    logo: "/assets/brand/countretail-logo-main.webp",
+    alt: "CountRetail",
+    width: 3538,
+    height: 504,
+    copy: "Connects traffic, Vision AI, marketing attribution, predictive aging, and owner-level store decisions.",
+    href: "https://www.countretail.com/",
+  },
 ];
 
-const integrations = [
+const securitySignals = [
+  "RFID-ready inventory events",
+  "Permission logs for sensitive actions",
+  "CountRetail camera context alignment",
+  "Multi-store transfer handoff history",
+  "Exception review for managers",
+];
+
+const integrationCloud = [
   "JewelLink CRM",
   "CountRetail AI",
   "TrackTech RFID",
-  "Avalara",
   "QuickBooks",
   "Xero",
   "Striven",
   "Shopify",
-  "Open APIs",
+  "Avalara",
+  "Open API",
 ];
 
-const releaseSignals = [
-  "Luxury jewelry retailers preparing a POS change",
-  "Multi-location stores needing stronger inventory controls",
-  "Teams running house accounts, layaway, and specialty financing",
-  "Retailers who want POS, CRM, cameras, and accounting connected",
-];
-
-const partnerPaths = [
+const ecosystemFlows = [
   {
-    name: "JewelLink",
-    href: "https://www.jewellink.com/demo/",
-    label: "CRM and clienteling",
-    copy: "For retailers who want Linkd POS history to feed sales follow-up, training, texting, bridal workflows, and AI clienteling.",
+    label: "Relationship",
+    product: "JewelLink",
+    copy: "Clienteling, texting, training, follow-up",
   },
   {
-    name: "CountRetail AI",
-    href: "https://www.countretail.com/demo/",
-    label: "Traffic and owner cockpit",
-    copy: "For retailers who want Linkd operational data connected with store traffic, Vision AI, inventory pressure, and marketing attribution.",
+    label: "Operations",
+    product: "Linkd",
+    copy: "POS, inventory, accounts, audit trail",
+  },
+  {
+    label: "Intelligence",
+    product: "CountRetail",
+    copy: "Traffic, marketing, aging, owner insight",
+  },
+];
+
+const earlyAccessSignals = [
+  "Luxury jewelry POS change",
+  "Multi-location inventory control",
+  "House accounts and layaway",
+  "Connected CRM and analytics",
+];
+
+const faqItems = [
+  {
+    question: "What is Linkd?",
+    answer:
+      "Linkd is jewelry POS software for luxury retailers, connecting checkout, inventory, repairs, house accounts, layaway, reporting, and accounting handoff.",
+  },
+  {
+    question: "How is Linkd different from JewelLink?",
+    answer:
+      "Linkd records store operations at the counter and back office. JewelLink uses customer and POS context for CRM, clienteling, texting, training, and follow-up.",
+  },
+  {
+    question: "How does Linkd work with CountRetail?",
+    answer:
+      "Linkd keeps operational records clean so CountRetail can compare traffic, camera intelligence, inventory pressure, and store performance against reliable retail data.",
+  },
+  {
+    question: "Does Linkd support jewelry inventory workflows?",
+    answer:
+      "Linkd is designed for serialized inventory, receiving, transfers, aging views, RFID-ready events, vendor context, and multi-store movement history.",
+  },
+];
+
+const softwareFeatures = [
+  "Jewelry point of sale",
+  "Serialized inventory management",
+  "Repair, appraisal, and service workflows",
+  "Layaway and house accounts",
+  "Role-based permissions",
+  "Inventory audit workflows",
+  "Multi-store transfer controls",
+  "Jewelry store finance review",
+  "Accounting handoff",
+  "POS integrations and API readiness",
+  "JewelLink CRM integration readiness",
+  "CountRetail AI integration readiness",
+];
+
+const seoPageMap = [
+  ...seoPathCards.map((card) => ({
+    name: card.label,
+    url: `https://linkd.com${card.href}`,
+    description: card.copy,
+  })),
+  {
+    name: "Linkd, JewelLink, and CountRetail Ecosystem",
+    url: "https://linkd.com/ecosystem",
+    description:
+      "Compare the Linkd operational core, JewelLink relationship layer, and CountRetail intelligence layer for jewelry retail.",
+  },
+];
+
+const siteNavigationItems = [
+  {
+    name: "Linkd Home",
+    url: "https://linkd.com/",
+    description:
+      "Linkd jewelry POS and store operations overview for luxury retail jewelers.",
+  },
+  ...seoPageMap,
+];
+
+const relatedRetailSystems = [
+  {
+    "@type": "SoftwareApplication",
+    name: "JewelLink",
+    applicationCategory: "CRM",
+    url: "https://www.jewellink.com/",
+    description:
+      "Relationship layer for CRM, clienteling, texting, training, follow-up, and team workflows.",
+  },
+  {
+    "@type": "SoftwareApplication",
+    name: "CountRetail",
+    applicationCategory: "BusinessIntelligenceApplication",
+    url: "https://www.countretail.com/",
+    description:
+      "Intelligence layer for traffic, Vision AI, marketing, inventory signals, and owner reporting.",
   },
 ];
 
@@ -149,10 +384,26 @@ const structuredData = [
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Linkd",
-    url: "https://www.linkd.com/",
-    logo: "https://www.linkd.com/assets/brand/linkd-logo-main.png",
+    url: "https://linkd.com/",
+    logo: "https://linkd.com/assets/brand/linkd-logo-main.webp",
     description:
-      "Luxury POS, inventory, security, accounting, and store operations for modern jewelry retailers.",
+      "Jewelry POS, inventory management, store operations, accounting handoff, and security controls for luxury retail jewelers.",
+    knowsAbout: [
+      "Jewelry point of sale",
+      "Jewelry inventory management",
+      "Jewelry repair management",
+      "Jewelry appraisal intake",
+      "Jewelry store finance",
+      "House account and layaway management",
+      "Multi-store jewelry operations",
+      "Jewelry POS integrations",
+      "RFID jewelry inventory",
+      "Jewelry store security",
+      "Luxury retail operations",
+      "Retail accounting handoff",
+      "JewelLink CRM",
+      "CountRetail AI",
+    ],
   },
   {
     "@context": "https://schema.org",
@@ -160,25 +411,78 @@ const structuredData = [
     name: "Linkd",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
-    url: "https://www.linkd.com/",
-    image: "https://www.linkd.com/assets/screenshots/linkd-login-tagline-devices.png",
+    url: "https://linkd.com/",
+    image: "https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp",
     description:
-      "The operational core for modern jewelry retail, connecting POS, inventory, house accounts, security, reporting, and luxury retail integrations.",
+      "Luxury jewelry POS software connecting checkout, inventory, repairs, house accounts, layaway, reporting, security, and retail integrations.",
+    featureList: softwareFeatures,
+    screenshot: workflowProofs.map((workflow) => `https://linkd.com${workflow.image}`),
+    isRelatedTo: relatedRetailSystems,
     audience: {
       "@type": "Audience",
-      audienceType: "Luxury retail jewelers",
+      audienceType: "Luxury jewelry retailers",
+    },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/PreOrder",
+      category: "Early access",
     },
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Linkd",
-    url: "https://www.linkd.com/",
+    url: "https://linkd.com/",
+    hasPart: seoPageMap.map((page) => ({
+      "@type": "WebPage",
+      name: page.name,
+      url: page.url,
+      description: page.description,
+    })),
     potentialAction: {
       "@type": "ContactAction",
-      target: "https://www.linkd.com/#early-access",
+      target: "https://linkd.com/#early-access",
       name: "Request Linkd early release access",
     },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Linkd product and ecosystem pages",
+    itemListElement: seoPageMap.map((page, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "WebPage",
+        name: page.name,
+        url: page.url,
+        description: page.description,
+      },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    name: "Linkd product and workflow navigation",
+    hasPart: siteNavigationItems.map((page, index) => ({
+      "@type": "WebPage",
+      position: index + 1,
+      name: page.name,
+      url: page.url,
+      description: page.description,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   },
 ];
 
@@ -193,7 +497,7 @@ export default function Home() {
         <Link className="brand-lockup" href="#top" aria-label="Linkd home">
           <span className="brand-logo-crop">
             <Image
-              src="/assets/brand/linkd-logo-main.png"
+              src="/assets/brand/linkd-logo-main.webp"
               alt="Linkd"
               width={5334}
               height={3205}
@@ -203,11 +507,11 @@ export default function Home() {
           </span>
         </Link>
         <nav className="nav-links" aria-label="Primary navigation">
-          <Link href="#platform">Platform</Link>
-          <Link href="#features">Features</Link>
-          <Link href="#security">Security</Link>
-          <Link href="#integrations">Integrations</Link>
-          <Link href="#early-access">Early Release</Link>
+          {primaryNavItems.map((item) => (
+            <Link href={item.href} key={item.href}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
         <div className="header-actions">
           <Link className="text-button" href="/login">
@@ -221,244 +525,310 @@ export default function Home() {
 
       <section className="hero-section" id="top">
         <div className="hero-copy">
-          <p className="eyebrow">Luxury POS for retail jewelers</p>
-          <h1>The operational core for modern jewelry retail.</h1>
+          <p className="eyebrow">Luxury jewelry POS software</p>
+          <h1>Jewelry POS that connects the store.</h1>
           <p className="hero-subtitle">
-            Linkd brings point of sale, inventory control, house accounts,
-            layaway, accounting, security audits, and multi-store operations
-            into one cloud platform built for luxury jewelry operators.
+            Linkd gives luxury jewelers one operational workspace for checkout,
+            inventory, services, house accounts, security, reporting, and
+            accounting handoff.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
               Request Early Access
             </Link>
-            <Link className="button button-secondary" href="/login">
-              Open Login
+            <Link className="button button-secondary" href="#workflows">
+              See Workflows
             </Link>
           </div>
           <dl className="hero-metrics" aria-label="Platform highlights">
-            <div>
-              <dt>POS</dt>
-              <dd>Checkout, services, layaway</dd>
-            </div>
-            <div>
-              <dt>RFID</dt>
-              <dd>Inventory security ready</dd>
-            </div>
-            <div>
-              <dt>API</dt>
-              <dd>Open integration strategy</dd>
-            </div>
+            {heroProofs.map((proof) => (
+              <div key={proof.value}>
+                <dt>{proof.value}</dt>
+                <dd>{proof.label}</dd>
+              </div>
+            ))}
           </dl>
         </div>
 
-        <div className="product-stage" aria-label="Linkd product preview">
+        <div className="product-stage hero-product-stage" aria-label="Linkd POS preview">
           <Image
             className="hero-device-image"
-            src="/assets/screenshots/linkd-login-tagline-devices.png"
-            alt="Linkd login and workspace shown on a MacBook screen"
+            src="/assets/screenshots/linkd-pos-register-devices.webp"
+            alt="Linkd POS register shown on a MacBook screen"
             width={1536}
             height={1024}
             priority
             unoptimized
           />
+          <div className="stage-proof-card">
+            <span>Operational core</span>
+            <strong>Sell, track, account, secure.</strong>
+          </div>
           <div className="hero-visual-signals" aria-label="Core Linkd workflows">
             <span>POS</span>
             <span>Inventory</span>
             <span>Services</span>
-            <span>Security</span>
+            <span>Accounts</span>
             <span>Reporting</span>
           </div>
         </div>
       </section>
 
-      <section className="section-light product-showcase-section" aria-label="Linkd product screens">
+      <section className="role-strip-section" aria-labelledby="role-strip-title">
+        <div className="role-strip-shell">
+          <div className="role-strip-copy">
+            <p className="eyebrow">Store stack</p>
+            <h2 id="role-strip-title">The difference, fast.</h2>
+            <p>
+              Linkd records the operation. JewelLink grows the relationship.
+              CountRetail explains the store.
+            </p>
+          </div>
+          <div className="role-strip-grid" aria-label="Linkd ecosystem roles">
+            {roleStripCards.map((card) => (
+              <a
+                className={`role-strip-card role-strip-${card.name.toLowerCase()}`}
+                href={card.href}
+                key={card.name}
+                target={card.href.startsWith("http") ? "_blank" : undefined}
+                rel={card.href.startsWith("http") ? "noreferrer" : undefined}
+              >
+                <div className={`role-card-visual role-card-visual-${card.kind}`}>
+                  <Image
+                    src={card.image}
+                    alt={card.alt}
+                    width={card.width}
+                    height={card.height}
+                    unoptimized
+                  />
+                </div>
+                <div>
+                  <span>{card.role}</span>
+                  <strong>{card.name}</strong>
+                  <p>{card.proof}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+          <Link className="role-strip-link" href="/ecosystem">
+            Compare the stack
+          </Link>
+        </div>
+      </section>
+
+      <section className="section-white platform-section" id="platform">
         <div className="section-copy">
-          <p className="eyebrow">Product preview</p>
-          <h2>One operational workspace from the sales floor to the back office.</h2>
+          <p className="eyebrow">Platform</p>
+          <h2>The daily operating system behind the jewelry counter.</h2>
           <p>
-            Early screenshot studies are being shaped into launch visuals for
-            the first release. The product story starts with the workflows
-            luxury jewelers run every day: sell, track, secure, and follow up.
+            Linkd is built around the data that must be right before CRM,
+            analytics, accounting, and AI can be trusted.
           </p>
         </div>
-        <div className="product-shot-grid">
-          {productShots.map((shot) => (
-            <article className="product-shot-card" key={shot.label}>
+        <div className="operating-grid">
+          {operatingSignals.map((signal) => (
+            <article className="operating-card" key={signal.label}>
+              <span>{signal.label}</span>
+              <h3>{signal.title}</h3>
+              <p>{signal.copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="operations-map" aria-label="Linkd connected operations map">
+          <div className="operations-map-core">
+            <span>Linkd Core</span>
+            <strong>One operating record</strong>
+            <p>Sales, items, accounts, permissions, and handoffs stay connected.</p>
+          </div>
+          <div className="operations-map-grid">
+            {operationsMap.map((module) => (
+              <article className="operations-map-node" key={module.title}>
+                <span>{module.label}</span>
+                <strong>{module.title}</strong>
+                <div
+                  className="mini-chip-row"
+                  aria-label={`${module.title} signals`}
+                >
+                  {module.signals.map((signal) => (
+                    <small key={signal}>{signal}</small>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-light seo-path-section">
+        <div className="section-copy">
+          <p className="eyebrow">Explore by priority</p>
+          <h2>Start with the workflow you need to fix first.</h2>
+        </div>
+        <div className="seo-path-grid">
+          {seoPathCards.map((card) => (
+            <Link className="seo-path-card" href={card.href} key={card.href}>
               <Image
-                src={shot.image}
-                alt={shot.alt}
+                src={card.image}
+                alt={card.alt}
                 width={1536}
                 height={1024}
                 unoptimized
               />
               <div>
-                <span>{shot.label}</span>
-                <h3>{shot.title}</h3>
-                <p>{shot.copy}</p>
+                <span>{card.label}</span>
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-light workflow-section" id="workflows">
+        <div className="section-copy workflow-heading">
+          <p className="eyebrow">Product proof</p>
+          <h2>Product screens your team can recognize fast.</h2>
+          <p>
+            Move from the counter to inventory, customer history, reporting,
+            and integrations without sending the store through separate tools.
+          </p>
+        </div>
+        <div className="workflow-proof-list">
+          {workflowProofs.map((workflow, index) => (
+            <article className="workflow-proof-card" key={workflow.label}>
+              <div className="workflow-shot">
+                <Image
+                  src={workflow.image}
+                  alt={workflow.alt}
+                  width={1536}
+                  height={1024}
+                  unoptimized
+                />
+              </div>
+              <div className="workflow-copy">
+                <span>{String(index + 1).padStart(2, "0")} / {workflow.label}</span>
+                <h3>{workflow.title}</h3>
+                <p>{workflow.copy}</p>
+                <div className="chip-row" aria-label={`${workflow.label} highlights`}>
+                  {workflow.chips.map((chip) => (
+                    <span key={chip}>{chip}</span>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="section-light intro-band" id="platform">
+      <section className="section-dark ecosystem-section" id="ecosystem">
         <div className="section-copy">
-          <p className="eyebrow">Platform</p>
-          <h2>Designed around the real operating pressure of jewelry stores.</h2>
-          <p>
-            Linkd is positioned as the system of record for the store: the place
-            where sales, inventory, finance, employees, and security events
-            connect before they become expensive problems.
-          </p>
-        </div>
-        <div className="pillar-grid">
-          {pillars.map((pillar) => (
-            <article className="pillar-card" key={pillar.label}>
-              <span>{pillar.label}</span>
-              <h3>{pillar.title}</h3>
-              <p>{pillar.copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-white feature-section" id="features">
-        <div className="section-copy">
-          <p className="eyebrow">Feature explainers</p>
-          <h2>The system of record behind every jewelry retail workflow.</h2>
-          <p>
-            Linkd is the operating layer for the work that has to be accurate
-            before AI, CRM, reporting, and accounting can trust the data.
-          </p>
-        </div>
-        <div className="feature-grid">
-          {featureExplainers.map((feature) => (
-            <article className="feature-card" key={feature.label}>
-              <span>{feature.label}</span>
-              <h3>{feature.title}</h3>
-              <p>{feature.copy}</p>
-              <ul>
-                {feature.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-dark security-section" id="security">
-        <div className="security-copy">
-          <p className="eyebrow">Security and audits</p>
-          <h2>Controls that connect what happened at the counter, in the case, and on camera.</h2>
-          <p>
-            Luxury retailers need more than end-of-day reports. Linkd is being
-            shaped to connect inventory movement, employee permissions, register
-            events, camera context, and exception reporting into one reviewable
-            timeline.
-          </p>
-        </div>
-        <div className="security-list">
-          {securityRows.map((row) => (
-            <div className="security-row" key={row}>
-              <span aria-hidden="true"></span>
-              <p>{row}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-light ecosystem-section" id="integrations">
-        <div className="section-copy narrow">
           <p className="eyebrow">Connected ecosystem</p>
-          <h2>Standalone POS, connected to the tools luxury jewelers already trust.</h2>
+          <h2>One store stack. Three clear jobs.</h2>
           <p>
-            Linkd should stand on its own while working cleanly with JewelLink,
-            CountRetail, accounting, tax, e-commerce, RFID, and custom retail
-            systems through open APIs.
+            Linkd should stand on its own while making JewelLink and CountRetail
+            more valuable with clean operational data.
           </p>
         </div>
-        <div className="partner-strip" aria-label="Industry partners">
-          <a href="https://www.jewellink.com/" target="_blank" rel="noreferrer">
-            <Image
-              src="/assets/brand/jewellink-logo-main.png"
-              alt="JewelLink"
-              width={12500}
-              height={6250}
-              unoptimized
-            />
-          </a>
-          <a href="https://www.countretail.com/" target="_blank" rel="noreferrer">
-            <Image
-              src="/assets/brand/countretail-logo-main.png"
-              alt="CountRetail AI"
-              width={3538}
-              height={504}
-              unoptimized
-            />
-          </a>
-        </div>
-        <div className="partner-notes">
-          <article>
-            <span>JewelLink</span>
-            <p>
-              Clienteling, training, follow-up, texting, and CRM context can
-              sit beside Linkd POS data instead of living in a disconnected
-              sales process.
-            </p>
-          </article>
-          <article>
-            <span>CountRetail AI</span>
-            <p>
-              Store traffic, camera intelligence, marketing attribution, and
-              inventory pressure signals can support the operational decisions
-              Linkd records.
-            </p>
-          </article>
-        </div>
-        <div className="partner-action-grid" aria-label="Partner demo paths">
-          {partnerPaths.map((partner) => (
-            <article key={partner.name}>
-              <span>{partner.label}</span>
-              <h3>Linkd + {partner.name}</h3>
-              <p>{partner.copy}</p>
-              <div>
-                <Link className="button button-primary" href="#early-access">
-                  Request Linkd Access
-                </Link>
-                <a className="partner-link" href={partner.href} target="_blank" rel="noreferrer">
-                  Partner demo form
-                </a>
+        <div className="ecosystem-grid">
+          {ecosystemCards.map((card) => (
+            <a
+              className="ecosystem-card"
+              href={card.href}
+              key={card.name}
+              target={card.href.startsWith("http") ? "_blank" : undefined}
+              rel={card.href.startsWith("http") ? "noreferrer" : undefined}
+            >
+              <div className={`ecosystem-logo ecosystem-logo-${card.name.toLowerCase()}`}>
+                <Image
+                  src={card.logo}
+                  alt={card.alt}
+                  width={card.width}
+                  height={card.height}
+                  unoptimized
+                />
               </div>
-            </article>
+              <span>{card.role}</span>
+              <h3>{card.name}</h3>
+              <p>{card.copy}</p>
+            </a>
           ))}
         </div>
         <div className="integration-cloud" aria-label="Planned integrations">
-          {integrations.map((integration) => (
+          {integrationCloud.map((integration) => (
             <span key={integration}>{integration}</span>
+          ))}
+        </div>
+        <div className="ecosystem-flow" aria-label="Linkd ecosystem data map">
+          {ecosystemFlows.map((flow) => (
+            <article
+              className={`ecosystem-flow-card ecosystem-flow-${flow.product.toLowerCase()}`}
+              key={flow.product}
+            >
+              <span>{flow.label}</span>
+              <strong>{flow.product}</strong>
+              <p>{flow.copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="section-actions">
+          <Link className="button button-secondary" href="/ecosystem">
+            Compare the Stack
+          </Link>
+        </div>
+      </section>
+
+      <section className="section-white security-section" id="security">
+        <div className="security-copy">
+          <p className="eyebrow">Security and audits</p>
+          <h2>Controls for the counter, the case, and the back office.</h2>
+          <p>
+            Jewelry operations need reviewable evidence around item movement,
+            register actions, employee access, and inventory exceptions.
+          </p>
+        </div>
+        <div className="security-list">
+          {securitySignals.map((signal) => (
+            <div className="security-row" key={signal}>
+              <span aria-hidden="true"></span>
+              <p>{signal}</p>
+            </div>
           ))}
         </div>
       </section>
 
       <section className="section-blue ai-section">
         <div>
-          <p className="eyebrow">AI-assisted operations</p>
-          <h2>From invoice ingestion to predictive aging.</h2>
+          <p className="eyebrow">AI-ready operations</p>
+          <h2>Cleaner records create better answers.</h2>
         </div>
         <div className="ai-grid">
           <article>
             <h3>Invoice ingestion</h3>
-            <p>Turn vendor invoices into inventory and accounting-ready records.</p>
+            <p>Convert vendor documents into inventory-ready records.</p>
           </article>
           <article>
-            <h3>Predictive inventory</h3>
-            <p>Spot aging, margin, traffic, and merchandising signals earlier.</p>
+            <h3>Predictive aging</h3>
+            <p>Spot stock, margin, and merchandising pressure earlier.</p>
           </article>
           <article>
             <h3>Accounting assist</h3>
-            <p>Prepare clean handoff into QuickBooks, Xero, Striven, and tax tools.</p>
+            <p>Prepare cleaner handoff into QuickBooks, Xero, and Striven.</p>
           </article>
+        </div>
+      </section>
+
+      <section className="section-white faq-section">
+        <div className="section-copy">
+          <p className="eyebrow">Quick answers</p>
+          <h2>Built for jewelry operators who need the store connected.</h2>
+        </div>
+        <div className="faq-grid">
+          {faqItems.map((item) => (
+            <article className="faq-card" key={item.question}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -466,15 +836,14 @@ export default function Home() {
         <div className="release-panel">
           <div className="release-copy">
             <p className="eyebrow">Early release access</p>
-            <h2>For jewelers ready to modernize POS, inventory security, and connected operations.</h2>
+            <h2>For jewelers ready to modernize POS and connected operations.</h2>
             <p>
-              The early list should prioritize retailers who can give direct
-              feedback on luxury POS workflows, inventory movement, accounting,
-              store security, migration, and ecosystem integrations with
-              JewelLink and CountRetail.
+              The early list is best for stores evaluating luxury POS,
+              inventory control, accounting handoff, security, and ecosystem
+              integrations.
             </p>
             <div className="release-signals">
-              {releaseSignals.map((signal) => (
+              {earlyAccessSignals.map((signal) => (
                 <span key={signal}>{signal}</span>
               ))}
             </div>
@@ -486,12 +855,19 @@ export default function Home() {
       <footer className="site-footer">
         <div>
           <span className="footer-mark">Linkd</span>
-          <p>The operational core for modern jewelry retail.</p>
+          <p>Jewelry POS and operations for luxury retail teams.</p>
         </div>
         <nav aria-label="Footer navigation">
           <Link href="#platform">Platform</Link>
-          <Link href="#features">Features</Link>
-          <Link href="#security">Security</Link>
+          <Link href="#workflows">Workflows</Link>
+          <Link href="/ecosystem">Ecosystem</Link>
+          <Link href="/jewelry-pos">Jewelry POS</Link>
+          <Link href="/repairs">Repairs</Link>
+          <Link href="/inventory">Inventory</Link>
+          <Link href="/accounting">Finance</Link>
+          <Link href="/multi-store">Multi-Store</Link>
+          <Link href="/security">Security</Link>
+          <Link href="/integrations">Integrations</Link>
           <Link href="#early-access">Early Release</Link>
           <Link href="/login">Login</Link>
         </nav>

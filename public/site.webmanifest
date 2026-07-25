@@ -1,0 +1,51 @@
+{
+  "name": "Linkd Jewelry POS",
+  "short_name": "Linkd",
+  "description": "Jewelry POS and operations software for luxury retailers.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f1f5f8",
+  "theme_color": "#17213a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Jewelry POS",
+      "short_name": "POS",
+      "description": "Checkout, repairs, layaway, house accounts, and tender controls.",
+      "url": "/jewelry-pos"
+    },
+    {
+      "name": "Inventory",
+      "short_name": "Inventory",
+      "description": "Serialized item control, transfers, aging, and RFID-ready events.",
+      "url": "/inventory"
+    },
+    {
+      "name": "Integrations",
+      "short_name": "Integrations",
+      "description": "JewelLink, CountRetail, accounting, e-commerce, RFID, and APIs.",
+      "url": "/integrations"
+    }
+  ]
+}

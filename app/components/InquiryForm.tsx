@@ -1,15 +1,13 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 const interestOptions = [
   "POS and checkout",
   "Inventory and RFID security",
   "House accounts and aging",
   "Layaway and financing",
-  "Multi-store transfers",
   "Accounting integrations",
-  "Shopify and e-commerce",
   "JewelLink CRM",
   "CountRetail camera intelligence",
   "Open API or custom integrations",
@@ -32,12 +30,31 @@ export default function InquiryForm() {
   ]);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
+  const sourcePathRef = useRef<HTMLInputElement>(null);
+  const sourceUrlRef = useRef<HTMLInputElement>(null);
+  const referrerRef = useRef<HTMLInputElement>(null);
 
   const statusCopy = useMemo(() => {
     if (submitState === "success") return message || "Your request was sent.";
     if (submitState === "error") return message || "Something went wrong.";
     return "";
   }, [message, submitState]);
+
+  function setSourcePath() {
+    if (sourcePathRef.current) {
+      sourcePathRef.current.value = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    }
+    if (sourceUrlRef.current) {
+      sourceUrlRef.current.value = window.location.href;
+    }
+    if (referrerRef.current) {
+      referrerRef.current.value = document.referrer;
+    }
+  }
+
+  useEffect(() => {
+    setSourcePath();
+  }, []);
 
   function toggleInterest(option: string) {
     setSelected((current) =>
@@ -67,6 +84,9 @@ export default function InquiryForm() {
       preferredContact: String(data.get("preferredContact") || ""),
       notes: String(data.get("notes") || ""),
       website: String(data.get("website") || ""),
+      sourcePath: String(data.get("sourcePath") || ""),
+      sourceUrl: String(data.get("sourceUrl") || ""),
+      referrer: String(data.get("referrer") || ""),
       interests: selected,
     };
 
@@ -83,6 +103,7 @@ export default function InquiryForm() {
       }
 
       form.reset();
+      setSourcePath();
       setSelected(["POS and checkout", "Inventory and RFID security"]);
       setSubmitState("success");
       setMessage(result.message || "Your request was sent.");
@@ -97,7 +118,12 @@ export default function InquiryForm() {
   }
 
   return (
-    <form className="inquiry-form" onSubmit={handleSubmit}>
+    <form
+      className="inquiry-form"
+      onSubmit={handleSubmit}
+      aria-busy={submitState === "submitting"}
+      aria-describedby="inquiry-form-intro inquiry-form-status"
+    >
       <input
         className="hidden-field"
         name="website"
@@ -105,23 +131,41 @@ export default function InquiryForm() {
         autoComplete="off"
         aria-hidden="true"
       />
+      <input name="sourcePath" type="hidden" ref={sourcePathRef} readOnly />
+      <input name="sourceUrl" type="hidden" ref={sourceUrlRef} readOnly />
+      <input name="referrer" type="hidden" ref={referrerRef} readOnly />
       <div className="form-heading">
         <span>Request early access</span>
-        <h3>Tell us about your store.</h3>
+        <h3>Start with the essentials.</h3>
+        <p id="inquiry-form-intro">
+          We will route your request around POS, inventory, or ecosystem needs.
+        </p>
       </div>
 
-      <div className="form-grid">
+      <div className="form-grid essential-form-grid">
         <label>
           Name
           <input name="name" autoComplete="name" required />
         </label>
         <label>
           Work email
-          <input name="email" type="email" autoComplete="email" required />
+          <input
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            required
+          />
         </label>
         <label>
           Phone
-          <input name="phone" type="tel" autoComplete="tel" required />
+          <input
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            required
+          />
         </label>
         <label>
           Store or company
@@ -140,60 +184,68 @@ export default function InquiryForm() {
           </select>
         </label>
         <label>
-          Current POS
-          <input name="currentPos" placeholder="EDGE, Lightspeed, custom, etc." />
-        </label>
-        <label>
-          Demo focus
+          Main focus
           <select name="demoFocus" defaultValue="Linkd POS early release">
             {demoFocusOptions.map((option) => (
               <option key={option}>{option}</option>
             ))}
           </select>
         </label>
-        <label>
-          Timeline
-          <select name="timeline" defaultValue="Exploring">
-            <option>Exploring</option>
-            <option>0-90 days</option>
-            <option>3-6 months</option>
-            <option>6+ months</option>
-          </select>
-        </label>
-        <label>
-          Preferred contact
-          <select name="preferredContact" defaultValue="Email">
-            <option>Email</option>
-            <option>Phone</option>
-            <option>Text</option>
-          </select>
-        </label>
       </div>
 
-      <fieldset>
-        <legend>Areas of interest</legend>
-        <div className="interest-grid">
-          {interestOptions.map((option) => (
-            <label className="check-option" key={option}>
-              <input
-                type="checkbox"
-                checked={selected.includes(option)}
-                onChange={() => toggleInterest(option)}
-              />
-              <span>{option}</span>
-            </label>
-          ))}
+      <details className="form-details">
+        <summary>Add migration, timeline, or integration details</summary>
+        <div className="form-grid">
+          <label>
+            Current POS
+            <input name="currentPos" placeholder="EDGE, Lightspeed, custom, etc." />
+          </label>
+          <label>
+            Timeline
+            <select name="timeline" defaultValue="Exploring">
+              <option>Exploring</option>
+              <option>0-90 days</option>
+              <option>3-6 months</option>
+              <option>6+ months</option>
+            </select>
+          </label>
+          <label>
+            Preferred contact
+            <select name="preferredContact" defaultValue="Email">
+              <option>Email</option>
+              <option>Phone</option>
+              <option>Text</option>
+            </select>
+          </label>
         </div>
-      </fieldset>
 
-      <label>
-        What should we know?
-        <textarea
-          name="notes"
-          rows={4}
-          placeholder="Tell us about inventory security, accounting, migration, multi-store needs, or demo timing."
-        />
-      </label>
+        <fieldset>
+          <legend>Areas of interest</legend>
+          <div className="interest-grid">
+            {interestOptions.map((option) => (
+              <label className="check-option" key={option}>
+                <input
+                  name="interests"
+                  type="checkbox"
+                  value={option}
+                  checked={selected.includes(option)}
+                  onChange={() => toggleInterest(option)}
+                />
+                <span>{option}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <label>
+          What should we know?
+          <textarea
+            name="notes"
+            rows={4}
+            placeholder="Tell us about inventory security, accounting, migration, multi-store needs, or demo timing."
+          />
+        </label>
+      </details>
 
       <button
         className="button button-primary form-submit"
@@ -203,11 +255,14 @@ export default function InquiryForm() {
         {submitState === "submitting" ? "Sending..." : "Request Early Access"}
       </button>
 
-      {statusCopy ? (
-        <p className={`form-status ${submitState}`} role="status">
-          {statusCopy}
-        </p>
-      ) : null}
+      <p
+        className={`form-status ${submitState} ${statusCopy ? "" : "is-empty"}`}
+        id="inquiry-form-status"
+        role={submitState === "error" ? "alert" : "status"}
+        aria-live={submitState === "error" ? "assertive" : "polite"}
+      >
+        {statusCopy}
+      </p>
     </form>
   );
 }

@@ -8,7 +8,7 @@ export default function NotFound() {
         <Link className="login-brand" href="/" aria-label="Linkd home">
           <span className="brand-logo-crop login-logo">
             <Image
-              src="/assets/brand/linkd-logo-main.png"
+              src="/assets/brand/linkd-logo-main.webp"
               alt="Linkd"
               width={5334}
               height={3205}
