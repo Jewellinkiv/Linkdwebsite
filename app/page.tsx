@@ -31,35 +31,35 @@ const productShots = [
     title: "Counter workflows built around jewelry sales.",
     copy: "Checkout, client selection, service add-ons, tender controls, parking, register permissions, and manager review live in one workspace.",
     image: "/assets/screenshots/linkd-pos-register-devices.png",
-    alt: "Linkd POS register shown on laptop and tablet",
+    alt: "Linkd POS register shown on a MacBook screen",
   },
   {
     label: "Inventory",
     title: "A live view of every item, transfer, and exception.",
     copy: "Search, serialized inventory, RFID readiness, purchasing, receiving, aging, and movement history stay close to the daily store flow.",
     image: "/assets/screenshots/linkd-inventory-search-devices.png",
-    alt: "Linkd inventory search shown on laptop and tablet",
+    alt: "Linkd inventory search shown on a MacBook screen",
   },
   {
     label: "CRM context",
     title: "Customer history connected to the operational record.",
     copy: "Linkd keeps store activity, finance status, service history, and customer context ready for JewelLink CRM and clienteling workflows.",
     image: "/assets/screenshots/linkd-customers-crm-devices.png",
-    alt: "Linkd customer management shown on laptop and tablet",
+    alt: "Linkd customer management shown on a MacBook screen",
   },
   {
     label: "Reporting",
     title: "Business intelligence operators can actually run.",
     copy: "Sales, tender, inventory, benchmarking, payroll, and commission reporting are organized for owners and managers who need answers quickly.",
     image: "/assets/screenshots/linkd-reports-home-devices.png",
-    alt: "Linkd reports catalog shown on laptop and tablet",
+    alt: "Linkd reports catalog shown on a MacBook screen",
   },
   {
     label: "Integrations",
     title: "Provider health, mapping, and sync controls in one place.",
     copy: "Accounting exports, Shopify, QuickBooks, Striven, Xero, documents, and provider handoffs get explicit status instead of becoming invisible back-office risk.",
     image: "/assets/screenshots/linkd-settings-integrations-devices.png",
-    alt: "Linkd integrations settings shown on laptop and tablet",
+    alt: "Linkd integrations settings shown on a MacBook screen",
   },
 ];
 
@@ -256,7 +256,7 @@ export default function Home() {
           <Image
             className="hero-device-image"
             src="/assets/screenshots/linkd-login-tagline-devices.png"
-            alt="Linkd login and workspace shown on a MacBook and iPad"
+            alt="Linkd login and workspace shown on a MacBook screen"
             width={1536}
             height={1024}
             priority

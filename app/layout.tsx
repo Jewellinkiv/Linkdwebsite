@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         url: "/assets/screenshots/linkd-login-tagline-devices.png",
         width: 1536,
         height: 1024,
-        alt: "Linkd luxury jewelry retail POS on desktop and tablet",
+        alt: "Linkd luxury jewelry retail POS on a MacBook screen",
       },
     ],
   },
