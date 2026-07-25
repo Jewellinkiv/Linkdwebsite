@@ -259,7 +259,7 @@ export const seoLandingPages = {
     eyebrow: "Jewelry retail integrations",
     title: "Connect POS, CRM, analytics, accounting, and e-commerce.",
     description:
-      "Linkd is the operational hub that can feed JewelLink CRM, CountRetail AI, accounting, tax, e-commerce, RFID, and custom APIs.",
+      "Linkd is the operational hub for a full luxury jewelry management stack, feeding JewelLink CRM, CountRetail AI, accounting, tax, e-commerce, RFID, and custom APIs.",
     image: "/assets/screenshots/linkd-settings-integrations-devices.webp",
     imageAlt: "Linkd integrations settings on a MacBook screen",
     proof: ["JewelLink CRM", "CountRetail AI", "Accounting", "Open API"],
@@ -302,9 +302,14 @@ export const seoLandingPages = {
     ],
     stackTitle: "A connected stack without hiding the source of truth.",
     stackCopy:
-      "Linkd should remain the daily operational record while partner systems activate customer, analytics, and back-office workflows.",
-    stackItems: ["JewelLink", "CountRetail", "TrackTech RFID", "QuickBooks", "Xero", "Shopify", "Avalara", "Open API"],
+      "Linkd remains the daily operational record while JewelLink activates the relationship layer and CountRetail explains the intelligence layer.",
+    stackItems: ["Linkd operations", "JewelLink CRM", "CountRetail AI", "TrackTech RFID", "QuickBooks", "Xero", "Shopify", "Avalara", "Open API"],
     faq: [
+      {
+        question: "How do Linkd, JewelLink, and CountRetail work together?",
+        answer:
+          "Linkd manages POS, inventory, services, accounts, permissions, reporting, and accounting handoff. JewelLink adds CRM, clienteling, texting, training, and follow-up. CountRetail adds traffic, Vision AI, analytics, inventory signals, and owner intelligence.",
+      },
       {
         question: "Does Linkd replace JewelLink or CountRetail?",
         answer:
@@ -316,11 +321,13 @@ export const seoLandingPages = {
           "Linkd is being positioned for accounting, tax, e-commerce, document, RFID, and custom API integrations, including QuickBooks, Xero, Striven, Shopify, and Avalara paths.",
       },
     ],
-    metaTitle: "Jewelry POS Integrations for CRM, Analytics, Accounting, and E-Commerce",
+    metaTitle: "Jewelry POS Integrations and Luxury Management Ecosystem",
     metaDescription:
-      "Linkd connects jewelry POS operations with JewelLink CRM, CountRetail AI, QuickBooks, Xero, Striven, Shopify, Avalara, RFID, and open APIs.",
+      "Linkd connects jewelry POS operations with JewelLink CRM, CountRetail AI, QuickBooks, Xero, Striven, Shopify, Avalara, RFID, open APIs, and full luxury jewelry management workflows.",
     keywords: [
       "jewelry POS integrations",
+      "luxury jewelry management software",
+      "full jewelry management ecosystem",
       "JewelLink CRM integration",
       "CountRetail AI integration",
       "QuickBooks jewelry POS",

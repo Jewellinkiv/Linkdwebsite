@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Linkd",
   },
   description:
-    "Jewelry POS software for luxury retailers, connecting checkout, inventory management, repairs, house accounts, security, reporting, accounting, JewelLink CRM, and CountRetail AI.",
+    "Jewelry POS software for luxury retailers, connecting checkout, inventory management, repairs, house accounts, security, reporting, accounting, JewelLink CRM, and CountRetail AI for full luxury jewelry management.",
   keywords: [
     "jewelry POS",
     "jewelry point of sale",
@@ -46,6 +46,8 @@ export const metadata: Metadata = {
     "multi-store jewelry inventory",
     "JewelLink CountRetail",
     "jewelry retail ecosystem",
+    "luxury jewelry management software",
+    "full jewelry management ecosystem",
     "JewelLink CRM",
     "CountRetail AI",
   ],
@@ -79,7 +81,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Linkd | Jewelry POS That Connects the Store",
     description:
-      "Luxury jewelry POS software for checkout, inventory, services, house accounts, reporting, accounting handoff, and connected retail operations.",
+      "Luxury jewelry POS software for checkout, inventory, services, house accounts, reporting, accounting handoff, JewelLink CRM, CountRetail AI, and connected retail operations.",
     type: "website",
     url: "/",
     images: [
@@ -95,7 +97,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Linkd | Jewelry POS That Connects the Store",
     description:
-      "Luxury jewelry POS software for checkout, inventory, services, house accounts, reporting, accounting handoff, and connected retail operations.",
+      "Luxury jewelry POS software for checkout, inventory, services, house accounts, reporting, accounting handoff, JewelLink CRM, CountRetail AI, and connected retail operations.",
     images: ["/og.png"],
   },
   alternates: {

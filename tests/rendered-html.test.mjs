@@ -56,6 +56,15 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Serialized/i);
   assert.match(html, /Approvals/i);
   assert.match(html, /Integrations signals/i);
+  assert.match(html, /Feature frames/i);
+  assert.match(html, /Show the workflow before explaining it/i);
+  assert.match(html, /Counter workspace/i);
+  assert.match(html, /CRM-ready record/i);
+  assert.match(html, /Repair and appraisal flow/i);
+  assert.match(html, /Owner reporting catalog/i);
+  assert.match(html, /Luxury management stack/i);
+  assert.match(html, /JewelLink context/i);
+  assert.match(html, /CountRetail/i);
   assert.match(html, /The difference, fast\./i);
   assert.match(html, /Linkd records the operation/i);
   assert.match(html, /JewelLink grows the relationship/i);
@@ -182,6 +191,8 @@ test("server-renders focused SEO landing pages", async () => {
       assert.match(html, /At a glance/i);
       assert.match(html, /What this workflow connects/i);
       assert.match(html, /connected workflow map/i);
+      assert.match(html, /Product frame/i);
+      assert.match(html, /The workspace view, simplified for fast scanning/i);
       assert.match(html, /Start/i);
       assert.match(html, /Control/i);
       assert.match(html, /Connect/i);
@@ -485,9 +496,15 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(css, /\.operations-map-core\s*\{[\s\S]*min-height: 320px/);
   assert.match(css, /\.operations-map-grid\s*\{[\s\S]*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(css, /\.operations-map-node\s*\{[\s\S]*min-height: 154px/);
+  assert.match(css, /\.feature-frame-grid\s*\{[\s\S]*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.feature-frame-card\s*\{[\s\S]*min-height: 390px/);
+  assert.match(css, /\.feature-frame-tabs\s*\{[\s\S]*repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.feature-frame-row\s*\{[\s\S]*min-height: 58px/);
+  assert.match(css, /\.feature-frame-card-compact\s*\{[\s\S]*max-width: 980px/);
   assert.match(css, /\.mini-chip-row small\s*\{[\s\S]*border-radius: 99px/);
   assert.match(css, /\.operations-map\s*\{[\s\S]*grid-template-columns: 1fr/);
   assert.match(css, /\.operations-map-grid,\s*\.role-strip-grid/);
+  assert.match(css, /\.role-strip-grid,\s*\.feature-frame-grid/);
   assert.match(css, /\.seo-path-card\s*\{[\s\S]*grid-template-columns: 102px minmax\(0, 1fr\)/);
   assert.match(css, /\.seo-path-card img\s*\{[\s\S]*min-height: 126px/);
   assert.match(css, /\.seo-path-card p\s*\{[\s\S]*-webkit-line-clamp: 2/);
@@ -508,7 +525,7 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   );
   assert.match(
     css,
-    /\.role-strip-grid,\s*\.seo-path-grid/,
+    /\.role-strip-grid,\s*\.feature-frame-grid,\s*\.seo-path-grid/,
   );
   assert.match(
     css,
@@ -585,12 +602,17 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(layout, /jewelry store accounting/);
   assert.match(layout, /jewelry POS integrations/);
   assert.match(layout, /multi-store jewelry inventory/);
+  assert.match(layout, /luxury jewelry management software/);
+  assert.match(layout, /full jewelry management ecosystem/);
   assert.match(landingData, /createSeoLandingMetadata/);
   assert.match(landingData, /keywords: page\.keywords/);
   assert.match(landingData, /luxury jewelry point of sale/);
   assert.match(landingData, /jewelry repair intake software/);
   assert.match(landingData, /multi-store jewelry POS/);
   assert.match(landingData, /jewelry POS integrations/);
+  assert.match(landingData, /Luxury Management Ecosystem/);
+  assert.match(landingData, /full luxury jewelry management stack/);
+  assert.match(landingData, /How do Linkd, JewelLink, and CountRetail work together/);
   assert.match(proxy, /export function proxy/);
   assert.match(proxy, /NextResponse\.next/);
   assert.match(proxy, /X-Content-Type-Options/);
@@ -609,6 +631,7 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(llms, /Linkd: operational core/i);
   assert.match(llms, /JewelLink: relationship layer/i);
   assert.match(llms, /CountRetail: intelligence layer/i);
+  assert.match(llms, /full luxury jewelry management stack/i);
   assert.match(llms, /https:\/\/linkd\.com\/repairs/);
   assert.match(llms, /https:\/\/linkd\.com\/accounting/);
   assert.match(llms, /https:\/\/linkd\.com\/multi-store/);

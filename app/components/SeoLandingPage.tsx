@@ -1,4 +1,5 @@
 import type { SeoLandingPage as SeoLandingPageData } from "../seoLandingPages";
+import { FeatureFrameCard, landingFeatureFramesBySlug } from "./FeatureFrames";
 import InquiryForm from "./InquiryForm";
 import Image from "next/image";
 import Link from "next/link";
@@ -183,6 +184,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
       detail: page.outcomes[2]?.title ?? page.stackItems[2],
     },
   ];
+  const featureFrame = landingFeatureFramesBySlug[page.slug];
 
   const structuredData = [
     {
@@ -348,6 +350,16 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
           ))}
         </div>
       </section>
+
+      {featureFrame ? (
+        <section className="section-white landing-feature-frame-section">
+          <div className="section-copy">
+            <p className="eyebrow">Product frame</p>
+            <h2>The workspace view, simplified for fast scanning.</h2>
+          </div>
+          <FeatureFrameCard frame={featureFrame} compact />
+        </section>
+      ) : null}
 
       <section className="section-white landing-proof-rail-section" id="product-screens">
         <div className="section-copy">

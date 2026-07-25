@@ -26,4 +26,5 @@ permissions, reporting, accounting handoff, and retail integrations.
 
 Linkd is the operational record for jewelry retailers. JewelLink activates the
 customer relationship. CountRetail explains store intelligence. Together they
-form a clear jewelry retail stack: operations, relationships, and intelligence.
+form a full luxury jewelry management stack: operations, relationships, and
+intelligence.

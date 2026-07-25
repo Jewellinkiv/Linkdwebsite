@@ -1,4 +1,5 @@
 import InquiryForm from "./components/InquiryForm";
+import { FeatureFrameGrid, productFeatureFrames } from "./components/FeatureFrames";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -315,6 +316,11 @@ const faqItems = [
       "Linkd keeps operational records clean so CountRetail can compare traffic, camera intelligence, inventory pressure, and store performance against reliable retail data.",
   },
   {
+    question: "How do Linkd, JewelLink, and CountRetail support full luxury jewelry management?",
+    answer:
+      "Linkd records POS, inventory, services, accounts, permissions, and reporting. JewelLink activates CRM, clienteling, texting, training, and follow-up. CountRetail adds traffic, Vision AI, analytics, and owner intelligence.",
+  },
+  {
     question: "Does Linkd support jewelry inventory workflows?",
     answer:
       "Linkd is designed for serialized inventory, receiving, transfers, aging views, RFID-ready events, vendor context, and multi-store movement history.",
@@ -334,6 +340,10 @@ const softwareFeatures = [
   "POS integrations and API readiness",
   "JewelLink CRM integration readiness",
   "CountRetail AI integration readiness",
+  "Customer profiles and segments",
+  "Jewelry repair and appraisal intake",
+  "Report catalog for sales, inventory, KPI, commission, payroll, customer, and operations reporting",
+  "Full luxury jewelry management ecosystem with Linkd, JewelLink, and CountRetail",
 ];
 
 const seoPageMap = [
@@ -399,6 +409,7 @@ const structuredData = [
       "Jewelry POS integrations",
       "RFID jewelry inventory",
       "Jewelry store security",
+      "Full luxury jewelry management",
       "Luxury retail operations",
       "Retail accounting handoff",
       "JewelLink CRM",
@@ -530,7 +541,7 @@ export default function Home() {
           <p className="hero-subtitle">
             Linkd gives luxury jewelers one operational workspace for checkout,
             inventory, services, house accounts, security, reporting, and
-            accounting handoff.
+            accounting handoff, ready for JewelLink CRM and CountRetail AI.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
@@ -572,6 +583,19 @@ export default function Home() {
             <span>Reporting</span>
           </div>
         </div>
+      </section>
+
+      <section className="section-white feature-frame-section" id="feature-frames">
+        <div className="section-copy">
+          <p className="eyebrow">Feature frames</p>
+          <h2>Show the workflow before explaining it.</h2>
+          <p>
+            Public-safe product frames turn the Linkd workspace into quick,
+            scannable proof for POS, customers, services, inventory, reports,
+            and integrations.
+          </p>
+        </div>
+        <FeatureFrameGrid frames={productFeatureFrames} />
       </section>
 
       <section className="role-strip-section" aria-labelledby="role-strip-title">
@@ -725,8 +749,9 @@ export default function Home() {
           <p className="eyebrow">Connected ecosystem</p>
           <h2>One store stack. Three clear jobs.</h2>
           <p>
-            Linkd should stand on its own while making JewelLink and CountRetail
-            more valuable with clean operational data.
+            Linkd, JewelLink, and CountRetail work together as a full luxury
+            jewelry management ecosystem: operations, relationships, and
+            intelligence.
           </p>
         </div>
         <div className="ecosystem-grid">
