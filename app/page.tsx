@@ -586,7 +586,7 @@ export default function Home() {
         <div className="product-stage hero-product-stage" aria-label="Linkd POS preview">
           <Image
             className="hero-device-image"
-            src="/assets/screenshots/linkd-pos-register-devices.webp"
+            src="/assets/screenshots/linkd-home-hero-banner.webp"
             alt="Linkd POS register shown on a MacBook screen"
             width={1536}
             height={1024}
