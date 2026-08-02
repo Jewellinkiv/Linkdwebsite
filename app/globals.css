@@ -1238,6 +1238,274 @@ h3 {
   gap: 42px;
 }
 
+.core-section {
+  align-items: center;
+  display: grid;
+  gap: clamp(36px, 5vw, 72px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+.core-copy {
+  max-width: 560px;
+  min-width: 0;
+}
+
+.core-copy p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.66;
+}
+
+.core-copy .button {
+  margin-top: 10px;
+}
+
+.core-orbit {
+  aspect-ratio: 1;
+  margin-inline: auto;
+  max-width: 580px;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+}
+
+.core-orbit-rings {
+  border: 1.5px dashed rgba(47, 126, 216, 0.35);
+  border-radius: 50%;
+  inset: 7%;
+  position: absolute;
+}
+
+.core-orbit-rings::before {
+  border: 1.5px dashed rgba(47, 126, 216, 0.22);
+  border-radius: 50%;
+  content: "";
+  inset: 19%;
+  position: absolute;
+}
+
+.core-hub {
+  background: radial-gradient(circle at 32% 26%, #2e4d80 0%, #17213a 72%);
+  border-radius: 50%;
+  box-shadow: 0 34px 70px rgba(23, 33, 58, 0.35);
+  color: var(--white);
+  display: grid;
+  gap: 4px;
+  height: clamp(150px, 34%, 196px);
+  left: 50%;
+  place-content: center;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(150px, 34%, 196px);
+  z-index: 2;
+}
+
+.core-hub strong {
+  font-size: 1.55rem;
+}
+
+.core-hub span {
+  color: #cde7ff;
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.core-node {
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 16px 36px rgba(23, 33, 58, 0.12);
+  color: var(--ink);
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 10px;
+  padding: 7px 16px 7px 7px;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.core-node i {
+  align-items: center;
+  border-radius: 50%;
+  color: var(--white);
+  display: flex;
+  font-size: 0.64rem;
+  font-style: normal;
+  font-weight: 850;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+
+.core-tone-blue i {
+  background: #2f7ed8;
+}
+
+.core-tone-teal i {
+  background: #16827a;
+}
+
+.core-tone-pink i {
+  background: #d64f7f;
+}
+
+.core-tone-gold i {
+  background: #b98a2f;
+}
+
+.core-tone-purple i {
+  background: #6c5ce7;
+}
+
+.core-tone-navy i {
+  background: #17213a;
+}
+
+.core-node-top {
+  left: 50%;
+  top: 1%;
+  transform: translateX(-50%);
+}
+
+.core-node-upper-left {
+  left: -2%;
+  top: 24%;
+}
+
+.core-node-upper-right {
+  right: -2%;
+  top: 24%;
+}
+
+.core-node-lower-left {
+  bottom: 24%;
+  left: 0;
+}
+
+.core-node-lower-right {
+  bottom: 24%;
+  right: 0;
+}
+
+.core-node-bottom {
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.proof-section {
+  align-items: center;
+  display: grid;
+  gap: clamp(36px, 5vw, 72px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+.proof-copy {
+  max-width: 560px;
+  min-width: 0;
+}
+
+.proof-copy p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.66;
+}
+
+.proof-copy .release-signals {
+  margin: 6px 0 22px;
+}
+
+.proof-stage {
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+  position: relative;
+}
+
+.proof-shot {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 30px 70px rgba(23, 33, 58, 0.2);
+  height: auto;
+  position: absolute;
+  width: 74%;
+}
+
+.proof-shot-back {
+  right: 0;
+  top: 0;
+  transform: rotate(2.5deg);
+}
+
+.proof-shot-front {
+  bottom: 0;
+  left: 0;
+  transform: rotate(-2deg);
+}
+
+.section-light .operating-card,
+.section-light .family-card {
+  background: var(--white);
+}
+
+@media (max-width: 960px) {
+  .core-section,
+  .proof-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .core-orbit {
+    aspect-ratio: auto;
+    display: block;
+    max-width: none;
+    text-align: center;
+  }
+
+  .core-orbit-rings {
+    display: none;
+  }
+
+  .core-hub {
+    height: 160px;
+    margin: 0 auto 16px;
+    position: static;
+    transform: none;
+    width: 160px;
+  }
+
+  .core-node,
+  .core-node-top,
+  .core-node-bottom {
+    display: inline-flex;
+    margin: 5px 4px;
+    position: static;
+    transform: none;
+  }
+
+  .proof-stage {
+    aspect-ratio: auto;
+  }
+
+  .proof-shot {
+    position: static;
+    width: 100%;
+  }
+
+  .proof-shot-back {
+    display: none;
+  }
+
+  .proof-shot-front {
+    transform: none;
+  }
+}
+
 .family-card {
   background: var(--soft);
   border: 1px solid var(--line);

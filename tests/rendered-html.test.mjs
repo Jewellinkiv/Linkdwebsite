@@ -56,10 +56,13 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Inventory control/i);
   assert.match(html, /Store finance/i);
   assert.match(html, /Role-based operations/i);
-  assert.match(html, /See the workspace your team will actually use/i);
-  assert.match(html, /Counter POS built\s+for jewelry sales|Counter POS built for jewelry sales/i);
-  assert.match(html, /Every item has a live operational record/i);
-  assert.match(html, /Owner reporting without a spreadsheet hunt/i);
+  assert.match(html, /Every part of the store, connected at the core/i);
+  assert.match(html, /Operational core/i);
+  assert.match(html, /Point of Sale/i);
+  assert.match(html, /Services &amp; Repairs|Services & Repairs/i);
+  assert.match(html, /Screens your team will recognize on day one/i);
+  assert.match(html, /Linkd POS register workspace/i);
+  assert.match(html, /Linkd owner reporting catalog/i);
   assert.match(html, /CountRetail/i);
   assert.match(html, /One family of products/i);
   assert.match(html, /Operations, relationships, and intelligence\./i);

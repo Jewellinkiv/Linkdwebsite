@@ -50,29 +50,30 @@ const operatingSignals = [
 
 const workflowProofs = [
   {
-    label: "Sell",
-    title: "Counter POS built for jewelry sales.",
-    copy: "Client lookup, service add-ons, manager controls, parked sales, and tender review in one register workspace.",
     image: "/assets/screenshots/linkd-pos-register-devices.webp",
-    alt: "Linkd POS register shown on a MacBook screen",
-    chips: ["Client lookup", "Repair intake", "Tender controls"],
   },
   {
-    label: "Track",
-    title: "Every item has a live operational record.",
-    copy: "Search serialized inventory, review item movement, prepare RFID workflows, and see aging before it becomes a surprise.",
     image: "/assets/screenshots/linkd-inventory-search-devices.webp",
-    alt: "Linkd inventory search shown on a MacBook screen",
-    chips: ["Serialized stock", "Transfers", "Aging risk"],
   },
   {
-    label: "Report",
-    title: "Owner reporting without a spreadsheet hunt.",
-    copy: "Sales, tenders, inventory, payroll, commissions, and benchmarking live where operators can find them.",
     image: "/assets/screenshots/linkd-reports-home-devices.webp",
-    alt: "Linkd reports catalog shown on a MacBook screen",
-    chips: ["Sales reports", "Commissions", "Benchmarks"],
   },
+];
+
+const coreModules = [
+  { code: "POS", label: "Point of Sale", tone: "blue", position: "top" },
+  { code: "INV", label: "Inventory", tone: "teal", position: "upper-right" },
+  { code: "SVC", label: "Services & Repairs", tone: "pink", position: "upper-left" },
+  { code: "ACC", label: "House Accounts", tone: "gold", position: "lower-left" },
+  { code: "RPT", label: "Reporting", tone: "purple", position: "lower-right" },
+  { code: "API", label: "Integrations", tone: "navy", position: "bottom" },
+];
+
+const proofChips = [
+  "Client lookup",
+  "Serialized stock",
+  "Tender controls",
+  "Owner reports",
 ];
 
 const advertisingVisuals = [
@@ -459,7 +460,38 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-white platform-section" id="platform">
+      <section className="section-white core-section" id="workflows">
+        <div className="core-copy">
+          <p className="eyebrow">One operating record</p>
+          <h2>Every part of the store, connected at the core.</h2>
+          <p>
+            Sales, items, services, accounts, and permissions all write to one
+            operational record, so the counter, the back office, JewelLink, and
+            CountRetail always see the same truth.
+          </p>
+          <Link className="button button-secondary" href="/jewelry-pos">
+            Explore workflows
+          </Link>
+        </div>
+        <div className="core-orbit" aria-label="Linkd operational core modules">
+          <div className="core-orbit-rings" aria-hidden="true"></div>
+          <div className="core-hub">
+            <strong>Linkd</strong>
+            <span>Operational core</span>
+          </div>
+          {coreModules.map((module) => (
+            <div
+              className={`core-node core-node-${module.position} core-tone-${module.tone}`}
+              key={module.code}
+            >
+              <i aria-hidden="true">{module.code}</i>
+              {module.label}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-light platform-section" id="platform">
         <div className="section-copy">
           <p className="eyebrow">Platform</p>
           <h2>Everything behind the counter. Nothing in the way.</h2>
@@ -481,43 +513,47 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-light workflow-section" id="workflows">
-        <div className="section-copy workflow-heading">
-          <p className="eyebrow">Product</p>
-          <h2>See the workspace your team will actually use.</h2>
+      <section className="section-white proof-section" id="product">
+        <div className="proof-copy">
+          <p className="eyebrow">Product proof</p>
+          <h2>Screens your team will recognize on day one.</h2>
           <p>
-            Move from the counter to inventory and owner reporting without
-            sending the store through separate tools.
+            A clean register workspace, serialized inventory search, and an
+            owner reporting catalog, without sending the store through
+            separate tools.
           </p>
+          <div className="release-signals" aria-label="Product highlights">
+            {proofChips.map((chip) => (
+              <span key={chip}>{chip}</span>
+            ))}
+          </div>
+          <div className="section-actions proof-actions">
+            <Link className="button button-secondary" href="/jewelry-pos">
+              See the POS
+            </Link>
+          </div>
         </div>
-        <div className="workflow-proof-list">
-          {workflowProofs.map((workflow, index) => (
-            <article className="workflow-proof-card" key={workflow.label}>
-              <div className="workflow-shot">
-                <Image
-                  src={workflow.image}
-                  alt={workflow.alt}
-                  width={1536}
-                  height={1024}
-                  unoptimized
-                />
-              </div>
-              <div className="workflow-copy">
-                <span>{String(index + 1).padStart(2, "0")} / {workflow.label}</span>
-                <h3>{workflow.title}</h3>
-                <p>{workflow.copy}</p>
-                <div className="chip-row" aria-label={`${workflow.label} highlights`}>
-                  {workflow.chips.map((chip) => (
-                    <span key={chip}>{chip}</span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
+        <div className="proof-stage" aria-label="Linkd product screens">
+          <Image
+            className="proof-shot proof-shot-back"
+            src="/assets/screenshots/linkd-reports-home-devices.webp"
+            alt="Linkd owner reporting catalog"
+            width={1536}
+            height={1024}
+            unoptimized
+          />
+          <Image
+            className="proof-shot proof-shot-front"
+            src="/assets/screenshots/linkd-pos-register-devices.webp"
+            alt="Linkd POS register workspace"
+            width={1536}
+            height={1024}
+            unoptimized
+          />
         </div>
       </section>
 
-      <section className="section-white family-section" id="ecosystem">
+      <section className="section-light family-section" id="ecosystem">
         <div className="section-copy">
           <p className="eyebrow">One family of products</p>
           <h2>Operations, relationships, and intelligence.</h2>
@@ -563,7 +599,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-light faq-section">
+      <section className="section-white faq-section">
         <div className="section-copy">
           <p className="eyebrow">Quick answers</p>
           <h2>Built for jewelry operators who need the store connected.</h2>
