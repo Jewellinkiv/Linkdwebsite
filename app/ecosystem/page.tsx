@@ -459,21 +459,37 @@ export default function EcosystemPage() {
       </section>
 
       <footer className="site-footer">
-        <div>
+        <div className="footer-top">
           <span className="footer-mark">Linkd</span>
-          <p>Jewelry POS and operations for luxury retail teams.</p>
+          <p>The operations center for luxury jewelry stores.</p>
         </div>
-        <nav aria-label="Footer navigation">
+        <div className="footer-columns">
+          <nav aria-label="Platform">
+            <strong>Platform</strong>
+            <Link href="/jewelry-pos">Jewelry POS</Link>
+            <Link href="/repairs">Repairs</Link>
+            <Link href="/inventory">Inventory</Link>
+            <Link href="/accounting">Finance</Link>
+            <Link href="/multi-store">Multi-Store</Link>
+            <Link href="/security">Security</Link>
+          </nav>
+          <nav aria-label="Ecosystem">
+            <strong>Ecosystem</strong>
+            <Link href="/ecosystem">The Family</Link>
+            <Link href="/integrations">Integrations</Link>
+            <a href="https://www.jewellink.com/" target="_blank" rel="noreferrer">JewelLink</a>
+            <a href="https://www.countretail.com/" target="_blank" rel="noreferrer">CountRetail</a>
+          </nav>
+          <nav aria-label="Access">
+            <strong>Access</strong>
+            <Link href="/login">Login</Link>
+            <Link href="#early-access">Book a Demo</Link>
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <p>© 2026 Linkd. All rights reserved.</p>
           <Link href="/">Home</Link>
-          <Link href="/jewelry-pos">Jewelry POS</Link>
-          <Link href="/repairs">Repairs</Link>
-          <Link href="/inventory">Inventory</Link>
-          <Link href="/accounting">Finance</Link>
-          <Link href="/multi-store">Multi-Store</Link>
-          <Link href="/security">Security</Link>
-          <Link href="/integrations">Integrations</Link>
-          <Link href="#early-access">Book a Demo</Link>
-        </nav>
+        </div>
       </footer>
     </main>
   );

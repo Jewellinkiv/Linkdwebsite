@@ -69,11 +69,12 @@ const coreModules = [
   { code: "API", label: "Integrations", tone: "navy", position: "bottom" },
 ];
 
-const proofChips = [
-  "Client lookup",
-  "Serialized stock",
-  "Tender controls",
-  "Owner reports",
+const specialtyChips = [
+  "Luxury Jewelry",
+  "Multi-Location",
+  "Bridal",
+  "Estate & Custom",
+  "Repairs",
 ];
 
 const advertisingVisuals = [
@@ -497,38 +498,43 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-white proof-section" id="product">
-        <div className="proof-copy">
+      <section className="section-white showcase-section" id="product">
+        <div className="section-copy">
           <p className="eyebrow">Product proof</p>
           <h2>Screens your team will recognize on day one.</h2>
-          <div className="release-signals" aria-label="Product highlights">
-            {proofChips.map((chip) => (
-              <span key={chip}>{chip}</span>
-            ))}
-          </div>
-          <div className="section-actions proof-actions">
-            <Link className="button button-secondary" href="/jewelry-pos">
-              See the POS
-            </Link>
-          </div>
         </div>
-        <div className="proof-stage" aria-label="Linkd product screens">
-          <Image
-            className="proof-shot proof-shot-back"
-            src="/assets/screenshots/linkd-reports-home-devices.webp"
-            alt="Linkd owner reporting catalog"
-            width={1536}
-            height={1024}
-            unoptimized
-          />
-          <Image
-            className="proof-shot proof-shot-front"
-            src="/assets/screenshots/linkd-pos-register-devices.webp"
-            alt="Linkd POS register workspace"
-            width={1536}
-            height={1024}
-            unoptimized
-          />
+        <div className="showcase-grid">
+          <article className="showcase-card">
+            <Image
+              src="/assets/screenshots/linkd-pos-register-devices.webp"
+              alt="Linkd POS register workspace"
+              width={1536}
+              height={1024}
+              unoptimized
+            />
+            <div>
+              <span>Register workspace</span>
+              <h3>Clients, items, services, and tender in one counter view.</h3>
+            </div>
+          </article>
+          <article className="showcase-card">
+            <Image
+              src="/assets/screenshots/linkd-reports-home-devices.webp"
+              alt="Linkd owner reporting catalog"
+              width={1536}
+              height={1024}
+              unoptimized
+            />
+            <div>
+              <span>Owner reporting</span>
+              <h3>Sales, inventory, and commissions without the spreadsheet hunt.</h3>
+            </div>
+          </article>
+        </div>
+        <div className="section-actions">
+          <Link className="button button-secondary" href="/jewelry-pos">
+            See the POS
+          </Link>
         </div>
       </section>
 
@@ -577,6 +583,16 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="dark-band" aria-labelledby="specialty-title">
+        <p className="eyebrow">Built for luxury jewelry retail</p>
+        <h2 id="specialty-title">Specialized for jewelers. Ready for every counter.</h2>
+        <div className="dark-band-chips" aria-label="Store types">
+          {specialtyChips.map((chip) => (
+            <span key={chip}>{chip}</span>
+          ))}
+        </div>
+      </section>
+
       <section className="section-white faq-section">
         <div className="section-copy">
           <p className="eyebrow">Quick answers</p>
@@ -612,24 +628,37 @@ export default function Home() {
       </section>
 
       <footer className="site-footer">
-        <div>
+        <div className="footer-top">
           <span className="footer-mark">Linkd</span>
-          <p>Jewelry POS and operations for luxury retail teams.</p>
+          <p>The operations center for luxury jewelry stores.</p>
         </div>
-        <nav aria-label="Footer navigation">
-          <Link href="#platform">Platform</Link>
-          <Link href="#workflows">Product</Link>
-          <Link href="/ecosystem">Ecosystem</Link>
-          <Link href="/jewelry-pos">Jewelry POS</Link>
-          <Link href="/repairs">Repairs</Link>
-          <Link href="/inventory">Inventory</Link>
-          <Link href="/accounting">Finance</Link>
-          <Link href="/multi-store">Multi-Store</Link>
-          <Link href="/security">Security</Link>
-          <Link href="/integrations">Integrations</Link>
-          <Link href="#early-access">Book a Demo</Link>
-          <Link href="/login">Login</Link>
-        </nav>
+        <div className="footer-columns">
+          <nav aria-label="Platform">
+            <strong>Platform</strong>
+            <Link href="/jewelry-pos">Jewelry POS</Link>
+            <Link href="/repairs">Repairs</Link>
+            <Link href="/inventory">Inventory</Link>
+            <Link href="/accounting">Finance</Link>
+            <Link href="/multi-store">Multi-Store</Link>
+            <Link href="/security">Security</Link>
+          </nav>
+          <nav aria-label="Ecosystem">
+            <strong>Ecosystem</strong>
+            <Link href="/ecosystem">The Family</Link>
+            <Link href="/integrations">Integrations</Link>
+            <a href="https://www.jewellink.com/" target="_blank" rel="noreferrer">JewelLink</a>
+            <a href="https://www.countretail.com/" target="_blank" rel="noreferrer">CountRetail</a>
+          </nav>
+          <nav aria-label="Access">
+            <strong>Access</strong>
+            <Link href="/login">Login</Link>
+            <Link href="#early-access">Book a Demo</Link>
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <p>© 2026 Linkd. All rights reserved.</p>
+          <Link href="#top">Back to top</Link>
+        </div>
       </footer>
     </main>
   );
