@@ -198,7 +198,7 @@ const structuredData = [
         item: {
           "@type": "Thing",
           name: item.name,
-          description: `${item.label}: ${item.proof}`,
+          description: `${item.question} ${item.label}: ${item.proof}`,
         },
       })),
     },
@@ -210,7 +210,7 @@ const structuredData = [
     potentialAction: {
       "@type": "ContactAction",
       target: "https://linkd.com/ecosystem#early-access",
-      name: "Request Linkd ecosystem early access",
+      name: "Book a Linkd ecosystem demo",
     },
   },
   {
@@ -307,14 +307,13 @@ export default function EcosystemPage() {
           <Link href="/security">Security</Link>
           <Link aria-current="page" href="/ecosystem">Ecosystem</Link>
           <Link href="/integrations">Integrations</Link>
-          <Link href="#early-access">Early Release</Link>
         </nav>
         <div className="header-actions">
           <Link className="text-button" href="/login">
             Login
           </Link>
           <Link className="button button-primary" href="#early-access">
-            Request Access
+            Book a Demo
           </Link>
         </div>
       </header>
@@ -330,7 +329,7 @@ export default function EcosystemPage() {
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
-              Request Early Access
+              Book a Demo
             </Link>
             <Link className="button button-secondary" href="/integrations">
               View Integrations
@@ -362,32 +361,6 @@ export default function EcosystemPage() {
                 <strong>{item.name}</strong>
                 <p>{item.proof}</p>
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-white ecosystem-proof-section">
-        <div className="section-copy">
-          <p className="eyebrow">At-a-glance difference</p>
-          <h2>Each system answers a different store question.</h2>
-        </div>
-        <div className="ecosystem-proof-board">
-          {ecosystemProofs.map((item) => (
-            <article className={`ecosystem-proof-card ecosystem-proof-${item.name.toLowerCase()}`} key={item.name}>
-              <div className={`ecosystem-proof-visual ecosystem-proof-visual-${item.kind}`}>
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  width={item.width}
-                  height={item.height}
-                  unoptimized
-                />
-              </div>
-              <span>{item.label}</span>
-              <h3>{item.question}</h3>
-              <p>{item.proof}</p>
-              <strong>{item.name}</strong>
             </article>
           ))}
         </div>
@@ -435,17 +408,12 @@ export default function EcosystemPage() {
         </div>
       </section>
 
-      <section className="section-dark landing-stack-section">
+      <section className="section-white landing-stack-section">
         <div className="section-copy">
           <p className="eyebrow">Simple positioning</p>
-          <h2>Operations, relationships, and intelligence should reinforce each other.</h2>
-          <p>
-            The goal is not another disconnected tool. The goal is one luxury
-            jewelry stack where the POS record, customer workflow, and store
-            intelligence can agree.
-          </p>
+          <h2>One stack that agrees with itself.</h2>
         </div>
-        <div className="integration-cloud" aria-label="Ecosystem keywords">
+        <div className="integration-cloud integration-strip" aria-label="Ecosystem keywords">
           <span>POS operations</span>
           <span>CRM and clienteling</span>
           <span>Vision AI traffic</span>
@@ -473,11 +441,11 @@ export default function EcosystemPage() {
       <section className="early-access-section" id="early-access">
         <div className="release-panel">
           <div className="release-copy">
-            <p className="eyebrow">Early release</p>
-            <h2>See how the connected stack could fit your store.</h2>
+            <p className="eyebrow">Book a demo</p>
+            <h2>See the connected stack in one demo.</h2>
             <p>
-              Share your POS, CRM, analytics, accounting, and integration
-              priorities so the right launch path can be scoped.
+              Tell us about your store. We will show how the three products
+              work together.
             </p>
             <div className="release-signals">
               <span>POS operations</span>
@@ -504,7 +472,7 @@ export default function EcosystemPage() {
           <Link href="/multi-store">Multi-Store</Link>
           <Link href="/security">Security</Link>
           <Link href="/integrations">Integrations</Link>
-          <Link href="#early-access">Early Release</Link>
+          <Link href="#early-access">Book a Demo</Link>
         </nav>
       </footer>
     </main>

@@ -1,5 +1,4 @@
 import type { SeoLandingPage as SeoLandingPageData } from "../seoLandingPages";
-import { FeatureFrameCard, landingFeatureFramesBySlug } from "./FeatureFrames";
 import InquiryForm from "./InquiryForm";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +17,6 @@ const navItems = [
   { href: "/security", label: "Security", slug: "security" },
   { href: "/ecosystem", label: "Ecosystem", slug: "ecosystem" },
   { href: "/integrations", label: "Integrations", slug: "integrations" },
-  { href: "#early-access", label: "Early Release" },
 ];
 
 const workflowLinkCards = [
@@ -162,30 +160,6 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
   )
     .map((slug) => workflowLinkCards.find((card) => card.slug === slug))
     .filter((card): card is WorkflowLinkCard => Boolean(card));
-  const signalCards = [
-    {
-      label: "Start",
-      title: page.proof[0],
-      detail: page.outcomes[0]?.title ?? page.stackItems[0],
-    },
-    {
-      label: "Control",
-      title: page.proof[1],
-      detail: page.outcomes[1]?.title ?? page.stackItems[1],
-    },
-    {
-      label: "Connect",
-      title: page.proof[2],
-      detail: page.stackItems.slice(0, 2).join(" + "),
-    },
-    {
-      label: "Review",
-      title: page.proof[3],
-      detail: page.outcomes[2]?.title ?? page.stackItems[2],
-    },
-  ];
-  const featureFrame = landingFeatureFramesBySlug[page.slug];
-
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -221,7 +195,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
       potentialAction: {
         "@type": "ContactAction",
         target: `${pageUrl}#early-access`,
-        name: `Request ${page.metaTitle} early access`,
+        name: `Book a ${page.metaTitle} demo`,
       },
       isPartOf: {
         "@type": "WebSite",
@@ -296,7 +270,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
             Login
           </Link>
           <Link className="button button-primary" href="#early-access">
-            Request Access
+            Book a Demo
           </Link>
         </div>
       </header>
@@ -308,7 +282,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
           <p>{page.description}</p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
-              Request Early Access
+              Book a Demo
             </Link>
             <Link className="button button-secondary" href="#product-screens">
               View Product Screens
@@ -331,35 +305,6 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
           />
         </div>
       </section>
-
-      <section className="section-light landing-signal-section">
-        <div className="section-copy landing-signal-copy">
-          <p className="eyebrow">At a glance</p>
-          <h2>What this workflow connects.</h2>
-        </div>
-        <div
-          className="landing-signal-board"
-          aria-label={`${page.eyebrow} connected workflow map`}
-        >
-          {signalCards.map((card) => (
-            <article className="landing-signal-card" key={card.label}>
-              <span>{card.label}</span>
-              <strong>{card.title}</strong>
-              <small>{card.detail}</small>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {featureFrame ? (
-        <section className="section-white landing-feature-frame-section">
-          <div className="section-copy">
-            <p className="eyebrow">Product frame</p>
-            <h2>The workspace view, simplified for fast scanning.</h2>
-          </div>
-          <FeatureFrameCard frame={featureFrame} compact />
-        </section>
-      ) : null}
 
       <section className="section-white landing-proof-rail-section" id="product-screens">
         <div className="section-copy">
@@ -385,7 +330,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
         </div>
       </section>
 
-      <section className="section-white landing-outcomes-section">
+      <section className="section-light landing-outcomes-section">
         <div className="section-copy">
           <p className="eyebrow">Workflow outcomes</p>
           <h2>Less explanation. More operational proof.</h2>
@@ -397,19 +342,6 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
               <h3>{outcome.title}</h3>
               <p>{outcome.copy}</p>
             </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-dark landing-stack-section">
-        <div className="section-copy">
-          <p className="eyebrow">Connected stack</p>
-          <h2>{page.stackTitle}</h2>
-          <p>{page.stackCopy}</p>
-        </div>
-        <div className="integration-cloud" aria-label={`${page.eyebrow} stack`}>
-          {page.stackItems.map((item) => (
-            <span key={item}>{item}</span>
           ))}
         </div>
       </section>
@@ -441,6 +373,11 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
               <h3>{card.name}</h3>
               <p>{card.proof}</p>
             </article>
+          ))}
+        </div>
+        <div className="integration-cloud integration-strip" aria-label={`${page.eyebrow} stack`}>
+          {page.stackItems.map((item) => (
+            <span key={item}>{item}</span>
           ))}
         </div>
         <div className="section-actions">
@@ -487,11 +424,11 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
       <section className="early-access-section" id="early-access">
         <div className="release-panel">
           <div className="release-copy">
-            <p className="eyebrow">Early release</p>
-            <h2>See how Linkd could fit your store.</h2>
+            <p className="eyebrow">Book a demo</p>
+            <h2>See how Linkd fits your store.</h2>
             <p>
-              Share your POS, inventory, accounting, and integration priorities
-              so the right launch path can be scoped.
+              Tell us about your store. We will show you the counter, the
+              case, and the back office.
             </p>
             <div className="release-signals">
               {page.proof.map((signal) => (
@@ -517,7 +454,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
           <Link href="/security">Security</Link>
           <Link href="/ecosystem">Ecosystem</Link>
           <Link href="/integrations">Integrations</Link>
-          <Link href="#early-access">Early Release</Link>
+          <Link href="#early-access">Book a Demo</Link>
           <Link href="/login">Login</Link>
         </nav>
       </footer>

@@ -131,7 +131,7 @@ test("server-renders focused SEO landing pages", async () => {
     [
       "/ecosystem",
       /Linkd, JewelLink, and CountRetail each have a clear job/i,
-      /Each system answers a different store question/i,
+      /One stack that agrees with itself/i,
       /jewelry retail ecosystem/i,
     ],
     [
@@ -163,7 +163,7 @@ test("server-renders focused SEO landing pages", async () => {
     assert.match(html, proof);
     assert.match(html, /name="keywords"/i);
     assert.match(html, keyword);
-    assert.match(html, /Request Early Access/i);
+    assert.match(html, /Book a Demo/i);
     assert.match(html, /href="#early-access"/);
     assert.match(html, /id="early-access"/);
     assert.match(html, /Start with the essentials/i);
@@ -186,15 +186,8 @@ test("server-renders focused SEO landing pages", async () => {
       assert.match(html, /See the workflow before the paragraph/i);
       assert.match(html, /href="#product-screens"/);
       assert.match(html, /id="product-screens"/);
-      assert.match(html, /At a glance/i);
-      assert.match(html, /What this workflow connects/i);
-      assert.match(html, /connected workflow map/i);
-      assert.match(html, /Product frame/i);
-      assert.match(html, /The workspace view, simplified for fast scanning/i);
-      assert.match(html, /Start/i);
-      assert.match(html, /Control/i);
-      assert.match(html, /Connect/i);
-      assert.match(html, /Review/i);
+      assert.match(html, /Workflow outcomes/i);
+      assert.match(html, /Less explanation\. More operational proof\./i);
       assert.match(html, /Where Linkd fits/i);
       assert.match(html, /Operations first\. Relationships and intelligence next\./i);
       assert.match(html, /POS, inventory, accounts, audits/i);
