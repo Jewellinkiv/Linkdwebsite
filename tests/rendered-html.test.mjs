@@ -41,22 +41,22 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /The operational core for modern jewelry retail/i);
+  assert.match(html, /Luxury jewelry POS software/i);
   assert.match(html, /href="#main-content"/i);
   assert.match(html, /id="main-content"/i);
   assert.match(html, /tabindex="-1"/i);
   assert.match(html, /Skip to content/i);
   assert.match(html, /Book a Demo/i);
-  assert.match(html, /Run the store\. Connect every sale\./i);
+  assert.match(html, /The operations center for luxury jewelry stores\./i);
   assert.match(html, /JewelLink CRM/i);
   assert.match(html, /linkd-pos-register-hero\.webp/i);
   assert.match(html, /Linkd POS register shown on a MacBook and iPad/i);
-  assert.match(html, /Everything behind the counter\. Nothing in the way\./i);
+  assert.match(html, /Four jobs\. One workspace\./i);
   assert.match(html, /Point of sale/i);
-  assert.match(html, /Inventory control/i);
-  assert.match(html, /Store finance/i);
-  assert.match(html, /Role-based operations/i);
-  assert.match(html, /Every part of the store, connected at the core/i);
+  assert.match(html, /Service management/i);
+  assert.match(html, /Inventory security/i);
+  assert.match(html, /Integrations/i);
+  assert.match(html, /Every part of the store, one core/i);
   assert.match(html, /Operational core/i);
   assert.match(html, /Point of Sale/i);
   assert.match(html, /Services &amp; Repairs|Services & Repairs/i);
@@ -69,7 +69,7 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Linkd records the operation/i);
   assert.match(html, /JewelLink grows the relationship/i);
   assert.match(html, /CountRetail explains the store/i);
-  assert.match(html, /The POS partner: sales, services, inventory, house accounts/i);
+  assert.match(html, /POS, services, inventory, and accounts\./i);
   assert.match(html, /Compare the Stack/i);
   assert.match(html, /QuickBooks/i);
   assert.match(html, /Open API/i);

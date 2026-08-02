@@ -13,15 +13,15 @@ const primaryNavItems = [
 const heroProofs = [
   {
     value: "POS",
-    label: "Checkout, services, layaway",
+    label: "Checkout & services",
   },
   {
     value: "RFID",
-    label: "Serialized item control",
+    label: "Inventory security",
   },
   {
-    value: "One",
-    label: "Connected store workspace",
+    value: "API",
+    label: "Integrations ready",
   },
 ];
 
@@ -29,22 +29,22 @@ const operatingSignals = [
   {
     label: "Sell",
     title: "Point of sale",
-    copy: "Fine jewelry checkout, repairs, appraisals, special orders, quotes, deposits, and tenders.",
+    copy: "Checkout, deposits, layaway, and house accounts.",
   },
   {
-    label: "Track",
-    title: "Inventory control",
-    copy: "Serialized items, transfers, receiving, aging, vendor context, and RFID-ready movement history.",
-  },
-  {
-    label: "Account",
-    title: "Store finance",
-    copy: "House accounts, layaway schedules, balances, interest rules, and clean accounting handoff.",
+    label: "Serve",
+    title: "Service management",
+    copy: "Repairs, appraisals, and custom work, intake to pickup.",
   },
   {
     label: "Secure",
-    title: "Role-based operations",
-    copy: "Register permissions, approvals, location controls, security logs, and exception review.",
+    title: "Inventory security",
+    copy: "Serialized, RFID-ready items with audits and movement history.",
+  },
+  {
+    label: "Connect",
+    title: "Integrations",
+    copy: "JewelLink CRM, CountRetail AI, accounting, and open APIs.",
   },
 ];
 
@@ -138,7 +138,7 @@ const ecosystemCards = [
     alt: "JewelLink",
     width: 12500,
     height: 6250,
-    copy: "CRM, clienteling, texting, training, bridal workflows, and AI-assisted follow-up.",
+    copy: "CRM, clienteling, and follow-up.",
     href: "https://www.jewellink.com/",
   },
   {
@@ -148,7 +148,7 @@ const ecosystemCards = [
     alt: "Linkd",
     width: 5334,
     height: 3205,
-    copy: "The POS partner: sales, services, inventory, house accounts, and accounting handoff.",
+    copy: "POS, services, inventory, and accounts.",
     href: "#early-access",
   },
   {
@@ -158,7 +158,7 @@ const ecosystemCards = [
     alt: "CountRetail",
     width: 3538,
     height: 504,
-    copy: "Traffic, Vision AI, marketing attribution, predictive aging, and owner decisions.",
+    copy: "Traffic, Vision AI, and owner insight.",
     href: "https://www.countretail.com/",
   },
 ];
@@ -197,16 +197,6 @@ const faqItems = [
     question: "How does Linkd work with CountRetail?",
     answer:
       "Linkd keeps operational records clean so CountRetail can compare traffic, camera intelligence, inventory pressure, and store performance against reliable retail data.",
-  },
-  {
-    question: "How do Linkd, JewelLink, and CountRetail support full luxury jewelry management?",
-    answer:
-      "Linkd records POS, inventory, services, accounts, permissions, and reporting. JewelLink activates CRM, clienteling, texting, training, and follow-up. CountRetail adds traffic, Vision AI, analytics, and owner intelligence.",
-  },
-  {
-    question: "Does Linkd support jewelry inventory workflows?",
-    answer:
-      "Linkd is designed for serialized inventory, receiving, transfers, aging views, RFID-ready events, vendor context, and multi-store movement history.",
   },
 ];
 
@@ -422,11 +412,10 @@ export default function Home() {
 
       <section className="hero-section" id="top">
         <div className="hero-copy">
-          <p className="eyebrow">The operational core for modern jewelry retail</p>
-          <h1>Run the store. Connect every sale.</h1>
+          <p className="eyebrow">Luxury jewelry POS software</p>
+          <h1>The operations center for luxury jewelry stores.</h1>
           <p className="hero-subtitle">
-            Linkd is the point of sale in the JewelLink family: checkout,
-            inventory, services, house accounts, and reporting in one modern
+            Checkout, service management, and inventory security in one simple
             workspace, connected to JewelLink CRM and CountRetail AI.
           </p>
           <div className="hero-actions">
@@ -463,11 +452,10 @@ export default function Home() {
       <section className="section-white core-section" id="workflows">
         <div className="core-copy">
           <p className="eyebrow">One operating record</p>
-          <h2>Every part of the store, connected at the core.</h2>
+          <h2>Every part of the store, one core.</h2>
           <p>
-            Sales, items, services, accounts, and permissions all write to one
-            operational record, so the counter, the back office, JewelLink, and
-            CountRetail always see the same truth.
+            Sales, services, inventory, and accounts write to one record,
+            shared with JewelLink and CountRetail.
           </p>
           <Link className="button button-secondary" href="/jewelry-pos">
             Explore workflows
@@ -494,11 +482,7 @@ export default function Home() {
       <section className="section-light platform-section" id="platform">
         <div className="section-copy">
           <p className="eyebrow">Platform</p>
-          <h2>Everything behind the counter. Nothing in the way.</h2>
-          <p>
-            Linkd is built around the data that must be right before CRM,
-            analytics, accounting, and AI can be trusted.
-          </p>
+          <h2>Four jobs. One workspace.</h2>
         </div>
         <div className="operating-grid">
           {operatingSignals.map((signal, index) => (
@@ -517,11 +501,6 @@ export default function Home() {
         <div className="proof-copy">
           <p className="eyebrow">Product proof</p>
           <h2>Screens your team will recognize on day one.</h2>
-          <p>
-            A clean register workspace, serialized inventory search, and an
-            owner reporting catalog, without sending the store through
-            separate tools.
-          </p>
           <div className="release-signals" aria-label="Product highlights">
             {proofChips.map((chip) => (
               <span key={chip}>{chip}</span>
@@ -559,8 +538,7 @@ export default function Home() {
           <h2>Operations, relationships, and intelligence.</h2>
           <p>
             Linkd records the operation. JewelLink grows the relationship.
-            CountRetail explains the store. Three products, one connected
-            luxury jewelry stack.
+            CountRetail explains the store.
           </p>
         </div>
         <div className="ecosystem-grid">
@@ -602,7 +580,7 @@ export default function Home() {
       <section className="section-white faq-section">
         <div className="section-copy">
           <p className="eyebrow">Quick answers</p>
-          <h2>Built for jewelry operators who need the store connected.</h2>
+          <h2>The essentials.</h2>
         </div>
         <div className="faq-grid">
           {faqItems.map((item) => (
@@ -620,9 +598,8 @@ export default function Home() {
             <p className="eyebrow">Book a demo</p>
             <h2>See Linkd run a real day at the counter.</h2>
             <p>
-              Tell us about your store and we will walk you through checkout,
-              inventory, accounts, reporting, and how Linkd connects with
-              JewelLink and CountRetail.
+              Tell us about your store. We will show you the counter, the
+              case, and the back office.
             </p>
             <div className="release-signals">
               {demoSignals.map((signal) => (
