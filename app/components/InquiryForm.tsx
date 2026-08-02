@@ -135,10 +135,10 @@ export default function InquiryForm() {
       <input name="sourceUrl" type="hidden" ref={sourceUrlRef} readOnly />
       <input name="referrer" type="hidden" ref={referrerRef} readOnly />
       <div className="form-heading">
-        <span>Request early access</span>
+        <span>Book a demo</span>
         <h3>Start with the essentials.</h3>
         <p id="inquiry-form-intro">
-          We will route your request around POS, inventory, or ecosystem needs.
+          We will route your demo around POS, inventory, or ecosystem needs.
         </p>
       </div>
 
@@ -252,7 +252,7 @@ export default function InquiryForm() {
         type="submit"
         disabled={submitState === "submitting"}
       >
-        {submitState === "submitting" ? "Sending..." : "Request Early Access"}
+        {submitState === "submitting" ? "Sending..." : "Book a Demo"}
       </button>
 
       <p

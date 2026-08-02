@@ -185,13 +185,13 @@ textarea {
 .button {
   align-items: center;
   border: 0;
-  border-radius: 7px;
+  border-radius: 999px;
   cursor: pointer;
   display: inline-flex;
   font-weight: 800;
   justify-content: center;
   min-height: 46px;
-  padding: 0 18px;
+  padding: 0 24px;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
@@ -204,7 +204,7 @@ textarea {
 }
 
 .button-primary {
-  background: var(--blue);
+  background: linear-gradient(135deg, #3b8ae0 0%, #2f7ed8 55%, #215fa8 100%);
   box-shadow: 0 18px 38px rgba(47, 126, 216, 0.24);
   color: var(--white);
 }
@@ -306,19 +306,23 @@ h3 {
 }
 
 .hero-metrics div {
-  border-top: 1px solid rgba(52, 65, 91, 0.18);
-  padding-top: 15px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(23, 33, 58, 0.06);
+  padding: 16px 18px;
 }
 
 .hero-metrics dt {
-  color: var(--blue);
-  font-size: 1.05rem;
+  color: var(--ink);
+  font-size: 1.5rem;
   font-weight: 850;
+  letter-spacing: -0.01em;
 }
 
 .hero-metrics dd {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   margin: 4px 0 0;
 }
 
@@ -345,6 +349,18 @@ h3 {
   height: auto;
   justify-self: center;
   width: min(100%, 920px);
+}
+
+.hero-stage {
+  align-self: center;
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+}
+
+.hero-stage .hero-device-image {
+  filter: drop-shadow(0 30px 60px rgba(23, 33, 58, 0.22));
+  width: min(100%, 980px);
 }
 
 .stage-proof-card {
@@ -633,6 +649,24 @@ h3 {
   align-self: end;
   font-size: 1.25rem;
   margin-bottom: 12px;
+}
+
+.operating-card span.operating-num,
+.operating-card:nth-child(2) span.operating-num,
+.operating-card:nth-child(3) span.operating-num {
+  align-items: center;
+  background: var(--blue);
+  border-radius: 10px;
+  color: var(--white);
+  display: inline-flex;
+  font-size: 0.86rem;
+  font-weight: 850;
+  height: 38px;
+  justify-content: center;
+  justify-self: start;
+  margin-bottom: 26px;
+  text-transform: none;
+  width: 46px;
 }
 
 .operating-card p {
@@ -1197,6 +1231,54 @@ h3 {
 
 .ecosystem-card p {
   margin: 0;
+}
+
+.family-section {
+  display: grid;
+  gap: 42px;
+}
+
+.family-card {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  min-height: 300px;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.family-card:hover {
+  background: var(--white);
+  box-shadow: 0 24px 52px rgba(23, 33, 58, 0.1);
+  transform: translateY(-3px);
+}
+
+.family-card .ecosystem-logo {
+  border: 1px solid var(--line);
+}
+
+.family-card > span {
+  color: var(--blue);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.family-card-linkd > span {
+  color: var(--teal);
+}
+
+.family-card-countretail > span {
+  color: var(--gold);
+}
+
+.family-card h3 {
+  color: var(--ink);
+}
+
+.family-card p {
+  color: var(--muted);
 }
 
 .integration-cloud,
