@@ -13,7 +13,7 @@
       <image:title>Linkd jewelry POS register hero banner</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory.webp</image:loc>
       <image:title>Linkd serialized jewelry inventory search</image:title>
     </image:image>
     <image:image>
@@ -31,15 +31,15 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-checkout.webp</image:loc>
       <image:title>Linkd jewelry POS register workflow</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm.webp</image:loc>
       <image:title>Linkd customer context and CRM-ready record</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reporting.webp</image:loc>
       <image:title>Linkd reports dashboard for jewelry store operators</image:title>
     </image:image>
   </url>
@@ -49,15 +49,15 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory.webp</image:loc>
       <image:title>Linkd jewelry inventory management workflow</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm.webp</image:loc>
       <image:title>Linkd customer history connected to store operations</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reporting.webp</image:loc>
       <image:title>Linkd reporting views for jewelry inventory review</image:title>
     </image:image>
   </url>
@@ -67,15 +67,15 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
-      <image:title>Linkd jewelry repair intake and service workflow</image:title>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-services-repairs.webp</image:loc>
+      <image:title>Linkd jewelry repair bench, intake to pickup</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm.webp</image:loc>
       <image:title>Linkd customer record with repair and service history</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reporting.webp</image:loc>
       <image:title>Linkd reports dashboard for jewelry service review</image:title>
     </image:image>
   </url>
@@ -85,15 +85,15 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reporting.webp</image:loc>
       <image:title>Linkd jewelry store reporting and audit workflow</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory.webp</image:loc>
       <image:title>Linkd inventory movement and serialized item review</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-settings-integrations-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-integrations.webp</image:loc>
       <image:title>Linkd provider and integration control settings</image:title>
     </image:image>
   </url>
@@ -107,7 +107,7 @@
       <image:title>Linkd jewelry retail ecosystem preview</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-checkout.webp</image:loc>
       <image:title>Linkd operational core for jewelry retail</image:title>
     </image:image>
     <image:image>
@@ -129,15 +129,15 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-settings-integrations-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-integrations.webp</image:loc>
       <image:title>Linkd jewelry retail integrations workflow</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-checkout.webp</image:loc>
       <image:title>Linkd POS register as the operational source of truth</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm.webp</image:loc>
       <image:title>Linkd customer activity ready for CRM workflows</image:title>
     </image:image>
     <image:image>
@@ -151,15 +151,15 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reporting.webp</image:loc>
       <image:title>Linkd jewelry store finance and accounting review</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-checkout.webp</image:loc>
       <image:title>Linkd POS register with tender and sale context</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-customers-crm.webp</image:loc>
       <image:title>Linkd customer record with operational account context</image:title>
     </image:image>
   </url>
@@ -169,15 +169,15 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory-search-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-inventory.webp</image:loc>
       <image:title>Linkd multi-store jewelry operations and inventory movement</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-settings-integrations-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-integrations.webp</image:loc>
       <image:title>Linkd provider and permission settings for multi-store control</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://linkd.com/assets/screenshots/linkd-reports-home-devices.webp</image:loc>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reporting.webp</image:loc>
       <image:title>Linkd reporting dashboard for multi-location jewelry operators</image:title>
     </image:image>
   </url>

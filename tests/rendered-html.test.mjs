@@ -50,7 +50,7 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /The operations center for luxury jewelry stores\./i);
   assert.match(html, /JewelLink CRM/i);
   assert.match(html, /linkd-pos-register-hero\.webp/i);
-  assert.match(html, /Linkd POS register shown on a MacBook and iPad/i);
+  assert.match(html, /Linkd point-of-sale workspace with cart, client, and quick actions/i);
   assert.match(html, /Four jobs\. One workspace\./i);
   assert.match(html, /Point of sale/i);
   assert.match(html, /Service management/i);
@@ -119,7 +119,7 @@ test("server-renders focused SEO landing pages", async () => {
     [
       "/repairs",
       /Repairs, appraisals, and services connected to the sale/i,
-      /Service work beside checkout/i,
+      /Repair bench, intake to pickup/i,
       /jewelry repair intake software/i,
     ],
     [
@@ -220,7 +220,7 @@ test("server-renders focused SEO landing pages", async () => {
         new RegExp(`https://linkd\\.com${path}#early-access`),
       );
       assert.match(html, /Luxury jewelry retailers/i);
-      assert.match(html, /linkd-customers-crm-devices\.webp|linkd-settings-integrations-devices\.webp/);
+      assert.match(html, /linkd-customers-crm\.webp|linkd-integrations\.webp/);
     } else {
       assert.match(html, /What happened at the counter/i);
       assert.match(html, /Who needs follow-up/i);
@@ -240,7 +240,7 @@ test("server-renders focused SEO landing pages", async () => {
       assert.match(html, /Operational core for jewelry POS/i);
       assert.match(html, /Relationship layer for CRM/i);
       assert.match(html, /Intelligence layer for traffic/i);
-      assert.match(html, /linkd-pos-register-devices\.webp/);
+      assert.match(html, /linkd-pos-checkout\.webp/);
       assert.match(html, /https:\/\/linkd\.com\/ecosystem#early-access/i);
     }
   }
@@ -665,10 +665,10 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(sitemap, /<loc>https:\/\/linkd\.com\/multi-store<\/loc>/);
   assert.match(sitemap, /linkd-home-hero-banner\.webp/);
   assert.match(sitemap, /Linkd jewelry POS register hero banner/);
-  assert.match(sitemap, /linkd-pos-register-devices\.webp/);
-  assert.match(sitemap, /linkd-customers-crm-devices\.webp/);
-  assert.match(sitemap, /linkd-reports-home-devices\.webp/);
-  assert.match(sitemap, /linkd-settings-integrations-devices\.webp/);
+  assert.match(sitemap, /linkd-pos-checkout\.webp/);
+  assert.match(sitemap, /linkd-customers-crm\.webp/);
+  assert.match(sitemap, /linkd-reporting\.webp/);
+  assert.match(sitemap, /linkd-integrations\.webp/);
   assert.match(sitemap, /linkd-luxury-management-stack\.webp/);
   assert.match(sitemap, /linkd-feature-frames\.webp/);
   assert.match(sitemap, /jewellink-logo-main\.webp/);
@@ -678,7 +678,7 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(sitemap, /Linkd customer context and CRM-ready record/);
   assert.match(sitemap, /Linkd provider and integration control settings/);
   assert.match(sitemap, /Linkd jewelry retail ecosystem preview/);
-  assert.match(sitemap, /Linkd jewelry repair intake and service workflow/);
+  assert.match(sitemap, /Linkd jewelry repair bench, intake to pickup/);
   assert.match(sitemap, /Linkd jewelry store finance and accounting review/);
   assert.match(sitemap, /Linkd multi-store jewelry operations and inventory movement/);
   assert.match(sitemap, /<lastmod>2026-07-25<\/lastmod>/);

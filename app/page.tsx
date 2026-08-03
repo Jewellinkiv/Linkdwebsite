@@ -50,13 +50,13 @@ const operatingSignals = [
 
 const workflowProofs = [
   {
-    image: "/assets/screenshots/linkd-pos-register-devices.webp",
+    image: "/assets/screenshots/linkd-pos-checkout.webp",
   },
   {
-    image: "/assets/screenshots/linkd-inventory-search-devices.webp",
+    image: "/assets/screenshots/linkd-inventory.webp",
   },
   {
-    image: "/assets/screenshots/linkd-reports-home-devices.webp",
+    image: "/assets/screenshots/linkd-reporting.webp",
   },
 ];
 
@@ -441,9 +441,9 @@ export default function Home() {
           <Image
             className="hero-device-image"
             src="/assets/screenshots/linkd-pos-register-hero.webp"
-            alt="Linkd POS register shown on a MacBook and iPad"
-            width={1536}
-            height={1024}
+            alt="Linkd point-of-sale workspace with cart, client, and quick actions"
+            width={2880}
+            height={1170}
             priority
             unoptimized
           />
@@ -506,7 +506,7 @@ export default function Home() {
         <div className="showcase-grid">
           <article className="showcase-card">
             <Image
-              src="/assets/screenshots/linkd-pos-register-devices.webp"
+              src="/assets/screenshots/linkd-pos-checkout.webp"
               alt="Linkd POS register workspace"
               width={1536}
               height={1024}
@@ -519,7 +519,7 @@ export default function Home() {
           </article>
           <article className="showcase-card">
             <Image
-              src="/assets/screenshots/linkd-reports-home-devices.webp"
+              src="/assets/screenshots/linkd-reporting.webp"
               alt="Linkd owner reporting catalog"
               width={1536}
               height={1024}

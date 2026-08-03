@@ -59,7 +59,7 @@ const ecosystemProofs = [
     label: "Operations",
     question: "What happened at the counter?",
     proof: "Sales, items, services, balances, permissions.",
-    image: "/assets/screenshots/linkd-pos-register-devices.webp",
+    image: "/assets/screenshots/linkd-pos-checkout.webp",
     alt: "Linkd POS register showing jewelry store counter operations",
     width: 1536,
     height: 1024,
@@ -94,7 +94,7 @@ const ecosystemHeroCards = [
     name: "Linkd",
     label: "Operations",
     proof: "POS / inventory / accounts",
-    image: "/assets/screenshots/linkd-pos-register-devices.webp",
+    image: "/assets/screenshots/linkd-pos-checkout.webp",
     alt: "Linkd POS register workflow",
     width: 1536,
     height: 1024,
@@ -183,7 +183,7 @@ const structuredData = [
     description:
       "See how Linkd, JewelLink, and CountRetail work together as the POS operations layer, customer relationship layer, and retail intelligence layer for jewelry stores.",
     image: [
-      "https://linkd.com/assets/screenshots/linkd-pos-register-devices.webp",
+      "https://linkd.com/assets/screenshots/linkd-pos-checkout.webp",
       "https://linkd.com/assets/brand/jewellink-logo-main.webp",
       "https://linkd.com/assets/brand/countretail-logo-main.webp",
     ],
