@@ -15,6 +15,11 @@
   --line: #d6e1ec;
   --success: #1f7a55;
   --danger: #b42318;
+  --jewel: #185ce8;
+  --count: #2563eb;
+  --linkd-grad: linear-gradient(135deg, #2563c9, #4aa8de);
+  --jewel-grad: linear-gradient(135deg, #123fb9, #2f7dff);
+  --count-grad: linear-gradient(135deg, #2563eb, #08b6d9);
 }
 
 * {
@@ -2043,11 +2048,11 @@ h3 {
 }
 
 .landing-proof-tile:nth-child(2) span {
-  color: var(--teal);
+  color: #2563c9;
 }
 
 .landing-proof-tile:nth-child(3) span {
-  color: var(--gold);
+  color: #4aa8de;
 }
 
 .landing-proof-tile h3 {
@@ -3371,4 +3376,109 @@ textarea:focus-visible {
   .ecosystem-hero-role p {
     font-size: 0.86rem;
   }
+}
+
+/* ============ Ecosystem product brand identities ============ */
+.family-card-jewellink > span,
+.landing-fit-card-jewellink span,
+.ecosystem-hero-tile-jewellink .ecosystem-hero-role span,
+.ecosystem-role-card-jewellink > span {
+  color: var(--jewel);
+}
+.family-card-linkd > span,
+.landing-fit-card-linkd span,
+.ecosystem-hero-tile-linkd .ecosystem-hero-role span,
+.ecosystem-role-card-linkd > span {
+  color: var(--blue);
+}
+.family-card-countretail > span,
+.landing-fit-card-countretail span,
+.ecosystem-hero-tile-countretail .ecosystem-hero-role span,
+.ecosystem-role-card-countretail > span {
+  color: var(--count);
+}
+
+/* brand top-accent bar on each product card */
+.family-card,
+.landing-fit-card,
+.ecosystem-hero-tile,
+.ecosystem-role-card {
+  position: relative;
+  overflow: hidden;
+}
+.family-card::before,
+.landing-fit-card::before,
+.ecosystem-hero-tile::before,
+.ecosystem-role-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 2;
+}
+.family-card-jewellink::before,
+.landing-fit-card-jewellink::before,
+.ecosystem-hero-tile-jewellink::before,
+.ecosystem-role-card-jewellink::before {
+  background: var(--jewel-grad);
+}
+.family-card-linkd::before,
+.landing-fit-card-linkd::before,
+.ecosystem-hero-tile-linkd::before,
+.ecosystem-role-card-linkd::before {
+  background: var(--linkd-grad);
+}
+.family-card-countretail::before,
+.landing-fit-card-countretail::before,
+.ecosystem-hero-tile-countretail::before,
+.ecosystem-role-card-countretail::before {
+  background: var(--count-grad);
+}
+
+/* /ecosystem role-card chip tints, on brand */
+.ecosystem-role-card-jewellink .chip-row span {
+  background: rgba(24, 92, 232, 0.1);
+  color: #163a86;
+}
+.ecosystem-role-card-linkd .chip-row span {
+  background: rgba(47, 126, 216, 0.1);
+  color: #1c4f86;
+}
+.ecosystem-role-card-countretail .chip-row span {
+  background: rgba(37, 99, 235, 0.1);
+  color: #0f4a86;
+}
+
+/* integration strip: sibling products in brand color */
+.integration-cloud span.chip-jewel {
+  color: var(--jewel);
+  border-color: rgba(24, 92, 232, 0.42);
+  font-weight: 800;
+}
+.integration-cloud span.chip-linkd {
+  color: var(--blue);
+  border-color: rgba(47, 126, 216, 0.42);
+  font-weight: 800;
+}
+.integration-cloud span.chip-count {
+  color: var(--count);
+  border-color: rgba(37, 99, 235, 0.42);
+  font-weight: 800;
+}
+
+/* homepage ecosystem trio as product screenshots */
+.family-card .family-shot {
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--white);
+}
+.family-card .family-shot img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }

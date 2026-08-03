@@ -98,21 +98,21 @@ const ecosystemFitCards = [
     name: "JewelLink",
     label: "Relationship layer",
     proof: "CRM, clienteling, team follow-up",
-    image: "/assets/brand/jewellink-logo-main.webp",
-    alt: "JewelLink logo",
-    width: 12500,
-    height: 6250,
-    kind: "logo",
+    image: "/assets/screenshots/jewellink-app.webp",
+    alt: "JewelLink clienteling CRM dashboard",
+    width: 3000,
+    height: 2000,
+    kind: "screen",
   },
   {
     name: "CountRetail",
     label: "Intelligence layer",
     proof: "Traffic, Vision AI, owner insight",
-    image: "/assets/brand/countretail-logo-main.webp",
-    alt: "CountRetail logo",
-    width: 3538,
-    height: 504,
-    kind: "logo",
+    image: "/assets/screenshots/countretail-app.webp",
+    alt: "CountRetail store analytics dashboard",
+    width: 3000,
+    height: 2000,
+    kind: "screen",
   },
 ];
 
@@ -376,9 +376,20 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
           ))}
         </div>
         <div className="integration-cloud integration-strip" aria-label={`${page.eyebrow} stack`}>
-          {page.stackItems.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
+          {page.stackItems.map((item) => {
+            const brandClass = item.startsWith("JewelLink")
+              ? "chip-jewel"
+              : item.startsWith("CountRetail")
+                ? "chip-count"
+                : item.startsWith("Linkd")
+                  ? "chip-linkd"
+                  : undefined;
+            return (
+              <span key={item} className={brandClass}>
+                {item}
+              </span>
+            );
+          })}
         </div>
         <div className="section-actions">
           <Link className="button button-secondary" href="/ecosystem">

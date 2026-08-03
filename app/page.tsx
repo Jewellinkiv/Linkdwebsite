@@ -135,30 +135,30 @@ const ecosystemCards = [
   {
     name: "JewelLink",
     role: "Relationships",
-    logo: "/assets/brand/jewellink-logo-main.webp",
-    alt: "JewelLink",
-    width: 12500,
-    height: 6250,
+    image: "/assets/screenshots/jewellink-app.webp",
+    alt: "JewelLink clienteling CRM dashboard with client follow-ups and appointments",
+    width: 3000,
+    height: 2000,
     copy: "CRM, clienteling, and follow-up.",
     href: "https://www.jewellink.com/",
   },
   {
     name: "Linkd",
     role: "Operations",
-    logo: "/assets/brand/linkd-logo-main.webp",
-    alt: "Linkd",
-    width: 5334,
-    height: 3205,
+    image: "/assets/screenshots/linkd-pos-checkout.webp",
+    alt: "Linkd point-of-sale workspace with cart, client, and quick actions",
+    width: 3000,
+    height: 2000,
     copy: "POS, services, inventory, and accounts.",
     href: "#early-access",
   },
   {
     name: "CountRetail",
     role: "Intelligence",
-    logo: "/assets/brand/countretail-logo-main.webp",
-    alt: "CountRetail",
-    width: 3538,
-    height: 504,
+    image: "/assets/screenshots/countretail-app.webp",
+    alt: "CountRetail store analytics dashboard with traffic, dwell, and conversion",
+    width: 3000,
+    height: 2000,
     copy: "Traffic, Vision AI, and owner insight.",
     href: "https://www.countretail.com/",
   },
@@ -569,9 +569,9 @@ export default function Home() {
               target={card.href.startsWith("http") ? "_blank" : undefined}
               rel={card.href.startsWith("http") ? "noreferrer" : undefined}
             >
-              <div className={`ecosystem-logo ecosystem-logo-${card.name.toLowerCase()}`}>
+              <div className="family-shot">
                 <Image
-                  src={card.logo}
+                  src={card.image}
                   alt={card.alt}
                   width={card.width}
                   height={card.height}
@@ -585,9 +585,18 @@ export default function Home() {
           ))}
         </div>
         <div className="integration-cloud integration-strip" aria-label="Planned integrations">
-          {integrationCloud.map((integration) => (
-            <span key={integration}>{integration}</span>
-          ))}
+          {integrationCloud.map((integration) => {
+            const brandClass = integration.startsWith("JewelLink")
+              ? "chip-jewel"
+              : integration.startsWith("CountRetail")
+                ? "chip-count"
+                : undefined;
+            return (
+              <span key={integration} className={brandClass}>
+                {integration}
+              </span>
+            );
+          })}
         </div>
         <div className="section-actions">
           <Link className="button button-secondary" href="/ecosystem">

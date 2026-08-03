@@ -104,21 +104,21 @@ const ecosystemHeroCards = [
     name: "JewelLink",
     label: "Relationships",
     proof: "CRM / clienteling / training",
-    image: "/assets/brand/jewellink-logo-main.webp",
-    alt: "JewelLink logo",
-    width: 12500,
-    height: 6250,
-    kind: "logo",
+    image: "/assets/screenshots/jewellink-app.webp",
+    alt: "JewelLink clienteling CRM dashboard",
+    width: 3000,
+    height: 2000,
+    kind: "screen",
   },
   {
     name: "CountRetail",
     label: "Intelligence",
     proof: "Traffic / Vision AI / analytics",
-    image: "/assets/brand/countretail-logo-main.webp",
-    alt: "CountRetail logo",
-    width: 3538,
-    height: 504,
-    kind: "logo",
+    image: "/assets/screenshots/countretail-app.webp",
+    alt: "CountRetail store analytics dashboard",
+    width: 3000,
+    height: 2000,
+    kind: "screen",
   },
 ];
 
@@ -369,7 +369,7 @@ export default function EcosystemPage() {
       <section className="section-white ecosystem-compare-section">
         <div className="ecosystem-role-grid">
           {ecosystemRoles.map((item) => (
-            <article className="ecosystem-role-card" key={item.name}>
+            <article className={`ecosystem-role-card ecosystem-role-card-${item.name.toLowerCase()}`} key={item.name}>
               <div className={`ecosystem-logo ecosystem-logo-${item.name.toLowerCase()}`}>
                 <Image
                   src={item.logo}
