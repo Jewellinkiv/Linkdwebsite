@@ -29,22 +29,22 @@ const operatingSignals = [
   {
     label: "Sell",
     title: "Point of sale",
-    copy: "Checkout, deposits, layaway, and house accounts.",
+    copy: "Every sale written the same way — checkout, deposits, layaway, and house accounts on one record.",
   },
   {
     label: "Serve",
     title: "Service management",
-    copy: "Repairs, appraisals, and custom work, intake to pickup.",
+    copy: "Every repair, appraisal, and custom job tracked from intake to pickup.",
   },
   {
     label: "Secure",
     title: "Inventory security",
-    copy: "Serialized, RFID-ready items with audits and movement history.",
+    copy: "Every piece accounted for — serialized, RFID-ready, with full movement history.",
   },
   {
     label: "Connect",
     title: "Integrations",
-    copy: "JewelLink CRM, CountRetail AI, accounting, and open APIs.",
+    copy: "One clean record across JewelLink CRM, CountRetail AI, accounting, and open APIs.",
   },
 ];
 
@@ -450,6 +450,19 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section-light manifesto-band" aria-labelledby="manifesto-title">
+        <h2 className="manifesto-statement" id="manifesto-title">
+          Software should be a system of best practices.
+        </h2>
+        <p className="manifesto-lead">
+          The disciplines behind a well-run jewelry house, built into the work
+          itself.
+          <span className="manifesto-kicker">
+            Proven behind the counter, then built into every screen.
+          </span>
+        </p>
+      </section>
+
       <section className="section-white core-section" id="workflows">
         <div className="core-copy">
           <p className="eyebrow">One operating record</p>
@@ -483,7 +496,7 @@ export default function Home() {
       <section className="section-light platform-section" id="platform">
         <div className="section-copy">
           <p className="eyebrow">Platform</p>
-          <h2>Four jobs. One workspace.</h2>
+          <h2>Four practices a well-run store never skips.</h2>
         </div>
         <div className="operating-grid">
           {operatingSignals.map((signal, index) => (

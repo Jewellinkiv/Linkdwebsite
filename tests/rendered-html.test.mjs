@@ -51,7 +51,8 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /JewelLink CRM/i);
   assert.match(html, /linkd-pos-register-hero\.webp/i);
   assert.match(html, /Linkd point-of-sale workspace with cart, client, and quick actions/i);
-  assert.match(html, /Four jobs\. One workspace\./i);
+  assert.match(html, /Four practices a well-run store never skips\./i);
+  assert.match(html, /Software should be a system of best practices\./i);
   assert.match(html, /Point of sale/i);
   assert.match(html, /Service management/i);
   assert.match(html, /Inventory security/i);
