@@ -6,6 +6,7 @@ import { FormEvent, useMemo, useState } from "react";
 import CustomStory from "./CustomStory";
 import InvoiceAiStory from "./InvoiceAiStory";
 import InventoryManagementStory from "./InventoryManagementStory";
+import InventorySecurityStory from "./InventorySecurityStory";
 import MakeSaleStory from "./MakeSaleStory";
 import RepairStory from "./RepairStory";
 import styles from "./guided-demo.module.css";
@@ -137,6 +138,7 @@ const liveWorkflowIds = new Set([
   "custom-management",
   "invoice-ai",
   "inventory-management",
+  "inventory-security",
 ]);
 
 function firstName(name: string) {
@@ -156,7 +158,9 @@ export default function GuidedDemoChooser() {
     () => workflows.find((workflow) => workflow.id === selectedId) ?? workflows[0],
     [selectedId],
   );
-  const activeNavItem = activeWorkflow === "invoice-ai" || activeWorkflow === "inventory-management"
+  const activeNavItem = activeWorkflow === "invoice-ai"
+    || activeWorkflow === "inventory-management"
+    || activeWorkflow === "inventory-security"
     ? "Inventory"
     : serviceWorkspaceActive
       ? "Services"
@@ -274,7 +278,8 @@ export default function GuidedDemoChooser() {
             {activeWorkflow ? (
               serviceWorkspaceActive
                 || activeWorkflow === "invoice-ai"
-                || activeWorkflow === "inventory-management" ? (
+                || activeWorkflow === "inventory-management"
+                || activeWorkflow === "inventory-security" ? (
                 <>Parked <em>0</em></>
               ) : (
                 <><b aria-hidden="true">Ⅱ</b> Park / Resume <em>0</em></>
@@ -327,6 +332,11 @@ export default function GuidedDemoChooser() {
       ) : activeWorkflow === "inventory-management" ? (
         <InventoryManagementStory
           onComplete={() => completeWorkflow("inventory-management")}
+          onExit={exitWorkflow}
+        />
+      ) : activeWorkflow === "inventory-security" ? (
+        <InventorySecurityStory
+          onComplete={() => completeWorkflow("inventory-security")}
           onExit={exitWorkflow}
         />
       ) : (
@@ -459,6 +469,8 @@ export default function GuidedDemoChooser() {
                   ? "Start guided invoice import"
                 : selectedWorkflow.id === "inventory-management"
                   ? "Start guided inventory entry"
+                : selectedWorkflow.id === "inventory-security"
+                  ? "Start guided case count"
                 : confirmedId === selectedWorkflow.id
                   ? "Workflow selected"
                   : "Choose this workflow"}
@@ -475,6 +487,8 @@ export default function GuidedDemoChooser() {
                   ? "Opens the guided Linkd invoice upload, AI review, and inventory handoff."
                 : selectedWorkflow.id === "inventory-management"
                   ? "Opens the guided Linkd item entry, tagging, placement, and movement history."
+                : selectedWorkflow.id === "inventory-security"
+                  ? "Opens the guided Linkd case scan, variance review, and audit resolution."
                 : confirmedId === selectedWorkflow.id
                 ? `${selectedWorkflow.title} is ready. Its guided steps are coming next.`
                 : "You can change workflows at any time."}

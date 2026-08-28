@@ -589,6 +589,45 @@ test("keeps the inventory management walkthrough serialized and traceable", asyn
   assert.doesNotMatch(inventoryStory, /fetch\(|Math\.random|new Date/);
 });
 
+test("keeps the inventory security walkthrough immutable and accountable", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const securityStory = await readFile(
+    new URL("../app/guided-demo/InventorySecurityStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /"inventory-security"/);
+  assert.match(chooser, /<InventorySecurityStory/);
+  assert.match(chooser, /Start guided case count/i);
+  assert.match(securityStory, /STEP \$\{step \+ 1\} OF 7/);
+  assert.match(securityStory, /CNT-20260828-0031/);
+  assert.match(securityStory, /EXPECTED_ITEMS = 12/);
+  assert.match(securityStory, /SCANNED_ITEMS = 11/);
+  assert.match(securityStory, /EXPECTED_VALUE = 8_624_000/);
+  assert.match(securityStory, /MISSING_ITEM_VALUE = 1_499_500/);
+  assert.match(securityStory, /LNK-006818/);
+  assert.match(securityStory, /Cycle count/);
+  assert.match(securityStory, /Blind cycle count/);
+  assert.match(securityStory, /Bridal Case 3/);
+  assert.match(securityStory, /Scan Case with RFID/);
+  assert.match(securityStory, /Barcode scan/);
+  assert.match(securityStory, /Entered by hand/);
+  assert.match(securityStory, /RFID read/);
+  assert.match(securityStory, /Legacy scan/);
+  assert.match(securityStory, /Expected items are snapshotted now/);
+  assert.match(securityStory, /authorized POS viewing checkout/i);
+  assert.match(securityStory, /POS Viewing Tray 1/);
+  assert.match(securityStory, /No automatic inventory adjustment/);
+  assert.match(securityStory, /immutable audit record created/i);
+  assert.match(securityStory, /Jordan Lee/);
+  assert.match(securityStory, /data-security-guide-target/);
+  assert.match(securityStory, /onComplete\(\)/);
+  assert.doesNotMatch(securityStory, /fetch\(|Math\.random|new Date/);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),
