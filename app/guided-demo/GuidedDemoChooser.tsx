@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import MakeSaleStory from "./MakeSaleStory";
+import RepairStory from "./RepairStory";
 import styles from "./guided-demo.module.css";
 
 type DemoProfile = {
@@ -127,6 +128,8 @@ const navItems = [
   "Help",
 ];
 
+const liveWorkflowIds = new Set(["make-a-sale", "repair-management"]);
+
 function firstName(name: string) {
   return name.trim().split(/\s+/)[0] || "there";
 }
@@ -136,6 +139,7 @@ export default function GuidedDemoChooser() {
   const [selectedId, setSelectedId] = useState(workflows[0].id);
   const [confirmedId, setConfirmedId] = useState<string | null>(null);
   const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
+  const [repairAtBench, setRepairAtBench] = useState(false);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [leadStatus, setLeadStatus] = useState("");
 
@@ -182,6 +186,10 @@ export default function GuidedDemoChooser() {
   function changeProfile() {
     setProfile(null);
     setActiveWorkflow(null);
+    setRepairAtBench(false);
+    setCompletedIds([]);
+    setSelectedId(workflows[0].id);
+    setConfirmedId(null);
     setLeadStatus("");
   }
 
@@ -189,13 +197,15 @@ export default function GuidedDemoChooser() {
     setSelectedId(workflow.id);
     setConfirmedId(null);
 
-    if (workflow.id === "make-a-sale") {
+    if (liveWorkflowIds.has(workflow.id)) {
+      if (workflow.id === "repair-management") setRepairAtBench(false);
       setActiveWorkflow(workflow.id);
     }
   }
 
   function launchSelectedWorkflow() {
-    if (selectedWorkflow.id === "make-a-sale") {
+    if (liveWorkflowIds.has(selectedWorkflow.id)) {
+      if (selectedWorkflow.id === "repair-management") setRepairAtBench(false);
       setActiveWorkflow(selectedWorkflow.id);
       return;
     }
@@ -203,10 +213,15 @@ export default function GuidedDemoChooser() {
     setConfirmedId(selectedWorkflow.id);
   }
 
-  function completeSaleStory() {
+  function completeWorkflow(workflowId: string) {
     setCompletedIds((current) =>
-      current.includes("make-a-sale") ? current : [...current, "make-a-sale"],
+      current.includes(workflowId) ? current : [...current, workflowId],
     );
+  }
+
+  function exitWorkflow() {
+    setActiveWorkflow(null);
+    setRepairAtBench(false);
   }
 
   return (
@@ -226,9 +241,15 @@ export default function GuidedDemoChooser() {
         </Link>
 
         <nav className={styles.posNav} aria-label="Linkd demo navigation">
-          {navItems.map((item, index) => (
+          {navItems.map((item) => (
             <span
-              className={index === 0 ? styles.activeNav : undefined}
+              className={
+                item === (
+                  activeWorkflow === "repair-management" && repairAtBench ? "Services" : "POS"
+                )
+                  ? styles.activeNav
+                  : undefined
+              }
               key={item}
             >
               {item}
@@ -238,8 +259,12 @@ export default function GuidedDemoChooser() {
 
         <div className={styles.headerActions}>
           <span className={styles.demoPill}>
-            {activeWorkflow === "make-a-sale" ? (
-              <><b aria-hidden="true">Ⅱ</b> Park / Resume <em>0</em></>
+            {activeWorkflow ? (
+              repairAtBench ? (
+                <>Parked <em>0</em></>
+              ) : (
+                <><b aria-hidden="true">Ⅱ</b> Park / Resume <em>0</em></>
+              )
             ) : (
               <><i aria-hidden="true" /> Guided Demo</>
             )}
@@ -265,8 +290,14 @@ export default function GuidedDemoChooser() {
 
       {activeWorkflow === "make-a-sale" ? (
         <MakeSaleStory
-          onComplete={completeSaleStory}
-          onExit={() => setActiveWorkflow(null)}
+          onComplete={() => completeWorkflow("make-a-sale")}
+          onExit={exitWorkflow}
+        />
+      ) : activeWorkflow === "repair-management" ? (
+        <RepairStory
+          onComplete={() => completeWorkflow("repair-management")}
+          onBenchChange={setRepairAtBench}
+          onExit={exitWorkflow}
         />
       ) : (
       <div className={styles.workspace}>
@@ -390,6 +421,8 @@ export default function GuidedDemoChooser() {
             >
               {selectedWorkflow.id === "make-a-sale"
                 ? "Start guided sale"
+                : selectedWorkflow.id === "repair-management"
+                  ? "Start guided repair"
                 : confirmedId === selectedWorkflow.id
                   ? "Workflow selected"
                   : "Choose this workflow"}
@@ -398,6 +431,8 @@ export default function GuidedDemoChooser() {
             <p className={styles.selectedNote} aria-live="polite">
               {selectedWorkflow.id === "make-a-sale"
                 ? "Opens the guided Linkd sale workspace."
+                : selectedWorkflow.id === "repair-management"
+                  ? "Opens the guided Linkd repair intake and service bench."
                 : confirmedId === selectedWorkflow.id
                 ? `${selectedWorkflow.title} is ready. Its guided steps are coming next.`
                 : "You can change workflows at any time."}

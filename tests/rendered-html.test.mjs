@@ -371,6 +371,78 @@ test("keeps the guided sale deterministic and connected", async () => {
   assert.match(saleStory, /Choose another workflow/);
 });
 
+test("keeps the guided repair deterministic, documented, and reviewable", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const repairStory = await readFile(
+    new URL("../app/guided-demo/RepairStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /"repair-management"/);
+  assert.match(chooser, /<RepairStory/);
+  assert.match(chooser, /Start guided repair/i);
+  assert.match(repairStory, /STEP \$\{step \+ 1\} OF 8/);
+  assert.match(repairStory, /Maya Thompson/);
+  assert.match(repairStory, /REP-ITEM-00972/);
+  assert.match(repairStory, /R-0317/);
+  assert.match(repairStory, /DEPOSIT = 25_000/);
+  assert.match(repairStory, /TAX_RATE_BPS = 825/);
+  assert.match(repairStory, /RP-PRONG-02/);
+  assert.match(repairStory, /CLN-POLISH-01/);
+  assert.match(repairStory, /Repair Intake/);
+  assert.match(repairStory, /Watch Repair/);
+  assert.match(repairStory, /Custom Job/);
+  assert.match(repairStory, /Special Order/);
+  assert.match(repairStory, /Add Photos/);
+  assert.match(repairStory, /Add Suggested SKUs/);
+  assert.match(repairStory, /Add Media References/);
+  assert.match(repairStory, /SIMULATED AI SUGGEST/);
+  assert.match(repairStory, /Review the suggested result before saving/);
+  assert.match(repairStory, /skuDecisions/);
+  assert.match(repairStory, /"included" \| "excluded"/);
+  assert.match(repairStory, /Include/);
+  assert.match(repairStory, /Exclude/);
+  assert.match(repairStory, /REPAIR ITEM AND PROMISE/);
+  assert.match(repairStory, /INTAKE EVIDENCE/);
+  assert.match(repairStory, /Declared Value/);
+  assert.match(repairStory, /In store custody/);
+  assert.match(repairStory, /Service Location/);
+  assert.match(repairStory, /REPAIR TASKS/);
+  assert.match(repairStory, /READY NOTIFICATION/);
+  assert.match(repairStory, /Add to Sale/);
+  assert.match(repairStory, /Tender/);
+  assert.match(repairStory, /Complete Sale/);
+  assert.match(repairStory, /SIMULATED UPDATE/);
+  assert.match(repairStory, /Mark Ready for Pickup/);
+  assert.match(repairStory, /No message has been sent/);
+  assert.match(repairStory, /onBenchChange\(true\)/);
+  assert.match(repairStory, /useDialogFocusTrap/);
+  assert.match(repairStory, /data-repair-guide-target/);
+  assert.match(repairStory, /onComplete\(\)/);
+  assert.doesNotMatch(repairStory, /fetch\(|Math\.random|new Date/);
+
+  const sourceNumber = (name) => {
+    const match = repairStory.match(new RegExp(`const ${name} = ([\\d_]+);`));
+    assert.ok(match, `${name} should be a fixed integer`);
+    return Number(match[1].replaceAll("_", ""));
+  };
+  const skuPrices = [...repairStory.matchAll(/price: ([\d_]+),/g)]
+    .map((match) => Number(match[1].replaceAll("_", "")));
+  const taxRateBps = sourceNumber("TAX_RATE_BPS");
+  const deposit = sourceNumber("DEPOSIT");
+  assert.equal(skuPrices.length, 2);
+  const subtotal = skuPrices.reduce((sum, price) => sum + price, 0);
+  const tax = Math.round((subtotal * taxRateBps) / 10_000);
+
+  assert.equal(subtotal, 50_000);
+  assert.equal(tax, 4_125);
+  assert.equal(subtotal + tax, 54_125);
+  assert.equal(subtotal + tax - deposit, 29_125);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),
