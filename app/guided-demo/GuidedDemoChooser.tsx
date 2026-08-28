@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
+import CustomStory from "./CustomStory";
 import MakeSaleStory from "./MakeSaleStory";
 import RepairStory from "./RepairStory";
 import styles from "./guided-demo.module.css";
@@ -128,7 +129,11 @@ const navItems = [
   "Help",
 ];
 
-const liveWorkflowIds = new Set(["make-a-sale", "repair-management"]);
+const liveWorkflowIds = new Set([
+  "make-a-sale",
+  "repair-management",
+  "custom-management",
+]);
 
 function firstName(name: string) {
   return name.trim().split(/\s+/)[0] || "there";
@@ -139,7 +144,7 @@ export default function GuidedDemoChooser() {
   const [selectedId, setSelectedId] = useState(workflows[0].id);
   const [confirmedId, setConfirmedId] = useState<string | null>(null);
   const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
-  const [repairAtBench, setRepairAtBench] = useState(false);
+  const [serviceWorkspaceActive, setServiceWorkspaceActive] = useState(false);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [leadStatus, setLeadStatus] = useState("");
 
@@ -186,7 +191,7 @@ export default function GuidedDemoChooser() {
   function changeProfile() {
     setProfile(null);
     setActiveWorkflow(null);
-    setRepairAtBench(false);
+    setServiceWorkspaceActive(false);
     setCompletedIds([]);
     setSelectedId(workflows[0].id);
     setConfirmedId(null);
@@ -198,14 +203,14 @@ export default function GuidedDemoChooser() {
     setConfirmedId(null);
 
     if (liveWorkflowIds.has(workflow.id)) {
-      if (workflow.id === "repair-management") setRepairAtBench(false);
+      if (workflow.area === "Services") setServiceWorkspaceActive(false);
       setActiveWorkflow(workflow.id);
     }
   }
 
   function launchSelectedWorkflow() {
     if (liveWorkflowIds.has(selectedWorkflow.id)) {
-      if (selectedWorkflow.id === "repair-management") setRepairAtBench(false);
+      if (selectedWorkflow.area === "Services") setServiceWorkspaceActive(false);
       setActiveWorkflow(selectedWorkflow.id);
       return;
     }
@@ -221,7 +226,7 @@ export default function GuidedDemoChooser() {
 
   function exitWorkflow() {
     setActiveWorkflow(null);
-    setRepairAtBench(false);
+    setServiceWorkspaceActive(false);
   }
 
   return (
@@ -245,7 +250,7 @@ export default function GuidedDemoChooser() {
             <span
               className={
                 item === (
-                  activeWorkflow === "repair-management" && repairAtBench ? "Services" : "POS"
+                  serviceWorkspaceActive ? "Services" : "POS"
                 )
                   ? styles.activeNav
                   : undefined
@@ -260,7 +265,7 @@ export default function GuidedDemoChooser() {
         <div className={styles.headerActions}>
           <span className={styles.demoPill}>
             {activeWorkflow ? (
-              repairAtBench ? (
+              serviceWorkspaceActive ? (
                 <>Parked <em>0</em></>
               ) : (
                 <><b aria-hidden="true">Ⅱ</b> Park / Resume <em>0</em></>
@@ -296,8 +301,14 @@ export default function GuidedDemoChooser() {
       ) : activeWorkflow === "repair-management" ? (
         <RepairStory
           onComplete={() => completeWorkflow("repair-management")}
-          onBenchChange={setRepairAtBench}
+          onBenchChange={setServiceWorkspaceActive}
           onExit={exitWorkflow}
+        />
+      ) : activeWorkflow === "custom-management" ? (
+        <CustomStory
+          onComplete={() => completeWorkflow("custom-management")}
+          onExit={exitWorkflow}
+          onWorkspaceChange={setServiceWorkspaceActive}
         />
       ) : (
       <div className={styles.workspace}>
@@ -423,6 +434,8 @@ export default function GuidedDemoChooser() {
                 ? "Start guided sale"
                 : selectedWorkflow.id === "repair-management"
                   ? "Start guided repair"
+                : selectedWorkflow.id === "custom-management"
+                  ? "Start guided custom job"
                 : confirmedId === selectedWorkflow.id
                   ? "Workflow selected"
                   : "Choose this workflow"}
@@ -433,6 +446,8 @@ export default function GuidedDemoChooser() {
                 ? "Opens the guided Linkd sale workspace."
                 : selectedWorkflow.id === "repair-management"
                   ? "Opens the guided Linkd repair intake and service bench."
+                : selectedWorkflow.id === "custom-management"
+                  ? "Opens the guided Linkd custom intake, approval, and production handoff."
                 : confirmedId === selectedWorkflow.id
                 ? `${selectedWorkflow.title} is ready. Its guided steps are coming next.`
                 : "You can change workflows at any time."}

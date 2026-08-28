@@ -443,6 +443,67 @@ test("keeps the guided repair deterministic, documented, and reviewable", async 
   assert.equal(subtotal + tax - deposit, 29_125);
 });
 
+test("keeps the guided custom job deterministic, reviewable, and connected", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const customStory = await readFile(
+    new URL("../app/guided-demo/CustomStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /"custom-management"/);
+  assert.match(chooser, /<CustomStory/);
+  assert.match(chooser, /Start guided custom job/i);
+  assert.match(customStory, /STEP \$\{step \+ 1\} OF 8/);
+  assert.match(customStory, /Eleanor Price/);
+  assert.match(customStory, /C-0428/);
+  assert.match(customStory, /CUST-STONE-00428/);
+  assert.match(customStory, /DEPOSIT = 150_000/);
+  assert.match(customStory, /TAX_RATE_BPS = 825/);
+  assert.match(customStory, /CUST-CAD-01/);
+  assert.match(customStory, /CUST-FAB-18K/);
+  assert.match(customStory, /APP-FINAL-01/);
+  assert.match(customStory, /Custom Job Intake/);
+  assert.match(customStory, /COPY FROM ACTIVE CUSTOM JOB/);
+  assert.match(customStory, /DESIGN REFERENCES &amp; MEDIA/);
+  assert.match(customStory, /END PRODUCT &amp; DESIGN BRIEF/);
+  assert.match(customStory, /Add Suggested SKUs/);
+  assert.match(customStory, /SIMULATED AI SUGGEST/);
+  assert.match(customStory, /Include/);
+  assert.match(customStory, /Exclude/);
+  assert.match(customStory, /CUSTOMER PROPERTY &amp; CUSTODY/);
+  assert.match(customStory, /BUILD MATERIAL/);
+  assert.match(customStory, /Estimate only/);
+  assert.match(customStory, /Needs Approval/);
+  assert.match(customStory, /SIMULATED CUSTOMER UPDATE/);
+  assert.match(customStory, /Approve Design &amp; Start Production/);
+  assert.match(customStory, /No message has been sent/);
+  assert.match(customStory, /useDialogFocusTrap/);
+  assert.match(customStory, /data-custom-guide-target/);
+  assert.match(customStory, /onComplete\(\)/);
+  assert.doesNotMatch(customStory, /fetch\(|Math\.random|new Date/);
+
+  const constant = (name) => {
+    const match = customStory.match(new RegExp(`const ${name} = ([\\d_]+);`));
+    assert.ok(match, `${name} should be a numeric constant`);
+    return Number(match[1].replaceAll("_", ""));
+  };
+  const skuPrices = [...customStory.matchAll(/price: ([\d_]+),/g)]
+    .map((match) => Number(match[1].replaceAll("_", "")));
+  const subtotal = skuPrices.reduce((sum, price) => sum + price, 0);
+  const tax = Math.round((subtotal * constant("TAX_RATE_BPS")) / 10_000);
+  const total = subtotal + tax;
+  const deposit = Math.min(constant("DEPOSIT"), total);
+
+  assert.equal(subtotal, 337_500);
+  assert.equal(tax, 27_844);
+  assert.equal(total, 365_344);
+  assert.equal(deposit, 150_000);
+  assert.equal(total - deposit, 215_344);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),
