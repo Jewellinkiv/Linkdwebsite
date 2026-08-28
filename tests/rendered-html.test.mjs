@@ -628,6 +628,19 @@ test("keeps the inventory security walkthrough immutable and accountable", async
   assert.doesNotMatch(securityStory, /fetch\(|Math\.random|new Date/);
 });
 
+test("gives every guided action a visible purple focus ring", async () => {
+  const demoCss = await readFile(
+    new URL("../app/guided-demo/guided-demo.module.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(demoCss, /\.guidedTarget\s*\{/);
+  assert.match(demoCss, /outline: 2px solid #8b5cf6/i);
+  assert.match(demoCss, /rgba\(139, 92, 246, 0\.9\)/i);
+  assert.match(demoCss, /rgba\(124, 58, 237, 0\.42\)/i);
+  assert.match(demoCss, /@keyframes guidedPulse/);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),
