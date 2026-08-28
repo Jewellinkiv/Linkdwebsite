@@ -504,6 +504,53 @@ test("keeps the guided custom job deterministic, reviewable, and connected", asy
   assert.equal(total - deposit, 215_344);
 });
 
+test("keeps the AI invoice walkthrough deterministic and human-reviewed", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const invoiceStory = await readFile(
+    new URL("../app/guided-demo/InvoiceAiStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /"invoice-ai"/);
+  assert.match(chooser, /<InvoiceAiStory/);
+  assert.match(chooser, /Start guided invoice import/i);
+  assert.match(invoiceStory, /STEP \$\{step \+ 1\} OF 6/);
+  assert.match(invoiceStory, /Stuller Invoice INV-884193\.pdf/);
+  assert.match(invoiceStory, /SIMULATED VISION AI/);
+  assert.match(invoiceStory, /DRAFTS ONLY/);
+  assert.match(invoiceStory, /Human review is required/);
+  assert.match(invoiceStory, /Resolve fields/);
+  assert.match(invoiceStory, /Approve draft/);
+  assert.match(invoiceStory, /Create 4 Inventory Items/);
+  assert.match(invoiceStory, /LNK-006814/);
+  assert.match(invoiceStory, /LNK-006817/);
+  assert.match(invoiceStory, /Corporate Inventory Intake/);
+  assert.match(invoiceStory, /Case Security/);
+  assert.match(invoiceStory, /Count Schedules/);
+  assert.match(invoiceStory, /Trade-In Management/);
+  assert.match(invoiceStory, /FREIGHT = 7_500/);
+  assert.match(invoiceStory, /data-invoice-guide-target/);
+  assert.match(invoiceStory, /onComplete\(\)/);
+  assert.doesNotMatch(invoiceStory, /fetch\(|Math\.random|new Date/);
+
+  const costs = [...invoiceStory.matchAll(/unitCost: ([\d_]+),/g)]
+    .map((match) => Number(match[1].replaceAll("_", "")));
+  const quantities = [...invoiceStory.matchAll(/quantity: (\d+),/g)]
+    .map((match) => Number(match[1]));
+  const merchandise = costs.reduce(
+    (sum, cost, index) => sum + cost * quantities[index],
+    0,
+  );
+
+  assert.deepEqual(costs, [82_000, 145_000, 18_500]);
+  assert.deepEqual(quantities, [1, 1, 2]);
+  assert.equal(merchandise, 264_000);
+  assert.equal(merchandise + 7_500, 271_500);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),

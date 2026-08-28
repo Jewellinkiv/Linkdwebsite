@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import CustomStory from "./CustomStory";
+import InvoiceAiStory from "./InvoiceAiStory";
 import MakeSaleStory from "./MakeSaleStory";
 import RepairStory from "./RepairStory";
 import styles from "./guided-demo.module.css";
@@ -133,6 +134,7 @@ const liveWorkflowIds = new Set([
   "make-a-sale",
   "repair-management",
   "custom-management",
+  "invoice-ai",
 ]);
 
 function firstName(name: string) {
@@ -152,6 +154,11 @@ export default function GuidedDemoChooser() {
     () => workflows.find((workflow) => workflow.id === selectedId) ?? workflows[0],
     [selectedId],
   );
+  const activeNavItem = activeWorkflow === "invoice-ai"
+    ? "Inventory"
+    : serviceWorkspaceActive
+      ? "Services"
+      : "POS";
 
   async function enterDemo(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -249,9 +256,7 @@ export default function GuidedDemoChooser() {
           {navItems.map((item) => (
             <span
               className={
-                item === (
-                  serviceWorkspaceActive ? "Services" : "POS"
-                )
+                item === activeNavItem
                   ? styles.activeNav
                   : undefined
               }
@@ -265,7 +270,7 @@ export default function GuidedDemoChooser() {
         <div className={styles.headerActions}>
           <span className={styles.demoPill}>
             {activeWorkflow ? (
-              serviceWorkspaceActive ? (
+              serviceWorkspaceActive || activeWorkflow === "invoice-ai" ? (
                 <>Parked <em>0</em></>
               ) : (
                 <><b aria-hidden="true">Ⅱ</b> Park / Resume <em>0</em></>
@@ -309,6 +314,11 @@ export default function GuidedDemoChooser() {
           onComplete={() => completeWorkflow("custom-management")}
           onExit={exitWorkflow}
           onWorkspaceChange={setServiceWorkspaceActive}
+        />
+      ) : activeWorkflow === "invoice-ai" ? (
+        <InvoiceAiStory
+          onComplete={() => completeWorkflow("invoice-ai")}
+          onExit={exitWorkflow}
         />
       ) : (
       <div className={styles.workspace}>
@@ -436,6 +446,8 @@ export default function GuidedDemoChooser() {
                   ? "Start guided repair"
                 : selectedWorkflow.id === "custom-management"
                   ? "Start guided custom job"
+                : selectedWorkflow.id === "invoice-ai"
+                  ? "Start guided invoice import"
                 : confirmedId === selectedWorkflow.id
                   ? "Workflow selected"
                   : "Choose this workflow"}
@@ -448,6 +460,8 @@ export default function GuidedDemoChooser() {
                   ? "Opens the guided Linkd repair intake and service bench."
                 : selectedWorkflow.id === "custom-management"
                   ? "Opens the guided Linkd custom intake, approval, and production handoff."
+                : selectedWorkflow.id === "invoice-ai"
+                  ? "Opens the guided Linkd invoice upload, AI review, and inventory handoff."
                 : confirmedId === selectedWorkflow.id
                 ? `${selectedWorkflow.title} is ready. Its guided steps are coming next.`
                 : "You can change workflows at any time."}
