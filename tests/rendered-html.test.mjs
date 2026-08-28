@@ -551,6 +551,44 @@ test("keeps the AI invoice walkthrough deterministic and human-reviewed", async 
   assert.equal(merchandise + 7_500, 271_500);
 });
 
+test("keeps the inventory management walkthrough serialized and traceable", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const inventoryStory = await readFile(
+    new URL("../app/guided-demo/InventoryManagementStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /"inventory-management"/);
+  assert.match(chooser, /<InventoryManagementStory/);
+  assert.match(chooser, /Start guided inventory entry/i);
+  assert.match(inventoryStory, /STEP \$\{step \+ 1\} OF 7/);
+  assert.match(inventoryStory, /Simon G\./);
+  assert.match(inventoryStory, /MR2362-W/);
+  assert.match(inventoryStory, /ITEM_COST = 745_000/);
+  assert.match(inventoryStory, /ITEM_RETAIL = 1_499_500/);
+  assert.match(inventoryStory, /LNK-006818/);
+  assert.match(inventoryStory, /SG-88421-26/);
+  assert.match(inventoryStory, /3034A7B21C0098/);
+  assert.match(inventoryStory, /GIA 7482193401/);
+  assert.match(inventoryStory, /Manual item entry/);
+  assert.match(inventoryStory, /Assign Item Number &amp; Serial/);
+  assert.match(inventoryStory, /Generate Barcode \/ RFID Tag/);
+  assert.match(inventoryStory, /Corporate Inventory Intake/);
+  assert.match(inventoryStory, /Bridal Case 3/);
+  assert.match(inventoryStory, /MOVEMENT &amp; MANAGEMENT HISTORY/);
+  assert.match(inventoryStory, /POS ready/);
+  assert.match(inventoryStory, /Scan ready/);
+  assert.match(inventoryStory, /Count ready/);
+  assert.match(inventoryStory, /Transfer ready/);
+  assert.match(inventoryStory, /No live inventory location is changed/);
+  assert.match(inventoryStory, /data-inventory-guide-target/);
+  assert.match(inventoryStory, /onComplete\(\)/);
+  assert.doesNotMatch(inventoryStory, /fetch\(|Math\.random|new Date/);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),
