@@ -493,6 +493,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="guided-demo-band" aria-labelledby="guided-demo-title">
+        <div className="guided-demo-band-copy">
+          <p className="eyebrow">Interactive product tour</p>
+          <h2 id="guided-demo-title">Step inside Linkd before the sales call.</h2>
+          <p>
+            Choose a real jewelry-store workflow and click through the same
+            decisions your team makes at the counter, bench, case, and office.
+          </p>
+          <Link className="button button-primary" href="/guided-demo">
+            Start the guided demo
+          </Link>
+          <small>No installation. About three minutes per story.</small>
+        </div>
+        <div className="guided-demo-band-console" aria-label="Available guided Linkd workflows">
+          <header>
+            <span>LINKD GUIDED DEMO</span>
+            <strong>Choose a workflow</strong>
+          </header>
+          <div className="guided-demo-band-grid">
+            <span><b>POS</b> Make a sale</span>
+            <span><b>SVC</b> Repair intake</span>
+            <span><b>INV</b> Receive inventory</span>
+            <span><b>SEC</b> Resolve an exception</span>
+          </div>
+          <footer><i /> Guided actions show you exactly where to click</footer>
+        </div>
+      </section>
+
       <section className="section-light manifesto-band" aria-labelledby="manifesto-title">
         <p className="eyebrow">Where Linkd leads</p>
           <h2 className="manifesto-statement" id="manifesto-title">

@@ -53,6 +53,9 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Linkd POS showing Val Jones, four jewelry and service lines/i);
   assert.match(html, /app\.linkd\.com\/pos/i);
   assert.match(html, /Run the whole store\. Keep more of/i);
+  assert.match(html, /Step inside Linkd before the sales call/i);
+  assert.match(html, /href="\/guided-demo"/i);
+  assert.match(html, /Start the guided demo/i);
   assert.match(html, /Four workflows\. One operating system\./i);
   assert.match(html, /Four operating engines\. One system your team can trust/i);
   assert.match(html, /Payment processing should strengthen the business/i);
@@ -325,6 +328,7 @@ test("server-renders the guided Linkd workflow chooser", async () => {
   assert.match(html, /name="storeName"/i);
   assert.match(html, /name="email"/i);
   assert.doesNotMatch(html, /name="phone"|name="locations"/i);
+  assert.doesNotMatch(html, /Open with sample demo details/i);
   assert.match(html, /noindex/i);
   assert.doesNotMatch(sitemap, /\/guided-demo/);
 });
@@ -605,24 +609,28 @@ test("keeps the inventory security walkthrough immutable and accountable", async
   assert.match(chooser, /"inventory-security"/);
   assert.match(chooser, /<InventorySecurityStory/);
   assert.match(chooser, /Start guided case count/i);
-  assert.match(securityStory, /STEP \$\{step \+ 1\} OF 7/);
+  assert.match(securityStory, /STEP \$\{step \+ 1\} OF 8/);
   assert.match(securityStory, /CNT-20260828-0031/);
   assert.match(securityStory, /EXPECTED_ITEMS = 12/);
   assert.match(securityStory, /SCANNED_ITEMS = 11/);
   assert.match(securityStory, /EXPECTED_VALUE = 8_624_000/);
   assert.match(securityStory, /MISSING_ITEM_VALUE = 1_499_500/);
   assert.match(securityStory, /LNK-006818/);
-  assert.match(securityStory, /Cycle count/);
-  assert.match(securityStory, /Blind cycle count/);
+  assert.match(securityStory, /Count Schedules/);
+  assert.match(securityStory, /Scheduled counts/);
   assert.match(securityStory, /Bridal Case 3/);
   assert.match(securityStory, /Scan Case with RFID/);
   assert.match(securityStory, /Barcode scan/);
   assert.match(securityStory, /Entered by hand/);
   assert.match(securityStory, /RFID read/);
   assert.match(securityStory, /Legacy scan/);
-  assert.match(securityStory, /Expected items are snapshotted now/);
+  assert.match(securityStory, /Starting freezes the expected population/);
   assert.match(securityStory, /authorized POS viewing checkout/i);
   assert.match(securityStory, /POS Viewing Tray 1/);
+  assert.match(securityStory, /Missing — Count Exception/);
+  assert.match(securityStory, /Security Log/);
+  assert.match(securityStory, /Physical re-scan matched/);
+  assert.match(securityStory, /Audit evidence alone cannot perform this step/);
   assert.match(securityStory, /No automatic inventory adjustment/);
   assert.match(securityStory, /immutable audit record created/i);
   assert.match(securityStory, /Jordan Lee/);
@@ -717,7 +725,7 @@ test("keeps Postmark configuration documented in code", async () => {
 
   assert.match(route, /POSTMARK_SERVER_TOKEN/);
   assert.match(route, /POSTMARK_FROM_EMAIL/);
-  assert.match(route, /LINKD_ALERT_TO_EMAIL/);
+  assert.match(route, /support@jewellink\.com/);
   assert.match(route, /x-postmark-server-token/i);
   assert.match(route, /Demo focus/);
   assert.match(route, /sourcePath/);
@@ -729,7 +737,7 @@ test("keeps Postmark configuration documented in code", async () => {
   assert.match(route, /request\.headers\.get\("referer"\)/);
   assert.match(envExample, /^POSTMARK_SERVER_TOKEN=/m);
   assert.match(envExample, /^POSTMARK_FROM_EMAIL=/m);
-  assert.match(envExample, /^LINKD_ALERT_TO_EMAIL=/m);
+  assert.doesNotMatch(envExample, /^LINKD_ALERT_TO_EMAIL=/m);
   assert.match(envExample, /^POSTMARK_MESSAGE_STREAM=outbound/m);
 });
 

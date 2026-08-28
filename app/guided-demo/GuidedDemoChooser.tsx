@@ -116,9 +116,9 @@ const workflows: Workflow[] = [
     area: "Security",
     title: "Resolve a security exception",
     description:
-      "Run a case count, find a variance and review the item movement trail.",
-    duration: "3 min",
-    steps: 7,
+      "Open a scheduled case count, investigate a missing piece, and physically verify its return.",
+    duration: "4 min",
+    steps: 8,
     tone: "navy",
   },
 ];
@@ -606,21 +606,6 @@ export default function GuidedDemoChooser() {
               <button className={styles.gateButton} type="submit">
                 Enter the guided demo <span aria-hidden="true">→</span>
               </button>
-              {process.env.NODE_ENV === "development" ? (
-                <button
-                  className={styles.localPreviewButton}
-                  onClick={() =>
-                    setProfile({
-                      name: "Local Preview",
-                      storeName: "Sissy's Log Cabin",
-                      email: "preview@linkd.local",
-                    })
-                  }
-                  type="button"
-                >
-                  Open with sample demo details
-                </button>
-              ) : null}
             </form>
 
             <p className={styles.consentCopy}>

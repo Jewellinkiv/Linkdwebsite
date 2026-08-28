@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 const POSTMARK_ENDPOINT = "https://api.postmarkapp.com/email";
+const LEAD_RECIPIENT = "support@jewellink.com";
 const MAX_FIELD_LENGTH = 600;
 const JSON_HEADERS = { "cache-control": "no-store" };
 
@@ -46,10 +47,9 @@ export async function POST(request: Request) {
   const runtime = await loadRuntimeEnv();
   const postmarkToken = runtimeEnv(runtime, "POSTMARK_SERVER_TOKEN");
   const fromEmail = runtimeEnv(runtime, "POSTMARK_FROM_EMAIL");
-  const toEmail = runtimeEnv(runtime, "LINKD_ALERT_TO_EMAIL");
   const messageStream = runtimeEnv(runtime, "POSTMARK_MESSAGE_STREAM") || "outbound";
 
-  if (!postmarkToken || !fromEmail || !toEmail) {
+  if (!postmarkToken || !fromEmail) {
     return jsonResponse(
       { message: "Contact delivery is temporarily unavailable." },
       503,
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
     },
     body: JSON.stringify({
       From: fromEmail,
-      To: toEmail,
+      To: LEAD_RECIPIENT,
       ReplyTo: lead.email,
       Subject: `Linkd guided demo: ${lead.storeName}`,
       TextBody: buildTextEmail(lead),
