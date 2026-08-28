@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import CustomStory from "./CustomStory";
+import CustomerStory from "./CustomerStory";
 import InvoiceAiStory from "./InvoiceAiStory";
 import InventoryManagementStory from "./InventoryManagementStory";
 import InventorySecurityStory from "./InventorySecurityStory";
@@ -139,6 +140,7 @@ const liveWorkflowIds = new Set([
   "invoice-ai",
   "inventory-management",
   "inventory-security",
+  "customer-story",
 ]);
 
 function firstName(name: string) {
@@ -158,7 +160,9 @@ export default function GuidedDemoChooser() {
     () => workflows.find((workflow) => workflow.id === selectedId) ?? workflows[0],
     [selectedId],
   );
-  const activeNavItem = activeWorkflow === "invoice-ai"
+  const activeNavItem = activeWorkflow === "customer-story"
+    ? "Customers"
+    : activeWorkflow === "invoice-ai"
     || activeWorkflow === "inventory-management"
     || activeWorkflow === "inventory-security"
     ? "Inventory"
@@ -339,6 +343,11 @@ export default function GuidedDemoChooser() {
           onComplete={() => completeWorkflow("inventory-security")}
           onExit={exitWorkflow}
         />
+      ) : activeWorkflow === "customer-story" ? (
+        <CustomerStory
+          onComplete={() => completeWorkflow("customer-story")}
+          onExit={exitWorkflow}
+        />
       ) : (
       <div className={styles.workspace}>
         <aside className={styles.sideColumn} aria-label="Your demo information">
@@ -471,6 +480,8 @@ export default function GuidedDemoChooser() {
                   ? "Start guided inventory entry"
                 : selectedWorkflow.id === "inventory-security"
                   ? "Start guided case count"
+                : selectedWorkflow.id === "customer-story"
+                  ? "Start customer story"
                 : confirmedId === selectedWorkflow.id
                   ? "Workflow selected"
                   : "Choose this workflow"}
@@ -489,6 +500,8 @@ export default function GuidedDemoChooser() {
                   ? "Opens the guided Linkd item entry, tagging, placement, and movement history."
                 : selectedWorkflow.id === "inventory-security"
                   ? "Opens the guided Linkd case scan, variance review, and audit resolution."
+                : selectedWorkflow.id === "customer-story"
+                  ? "Opens the guided Linkd customer profile, connected history, wishlist, and follow-up opportunity."
                 : confirmedId === selectedWorkflow.id
                 ? `${selectedWorkflow.title} is ready. Its guided steps are coming next.`
                 : "You can change workflows at any time."}

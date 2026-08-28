@@ -4379,7 +4379,878 @@
   }
 }
 
+/* Guided customer story: relationship history, preferences, and accountable follow-up. */
+.customerStory {
+  background: #f1f6fb;
+}
+
+.customerMain {
+  display: grid;
+  gap: 14px;
+}
+
+.customerHeader {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #c8d9e8;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 20px;
+}
+
+.customerHeader p,
+.customerPanel header p,
+.customerOpportunity header p,
+.customerComplete header p {
+  color: #66758a;
+  font-size: 0.57rem;
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  margin: 0 0 3px;
+}
+
+.customerHeader h1 {
+  font-size: 1.24rem;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.customerHeader > div > span {
+  color: #667489;
+  display: block;
+  font-size: 0.64rem;
+  margin-top: 4px;
+}
+
+.customerLoyalPill {
+  background: #e4f2eb;
+  border: 1px solid #b9ddca;
+  border-radius: 99px;
+  color: #24704f;
+  font-size: 0.57rem;
+  font-weight: 900;
+  padding: 7px 10px;
+}
+
+.customerDirectory,
+.customerProfile {
+  display: grid;
+  gap: 14px;
+}
+
+.customerKpis,
+.customerCompleteKpis {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.customerKpis > div,
+.customerCompleteKpis > div {
+  background: #fff;
+  border: 1px solid #cadbe9;
+  border-radius: 8px;
+  display: grid;
+  gap: 3px;
+  padding: 14px 16px;
+}
+
+.customerKpis span,
+.customerCompleteKpis span {
+  color: #68758a;
+  font-size: 0.54rem;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+}
+
+.customerKpis strong,
+.customerCompleteKpis strong {
+  color: #1a2330;
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.customerKpis small,
+.customerCompleteKpis small {
+  color: #778396;
+  font-size: 0.58rem;
+}
+
+.customerPanel {
+  background: #fff;
+  border: 1px solid #cadbe9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.customerPanel > header {
+  align-items: center;
+  border-bottom: 1px solid #d4e1ec;
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 16px;
+}
+
+.customerPanel header h2 {
+  font-size: 0.87rem;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.customerPanel header > span {
+  color: #6b788c;
+  font-size: 0.59rem;
+}
+
+.customerSearchBar {
+  align-items: end;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 18px 16px;
+}
+
+.customerSearchBar label {
+  color: #647388;
+  display: grid;
+  font-size: 0.58rem;
+  font-weight: 800;
+  gap: 6px;
+}
+
+.customerSearchBar input {
+  background: #f9fbfd;
+  border: 1px solid #bdd2e4;
+  border-radius: 7px;
+  color: #1e2733;
+  font: inherit;
+  font-size: 0.72rem;
+  min-height: 42px;
+  padding: 0 12px;
+}
+
+.customerSearchBar button,
+.customerPrimaryButton,
+.customerInsightBanner button {
+  background: #3476ba;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.66rem;
+  font-weight: 850;
+  min-height: 42px;
+  padding: 0 15px;
+}
+
+.customerRow {
+  align-items: center;
+  display: grid;
+  gap: 11px;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  padding: 12px 16px;
+}
+
+.customerRow + .customerRow {
+  border-top: 1px solid #e0e8ef;
+}
+
+.customerRow > span,
+.customerResultRow > span,
+.customerIdentity > span {
+  align-items: center;
+  background: #e4edf7;
+  border-radius: 50%;
+  color: #2d639c;
+  display: flex;
+  font-size: 0.62rem;
+  font-weight: 900;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.customerRow p,
+.customerResultRow p,
+.customerActivity p,
+.customerWishlistItem p,
+.customerMilestone p,
+.customerPreference p {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+}
+
+.customerRow p strong {
+  font-size: 0.68rem;
+}
+
+.customerRow small,
+.customerWishlistItem small,
+.customerMilestone p,
+.customerPreference p {
+  color: #6e7a8d;
+  font-size: 0.58rem;
+}
+
+.customerRow em {
+  color: #596a80;
+  font-size: 0.59rem;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.customerResultRow {
+  align-items: center;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 48px minmax(190px, 1fr) auto auto;
+  padding: 18px;
+}
+
+.customerResultRow > span {
+  font-size: 0.72rem;
+  height: 48px;
+  width: 48px;
+}
+
+.customerResultRow > div > strong {
+  font-size: 0.8rem;
+}
+
+.customerResultRow p {
+  color: #6b788b;
+  font-size: 0.58rem;
+  margin-top: 4px;
+}
+
+.customerResultRow dl {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+}
+
+.customerResultRow dl div {
+  display: grid;
+  gap: 3px;
+}
+
+.customerResultRow dt,
+.customerTaskPreview dt {
+  color: #738095;
+  font-size: 0.51rem;
+  font-weight: 850;
+}
+
+.customerResultRow dd,
+.customerTaskPreview dd {
+  font-size: 0.62rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.customerResultRow button {
+  background: #3476ba;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  font: inherit;
+  font-size: 0.64rem;
+  font-weight: 850;
+  min-height: 38px;
+  padding: 0 13px;
+}
+
+.customerIdentity {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #c9dbe9;
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 54px minmax(0, 1fr) auto auto;
+  padding: 17px 18px;
+}
+
+.customerIdentity > span {
+  background: #dce9f6;
+  font-size: 0.78rem;
+  height: 54px;
+  width: 54px;
+}
+
+.customerIdentity h2 {
+  font-size: 1rem;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.customerIdentity p {
+  color: #69768a;
+  font-size: 0.59rem;
+  margin: 4px 0 0;
+}
+
+.customerIdentity > div:nth-last-child(-n + 2) {
+  border-left: 1px solid #dbe5ed;
+  display: grid;
+  gap: 4px;
+  min-width: 125px;
+  padding-left: 16px;
+}
+
+.customerIdentity small {
+  color: #758196;
+  font-size: 0.5rem;
+  font-weight: 850;
+}
+
+.customerIdentity > div > strong {
+  font-size: 0.63rem;
+}
+
+.customerIdentityCompact {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+
+.customerIdentityCompact > span {
+  height: 42px;
+  width: 42px;
+}
+
+.customerProfileGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.customerFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 8px 16px 14px;
+}
+
+.customerFacts div {
+  display: grid;
+  gap: 3px;
+  padding: 9px 0;
+}
+
+.customerFacts dt {
+  color: #6f7c8f;
+  font-size: 0.56rem;
+}
+
+.customerFacts dd {
+  font-size: 0.65rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.customerActivity {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  padding: 12px 16px;
+}
+
+.customerActivity + .customerActivity {
+  border-top: 1px solid #e1e9f0;
+}
+
+.customerActivity > span {
+  background: #e7f0f8;
+  border-radius: 5px;
+  color: #32689e;
+  font-size: 0.5rem;
+  font-weight: 900;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.customerActivity p strong,
+.customerWishlistItem p strong,
+.customerMilestone p strong,
+.customerPreference p strong {
+  color: #25303d;
+  font-size: 0.63rem;
+}
+
+.customerActivity p {
+  color: #6a778b;
+  font-size: 0.56rem;
+}
+
+.customerActivity em {
+  color: #52657b;
+  font-size: 0.59rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.customerPrimaryButton {
+  justify-self: end;
+}
+
+.customerTimeline {
+  padding: 4px 16px 8px;
+}
+
+.customerTimeline > div {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 50px 56px minmax(0, 1fr) auto;
+  padding: 12px 0;
+}
+
+.customerTimeline > div + div {
+  border-top: 1px solid #e0e8ef;
+}
+
+.customerTimeline > div > span {
+  color: #708096;
+  font-size: 0.54rem;
+  font-weight: 850;
+}
+
+.customerTimeline > div > em {
+  background: #e7f0f8;
+  border-radius: 5px;
+  color: #31689e;
+  font-size: 0.48rem;
+  font-style: normal;
+  font-weight: 900;
+  padding: 5px;
+  text-align: center;
+}
+
+.customerTimeline p {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+}
+
+.customerTimeline p strong,
+.customerTimeline > div > b {
+  font-size: 0.63rem;
+}
+
+.customerTimeline p small {
+  color: #6b788b;
+  font-size: 0.55rem;
+}
+
+.customerBalances {
+  background: #f7fafd;
+  border-top: 1px solid #d7e3ec;
+  display: flex;
+  gap: 28px;
+  justify-content: flex-end;
+  padding: 11px 16px;
+}
+
+.customerBalances span {
+  color: #6e7b8f;
+  font-size: 0.52rem;
+  font-weight: 850;
+}
+
+.customerBalances strong {
+  color: #1f2a36;
+  margin-left: 6px;
+}
+
+.customerWishlistItem {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  padding: 13px 16px;
+}
+
+.customerWishlistItem + .customerWishlistItem {
+  border-top: 1px solid #e0e8ef;
+}
+
+.customerWishlistItem > span {
+  align-items: center;
+  background: #e6eef7;
+  border-radius: 7px;
+  color: #315f91;
+  display: flex;
+  font-size: 0.57rem;
+  font-weight: 900;
+  height: 46px;
+  justify-content: center;
+}
+
+.customerWishlistItem > div {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+}
+
+.customerWishlistItem > div > strong {
+  font-size: 0.63rem;
+}
+
+.customerWishlistItem > div small {
+  color: #b54c6a;
+}
+
+.customerMilestone,
+.customerPreference {
+  align-items: center;
+  display: grid;
+  gap: 11px;
+  grid-template-columns: 46px 1fr;
+  padding: 12px 16px;
+}
+
+.customerMilestone + .customerMilestone,
+.customerPreference {
+  border-top: 1px solid #e1e9f0;
+}
+
+.customerMilestone > span {
+  align-items: center;
+  background: #f3ebf8;
+  border-radius: 7px;
+  color: #72508b;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.5rem;
+  font-weight: 900;
+  height: 46px;
+  justify-content: center;
+}
+
+.customerMilestone > span strong {
+  font-size: 0.78rem;
+}
+
+.customerPreference > span {
+  color: #b64d6c;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.customerInsightBanner {
+  align-items: center;
+  background: linear-gradient(100deg, #f3eefb, #edf5fc);
+  border: 1px solid #cbbce2;
+  border-radius: 9px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  padding: 14px 16px;
+}
+
+.customerInsightBanner > span {
+  align-items: center;
+  background: #7853a3;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  height: 38px;
+  justify-content: center;
+}
+
+.customerInsightBanner p {
+  color: #59677b;
+  font-size: 0.6rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.customerInsightBanner p strong {
+  color: #25303d;
+  display: block;
+  font-size: 0.69rem;
+}
+
+.customerOpportunity {
+  background: #fff;
+  border: 1px solid #c7d9e8;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.customerOpportunity > header {
+  align-items: center;
+  background: linear-gradient(100deg, #f2ecfa, #f5f9fd);
+  border-bottom: 1px solid #d7dce9;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  padding: 17px 18px;
+}
+
+.customerOpportunity > header > span {
+  align-items: center;
+  background: #76529e;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  height: 42px;
+  justify-content: center;
+}
+
+.customerOpportunity header h2 {
+  font-size: 0.95rem;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.customerOpportunity header small {
+  color: #69768a;
+  font-size: 0.56rem;
+}
+
+.customerOpportunity header em {
+  background: #f3e4ba;
+  border-radius: 99px;
+  color: #765719;
+  font-size: 0.52rem;
+  font-style: normal;
+  font-weight: 900;
+  padding: 7px 9px;
+}
+
+.customerEvidenceGrid {
+  display: grid;
+  gap: 9px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 15px 18px 0;
+}
+
+.customerEvidenceGrid > div {
+  background: #f8fafc;
+  border: 1px solid #d6e2ec;
+  border-radius: 7px;
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+}
+
+.customerEvidenceGrid span {
+  color: #745198;
+  font-size: 0.5rem;
+  font-weight: 900;
+}
+
+.customerEvidenceGrid strong {
+  font-size: 0.66rem;
+}
+
+.customerEvidenceGrid p {
+  color: #6b788b;
+  font-size: 0.56rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.customerDraft {
+  border: 1px solid #d1deea;
+  border-radius: 8px;
+  margin: 14px 18px 0;
+  overflow: hidden;
+}
+
+.customerDraft > div {
+  align-items: center;
+  background: #f5f8fb;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+}
+
+.customerDraft > div p {
+  color: #66748a;
+  font-size: 0.52rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.customerDraft > div span {
+  color: #748196;
+  font-size: 0.53rem;
+}
+
+.customerDraft blockquote {
+  color: #364457;
+  font-size: 0.64rem;
+  line-height: 1.55;
+  margin: 0;
+  padding: 14px;
+}
+
+.customerTaskPreview {
+  display: grid;
+  gap: 8px 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 14px 18px;
+}
+
+.customerTaskPreview div {
+  display: grid;
+  gap: 3px;
+}
+
+.customerOpportunity > .customerPrimaryButton {
+  display: block;
+  margin: 0 18px 10px auto;
+}
+
+.customerAiNote {
+  color: #718095;
+  font-size: 0.53rem;
+  line-height: 1.4;
+  margin: 0 18px 16px;
+  text-align: right;
+}
+
+.customerComplete {
+  background: #fff;
+  border: 1px solid #c8d9e8;
+  border-radius: 9px;
+  display: grid;
+  gap: 16px;
+  padding: 22px;
+}
+
+.customerComplete > header {
+  align-items: center;
+  display: grid;
+  gap: 13px;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+}
+
+.customerComplete > header > span {
+  align-items: center;
+  background: #ddf0e6;
+  border-radius: 50%;
+  color: #24714f;
+  display: flex;
+  font-weight: 900;
+  height: 46px;
+  justify-content: center;
+}
+
+.customerComplete h1 {
+  font-size: 1.14rem;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.customerComplete header small {
+  color: #68758a;
+  font-size: 0.59rem;
+}
+
+.customerComplete header > strong {
+  background: #e4f2eb;
+  border-radius: 99px;
+  color: #267252;
+  font-size: 0.54rem;
+  padding: 7px 10px;
+}
+
+.customerComplete > ul {
+  border: 1px solid #d2e0eb;
+  border-radius: 8px;
+  display: grid;
+  list-style: none;
+  margin: 0;
+  padding: 0 14px;
+}
+
+.customerComplete li {
+  align-items: start;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 22px 1fr;
+  padding: 11px 0;
+}
+
+.customerComplete li + li {
+  border-top: 1px solid #e0e8ef;
+}
+
+.customerComplete li > span {
+  align-items: center;
+  background: #e1f1e8;
+  border-radius: 50%;
+  color: #277251;
+  display: flex;
+  font-size: 0.56rem;
+  height: 20px;
+  justify-content: center;
+}
+
+.customerComplete li p {
+  color: #667388;
+  font-size: 0.61rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.customerComplete li strong {
+  color: #222a36;
+  display: block;
+  font-size: 0.67rem;
+}
+
+.customerComplete > button {
+  background: #3476ba;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 850;
+  justify-self: end;
+  min-height: 40px;
+  padding: 0 16px;
+}
+
 @media (max-width: 760px) {
+  .customerHeader,
+  .customerPanel > header,
+  .customerDraft > div { align-items: start; flex-direction: column; gap: 6px; }
+  .customerKpis,
+  .customerCompleteKpis,
+  .customerEvidenceGrid { grid-template-columns: 1fr; }
+  .customerSearchBar,
+  .customerProfileGrid,
+  .customerTaskPreview { grid-template-columns: 1fr; }
+  .customerSearchBar button,
+  .customerPrimaryButton { justify-self: stretch; width: 100%; }
+  .customerResultRow { align-items: start; grid-template-columns: 48px minmax(0, 1fr); }
+  .customerResultRow dl,
+  .customerResultRow button { grid-column: 2; }
+  .customerResultRow dl { flex-direction: column; gap: 8px; }
+  .customerIdentity { align-items: start; grid-template-columns: 42px minmax(0, 1fr); }
+  .customerIdentity > span { height: 42px; width: 42px; }
+  .customerIdentity > div:nth-last-child(-n + 2) { border-left: 0; grid-column: 2; min-width: 0; padding-left: 0; }
+  .customerTimeline { overflow-x: auto; }
+  .customerTimeline > div { min-width: 560px; }
+  .customerBalances { align-items: flex-end; flex-direction: column; gap: 7px; }
+  .customerInsightBanner { grid-template-columns: 38px minmax(0, 1fr); }
+  .customerInsightBanner button { grid-column: 2; }
+  .customerOpportunity > header { align-items: start; grid-template-columns: 42px minmax(0, 1fr); }
+  .customerOpportunity header em { grid-column: 2; justify-self: start; }
+  .customerComplete > header { align-items: start; grid-template-columns: 46px minmax(0, 1fr); }
+  .customerComplete header > strong { grid-column: 2; justify-self: start; }
+  .customerComplete > button { justify-self: stretch; }
   .invoiceHeader { align-items: start; gap: 10px; }
   .invoiceChoiceGrid,
   .invoiceKpis,

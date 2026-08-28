@@ -631,6 +631,35 @@ test("keeps the inventory security walkthrough immutable and accountable", async
   assert.doesNotMatch(securityStory, /fetch\(|Math\.random|new Date/);
 });
 
+test("keeps the customer walkthrough connected and staff-reviewed", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const customerStory = await readFile(
+    new URL("../app/guided-demo/CustomerStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /"customer-story"/);
+  assert.match(chooser, /<CustomerStory/);
+  assert.match(chooser, /Start customer story/i);
+  assert.match(customerStory, /STEP \$\{step \+ 1\} OF 6/);
+  assert.match(customerStory, /Alexus Jones/);
+  assert.match(customerStory, /C-10491/);
+  assert.match(customerStory, /S-10428/);
+  assert.match(customerStory, /R-0874/);
+  assert.match(customerStory, /LNK-005902/);
+  assert.match(customerStory, /September 18/);
+  assert.match(customerStory, /Linkd follow-up suggestion/i);
+  assert.match(customerStory, /staff member reviews the context/i);
+  assert.match(customerStory, /TASK-20841/);
+  assert.match(customerStory, /Owner queue updated/);
+  assert.match(customerStory, /data-customer-guide-target/);
+  assert.match(customerStory, /onComplete\(\)/);
+  assert.doesNotMatch(customerStory, /fetch\(|Math\.random|new Date/);
+});
+
 test("gives every guided action a visible purple focus ring", async () => {
   const demoCss = await readFile(
     new URL("../app/guided-demo/guided-demo.module.css", import.meta.url),
