@@ -249,6 +249,11 @@
   z-index: 2;
 }
 
+.premier-page.linkd-home .hero-device-picture {
+  display: grid;
+  width: min(100%, 940px);
+}
+
 .premier-page .landing-stage img {
   aspect-ratio: 3 / 2;
   object-fit: contain;
@@ -801,19 +806,39 @@
   }
 
   .linkd-home .hero-device-picture {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
     border-radius: 14px;
     box-shadow: 0 28px 58px rgba(43, 75, 125, 0.2);
     overflow: hidden;
   }
 
   .linkd-home .hero-stage .hero-device-picture .hero-device-image {
-    border-radius: 0;
+    border-radius: 6px;
     box-shadow: none;
     height: 100%;
-    object-fit: cover;
-    object-position: 50% 22%;
+    object-fit: contain;
+    object-position: center;
     width: 100%;
+  }
+
+  .linkd-home .hero-device-toolbar {
+    gap: 7px;
+    min-height: 28px;
+    padding: 5px 8px;
+  }
+
+  .linkd-home .hero-device-url {
+    font-size: 0.48rem;
+    max-width: 170px;
+    padding-block: 3px;
+  }
+
+  .linkd-home .hero-device-status {
+    display: none;
+  }
+
+  .linkd-home .hero-device-screen {
+    padding: 5px;
   }
 
   .premier-page .landing-stage {

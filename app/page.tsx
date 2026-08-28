@@ -48,7 +48,7 @@ const operatingSignals = [
 
 const workflowProofs = [
   {
-    image: "/assets/screenshots/linkd-pos-checkout.webp",
+    image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
   },
   {
     image: "/assets/screenshots/linkd-inventory.webp",
@@ -63,8 +63,8 @@ const productScenes = [
     label: "Counter workspace",
     title: "One calm counter view for clients, pieces, services, and tender.",
     copy: "A live sale keeps the customer, the jewelry, service work, and payment decisions together.",
-    image: "/assets/screenshots/linkd-pos-checkout.webp",
-    alt: "Linkd point-of-sale workspace with client, jewelry items, service lines, tender, and quick actions",
+    image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
+    alt: "Linkd POS showing Val Jones, jewelry items, a service line, and payment totals",
     href: "/jewelry-pos",
     tone: "pos",
   },
@@ -179,8 +179,8 @@ const ecosystemCards = [
   {
     name: "Linkd",
     role: "Operations",
-    image: "/assets/screenshots/linkd-pos-checkout.webp",
-    alt: "Linkd point-of-sale workspace with cart, client, and quick actions",
+    image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
+    alt: "Linkd POS with a populated jewelry cart and demo customer",
     width: 1800,
     height: 1200,
     copy: "POS, services, inventory, and accounts.",
@@ -468,22 +468,25 @@ export default function Home() {
         <div className="hero-stage" aria-label="Linkd POS preview">
           <span className="hero-glow hero-glow-blue" aria-hidden="true" />
           <span className="hero-glow hero-glow-mint" aria-hidden="true" />
-          <picture className="hero-device-picture">
-            <source
-              media="(max-width: 600px)"
-              srcSet="/assets/screenshots/linkd-pos-checkout.webp"
-            />
-            <Image
-              className="hero-device-image"
-              src="/assets/screenshots/linkd-pos-register-hero.webp"
-              alt="Linkd point-of-sale workspace with cart, client, and quick actions"
-              width={1800}
-              height={731}
-              loading="eager"
-              sizes="(max-width: 860px) calc(100vw - 44px), 52vw"
-              unoptimized
-            />
-          </picture>
+          <div className="hero-device-picture">
+            <div className="hero-device-toolbar" aria-hidden="true">
+              <span className="hero-device-dots"><i /><i /><i /></span>
+              <span className="hero-device-url">app.linkd.com/pos</span>
+              <span className="hero-device-status">Live workflow</span>
+            </div>
+            <div className="hero-device-screen">
+              <Image
+                className="hero-device-image"
+                src="/assets/screenshots/linkd-pos-cart-demo-v2.webp"
+                alt="Linkd POS showing Val Jones, four jewelry and service lines, and a $24,664.76 balance"
+                width={1817}
+                height={866}
+                loading="eager"
+                sizes="(max-width: 860px) calc(100vw - 44px), 52vw"
+                unoptimized
+              />
+            </div>
+          </div>
           <p className="hero-scene-caption">
             <span aria-hidden="true" /> Every piece, payment, and promise—connected.
           </p>

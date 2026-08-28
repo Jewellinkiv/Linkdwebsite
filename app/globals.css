@@ -3709,12 +3709,97 @@ textarea:focus-visible {
   z-index: 1;
 }
 
-.linkd-home .hero-stage .hero-device-image {
-  border-radius: 18px;
+.linkd-home .hero-device-picture {
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(128, 154, 199, 0.26);
+  border-radius: 20px;
   box-shadow: 0 34px 64px rgba(43, 75, 125, 0.2);
-  filter: none;
-  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
   width: min(100%, 940px);
+}
+
+.linkd-home .hero-device-toolbar {
+  align-items: center;
+  background: linear-gradient(180deg, #fbfcff 0%, #f5f8fc 100%);
+  border-bottom: 1px solid rgba(128, 154, 199, 0.2);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-height: 38px;
+  padding: 7px 12px;
+}
+
+.linkd-home .hero-device-dots {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.linkd-home .hero-device-dots i {
+  background: #d3dbe7;
+  border-radius: 999px;
+  display: block;
+  height: 6px;
+  width: 6px;
+}
+
+.linkd-home .hero-device-dots i:first-child {
+  background: #ff725f;
+}
+
+.linkd-home .hero-device-dots i:nth-child(2) {
+  background: #ffbd45;
+}
+
+.linkd-home .hero-device-dots i:last-child {
+  background: #32c75a;
+}
+
+.linkd-home .hero-device-url {
+  background: #fff;
+  border: 1px solid rgba(128, 154, 199, 0.18);
+  border-radius: 6px;
+  color: #78869a;
+  font-size: 0.58rem;
+  justify-self: center;
+  max-width: 230px;
+  overflow: hidden;
+  padding: 4px 14px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.linkd-home .hero-device-status {
+  color: #3571c6;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.linkd-home .hero-device-screen {
+  align-items: center;
+  background: #f7f9fc;
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(6px, 1vw, 12px);
+}
+
+.linkd-home .hero-stage .hero-device-image {
+  border-radius: 8px;
+  box-shadow: none;
+  filter: none;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  position: relative;
+  width: 100%;
   z-index: 2;
 }
 

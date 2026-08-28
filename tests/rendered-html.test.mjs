@@ -49,8 +49,9 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Book a Demo/i);
   assert.match(html, /POS \+ ERP for luxury jewelers/i);
   assert.match(html, /JewelLink CRM/i);
-  assert.match(html, /linkd-pos-register-hero\.webp/i);
-  assert.match(html, /Linkd point-of-sale workspace with cart, client, and quick actions/i);
+  assert.match(html, /linkd-pos-cart-demo-v2\.webp/i);
+  assert.match(html, /Linkd POS showing Val Jones, four jewelry and service lines/i);
+  assert.match(html, /app\.linkd\.com\/pos/i);
   assert.match(html, /Run the whole store\. Keep more of/i);
   assert.match(html, /Four workflows\. One operating system\./i);
   assert.match(html, /Four operating engines\. One system your team can trust/i);
@@ -63,7 +64,7 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Payments/i);
   assert.match(html, /Services &amp; Repairs|Services & Repairs/i);
   assert.match(html, /Every screen is built around the work your team actually does/i);
-  assert.match(html, /Linkd point-of-sale workspace with client, jewelry items, service lines, tender, and quick actions/i);
+  assert.match(html, /Linkd POS showing Val Jones, jewelry items, a service line, and payment totals/i);
   assert.match(html, /Linkd inventory workspace showing serialized jewelry, location, status, and retail value/i);
   assert.match(html, /Linkd repairs and services workspace with intake, bench, ready, and turnaround data/i);
   assert.match(html, /CountRetail/i);
@@ -243,7 +244,7 @@ test("server-renders focused SEO landing pages", async () => {
         new RegExp(`https://linkd\\.com${path}#early-access`),
       );
       assert.match(html, /Luxury jewelry retailers/i);
-      assert.match(html, /linkd-customers-crm\.webp|linkd-integrations\.webp/);
+      assert.match(html, /linkd-customer-overview-demo-v2\.webp|linkd-integrations\.webp/);
     } else {
       assert.match(html, /What happened at the counter/i);
       assert.match(html, /Who needs follow-up/i);
@@ -270,7 +271,7 @@ test("server-renders focused SEO landing pages", async () => {
       assert.match(html, /Operational core for jewelry POS/i);
       assert.match(html, /Relationship layer for CRM/i);
       assert.match(html, /Intelligence layer for traffic/i);
-      assert.match(html, /linkd-pos-checkout\.webp/);
+      assert.match(html, /linkd-pos-cart-demo-card-v2\.webp/);
       assert.match(html, /https:\/\/linkd\.com\/ecosystem#early-access/i);
     }
   }
@@ -467,6 +468,18 @@ test("serves lighter web visuals for mobile and SEO pages", async () => {
     assert.ok(info.size < 70_000, `${asset} should stay lightweight`);
   }
 
+  const sanitizedProductAssets = [
+    "../public/assets/screenshots/linkd-pos-cart-demo-v2.webp",
+    "../public/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
+    "../public/assets/screenshots/linkd-customer-overview-demo-v2.webp",
+  ];
+
+  for (const asset of sanitizedProductAssets) {
+    const info = await stat(new URL(asset, import.meta.url));
+    assert.ok(info.size > 50_000, `${asset} should retain readable UI detail`);
+    assert.ok(info.size < 150_000, `${asset} should remain web-ready`);
+  }
+
   const marketingAssets = [
     "../public/assets/advertising/linkd-luxury-management-stack.webp",
     "../public/assets/advertising/linkd-feature-frames.webp",
@@ -515,8 +528,10 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(homePage, /House accounts and layaway/);
   assert.match(homePage, /href: "\/multi-store"/);
   assert.match(homePage, /Transfers, roles, and reporting/);
-  assert.match(homePage, /<picture className="hero-device-picture">/);
-  assert.match(homePage, /media="\(max-width: 600px\)"/);
+  assert.match(homePage, /<div className="hero-device-picture">/);
+  assert.match(homePage, /className="hero-device-toolbar"/);
+  assert.match(homePage, /className="hero-device-screen"/);
+  assert.doesNotMatch(homePage, /media="\(max-width: 600px\)"/);
   assert.match(homePage, /sizes="\(max-width: 860px\)/);
 
   assert.match(baseCss, /@media \(prefers-reduced-motion: reduce\)/);
@@ -530,7 +545,9 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(premierCss, /min-width: min\(360px, calc\(100vw - 36px\)\)/);
   assert.match(premierCss, /@media \(max-width: 640px\)/);
   assert.match(premierCss, /\.premier-header-actions\s*\{\s*display: none/);
-  assert.match(premierCss, /\.hero-device-picture\s*\{[\s\S]*aspect-ratio: 4 \/ 3/);
+  assert.match(premierCss, /\.hero-device-picture\s*\{[\s\S]*aspect-ratio: 16 \/ 9/);
+  assert.match(baseCss, /\.hero-device-picture\s*\{[\s\S]*aspect-ratio: 16 \/ 9/);
+  assert.match(baseCss, /\.hero-device-image\s*\{[\s\S]*object-fit: contain/);
   assert.match(premierCss, /outline-color: #0b57c5/);
 });
 
@@ -645,10 +662,10 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(sitemap, /<loc>https:\/\/linkd\.com\/repairs<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/linkd\.com\/accounting<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/linkd\.com\/multi-store<\/loc>/);
-  assert.match(sitemap, /linkd-home-hero-banner\.webp/);
+  assert.match(sitemap, /linkd-pos-cart-demo-v2\.webp/);
   assert.match(sitemap, /Linkd jewelry POS register hero banner/);
-  assert.match(sitemap, /linkd-pos-checkout\.webp/);
-  assert.match(sitemap, /linkd-customers-crm\.webp/);
+  assert.match(sitemap, /linkd-pos-cart-demo-card-v2\.webp/);
+  assert.match(sitemap, /linkd-customer-overview-demo-v2\.webp/);
   assert.match(sitemap, /linkd-reporting\.webp/);
   assert.match(sitemap, /linkd-integrations\.webp/);
   assert.match(sitemap, /linkd-luxury-management-stack\.webp/);

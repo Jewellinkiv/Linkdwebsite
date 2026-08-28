@@ -38,20 +38,20 @@ export const seoLandingPages = {
     title: "Better payment economics, built into the sale.",
     description:
       "Linkd connects tender, deposits, receivables, settlement review, and accounting handoff so luxury jewelers can protect margin without breaking the customer experience.",
-    image: "/assets/screenshots/linkd-pos-checkout.webp",
+    image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     imageAlt: "Linkd checkout workspace with customer, jewelry items, services, and tender context",
     proof: ["Tender control", "Receivables", "Settlement review", "Clean handoff"],
     visualProofs: [
       {
         label: "Counter",
         title: "Tender decisions beside the sale",
-        image: "/assets/screenshots/linkd-pos-checkout.webp",
+        image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd jewelry POS checkout and tender workflow",
       },
       {
         label: "Balance",
         title: "Deposits and receivables stay visible",
-        image: "/assets/screenshots/linkd-customers-crm.webp",
+        image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer account and balance context",
       },
       {
@@ -117,20 +117,20 @@ export const seoLandingPages = {
     title: "POS built around the way jewelers actually sell.",
     description:
       "Linkd connects checkout, services, layaway, account balances, tender controls, and customer context in one counter workflow.",
-    image: "/assets/screenshots/linkd-pos-checkout.webp",
+    image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     imageAlt: "Linkd jewelry POS register on a MacBook screen",
     proof: ["Checkout", "Repair intake", "Layaway", "Tender controls"],
     visualProofs: [
       {
         label: "Register",
         title: "Checkout and service intake",
-        image: "/assets/screenshots/linkd-pos-checkout.webp",
+        image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd jewelry POS register workflow",
       },
       {
         label: "Customer",
         title: "POS context beside the relationship",
-        image: "/assets/screenshots/linkd-customers-crm.webp",
+        image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer context and CRM-ready record",
       },
       {
@@ -204,7 +204,7 @@ export const seoLandingPages = {
       {
         label: "Customer",
         title: "Repair history tied to the relationship",
-        image: "/assets/screenshots/linkd-customers-crm.webp",
+        image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer record with repair and service history",
       },
       {
@@ -278,7 +278,7 @@ export const seoLandingPages = {
       {
         label: "Account",
         title: "Customer history tied to items",
-        image: "/assets/screenshots/linkd-customers-crm.webp",
+        image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer history connected to store operations",
       },
       {
@@ -352,13 +352,13 @@ export const seoLandingPages = {
       {
         label: "Source",
         title: "POS activity stays the record",
-        image: "/assets/screenshots/linkd-pos-checkout.webp",
+        image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd POS register as the operational source of truth",
       },
       {
         label: "Context",
         title: "CRM-ready customer activity",
-        image: "/assets/screenshots/linkd-customers-crm.webp",
+        image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer activity ready for CRM workflows",
       },
     ],
@@ -428,13 +428,13 @@ export const seoLandingPages = {
       {
         label: "Register",
         title: "Deposits and tender context",
-        image: "/assets/screenshots/linkd-pos-checkout.webp",
+        image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd POS register with tender and sale context",
       },
       {
         label: "Customer",
         title: "Balances beside the customer record",
-        image: "/assets/screenshots/linkd-customers-crm.webp",
+        image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer record with operational account context",
       },
       {
