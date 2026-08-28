@@ -660,6 +660,38 @@ test("keeps the customer walkthrough connected and staff-reviewed", async () => 
   assert.doesNotMatch(customerStory, /fetch\(|Math\.random|new Date/);
 });
 
+test("keeps the owner walkthrough aligned with Linkd Office and Reports", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const ownerStory = await readFile(
+    new URL("../app/guided-demo/OwnerStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /"owner-story"/);
+  assert.match(chooser, /<OwnerStory/);
+  assert.match(chooser, /Start owner review/i);
+  assert.match(ownerStory, /STEP \$\{step \+ 1\} OF 7/);
+  assert.match(ownerStory, /Office Today/);
+  assert.match(ownerStory, /Closeout Control Record/);
+  assert.match(ownerStory, /Daily Closeout Register/);
+  assert.match(ownerStory, /Exception Follow-up Queue/);
+  assert.match(ownerStory, /Business Day Summary/);
+  assert.match(ownerStory, /Four-Plane Money Story/);
+  assert.match(ownerStory, /Sales Overview/);
+  assert.match(ownerStory, /Revenue, transaction, margin, and tender mix overview/);
+  assert.match(ownerStory, /Benchmarking \/ KPI/);
+  assert.match(ownerStory, /Service Workload/);
+  assert.match(ownerStory, /Inventory Reporting/);
+  assert.match(ownerStory, /Aging Reference/);
+  assert.match(ownerStory, /does not create or approve a live closeout/i);
+  assert.match(ownerStory, /data-owner-guide-target/);
+  assert.match(ownerStory, /onComplete\(\)/);
+  assert.doesNotMatch(ownerStory, /fetch\(|Math\.random|new Date/);
+});
+
 test("gives every guided action a visible purple focus ring", async () => {
   const demoCss = await readFile(
     new URL("../app/guided-demo/guided-demo.module.css", import.meta.url),

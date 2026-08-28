@@ -9,6 +9,7 @@ import InvoiceAiStory from "./InvoiceAiStory";
 import InventoryManagementStory from "./InventoryManagementStory";
 import InventorySecurityStory from "./InventorySecurityStory";
 import MakeSaleStory from "./MakeSaleStory";
+import OwnerStory from "./OwnerStory";
 import RepairStory from "./RepairStory";
 import styles from "./guided-demo.module.css";
 
@@ -104,9 +105,9 @@ const workflows: Workflow[] = [
     area: "Owner view",
     title: "Run the day as an owner",
     description:
-      "Review sales, tenders, work due, aging inventory and store exceptions.",
-    duration: "3 min",
-    steps: 6,
+      "Review Office closeout, sales, benchmarking, service workload, and inventory aging.",
+    duration: "4 min",
+    steps: 7,
     tone: "gold",
   },
   {
@@ -141,6 +142,7 @@ const liveWorkflowIds = new Set([
   "inventory-management",
   "inventory-security",
   "customer-story",
+  "owner-story",
 ]);
 
 function firstName(name: string) {
@@ -153,6 +155,7 @@ export default function GuidedDemoChooser() {
   const [confirmedId, setConfirmedId] = useState<string | null>(null);
   const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
   const [serviceWorkspaceActive, setServiceWorkspaceActive] = useState(false);
+  const [ownerArea, setOwnerArea] = useState<"Office" | "Reports">("Reports");
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [leadStatus, setLeadStatus] = useState("");
 
@@ -160,7 +163,9 @@ export default function GuidedDemoChooser() {
     () => workflows.find((workflow) => workflow.id === selectedId) ?? workflows[0],
     [selectedId],
   );
-  const activeNavItem = activeWorkflow === "customer-story"
+  const activeNavItem = activeWorkflow === "owner-story"
+    ? ownerArea
+    : activeWorkflow === "customer-story"
     ? "Customers"
     : activeWorkflow === "invoice-ai"
     || activeWorkflow === "inventory-management"
@@ -209,6 +214,7 @@ export default function GuidedDemoChooser() {
     setProfile(null);
     setActiveWorkflow(null);
     setServiceWorkspaceActive(false);
+    setOwnerArea("Reports");
     setCompletedIds([]);
     setSelectedId(workflows[0].id);
     setConfirmedId(null);
@@ -244,6 +250,7 @@ export default function GuidedDemoChooser() {
   function exitWorkflow() {
     setActiveWorkflow(null);
     setServiceWorkspaceActive(false);
+    setOwnerArea("Reports");
   }
 
   return (
@@ -346,6 +353,12 @@ export default function GuidedDemoChooser() {
       ) : activeWorkflow === "customer-story" ? (
         <CustomerStory
           onComplete={() => completeWorkflow("customer-story")}
+          onExit={exitWorkflow}
+        />
+      ) : activeWorkflow === "owner-story" ? (
+        <OwnerStory
+          onAreaChange={setOwnerArea}
+          onComplete={() => completeWorkflow("owner-story")}
           onExit={exitWorkflow}
         />
       ) : (
@@ -482,6 +495,8 @@ export default function GuidedDemoChooser() {
                   ? "Start guided case count"
                 : selectedWorkflow.id === "customer-story"
                   ? "Start customer story"
+                : selectedWorkflow.id === "owner-story"
+                  ? "Start owner review"
                 : confirmedId === selectedWorkflow.id
                   ? "Workflow selected"
                   : "Choose this workflow"}
@@ -502,6 +517,8 @@ export default function GuidedDemoChooser() {
                   ? "Opens the guided Linkd case scan, variance review, and audit resolution."
                 : selectedWorkflow.id === "customer-story"
                   ? "Opens the guided Linkd customer profile, connected history, wishlist, and follow-up opportunity."
+                : selectedWorkflow.id === "owner-story"
+                  ? "Opens the guided Linkd Office closeout and Reports review across sales, stores, services, and inventory."
                 : confirmedId === selectedWorkflow.id
                 ? `${selectedWorkflow.title} is ready. Its guided steps are coming next.`
                 : "You can change workflows at any time."}
