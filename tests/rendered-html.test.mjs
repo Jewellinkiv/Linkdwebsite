@@ -346,6 +346,31 @@ test("validates guided-demo access without caching responses", async () => {
   assert.match(result.message, /valid email/i);
 });
 
+test("keeps the guided sale deterministic and connected", async () => {
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
+  const saleStory = await readFile(
+    new URL("../app/guided-demo/MakeSaleStory.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(chooser, /setActiveWorkflow\(workflow\.id\)/);
+  assert.match(chooser, /Start guided sale/i);
+  assert.match(saleStory, /STEP \$\{step \+ 1\} OF 7/);
+  assert.match(saleStory, /Alexus Jones/);
+  assert.match(saleStory, /LNK-004821/);
+  assert.match(saleStory, /ITEM_PRICE = 495_000/);
+  assert.match(saleStory, /SERVICE_PRICE = 15_000/);
+  assert.match(saleStory, /TAX_RATE_BPS = 825/);
+  assert.match(saleStory, /Sale S-10428/);
+  assert.match(saleStory, /SVC-2841/);
+  assert.match(saleStory, /Visa •••• 4242/);
+  assert.match(saleStory, /onComplete\(\)/);
+  assert.match(saleStory, /Choose another workflow/);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),

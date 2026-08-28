@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
+import MakeSaleStory from "./MakeSaleStory";
 import styles from "./guided-demo.module.css";
 
 type DemoProfile = {
@@ -134,6 +135,8 @@ export default function GuidedDemoChooser() {
   const [profile, setProfile] = useState<DemoProfile | null>(null);
   const [selectedId, setSelectedId] = useState(workflows[0].id);
   const [confirmedId, setConfirmedId] = useState<string | null>(null);
+  const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [leadStatus, setLeadStatus] = useState("");
 
   const selectedWorkflow = useMemo(
@@ -178,7 +181,32 @@ export default function GuidedDemoChooser() {
 
   function changeProfile() {
     setProfile(null);
+    setActiveWorkflow(null);
     setLeadStatus("");
+  }
+
+  function selectWorkflow(workflow: Workflow) {
+    setSelectedId(workflow.id);
+    setConfirmedId(null);
+
+    if (workflow.id === "make-a-sale") {
+      setActiveWorkflow(workflow.id);
+    }
+  }
+
+  function launchSelectedWorkflow() {
+    if (selectedWorkflow.id === "make-a-sale") {
+      setActiveWorkflow(selectedWorkflow.id);
+      return;
+    }
+
+    setConfirmedId(selectedWorkflow.id);
+  }
+
+  function completeSaleStory() {
+    setCompletedIds((current) =>
+      current.includes("make-a-sale") ? current : [...current, "make-a-sale"],
+    );
   }
 
   return (
@@ -210,7 +238,11 @@ export default function GuidedDemoChooser() {
 
         <div className={styles.headerActions}>
           <span className={styles.demoPill}>
-            <i aria-hidden="true" /> Guided Demo
+            {activeWorkflow === "make-a-sale" ? (
+              <><b aria-hidden="true">Ⅱ</b> Park / Resume <em>0</em></>
+            ) : (
+              <><i aria-hidden="true" /> Guided Demo</>
+            )}
           </span>
           <span className={styles.headerIdentity}>
             <small>DEMO STORE</small>
@@ -231,6 +263,12 @@ export default function GuidedDemoChooser() {
         <strong>{profile?.storeName || "Your Jewelry Store"}</strong>
       </div>
 
+      {activeWorkflow === "make-a-sale" ? (
+        <MakeSaleStory
+          onComplete={completeSaleStory}
+          onExit={() => setActiveWorkflow(null)}
+        />
+      ) : (
       <div className={styles.workspace}>
         <aside className={styles.sideColumn} aria-label="Your demo information">
           <section className={styles.panel}>
@@ -257,10 +295,13 @@ export default function GuidedDemoChooser() {
             <div className={styles.divider} />
             <div className={styles.progressHeading}>
               <span>WORKFLOWS EXPLORED</span>
-              <strong>0 / {workflows.length}</strong>
+              <strong>{completedIds.length} / {workflows.length}</strong>
             </div>
-            <div className={styles.progressTrack} aria-label="No workflows completed">
-              <span />
+            <div
+              className={styles.progressTrack}
+              aria-label={`${completedIds.length} workflows completed`}
+            >
+              <span style={{ width: `${Math.max(4, (completedIds.length / workflows.length) * 100)}%` }} />
             </div>
           </section>
 
@@ -299,10 +340,7 @@ export default function GuidedDemoChooser() {
                 aria-pressed={selectedId === workflow.id}
                 className={`${styles.workflowCard} ${styles[workflow.tone]}`}
                 key={workflow.id}
-                onClick={() => {
-                  setSelectedId(workflow.id);
-                  setConfirmedId(null);
-                }}
+                onClick={() => selectWorkflow(workflow)}
                 type="button"
               >
                 <span className={styles.workflowTopline}>
@@ -310,6 +348,9 @@ export default function GuidedDemoChooser() {
                   <span>{workflow.area}</span>
                   {workflow.recommended ? (
                     <span className={styles.recommendedTag}>Recommended</span>
+                  ) : null}
+                  {completedIds.includes(workflow.id) ? (
+                    <span className={styles.completedTag}>Completed</span>
                   ) : null}
                 </span>
                 <strong>{workflow.title}</strong>
@@ -345,15 +386,19 @@ export default function GuidedDemoChooser() {
             <button
               className={styles.primaryButton}
               type="button"
-              onClick={() => setConfirmedId(selectedWorkflow.id)}
+              onClick={launchSelectedWorkflow}
             >
-              {confirmedId === selectedWorkflow.id
-                ? "Workflow selected"
-                : "Choose this workflow"}
+              {selectedWorkflow.id === "make-a-sale"
+                ? "Start guided sale"
+                : confirmedId === selectedWorkflow.id
+                  ? "Workflow selected"
+                  : "Choose this workflow"}
               <span aria-hidden="true">→</span>
             </button>
             <p className={styles.selectedNote} aria-live="polite">
-              {confirmedId === selectedWorkflow.id
+              {selectedWorkflow.id === "make-a-sale"
+                ? "Opens the guided Linkd sale workspace."
+                : confirmedId === selectedWorkflow.id
                 ? `${selectedWorkflow.title} is ready. Its guided steps are coming next.`
                 : "You can change workflows at any time."}
             </p>
@@ -364,10 +409,7 @@ export default function GuidedDemoChooser() {
             {workflows.slice(0, 3).map((workflow) => (
               <button
                 key={workflow.id}
-                onClick={() => {
-                  setSelectedId(workflow.id);
-                  setConfirmedId(null);
-                }}
+                onClick={() => selectWorkflow(workflow)}
                 type="button"
               >
                 <span className={`${styles.miniCode} ${styles[workflow.tone]}`}>
@@ -380,6 +422,7 @@ export default function GuidedDemoChooser() {
           </section>
         </aside>
       </div>
+      )}
 
       {!profile ? (
         <div className={styles.gateBackdrop} role="presentation">
@@ -442,6 +485,21 @@ export default function GuidedDemoChooser() {
               <button className={styles.gateButton} type="submit">
                 Enter the guided demo <span aria-hidden="true">→</span>
               </button>
+              {process.env.NODE_ENV === "development" ? (
+                <button
+                  className={styles.localPreviewButton}
+                  onClick={() =>
+                    setProfile({
+                      name: "Local Preview",
+                      storeName: "Sissy's Log Cabin",
+                      email: "preview@linkd.local",
+                    })
+                  }
+                  type="button"
+                >
+                  Open with sample demo details
+                </button>
+              ) : null}
             </form>
 
             <p className={styles.consentCopy}>
