@@ -10,9 +10,10 @@ export default function NotFound() {
             <Image
               src="/assets/brand/linkd-logo-main.webp"
               alt="Linkd"
-              width={5334}
-              height={3205}
-              priority
+              width={1200}
+              height={721}
+              loading="eager"
+              sizes="132px"
               unoptimized
             />
           </span>

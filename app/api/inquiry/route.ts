@@ -97,13 +97,13 @@ export async function POST(request: Request) {
     return jsonResponse(
       {
         message:
-          "This form is ready for Postmark. Add the Postmark alert environment variables before launch.",
+          "Demo requests are temporarily unavailable. Please try again shortly.",
       },
       503,
     );
   }
 
-  const subject = `Linkd early access request: ${inquiry.company}`;
+  const subject = `Linkd demo request: ${inquiry.company}`;
   const htmlBody = buildHtmlEmail(inquiry);
   const textBody = buildTextEmail(inquiry);
 

@@ -32,6 +32,85 @@ export type SeoLandingPage = {
 };
 
 export const seoLandingPages = {
+  payments: {
+    slug: "payments",
+    eyebrow: "Payment processing for jewelers",
+    title: "Better payment economics, built into the sale.",
+    description:
+      "Linkd connects tender, deposits, receivables, settlement review, and accounting handoff so luxury jewelers can protect margin without breaking the customer experience.",
+    image: "/assets/screenshots/linkd-pos-checkout.webp",
+    imageAlt: "Linkd checkout workspace with customer, jewelry items, services, and tender context",
+    proof: ["Tender control", "Receivables", "Settlement review", "Clean handoff"],
+    visualProofs: [
+      {
+        label: "Counter",
+        title: "Tender decisions beside the sale",
+        image: "/assets/screenshots/linkd-pos-checkout.webp",
+        alt: "Linkd jewelry POS checkout and tender workflow",
+      },
+      {
+        label: "Balance",
+        title: "Deposits and receivables stay visible",
+        image: "/assets/screenshots/linkd-customers-crm.webp",
+        alt: "Linkd customer account and balance context",
+      },
+      {
+        label: "Close",
+        title: "Daily review with an operational trail",
+        image: "/assets/screenshots/linkd-reporting.webp",
+        alt: "Linkd reporting workspace for sales and payment review",
+      },
+    ],
+    outcomes: [
+      {
+        label: "Protect",
+        title: "Payment economics",
+        copy: "Put processing strategy in the same conversation as checkout, instead of treating fees as an invisible cost after the sale.",
+      },
+      {
+        label: "Control",
+        title: "Receivables management",
+        copy: "Keep deposits, layaway, house accounts, and open balances connected to the customer and the original transaction.",
+      },
+      {
+        label: "Reconcile",
+        title: "A cleaner close",
+        copy: "Give operators a consistent trail from tender activity to settlement review and accounting handoff.",
+      },
+    ],
+    stackTitle: "Payments are strongest when the whole store agrees.",
+    stackCopy:
+      "Linkd connects tender activity to the operational record, receivables, reporting, and accounting paths without losing the customer context.",
+    stackItems: ["Linkd POS", "Receivables", "Sage", "QuickBooks", "Reporting", "Open API"],
+    faq: [
+      {
+        question: "Does Linkd separate payment processing from the POS?",
+        answer:
+          "No. Linkd is designed to keep tender decisions, the sale, customer context, balances, and reporting in one connected operational workflow.",
+      },
+      {
+        question: "Can Linkd help with layaway and house accounts?",
+        answer:
+          "Yes. Deposits, schedules, payments, balances, and aging are designed to remain connected to the customer and original transaction.",
+      },
+      {
+        question: "How does payment activity reach accounting?",
+        answer:
+          "Linkd creates a consistent operational record for review and handoff. The exact integration path is mapped around your accounting system and workflow.",
+      },
+    ],
+    metaTitle: "Payment Processing for Jewelry Stores",
+    metaDescription:
+      "Linkd connects payment processing, receivables, tender controls, settlement review, and accounting handoff for luxury jewelry retailers.",
+    keywords: [
+      "jewelry store payment processing",
+      "jewelry POS payments",
+      "luxury retail payment processing",
+      "jewelry store receivables",
+      "jewelry layaway software",
+      "payment reconciliation jewelry retail",
+    ],
+  },
   jewelryPos: {
     slug: "jewelry-pos",
     eyebrow: "Jewelry POS software",
@@ -257,12 +336,12 @@ export const seoLandingPages = {
   integrations: {
     slug: "integrations",
     eyebrow: "Jewelry retail integrations",
-    title: "Connect POS, CRM, analytics, accounting, and e-commerce.",
+    title: "One operational record. Every essential connection.",
     description:
-      "Linkd is the operational hub for a full luxury jewelry management stack, feeding JewelLink CRM, CountRetail AI, accounting, tax, e-commerce, RFID, and custom APIs.",
+      "Linkd is designed as the operational hub for payments, Sage, QuickBooks, the Linkd Ecosystem, e-commerce, RFID, tax, and custom API paths.",
     image: "/assets/screenshots/linkd-integrations.webp",
     imageAlt: "Linkd integrations settings on a MacBook screen",
-    proof: ["JewelLink CRM", "CountRetail AI", "Accounting", "Open API"],
+    proof: ["Payment processing", "Sage", "QuickBooks", "Open API"],
     visualProofs: [
       {
         label: "Status",
@@ -285,45 +364,45 @@ export const seoLandingPages = {
     ],
     outcomes: [
       {
-        label: "CRM",
-        title: "JewelLink-ready context",
-        copy: "POS, service, and account activity flows into JewelLink clienteling as a matter of course, not a manual export.",
+        label: "Ecosystem",
+        title: "Connected product context",
+        copy: "The integration model keeps Linkd operations ready for JewelLink relationships, CountRetail intelligence, and JewelHire people workflows.",
       },
       {
-        label: "Analytics",
-        title: "CountRetail-ready signals",
-        copy: "Clean operational data feeds CountRetail, so traffic, marketing, and inventory pressure read true.",
+        label: "Payments",
+        title: "Processing beside the transaction",
+        copy: "Payment activity stays connected to the sale, the balance, settlement review, and the daily operational trail.",
       },
       {
         label: "Back office",
         title: "Accounting and commerce paths",
-        copy: "Reconciled handoff to QuickBooks, Xero, Striven, Shopify, and Avalara — so the books and the floor always agree.",
+        copy: "Map Sage, QuickBooks, commerce, tax, and custom API paths around the way your back office actually closes the day.",
       },
     ],
     stackTitle: "A connected stack without hiding the source of truth.",
     stackCopy:
-      "Linkd remains the daily operational record while JewelLink activates the relationship layer and CountRetail explains the intelligence layer.",
-    stackItems: ["Linkd operations", "JewelLink CRM", "CountRetail AI", "TrackTech RFID", "QuickBooks", "Xero", "Shopify", "Avalara", "Open API"],
+      "Linkd remains the daily operational record while accounting, payment, commerce, and ecosystem connections carry clean context to the next workflow.",
+    stackItems: ["Payment processing", "Sage", "QuickBooks", "JewelLink CRM", "CountRetail AI", "JewelHire", "TrackTech RFID", "Shopify", "Avalara", "Open API"],
     faq: [
       {
         question: "How do Linkd, JewelLink, and CountRetail work together?",
         answer:
-          "Linkd manages POS, inventory, services, accounts, permissions, reporting, and accounting handoff. JewelLink adds CRM, clienteling, texting, training, and follow-up. CountRetail adds traffic, Vision AI, analytics, inventory signals, and owner intelligence.",
+          "Linkd manages store operations, JewelLink adds relationship workflows, CountRetail adds retail intelligence, and JewelHire supports recruiting and talent.",
       },
       {
-        question: "Does Linkd replace JewelLink or CountRetail?",
+        question: "Does Linkd replace the other ecosystem products?",
         answer:
-          "No. Linkd is the POS and operations layer. JewelLink handles CRM and clienteling workflows, while CountRetail handles traffic, analytics, and store intelligence.",
+          "No. Linkd is the POS and operations layer. JewelLink handles relationships, CountRetail handles intelligence, and JewelHire supports the people layer.",
       },
       {
         question: "Can Linkd connect to accounting and e-commerce?",
         answer:
-          "Linkd is being positioned for accounting, tax, e-commerce, document, RFID, and custom API integrations, including QuickBooks, Xero, Striven, Shopify, and Avalara paths.",
+          "Linkd is designed for accounting, tax, e-commerce, RFID, and custom API paths, including Sage, QuickBooks, Shopify, and Avalara. Exact scope is confirmed during integration planning.",
       },
     ],
     metaTitle: "Jewelry POS Integrations and Luxury Management Ecosystem",
     metaDescription:
-      "Linkd connects jewelry POS operations with JewelLink CRM, CountRetail AI, QuickBooks, Xero, Striven, Shopify, Avalara, RFID, open APIs, and full luxury jewelry management workflows.",
+      "Linkd connects jewelry POS operations with payment processing, Sage, QuickBooks, JewelLink, CountRetail, JewelHire, Shopify, Avalara, RFID, and open API paths.",
     keywords: [
       "jewelry POS integrations",
       "luxury jewelry management software",
@@ -331,6 +410,7 @@ export const seoLandingPages = {
       "JewelLink CRM integration",
       "CountRetail AI integration",
       "QuickBooks jewelry POS",
+      "Sage jewelry POS",
       "Shopify jewelry POS integration",
       "jewelry retail API",
     ],
@@ -561,9 +641,9 @@ export const seoLandingPages = {
 
 export function createSeoLandingMetadata(page: SeoLandingPage): Metadata {
   const socialImage = {
-    url: "/og.png",
-    width: 1200,
-    height: 630,
+    url: page.image,
+    width: 1800,
+    height: 1200,
     alt: `${page.metaTitle} from Linkd`,
   };
 

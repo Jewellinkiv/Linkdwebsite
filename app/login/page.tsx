@@ -19,9 +19,10 @@ export default function LoginPage() {
             <Image
               src="/assets/brand/linkd-logo-main.webp"
               alt="Linkd"
-              width={5334}
-              height={3205}
-              priority
+              width={1200}
+              height={721}
+              loading="eager"
+              sizes="132px"
               unoptimized
             />
           </span>
@@ -31,33 +32,24 @@ export default function LoginPage() {
           <p className="eyebrow">POS access</p>
           <h1>pos.linkd.com</h1>
           <p>
-            This page is prepared as the Linkd POS portal handoff for store
-            teams. When authentication is connected, this experience can move
-            behind <strong>pos.linkd.com/login</strong>.
+            Customer portal access is provided directly to approved Linkd
+            retailers during onboarding.
           </p>
         </div>
 
-        <form className="login-form">
+        <div className="login-form">
           <div className="portal-note">
             <span>Operator portal</span>
-            <p>Secure POS, inventory, reports, and integration access for approved retailers.</p>
+            <p>Need an invitation or help reaching your store workspace? Our team will route you securely.</p>
           </div>
-          <label>
-            Email
-            <input type="email" autoComplete="email" placeholder="you@store.com" />
-          </label>
-          <label>
-            Password
-            <input type="password" autoComplete="current-password" placeholder="Password" />
-          </label>
-          <button className="button button-primary" type="button">
-            Log In
-          </button>
+          <Link className="button button-primary" href="/#early-access">
+            Request Access
+          </Link>
           <div className="login-links">
             <Link href="/">Return to site</Link>
-            <Link href="/#early-access">Request access</Link>
+            <Link href="/ecosystem">Explore the Ecosystem</Link>
           </div>
-        </form>
+        </div>
       </section>
     </main>
   );

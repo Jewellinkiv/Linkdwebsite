@@ -3,21 +3,22 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 const interestOptions = [
-  "POS and checkout",
-  "Inventory and RFID security",
-  "House accounts and aging",
-  "Layaway and financing",
-  "Accounting integrations",
-  "JewelLink CRM",
-  "CountRetail camera intelligence",
+  "Payment processing",
+  "Receivables and accounts",
+  "Repairs and services",
+  "Inventory flow and control",
+  "Rapid data migration",
+  "Sage and QuickBooks",
+  "Linkd Ecosystem",
   "Open API or custom integrations",
 ];
 
 const demoFocusOptions = [
-  "Linkd POS early release",
-  "Linkd + JewelLink CRM",
-  "Linkd + CountRetail AI",
-  "Full luxury operations stack",
+  "Full Linkd system",
+  "Payment processing",
+  "Receivables management",
+  "Services and inventory",
+  "Linkd Ecosystem",
   "Migration planning",
 ];
 
@@ -25,8 +26,8 @@ type SubmitState = "idle" | "submitting" | "success" | "error";
 
 export default function InquiryForm() {
   const [selected, setSelected] = useState<string[]>([
-    "POS and checkout",
-    "Inventory and RFID security",
+    "Payment processing",
+    "Inventory flow and control",
   ]);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
@@ -104,7 +105,7 @@ export default function InquiryForm() {
 
       form.reset();
       setSourcePath();
-      setSelected(["POS and checkout", "Inventory and RFID security"]);
+      setSelected(["Payment processing", "Inventory flow and control"]);
       setSubmitState("success");
       setMessage(result.message || "Your request was sent.");
     } catch (error) {
@@ -138,7 +139,7 @@ export default function InquiryForm() {
         <span>Book a demo</span>
         <h3>Start with the essentials.</h3>
         <p id="inquiry-form-intro">
-          We will route your demo around POS, inventory, or ecosystem needs.
+          We will tailor the demo around your processor, workflows, and migration.
         </p>
       </div>
 
@@ -185,7 +186,7 @@ export default function InquiryForm() {
         </label>
         <label>
           Main focus
-          <select name="demoFocus" defaultValue="Linkd POS early release">
+          <select name="demoFocus" defaultValue="Full Linkd system">
             {demoFocusOptions.map((option) => (
               <option key={option}>{option}</option>
             ))}
@@ -254,6 +255,11 @@ export default function InquiryForm() {
       >
         {submitState === "submitting" ? "Sending..." : "Book a Demo"}
       </button>
+
+      <p className="form-consent">
+        By submitting, you agree that Linkd may contact you about this request.
+        Your information is used to prepare and follow up on the demo.
+      </p>
 
       <p
         className={`form-status ${submitState} ${statusCopy ? "" : "is-empty"}`}

@@ -6,12 +6,12 @@ is configured by `.openai/hosting.json`.
 
 ## What The Site Covers
 
-- Homepage explanation of Linkd, JewelLink, and CountRetail
+- Homepage explanation of Linkd, JewelLink, CountRetail, and JewelHire
 - Focused SEO pages for jewelry POS, repairs, inventory, accounting,
-  multi-store operations, security, integrations, and ecosystem comparison
+  payments, multi-store operations, security, integrations, and ecosystem comparison
 - Product screenshots, optimized WebP assets, app icons, social preview image,
   sitemap, robots file, and `llms.txt`
-- Early access inquiry form backed by Postmark
+- Demo inquiry form backed by Postmark
 
 ## Local Setup
 
@@ -56,6 +56,7 @@ Primary crawl routes:
 
 - `/`
 - `/jewelry-pos`
+- `/payments`
 - `/repairs`
 - `/inventory`
 - `/accounting`

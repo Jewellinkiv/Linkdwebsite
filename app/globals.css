@@ -17,9 +17,11 @@
   --danger: #b42318;
   --jewel: #185ce8;
   --count: #2563eb;
+  --hire: #2e67e4;
   --linkd-grad: linear-gradient(135deg, #2563c9, #4aa8de);
   --jewel-grad: linear-gradient(135deg, #123fb9, #2f7dff);
   --count-grad: linear-gradient(135deg, #2563eb, #08b6d9);
+  --hire-grad: linear-gradient(135deg, #3a7cff, #163fb9);
 }
 
 * {
@@ -3397,6 +3399,12 @@ textarea:focus-visible {
 .ecosystem-role-card-countretail > span {
   color: var(--count);
 }
+.family-card-jewelhire > span,
+.landing-fit-card-jewelhire span,
+.ecosystem-hero-tile-jewelhire .ecosystem-hero-role span,
+.ecosystem-role-card-jewelhire > span {
+  color: var(--hire);
+}
 
 /* brand top-accent bar on each product card */
 .family-card,
@@ -3436,6 +3444,12 @@ textarea:focus-visible {
 .ecosystem-role-card-countretail::before {
   background: var(--count-grad);
 }
+.family-card-jewelhire::before,
+.landing-fit-card-jewelhire::before,
+.ecosystem-hero-tile-jewelhire::before,
+.ecosystem-role-card-jewelhire::before {
+  background: var(--hire-grad);
+}
 
 /* /ecosystem role-card chip tints, on brand */
 .ecosystem-role-card-jewellink .chip-row span {
@@ -3449,6 +3463,25 @@ textarea:focus-visible {
 .ecosystem-role-card-countretail .chip-row span {
   background: rgba(37, 99, 235, 0.1);
   color: #0f4a86;
+}
+.ecosystem-role-card-jewelhire .chip-row span {
+  background: rgba(46, 103, 228, 0.1);
+  color: #173f91;
+}
+
+.ecosystem-role-link {
+  align-items: center;
+  color: var(--blue-2);
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 820;
+  gap: 6px;
+  margin-top: auto;
+  width: max-content;
+}
+
+.ecosystem-role-link:hover {
+  color: var(--hire);
 }
 
 /* integration strip: sibling products in brand color */
@@ -3467,6 +3500,11 @@ textarea:focus-visible {
   border-color: rgba(37, 99, 235, 0.42);
   font-weight: 800;
 }
+.integration-cloud span.chip-hire {
+  color: var(--hire);
+  border-color: rgba(46, 103, 228, 0.42);
+  font-weight: 800;
+}
 
 /* homepage ecosystem trio as product screenshots */
 .family-card .family-shot {
@@ -3481,4 +3519,758 @@ textarea:focus-visible {
   height: 100%;
   object-fit: cover;
   width: 100%;
+}
+
+/* ============ Linkd homepage: suite visual system ============ */
+.linkd-home {
+  --suite-ink: #0d1835;
+  --suite-ink-soft: #53617a;
+  --suite-blue: #3167df;
+  --suite-blue-deep: #204dbc;
+  --suite-line: #d9e3f1;
+  --suite-paper: #f8faff;
+  --suite-mist: #eef4fb;
+  background: var(--suite-paper);
+}
+
+.linkd-home .site-header {
+  background: rgba(248, 250, 255, 0.84);
+  border-bottom-color: rgba(215, 226, 242, 0.7);
+  min-height: 80px;
+  padding-inline: clamp(22px, 4vw, 66px);
+}
+
+.linkd-home .brand-logo-crop {
+  background: transparent;
+  height: 44px;
+  width: 126px;
+}
+
+.linkd-home .brand-logo-crop img {
+  width: 238px;
+}
+
+.linkd-home .nav-links a,
+.linkd-home .text-button {
+  color: #4c586f;
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.83rem;
+  font-weight: 760;
+}
+
+.linkd-home .nav-links a:hover,
+.linkd-home .text-button:hover {
+  color: var(--suite-ink);
+}
+
+.linkd-home .button {
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  min-height: 51px;
+  padding-inline: 25px;
+}
+
+.linkd-home .button-primary {
+  background: linear-gradient(105deg, #285bd4 0%, #3977eb 53%, #6bb7f0 100%);
+  box-shadow: 0 15px 32px rgba(49, 103, 223, 0.26);
+}
+
+.linkd-home .button-primary:hover {
+  background: linear-gradient(105deg, #204dbc 0%, #3167df 58%, #54a6e8 100%);
+  box-shadow: 0 19px 38px rgba(49, 103, 223, 0.32);
+}
+
+.linkd-home .button-secondary {
+  background: rgba(255, 255, 255, 0.68);
+  border-color: rgba(128, 154, 199, 0.3);
+  color: #244889;
+}
+
+.linkd-home .hero-section {
+  align-items: center;
+  background:
+    radial-gradient(circle at 88% 42%, rgba(198, 215, 255, 0.85) 0 10%, transparent 28%),
+    radial-gradient(circle at 53% 87%, rgba(196, 245, 238, 0.76) 0 8%, transparent 25%),
+    linear-gradient(180deg, #fafcff 0%, #f4f8fe 72%, #f8faff 100%);
+  gap: clamp(28px, 4vw, 64px);
+  grid-template-columns: minmax(0, 0.8fr) minmax(500px, 1.12fr);
+  min-height: clamp(730px, 89vh, 910px);
+  padding: 146px clamp(22px, 4vw, 66px) 58px;
+  position: relative;
+}
+
+.linkd-home .hero-section::after {
+  background: linear-gradient(90deg, rgba(222, 231, 244, 0.78), rgba(222, 231, 244, 0));
+  bottom: 0;
+  content: "";
+  height: 1px;
+  left: clamp(22px, 4vw, 66px);
+  position: absolute;
+  right: clamp(22px, 4vw, 66px);
+}
+
+.linkd-home .hero-copy {
+  align-self: center;
+  max-width: 620px;
+  position: relative;
+  z-index: 2;
+}
+
+.linkd-home .eyebrow {
+  color: var(--suite-blue);
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 830;
+  letter-spacing: 0.095em;
+  margin-bottom: 18px;
+}
+
+.linkd-home h1,
+.linkd-home h2,
+.linkd-home h3 {
+  color: var(--suite-ink);
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+}
+
+.linkd-home h1 {
+  font-size: clamp(3.6rem, 5.5vw, 5.9rem);
+  font-weight: 800;
+  letter-spacing: -0.068em;
+  line-height: 0.98;
+  margin-bottom: 28px;
+  max-width: 10.8ch;
+}
+
+.linkd-home h1 em,
+.linkd-home .manifesto-statement em {
+  color: var(--suite-blue);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.linkd-home .hero-subtitle {
+  color: var(--suite-ink-soft);
+  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  line-height: 1.64;
+  max-width: 550px;
+}
+
+.linkd-home .hero-actions {
+  gap: 13px;
+  margin: 30px 0 36px;
+}
+
+.linkd-home .hero-metrics {
+  border-top: 1px solid rgba(208, 221, 239, 0.78);
+  gap: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  max-width: 620px;
+  padding-top: 19px;
+}
+
+.linkd-home .hero-metrics div {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid rgba(208, 221, 239, 0.78);
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 48px;
+  padding: 0 16px;
+}
+
+.linkd-home .hero-metrics div:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.linkd-home .hero-metrics dt {
+  color: var(--suite-ink);
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 820;
+  letter-spacing: -0.025em;
+}
+
+.linkd-home .hero-metrics dd {
+  color: #75839a;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+.linkd-home .hero-stage {
+  align-self: center;
+  isolation: isolate;
+  min-height: 470px;
+  padding-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.linkd-home .hero-stage .hero-device-image {
+  border-radius: 18px;
+  box-shadow: 0 34px 64px rgba(43, 75, 125, 0.2);
+  filter: none;
+  position: relative;
+  width: min(100%, 940px);
+  z-index: 2;
+}
+
+.hero-glow {
+  border-radius: 999px;
+  display: block;
+  filter: blur(2px);
+  position: absolute;
+  z-index: 0;
+}
+
+.hero-glow-blue {
+  background: rgba(188, 209, 255, 0.65);
+  height: min(38vw, 500px);
+  right: -11%;
+  top: -5%;
+  width: min(38vw, 500px);
+}
+
+.hero-glow-mint {
+  background: rgba(190, 239, 234, 0.76);
+  bottom: 0;
+  height: min(20vw, 270px);
+  left: -5%;
+  width: min(20vw, 270px);
+}
+
+.linkd-home .hero-scene-caption {
+  align-items: center;
+  color: #64748b;
+  display: flex;
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  gap: 8px;
+  margin: 12px 0 0 5%;
+  position: relative;
+  z-index: 3;
+}
+
+.linkd-home .hero-scene-caption span {
+  background: #53d8d0;
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+}
+
+.linkd-home .section-light,
+.linkd-home .section-white,
+.linkd-home .section-dark,
+.linkd-home .section-blue,
+.linkd-home .dark-band,
+.linkd-home .early-access-section {
+  padding: clamp(76px, 9vw, 126px) clamp(22px, 7vw, 120px);
+}
+
+.linkd-home .section-light {
+  background: var(--suite-paper);
+}
+
+.linkd-home .section-white {
+  background: #fff;
+}
+
+.linkd-home h2 {
+  font-size: clamp(2.35rem, 4.25vw, 4.4rem);
+  font-weight: 780;
+  letter-spacing: -0.058em;
+  line-height: 1.02;
+}
+
+.linkd-home .manifesto-band {
+  background:
+    radial-gradient(circle at 7% 44%, rgba(216, 231, 255, 0.58), transparent 24%),
+    var(--suite-paper);
+  gap: 0;
+  padding-bottom: clamp(70px, 9vw, 116px);
+  padding-top: clamp(70px, 8vw, 108px);
+}
+
+.linkd-home .manifesto-band .eyebrow {
+  margin-bottom: 14px;
+}
+
+.linkd-home .manifesto-statement {
+  font-size: clamp(2.2rem, 4.1vw, 4rem);
+  font-weight: 760;
+  letter-spacing: -0.058em;
+  line-height: 1.05;
+  margin-bottom: 27px;
+  max-width: 19ch;
+}
+
+.linkd-home .manifesto-practices {
+  align-items: center;
+  color: #405475;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: clamp(0.9rem, 1.3vw, 1.08rem);
+  font-weight: 760;
+  gap: 12px;
+  justify-content: center;
+}
+
+.linkd-home .manifesto-practices b {
+  color: #92a5c2;
+  font-size: 1.1em;
+}
+
+.linkd-home .core-section {
+  background: #fff;
+  gap: clamp(44px, 7vw, 112px);
+}
+
+.linkd-home .core-copy p,
+.linkd-home .section-copy p {
+  color: var(--suite-ink-soft);
+  line-height: 1.65;
+}
+
+.linkd-home .core-orbit {
+  max-width: 560px;
+}
+
+.linkd-home .core-orbit-rings {
+  border-color: rgba(49, 103, 223, 0.2);
+}
+
+.linkd-home .core-orbit-rings::before {
+  border-color: rgba(92, 207, 198, 0.28);
+}
+
+.linkd-home .core-hub {
+  background: radial-gradient(circle at 35% 27%, #427ce1 0%, #173f9d 68%, #0b276f 100%);
+  box-shadow: 0 30px 64px rgba(38, 82, 181, 0.28);
+}
+
+.linkd-home .core-node {
+  border-color: #d9e4f5;
+  box-shadow: 0 14px 30px rgba(38, 67, 118, 0.1);
+}
+
+.linkd-home .platform-section {
+  background: #f7faff;
+  gap: 52px;
+}
+
+.linkd-home .section-copy {
+  max-width: 820px;
+}
+
+.linkd-home .operating-grid {
+  border-top: 1px solid #dce6f2;
+  gap: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.linkd-home .operating-card {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #dce6f2;
+  border-radius: 0;
+  min-height: 270px;
+  padding: 27px clamp(17px, 2vw, 28px) 12px;
+}
+
+.linkd-home .operating-card:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.linkd-home .operating-card span.operating-num,
+.linkd-home .operating-card:nth-child(2) span.operating-num,
+.linkd-home .operating-card:nth-child(3) span.operating-num {
+  background: transparent;
+  color: var(--suite-blue);
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.78rem;
+  height: auto;
+  margin-bottom: 44px;
+  padding: 0;
+  width: auto;
+}
+
+.linkd-home .operating-card h3 {
+  font-size: clamp(1.18rem, 1.4vw, 1.45rem);
+  font-weight: 760;
+  letter-spacing: -0.035em;
+  line-height: 1.14;
+}
+
+.linkd-home .operating-card p {
+  color: var(--suite-ink-soft);
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+.linkd-home .showcase-section {
+  gap: 50px;
+}
+
+.linkd-home .showcase-grid {
+  align-items: start;
+  gap: clamp(22px, 3vw, 42px);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+}
+
+.linkd-home .showcase-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  gap: 23px;
+  padding: 0;
+}
+
+.linkd-home .showcase-card-pos {
+  grid-row: span 2;
+}
+
+.linkd-home .showcase-card .scene-browser {
+  background:
+    radial-gradient(circle at 74% 15%, rgba(200, 221, 255, 0.72), transparent 25%),
+    linear-gradient(145deg, #f7faff 0%, #edf4fb 100%);
+  border: 1px solid #e0e8f3;
+  border-radius: 22px;
+  overflow: hidden;
+  padding: clamp(11px, 1.7vw, 22px);
+}
+
+.linkd-home .showcase-card .scene-browser img {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 26px 45px rgba(36, 68, 120, 0.17);
+  width: 100%;
+}
+
+.linkd-home .showcase-card-inventory .scene-browser {
+  background:
+    radial-gradient(circle at 14% 82%, rgba(184, 239, 232, 0.72), transparent 31%),
+    linear-gradient(145deg, #f8fbff 0%, #ecf4f7 100%);
+}
+
+.linkd-home .showcase-card-services .scene-browser {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(222, 218, 255, 0.58), transparent 29%),
+    linear-gradient(145deg, #fafbff 0%, #eff3fb 100%);
+}
+
+.linkd-home .showcase-card > div:last-child {
+  padding: 0 clamp(2px, 0.8vw, 12px);
+}
+
+.linkd-home .showcase-card span {
+  color: var(--suite-blue);
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.69rem;
+  font-weight: 830;
+  letter-spacing: 0.1em;
+  margin-bottom: 11px;
+}
+
+.linkd-home .showcase-card h3 {
+  font-size: clamp(1.28rem, 1.85vw, 1.8rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.linkd-home .showcase-card p {
+  color: var(--suite-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 12px 0 15px;
+  max-width: 52ch;
+}
+
+.linkd-home .scene-link {
+  align-items: center;
+  color: #224caa;
+  display: inline-flex;
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.84rem;
+  font-weight: 790;
+  gap: 8px;
+}
+
+.linkd-home .scene-link i {
+  font-size: 1rem;
+  font-style: normal;
+}
+
+.linkd-home .family-section {
+  background:
+    radial-gradient(circle at 93% 18%, rgba(209, 223, 255, 0.64), transparent 25%),
+    #f8faff;
+  gap: 48px;
+}
+
+.linkd-home .ecosystem-grid {
+  gap: 18px;
+}
+
+.linkd-home .family-card {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: #dce6f3;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(41, 70, 118, 0.06);
+  gap: 13px;
+  padding: 14px 14px 22px;
+}
+
+.linkd-home .family-card:hover {
+  background: #fff;
+  box-shadow: 0 24px 52px rgba(41, 70, 118, 0.12);
+}
+
+.linkd-home .family-card .family-shot {
+  border-color: #e2eaf4;
+  border-radius: 12px;
+}
+
+.linkd-home .family-card > span,
+.linkd-home .family-card h3,
+.linkd-home .family-card p {
+  margin-inline: 8px;
+}
+
+.linkd-home .family-card h3 {
+  font-size: 1.4rem;
+  font-weight: 760;
+  letter-spacing: -0.045em;
+}
+
+.linkd-home .family-card p {
+  font-size: 0.9rem;
+}
+
+.linkd-home .integration-cloud span {
+  background: rgba(255, 255, 255, 0.64);
+  border-color: #d8e4f2;
+  color: #465876;
+  font-size: 0.82rem;
+}
+
+.linkd-home .dark-band {
+  background:
+    radial-gradient(circle at 21% -5%, rgba(77, 127, 250, 0.36), transparent 37%),
+    radial-gradient(circle at 86% 110%, rgba(72, 210, 198, 0.18), transparent 30%),
+    #0c1838;
+}
+
+.linkd-home .dark-band h2 {
+  font-weight: 730;
+  letter-spacing: -0.055em;
+}
+
+.linkd-home .dark-band-chips span {
+  border-color: rgba(195, 216, 255, 0.24);
+  font-family: var(--font-manrope), var(--font-geist-sans), sans-serif;
+  font-size: 0.87rem;
+}
+
+.linkd-home .faq-section {
+  gap: 48px;
+}
+
+.linkd-home .faq-grid {
+  gap: 0;
+}
+
+.linkd-home .faq-card {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #dce6f2;
+  border-radius: 0;
+  min-height: 220px;
+  padding: 6px clamp(16px, 2vw, 28px) 8px;
+}
+
+.linkd-home .faq-card:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.linkd-home .faq-card h3 {
+  font-size: 1.1rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.linkd-home .faq-card p {
+  color: var(--suite-ink-soft);
+  font-size: 0.91rem;
+}
+
+.linkd-home .early-access-section {
+  background:
+    radial-gradient(circle at 7% 11%, rgba(190, 218, 255, 0.3), transparent 28%),
+    linear-gradient(120deg, #1c48b5 0%, #3168da 50%, #61b8ee 100%);
+}
+
+.linkd-home .release-copy h2 {
+  font-weight: 750;
+  letter-spacing: -0.055em;
+}
+
+.linkd-home .inquiry-form {
+  border-radius: 18px;
+}
+
+.linkd-home .site-footer {
+  background: #0c1733;
+}
+
+@media (max-width: 1080px) {
+  .linkd-home .hero-section {
+    grid-template-columns: minmax(0, 0.84fr) minmax(420px, 1fr);
+    padding-inline: clamp(22px, 4vw, 56px);
+  }
+
+  .linkd-home .showcase-grid {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 860px) {
+  .linkd-home .hero-section {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding-bottom: 72px;
+  }
+
+  .linkd-home .hero-copy {
+    max-width: 680px;
+  }
+
+  .linkd-home h1 {
+    max-width: 11.5ch;
+  }
+
+  .linkd-home .hero-stage {
+    max-width: 760px;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .linkd-home .operating-grid,
+  .linkd-home .faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .linkd-home .operating-card:nth-child(3),
+  .linkd-home .faq-card:nth-child(3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .linkd-home .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .linkd-home .showcase-card-pos {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 540px) {
+  .linkd-home .site-header {
+    min-height: 72px;
+    padding-inline: 18px;
+  }
+
+  .linkd-home .hero-section {
+    padding: 124px 22px 58px;
+  }
+
+  .linkd-home .hero-section::after {
+    left: 22px;
+    right: 22px;
+  }
+
+  .linkd-home h1 {
+    font-size: clamp(3rem, 13.5vw, 4.2rem);
+    letter-spacing: -0.07em;
+  }
+
+  .linkd-home .hero-actions .button {
+    width: 100%;
+  }
+
+  .linkd-home .hero-metrics {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+  }
+
+  .linkd-home .hero-metrics div,
+  .linkd-home .hero-metrics div:first-child {
+    border-bottom: 1px solid rgba(208, 221, 239, 0.78);
+    border-left: 0;
+    min-height: 0;
+    padding: 13px 0;
+  }
+
+  .linkd-home .hero-stage {
+    padding-bottom: 14px;
+  }
+
+  .linkd-home .hero-stage .hero-device-image {
+    border-radius: 10px;
+  }
+
+  .linkd-home .hero-scene-caption {
+    font-size: 0.66rem;
+    margin-left: 0;
+  }
+
+  .linkd-home .section-light,
+  .linkd-home .section-white,
+  .linkd-home .section-dark,
+  .linkd-home .section-blue,
+  .linkd-home .dark-band,
+  .linkd-home .early-access-section {
+    padding-inline: 22px;
+  }
+
+  .linkd-home .operating-grid,
+  .linkd-home .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .linkd-home .operating-card,
+  .linkd-home .operating-card:first-child,
+  .linkd-home .operating-card:nth-child(3),
+  .linkd-home .faq-card,
+  .linkd-home .faq-card:first-child,
+  .linkd-home .faq-card:nth-child(3) {
+    border-bottom: 1px solid #dce6f2;
+    border-left: 0;
+    min-height: 0;
+    padding: 22px 0;
+  }
+
+  .linkd-home .operating-card span.operating-num,
+  .linkd-home .operating-card:nth-child(2) span.operating-num,
+  .linkd-home .operating-card:nth-child(3) span.operating-num {
+    margin-bottom: 22px;
+  }
+
+  .linkd-home .showcase-card .scene-browser {
+    border-radius: 15px;
+    padding: 8px;
+  }
+
+  .linkd-home .family-card {
+    border-radius: 14px;
+  }
 }

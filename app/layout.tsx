@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "./globals.css";
+import "./premier.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://linkd.com"),
   applicationName: "Linkd",
@@ -20,13 +26,15 @@ export const metadata: Metadata = {
   category: "Jewelry POS software",
   manifest: "/site.webmanifest",
   title: {
-    default: "Linkd | Jewelry POS and Operations for Luxury Retail",
+    default: "Linkd | POS + ERP for Luxury Jewelry Retail",
     template: "%s | Linkd",
   },
   description:
-    "Jewelry POS software for luxury retailers, connecting checkout, inventory management, repairs, house accounts, security, reporting, accounting, JewelLink CRM, and CountRetail AI for full luxury jewelry management.",
+    "POS + ERP for luxury jewelers with payment processing, receivables, service management, inventory flow, rapid migration, white-glove support, and the connected Linkd Ecosystem.",
   keywords: [
     "jewelry POS",
+    "jewelry store payment processing",
+    "jewelry receivables management",
     "jewelry point of sale",
     "luxury retail POS",
     "jewelry inventory management",
@@ -50,6 +58,7 @@ export const metadata: Metadata = {
     "full jewelry management ecosystem",
     "JewelLink CRM",
     "CountRetail AI",
+    "JewelHire",
   ],
   icons: {
     icon: [
@@ -79,14 +88,14 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Linkd | Jewelry POS That Connects the Store",
+    title: "Linkd | Run the Whole Store. Keep More of Every Sale.",
     description:
-      "Luxury jewelry POS software for checkout, inventory, services, house accounts, reporting, accounting handoff, JewelLink CRM, CountRetail AI, and connected retail operations.",
+      "Best-in-class payments, receivables, services, and inventory flow—built for luxury jewelry retail.",
     type: "website",
     url: "/",
     images: [
       {
-        url: "/og.png",
+        url: "/og-linkd-v2.png",
         width: 1200,
         height: 630,
         alt: "Linkd jewelry POS that connects the store",
@@ -95,10 +104,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Linkd | Jewelry POS That Connects the Store",
+    title: "Linkd | Run the Whole Store. Keep More of Every Sale.",
     description:
-      "Luxury jewelry POS software for checkout, inventory, services, house accounts, reporting, accounting handoff, JewelLink CRM, CountRetail AI, and connected retail operations.",
-    images: ["/og.png"],
+      "Best-in-class payments, receivables, services, and inventory flow—built for luxury jewelry retail.",
+    images: ["/og-linkd-v2.png"],
   },
   alternates: {
     canonical: "/",
@@ -120,7 +129,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} antialiased`}
       >
         <a className="skip-link" href="#main-content">
           Skip to content

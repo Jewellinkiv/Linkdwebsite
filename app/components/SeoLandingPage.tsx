@@ -1,5 +1,7 @@
 import type { SeoLandingPage as SeoLandingPageData } from "../seoLandingPages";
 import InquiryForm from "./InquiryForm";
+import JewelHireBrand from "./JewelHireBrand";
+import { SiteFooter, SiteHeader } from "./SiteChrome";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,19 +9,14 @@ type SeoLandingPageProps = {
   page: SeoLandingPageData;
 };
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/jewelry-pos", label: "POS", slug: "jewelry-pos" },
-  { href: "/repairs", label: "Repairs", slug: "repairs" },
-  { href: "/inventory", label: "Inventory", slug: "inventory" },
-  { href: "/accounting", label: "Finance", slug: "accounting" },
-  { href: "/multi-store", label: "Multi-Store", slug: "multi-store" },
-  { href: "/security", label: "Security", slug: "security" },
-  { href: "/ecosystem", label: "Ecosystem", slug: "ecosystem" },
-  { href: "/integrations", label: "Integrations", slug: "integrations" },
-];
-
 const workflowLinkCards = [
+  {
+    slug: "payments",
+    href: "/payments",
+    label: "Payments",
+    title: "Processing and receivables",
+    copy: "Tender, balances, settlement review.",
+  },
   {
     slug: "jewelry-pos",
     href: "/jewelry-pos",
@@ -74,7 +71,8 @@ const workflowLinkCards = [
 type WorkflowLinkCard = (typeof workflowLinkCards)[number];
 
 const relatedWorkflowMap: Record<string, string[]> = {
-  "jewelry-pos": ["repairs", "inventory", "accounting"],
+  payments: ["jewelry-pos", "accounting", "integrations"],
+  "jewelry-pos": ["payments", "repairs", "inventory"],
   repairs: ["jewelry-pos", "inventory", "integrations"],
   inventory: ["multi-store", "security", "integrations"],
   accounting: ["jewelry-pos", "integrations", "multi-store"],
@@ -90,8 +88,8 @@ const ecosystemFitCards = [
     proof: "POS, inventory, accounts, audits",
     image: "",
     alt: "",
-    width: 1536,
-    height: 1024,
+    width: 1800,
+    height: 1200,
     kind: "screen",
   },
   {
@@ -100,8 +98,8 @@ const ecosystemFitCards = [
     proof: "CRM, clienteling, team follow-up",
     image: "/assets/screenshots/jewellink-app.webp",
     alt: "JewelLink clienteling CRM dashboard",
-    width: 3000,
-    height: 2000,
+    width: 1800,
+    height: 1200,
     kind: "screen",
   },
   {
@@ -110,8 +108,18 @@ const ecosystemFitCards = [
     proof: "Traffic, Vision AI, owner insight",
     image: "/assets/screenshots/countretail-app.webp",
     alt: "CountRetail store analytics dashboard",
-    width: 3000,
-    height: 2000,
+    width: 1800,
+    height: 1200,
+    kind: "screen",
+  },
+  {
+    name: "JewelHire",
+    label: "People layer",
+    proof: "Hiring, assessment, and onboarding",
+    image: "/assets/screenshots/jewelhire-recruiting-pipeline.webp",
+    alt: "JewelHire recruiting pipeline for jewelry stores",
+    width: 1271,
+    height: 715,
     kind: "screen",
   },
 ];
@@ -124,6 +132,14 @@ const relatedRetailSystems = [
     url: "https://www.jewellink.com/",
     description:
       "Relationship layer for CRM, clienteling, texting, training, follow-up, and team workflows.",
+  },
+  {
+    "@type": "SoftwareApplication",
+    name: "JewelHire",
+    applicationCategory: "BusinessApplication",
+    url: "https://jewelhire.com/",
+    description:
+      "People layer for jewelry retail hiring, assessment, onboarding, and talent.",
   },
   {
     "@type": "SoftwareApplication",
@@ -160,6 +176,11 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
   )
     .map((slug) => workflowLinkCards.find((card) => card.slug === slug))
     .filter((card): card is WorkflowLinkCard => Boolean(card));
+  const headerCurrent = page.slug === "integrations"
+    ? "integrations"
+    : page.slug === "payments"
+      ? "payments"
+      : "platform";
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -185,11 +206,6 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
         audience: {
           "@type": "Audience",
           audienceType: "Luxury jewelry retailers",
-        },
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/PreOrder",
-          category: "Early access",
         },
       },
       potentialAction: {
@@ -236,44 +252,12 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
   ];
 
   return (
-    <main>
+    <main className="premier-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <header className="site-header">
-        <Link className="brand-lockup" href="/" aria-label="Linkd home">
-          <span className="brand-logo-crop">
-            <Image
-              src="/assets/brand/linkd-logo-main.webp"
-              alt="Linkd"
-              width={5334}
-              height={3205}
-              priority
-              unoptimized
-            />
-          </span>
-        </Link>
-        <nav className="nav-links" aria-label="Primary navigation">
-          {navItems.map((item) => (
-            <Link
-              aria-current={item.slug === page.slug ? "page" : undefined}
-              href={item.href}
-              key={item.href}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="header-actions">
-          <Link className="text-button" href="/login">
-            Login
-          </Link>
-          <Link className="button button-primary" href="#early-access">
-            Book a Demo
-          </Link>
-        </div>
-      </header>
+      <SiteHeader current={headerCurrent} />
 
       <section className="landing-hero">
         <div className="landing-copy">
@@ -298,9 +282,10 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
           <Image
             src={page.image}
             alt={page.imageAlt}
-            width={1536}
-            height={1024}
-            priority
+            width={1800}
+            height={1200}
+            loading="eager"
+            sizes="(max-width: 1180px) 90vw, 53vw"
             unoptimized
           />
         </div>
@@ -317,8 +302,9 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
               <Image
                 src={proof.image}
                 alt={proof.alt}
-                width={1536}
-                height={1024}
+                width={1800}
+                height={1200}
+                sizes="(max-width: 860px) 90vw, (max-width: 1180px) 44vw, 29vw"
                 unoptimized
               />
               <div>
@@ -349,11 +335,12 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
       <section className="section-white landing-fit-section">
         <div className="section-copy">
           <p className="eyebrow">Where Linkd fits</p>
-          <h2>Operations first. Relationships and intelligence next.</h2>
+          <h2>{page.stackTitle}</h2>
+          <p>{page.stackCopy}</p>
         </div>
         <div
           className="landing-fit-board"
-          aria-label="Linkd, JewelLink, and CountRetail roles"
+          aria-label="Linkd Ecosystem product roles"
         >
           {fitCards.map((card) => (
             <article
@@ -361,13 +348,18 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
               key={card.name}
             >
               <div className={`landing-fit-visual landing-fit-visual-${card.kind}`}>
-                <Image
-                  src={card.image}
-                  alt={card.alt}
-                  width={card.width}
-                  height={card.height}
-                  unoptimized
-                />
+                {card.image ? (
+                  <Image
+                    src={card.image}
+                    alt={card.alt}
+                    width={card.width}
+                    height={card.height}
+                    sizes="(max-width: 860px) 90vw, (max-width: 1180px) 44vw, 22vw"
+                    unoptimized
+                  />
+                ) : (
+                  <JewelHireBrand />
+                )}
               </div>
               <span>{card.label}</span>
               <h3>{card.name}</h3>
@@ -379,9 +371,11 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
           {page.stackItems.map((item) => {
             const brandClass = item.startsWith("JewelLink")
               ? "chip-jewel"
-              : item.startsWith("CountRetail")
-                ? "chip-count"
-                : item.startsWith("Linkd")
+                : item.startsWith("CountRetail")
+                  ? "chip-count"
+                  : item.startsWith("JewelHire")
+                    ? "chip-hire"
+                  : item.startsWith("Linkd")
                   ? "chip-linkd"
                   : undefined;
             return (
@@ -451,39 +445,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="footer-top">
-          <span className="footer-mark">Linkd</span>
-          <p>The operations center for luxury jewelry stores.</p>
-        </div>
-        <div className="footer-columns">
-          <nav aria-label="Platform">
-            <strong>Platform</strong>
-            <Link href="/jewelry-pos">Jewelry POS</Link>
-            <Link href="/repairs">Repairs</Link>
-            <Link href="/inventory">Inventory</Link>
-            <Link href="/accounting">Finance</Link>
-            <Link href="/multi-store">Multi-Store</Link>
-            <Link href="/security">Security</Link>
-          </nav>
-          <nav aria-label="Ecosystem">
-            <strong>Ecosystem</strong>
-            <Link href="/ecosystem">The Family</Link>
-            <Link href="/integrations">Integrations</Link>
-            <a href="https://www.jewellink.com/" target="_blank" rel="noreferrer">JewelLink</a>
-            <a href="https://www.countretail.com/" target="_blank" rel="noreferrer">CountRetail</a>
-          </nav>
-          <nav aria-label="Access">
-            <strong>Access</strong>
-            <Link href="/login">Login</Link>
-            <Link href="#early-access">Book a Demo</Link>
-          </nav>
-        </div>
-        <div className="footer-bottom">
-          <p>© 2026 Linkd. All rights reserved.</p>
-          <Link href="/">Home</Link>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

@@ -26,6 +26,20 @@
     </image:image>
   </url>
   <url>
+    <loc>https://linkd.com/payments</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-pos-checkout.webp</image:loc>
+      <image:title>Linkd payment processing and jewelry POS workflow</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://linkd.com/assets/screenshots/linkd-reporting.webp</image:loc>
+      <image:title>Linkd settlement and payment reporting review</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://linkd.com/jewelry-pos</loc>
     <lastmod>2026-07-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -103,7 +117,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://linkd.com/og.png</image:loc>
+      <image:loc>https://linkd.com/og-linkd-v2.png</image:loc>
       <image:title>Linkd jewelry retail ecosystem preview</image:title>
     </image:image>
     <image:image>
@@ -120,7 +134,7 @@
     </image:image>
     <image:image>
       <image:loc>https://linkd.com/assets/advertising/linkd-luxury-management-stack.webp</image:loc>
-      <image:title>Linkd full luxury jewelry management stack with JewelLink and CountRetail</image:title>
+      <image:title>Linkd Ecosystem for operations, relationships, intelligence, and people</image:title>
     </image:image>
   </url>
   <url>
