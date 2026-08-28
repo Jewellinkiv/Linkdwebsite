@@ -301,6 +301,51 @@ test("keeps utility pages out of the ranked SEO surface", async () => {
   assert.doesNotMatch(sitemap, /\/login/);
 });
 
+test("server-renders the guided Linkd workflow chooser", async () => {
+  const response = await render("/guided-demo");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const sitemap = await readFile(
+    new URL("../public/sitemap.xml", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(html, /Guided Demo/i);
+  assert.match(html, /Sample data/i);
+  assert.match(html, /Make a sale/i);
+  assert.match(html, /Repair intake/i);
+  assert.match(html, /Custom intake/i);
+  assert.match(html, /AI invoice import/i);
+  assert.match(html, /Inventory entry/i);
+  assert.match(html, /Know the customer/i);
+  assert.match(html, /Run the day as an owner/i);
+  assert.match(html, /security exception/i);
+  assert.match(html, /name="name"/i);
+  assert.match(html, /name="storeName"/i);
+  assert.match(html, /name="email"/i);
+  assert.doesNotMatch(html, /name="phone"|name="locations"/i);
+  assert.match(html, /noindex/i);
+  assert.doesNotMatch(sitemap, /\/guided-demo/);
+});
+
+test("validates guided-demo access without caching responses", async () => {
+  const response = await request("/api/demo-access", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      name: "Alex Morgan",
+      storeName: "Demo Jewelers",
+      email: "invalid",
+    }),
+  });
+
+  assert.equal(response.status, 400);
+  assert.match(response.headers.get("cache-control") ?? "", /no-store/i);
+  const result = await response.json();
+  assert.match(result.message, /valid email/i);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),
