@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./guided-demo.module.css";
 
 type MakeSaleStoryProps = {
@@ -9,14 +9,13 @@ type MakeSaleStoryProps = {
 };
 
 const ITEM_PRICE = 495_000;
-const SERVICE_PRICE = 15_000;
 const TAX_RATE_BPS = 825;
 
 const guideSteps = [
   {
     title: "Select the client",
     instruction:
-      "Choose Alexus Jones so the sale and service work stay on one customer record.",
+      "Choose Alexus Jones so this purchase is connected to the right customer record.",
   },
   {
     title: "Open inventory",
@@ -27,16 +26,6 @@ const guideSteps = [
     title: "Add the anniversary band",
     instruction:
       "Add serial LNK-004821. Linkd will reserve this exact piece in the sale draft.",
-  },
-  {
-    title: "Add the sizing work",
-    instruction:
-      "Alexus needs the band resized before pickup. Add the service beside the item.",
-  },
-  {
-    title: "Confirm ring sizing",
-    instruction:
-      "The order is prefilled from size 7 to 6.5, due September 5. Add it to the sale.",
   },
   {
     title: "Tender the balance",
@@ -59,47 +48,73 @@ function money(cents: number) {
 
 export default function MakeSaleStory({ onComplete, onExit }: MakeSaleStoryProps) {
   const [step, setStep] = useState(0);
+  const [postingSummaryOpen, setPostingSummaryOpen] = useState(false);
+  const postingSummaryRef = useRef<HTMLElement>(null);
 
   const hasClient = step >= 1;
   const hasItem = step >= 3;
-  const hasService = step >= 5;
-  const isTendered = step >= 6;
-  const isComplete = step >= 7;
-  const subtotal = (hasItem ? ITEM_PRICE : 0) + (hasService ? SERVICE_PRICE : 0);
+  const isTendered = step >= 4;
+  const isReceipt = step >= 5;
+  const subtotal = hasItem ? ITEM_PRICE : 0;
   const tax = Math.round((subtotal * TAX_RATE_BPS) / 10_000);
   const total = subtotal + tax;
   const tendered = isTendered ? total : 0;
   const balance = total - tendered;
   const currentGuide = guideSteps[Math.min(step, guideSteps.length - 1)];
 
+  useEffect(() => {
+    if (!isReceipt) return;
+
+    const timer = window.setTimeout(() => setPostingSummaryOpen(true), 700);
+    return () => window.clearTimeout(timer);
+  }, [isReceipt]);
+
+  useEffect(() => {
+    if (postingSummaryOpen) postingSummaryRef.current?.focus();
+  }, [postingSummaryOpen]);
+
   function finishSale() {
-    if (step !== 6) return;
-    setStep(7);
+    if (step !== 4) return;
+    setPostingSummaryOpen(false);
+    setStep(5);
     onComplete();
+  }
+
+  function restartSale() {
+    setPostingSummaryOpen(false);
+    setStep(0);
   }
 
   return (
     <section className={styles.saleStory} aria-label="Guided Make a Sale workflow">
       <div className={styles.saleGuide} aria-live="polite">
         <div className={styles.saleGuideProgress}>
-          <span>{isComplete ? "STORY COMPLETE" : `STEP ${step + 1} OF 7`}</span>
-          <div><i style={{ width: `${(Math.min(step, 7) / 7) * 100}%` }} /></div>
+          <span>{isReceipt ? "STORY COMPLETE" : `STEP ${step + 1} OF 5`}</span>
+          <div><i style={{ width: `${(Math.min(step, 5) / 5) * 100}%` }} /></div>
         </div>
         <div className={styles.saleGuideCopy}>
-          <strong>{isComplete ? "Sale complete" : currentGuide.title}</strong>
+          <strong>{isReceipt ? "Receipt created" : currentGuide.title}</strong>
           <p>
-            {isComplete
-              ? "The customer, inventory, service, payment, and owner records are connected."
+            {isReceipt
+              ? "Sale S-10428 is complete. Your receipt is ready and the connected records have posted."
               : currentGuide.instruction}
           </p>
         </div>
         <div className={styles.saleGuideActions}>
           <span>Guided Demo · Sample Data</span>
           <button type="button" onClick={onExit}>Choose workflows</button>
-          <button type="button" onClick={() => setStep(0)}>Restart</button>
+          <button type="button" onClick={restartSale}>Restart</button>
         </div>
       </div>
 
+      {isReceipt ? (
+        <SaleReceipt
+          onChooseWorkflow={onExit}
+          postingSummaryOpen={postingSummaryOpen}
+          postingSummaryRef={postingSummaryRef}
+          total={total}
+        />
+      ) : (
       <div className={styles.saleWorkspace}>
         <aside className={`${styles.salePanel} ${styles.saleClientPanel}`}>
           <p className={styles.salePanelLabel}>CLIENT</p>
@@ -159,9 +174,7 @@ export default function MakeSaleStory({ onComplete, onExit }: MakeSaleStoryProps
                 <span aria-hidden="true">＋</span> Add Item
               </button>
               <button
-                className={step === 3 ? styles.guidedTarget : ""}
-                disabled={step !== 3}
-                onClick={() => setStep(4)}
+                disabled
                 type="button"
               >
                 <span aria-hidden="true">⌁</span> Add Service
@@ -170,22 +183,7 @@ export default function MakeSaleStory({ onComplete, onExit }: MakeSaleStoryProps
           </header>
 
           <div className={styles.saleCartBody}>
-            {isComplete ? (
-              <div className={styles.saleCompleteCard} tabIndex={-1}>
-                <span className={styles.saleCompleteMark} aria-hidden="true">✓</span>
-                <p>SALE COMPLETE</p>
-                <h2>Everything posted together.</h2>
-                <strong>Sale S-10428 · {money(total)} · Visa •••• 4242</strong>
-                <ul>
-                  <li><span>✓</span><p><strong>Customer updated</strong>Purchase added to Alexus Jones’s history.</p></li>
-                  <li><span>✓</span><p><strong>Inventory updated</strong>Serial LNK-004821 changed from reserved to sold.</p></li>
-                  <li><span>✓</span><p><strong>Service created</strong>Work order SVC-2841 is due September 5.</p></li>
-                  <li><span>✓</span><p><strong>Payment recorded</strong>{money(total)} added to today’s Visa reconciliation.</p></li>
-                  <li><span>✓</span><p><strong>Owner reporting updated</strong>Daily sales increased by {money(total)}.</p></li>
-                </ul>
-                <button type="button" onClick={onExit}>Choose another workflow</button>
-              </div>
-            ) : hasItem ? (
+            {hasItem ? (
               <div className={styles.saleLines}>
                 <article>
                   <span className={styles.saleLineThumb}>AB</span>
@@ -197,17 +195,6 @@ export default function MakeSaleStory({ onComplete, onExit }: MakeSaleStoryProps
                   </div>
                   <strong>{money(ITEM_PRICE)}</strong>
                 </article>
-                {hasService ? (
-                  <article className={styles.saleServiceLine}>
-                    <span className={styles.saleLineThumb}>SVC</span>
-                    <div>
-                      <small>SERVICE</small>
-                      <strong>Ring sizing · Size 7 to 6.5</strong>
-                      <p>Due September 5, 2026 · Connected to LNK-004821</p>
-                    </div>
-                    <strong>{money(SERVICE_PRICE)}</strong>
-                  </article>
-                ) : null}
               </div>
             ) : (
               <div className={styles.saleEmptyCart}>
@@ -218,15 +205,13 @@ export default function MakeSaleStory({ onComplete, onExit }: MakeSaleStoryProps
             )}
           </div>
 
-          {!isComplete ? (
-            <footer className={styles.saleTotals}>
-              <dl>
-                <div><dt>Subtotal</dt><dd>{money(subtotal)}</dd></div>
-                <div><dt>Tax</dt><dd>{money(tax)}</dd></div>
-                <div><dt>Total</dt><dd>{money(total)}</dd></div>
-              </dl>
-            </footer>
-          ) : null}
+          <footer className={styles.saleTotals}>
+            <dl>
+              <div><dt>Subtotal</dt><dd>{money(subtotal)}</dd></div>
+              <div><dt>Tax</dt><dd>{money(tax)}</dd></div>
+              <div><dt>Total</dt><dd>{money(total)}</dd></div>
+            </dl>
+          </footer>
         </section>
 
         <aside className={styles.saleRightColumn}>
@@ -256,35 +241,34 @@ export default function MakeSaleStory({ onComplete, onExit }: MakeSaleStoryProps
               <div><dt>BALANCE</dt><dd>{money(balance)}</dd></div>
             </dl>
             <button
-              className={step === 5 ? styles.guidedTarget : ""}
-              disabled={step !== 5}
-              onClick={() => setStep(6)}
+              className={step === 3 ? styles.guidedTarget : ""}
+              disabled={step !== 3}
+              onClick={() => setStep(4)}
               type="button"
             >
-              ▭ &nbsp; Tender {step === 5 ? money(total) : ""}
+              ▭ &nbsp; Tender {step === 3 ? money(total) : ""}
             </button>
             <button
-              className={step === 6 ? styles.guidedTarget : ""}
-              disabled={step !== 6}
+              className={step === 4 ? styles.guidedTarget : ""}
+              disabled={step !== 4}
               onClick={finishSale}
               type="button"
             >
               ▭ &nbsp; Complete Sale
             </button>
             <p>
-              {step < 5
-                ? hasItem
-                  ? "Add the service to continue."
-                  : "Add at least one line."
-                : step === 5
+              {step < 3
+                ? "Add at least one line."
+                : step === 3
                   ? "Tender the full balance."
-                  : step === 6
+                  : step === 4
                     ? "Balance is ready to post."
                     : "Completed today: 1"}
             </p>
           </section>
         </aside>
       </div>
+      )}
 
       {step === 0 ? (
         <PickerDialog
@@ -319,24 +303,83 @@ export default function MakeSaleStory({ onComplete, onExit }: MakeSaleStoryProps
         </PickerDialog>
       ) : null}
 
-      {step === 4 ? (
-        <PickerDialog
-          eyebrow="SERVICE CATALOG"
-          title="Add Service"
-          search="Ring sizing"
-          onClose={() => setStep(3)}
-        >
-          <button autoFocus className={styles.salePickerResult} onClick={() => setStep(5)} type="button">
-            <span>SVC</span>
-            <p>
-              <strong>Ring sizing · Size 7 to 6.5</strong>
-              <small>Due September 5, 2026 · Recommended for this item</small>
-            </p>
-            <i>{money(SERVICE_PRICE)} &nbsp; Add →</i>
-          </button>
-        </PickerDialog>
-      ) : null}
     </section>
+  );
+}
+
+function SaleReceipt({
+  onChooseWorkflow,
+  postingSummaryOpen,
+  postingSummaryRef,
+  total,
+}: {
+  onChooseWorkflow: () => void;
+  postingSummaryOpen: boolean;
+  postingSummaryRef: React.RefObject<HTMLElement | null>;
+  total: number;
+}) {
+  return (
+    <div className={styles.saleReceiptStage}>
+      <article className={styles.saleReceipt} aria-label="Sale S-10428 receipt">
+        <header>
+          <div><span aria-hidden="true">L</span><strong>Linkd</strong></div>
+          <p>SALE RECEIPT</p>
+          <small>Sissy’s Log Cabin · Corporate</small>
+        </header>
+        <div className={styles.saleReceiptMeta}>
+          <p><span>Sale</span><strong>S-10428</strong></p>
+          <p><span>Date</span><strong>August 28, 2026 · 3:42 PM</strong></p>
+          <p><span>Associate</span><strong>William Jones</strong></p>
+          <p><span>Customer</span><strong>Alexus Jones · C-10491</strong></p>
+        </div>
+        <div className={styles.saleReceiptLine}>
+          <div>
+            <strong>14K White Gold Diamond Anniversary Band</strong>
+            <span>Style AB-750-WG · Serial LNK-004821 · Qty 1</span>
+          </div>
+          <strong>{money(ITEM_PRICE)}</strong>
+        </div>
+        <dl className={styles.saleReceiptTotals}>
+          <div><dt>Subtotal</dt><dd>{money(ITEM_PRICE)}</dd></div>
+          <div><dt>Tax · 8.25%</dt><dd>{money(total - ITEM_PRICE)}</dd></div>
+          <div><dt>Total</dt><dd>{money(total)}</dd></div>
+          <div><dt>Visa •••• 4242</dt><dd>{money(total)}</dd></div>
+          <div><dt>Balance</dt><dd>$0.00</dd></div>
+        </dl>
+        <footer>
+          <strong>Thank you, Alexus.</strong>
+          <p>Sale complete · Receipt R-10428</p>
+          <div><button type="button">Print receipt</button><button type="button">Email receipt</button></div>
+        </footer>
+      </article>
+
+      {!postingSummaryOpen ? (
+        <p className={styles.salePostingStatus} aria-live="polite">Posting connected records…</p>
+      ) : (
+        <div className={styles.salePostingBackdrop}>
+          <section
+            aria-labelledby="sale-posted-title"
+            aria-modal="true"
+            className={styles.salePostingModal}
+            ref={postingSummaryRef}
+            role="dialog"
+            tabIndex={-1}
+          >
+            <span className={styles.saleCompleteMark} aria-hidden="true">✓</span>
+            <p>SALE COMPLETE</p>
+            <h2 id="sale-posted-title">Everything posted together.</h2>
+            <strong>Sale S-10428 · {money(total)} · Visa •••• 4242</strong>
+            <ul>
+              <li><span>✓</span><p><strong>Customer updated</strong>Purchase added to Alexus Jones’s history.</p></li>
+              <li><span>✓</span><p><strong>Inventory updated</strong>Serial LNK-004821 changed from reserved to sold.</p></li>
+              <li><span>✓</span><p><strong>Payment recorded</strong>{money(total)} added to today’s Visa reconciliation.</p></li>
+              <li><span>✓</span><p><strong>Owner reporting updated</strong>Daily sales increased by {money(total)}.</p></li>
+            </ul>
+            <button autoFocus type="button" onClick={onChooseWorkflow}>Choose another workflow</button>
+          </section>
+        </div>
+      )}
+    </div>
   );
 }
 

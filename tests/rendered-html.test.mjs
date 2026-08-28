@@ -358,14 +358,17 @@ test("keeps the guided sale deterministic and connected", async () => {
 
   assert.match(chooser, /setActiveWorkflow\(workflow\.id\)/);
   assert.match(chooser, /Start guided sale/i);
-  assert.match(saleStory, /STEP \$\{step \+ 1\} OF 7/);
+  assert.match(saleStory, /STEP \$\{step \+ 1\} OF 5/);
   assert.match(saleStory, /Alexus Jones/);
   assert.match(saleStory, /LNK-004821/);
   assert.match(saleStory, /ITEM_PRICE = 495_000/);
-  assert.match(saleStory, /SERVICE_PRICE = 15_000/);
+  assert.doesNotMatch(saleStory, /SERVICE_PRICE/);
   assert.match(saleStory, /TAX_RATE_BPS = 825/);
   assert.match(saleStory, /Sale S-10428/);
-  assert.match(saleStory, /SVC-2841/);
+  assert.match(saleStory, /SALE RECEIPT/);
+  assert.match(saleStory, /Receipt R-10428/);
+  assert.match(saleStory, /setPostingSummaryOpen\(true\)/);
+  assert.doesNotMatch(saleStory, /Service created/);
   assert.match(saleStory, /Visa •••• 4242/);
   assert.match(saleStory, /onComplete\(\)/);
   assert.match(saleStory, /Choose another workflow/);

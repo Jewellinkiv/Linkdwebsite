@@ -36,9 +36,9 @@ const workflows: Workflow[] = [
     area: "Sales",
     title: "Make a sale",
     description:
-      "Select a client, add a serialized item and service, then complete tender.",
+      "Select a client, add a serialized item, tender payment, and review the receipt.",
     duration: "3 min",
-    steps: 7,
+    steps: 5,
     tone: "blue",
     recommended: true,
   },
