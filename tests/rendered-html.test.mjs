@@ -387,6 +387,11 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
   assert.match(source, /Welcome, \{profile\.name\}/);
   assert.match(source, /Linkd POS, JewelLink CRM/);
   assert.match(source, /CountRetail Analytics, or JewelHire Hiring/);
+  assert.doesNotMatch(source, /Suite access unlocked/);
+  assert.doesNotMatch(source, /unlockMark/);
+  assert.match(source, /accessPanelUnlocked/);
+  assert.match(styles, /\.accessPanelUnlocked\s*\{[^}]*max-width: 760px/s);
+  assert.match(styles, /\.unlockedActions > a\s*\{[^}]*width: auto/s);
   assert.match(styles, /border: 2px solid var\(--card-border\)/);
   assert.match(styles, /border-radius: 999px/);
   assert.match(html, /noindex/i);

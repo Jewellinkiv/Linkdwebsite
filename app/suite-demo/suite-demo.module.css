@@ -15,6 +15,12 @@
   padding: clamp(62px, 7vw, 104px) clamp(24px, 5vw, 82px) 18px;
 }
 
+.heroUnlocked {
+  max-width: 850px;
+  padding-bottom: 8px;
+  padding-top: clamp(36px, 4vw, 56px);
+}
+
 .accessPanel {
   backdrop-filter: blur(18px);
   background: rgba(255, 255, 255, 0.9);
@@ -24,6 +30,11 @@
   margin: 0 auto;
   padding: clamp(28px, 4vw, 46px);
   width: 100%;
+}
+
+.accessPanelUnlocked {
+  max-width: 760px;
+  padding: clamp(24px, 3vw, 32px);
 }
 
 .panelEyebrow {
@@ -124,34 +135,36 @@
   text-align: left;
 }
 
+.unlockedPanel h2 {
+  font-size: clamp(1.85rem, 2.4vw, 2.4rem);
+}
+
 .unlockedPanel > p:not(.panelEyebrow) {
   color: var(--suite-muted);
-  font-size: clamp(1rem, 1.5vw, 1.14rem);
-  line-height: 1.65;
-  margin: 18px 0 0;
-  max-width: 720px;
+  font-size: clamp(0.98rem, 1vw, 1.06rem);
+  line-height: 1.55;
+  margin: 12px 0 0;
+  max-width: 680px;
 }
 
-.unlockMark {
+.unlockedActions {
   align-items: center;
-  background: linear-gradient(135deg, #216fd4, #39bfc6);
-  border-radius: 16px;
-  box-shadow: 0 12px 28px rgba(33, 111, 212, 0.25);
-  color: #fff;
-  display: inline-flex;
-  font-size: 1.2rem;
-  font-weight: 900;
-  height: 48px;
-  justify-content: center;
-  margin-bottom: 24px;
-  width: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin-top: 20px;
 }
 
-.unlockedPanel > a {
-  display: flex;
-  justify-content: center;
-  margin-top: 26px;
-  width: 100%;
+.unlockedActions > a {
+  display: inline-flex;
+  min-height: 46px;
+  padding: 0 22px;
+  width: auto;
+}
+
+.unlockedActions > small {
+  margin: 0;
+  text-align: left;
 }
 
 .accessPanel small {
@@ -730,6 +743,10 @@
     padding-top: 102px;
   }
 
+  .heroUnlocked {
+    padding-top: 80px;
+  }
+
   .storySection {
     border-radius: 22px;
     padding: 34px 24px;
@@ -766,6 +783,24 @@
   .accessPanel {
     border-radius: 22px;
     padding: 24px 20px;
+  }
+
+  .accessPanelUnlocked {
+    padding: 22px 20px;
+  }
+
+  .unlockedActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .unlockedActions > a {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .unlockedActions > small {
+    text-align: center;
   }
 
   .storyStrip {

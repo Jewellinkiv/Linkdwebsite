@@ -235,21 +235,24 @@ export default function SuiteDemoHub() {
     <main className={`premier-page ${styles.suitePage}`}>
       <SiteHeader current="ecosystem" demoHref="#suite-access" />
 
-      <section className={styles.hero}>
-        <aside className={styles.accessPanel} id="suite-access">
+      <section className={`${styles.hero} ${unlocked ? styles.heroUnlocked : ""}`}>
+        <aside
+          className={`${styles.accessPanel} ${unlocked ? styles.accessPanelUnlocked : ""}`}
+          id="suite-access"
+        >
           {unlocked ? (
             <div className={styles.unlockedPanel}>
-              <span className={styles.unlockMark} aria-hidden="true">✓</span>
-              <p className={styles.panelEyebrow}>Suite access unlocked</p>
               <h2>Welcome, {profile.name}.</h2>
               <p>
                 Choose the system you wish to demo below: Linkd POS, JewelLink CRM,
                 CountRetail Analytics, or JewelHire Hiring.
               </p>
-              <a className="button button-primary" href="#tour-heading">
-                Choose a guided tour
-              </a>
-              <small>Your access stays available in this browser for four hours.</small>
+              <div className={styles.unlockedActions}>
+                <a className="button button-primary" href="#tour-heading">
+                  Choose a guided tour
+                </a>
+                <small>Your access stays available in this browser for four hours.</small>
+              </div>
             </div>
           ) : (
             <>
