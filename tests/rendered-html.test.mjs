@@ -8,7 +8,7 @@ async function render(path = "/") {
   });
 }
 
-async function request(path = "/", init = {}) {
+async function request(path = "/", init = {}, runtimeEnv = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -19,6 +19,7 @@ async function request(path = "/", init = {}) {
       ASSETS: {
         fetch: async () => new Response("Not found", { status: 404 }),
       },
+      ...runtimeEnv,
     },
     {
       waitUntil() {},
@@ -54,9 +55,9 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /app\.linkd\.com\/pos/i);
   assert.match(html, /Run the whole store\. Keep more of/i);
   assert.match(html, /Step inside Linkd before the sales call/i);
-  assert.match(html, /href="\/guided-demo"/i);
+  assert.match(html, /href="\/suite-demo"/i);
   assert.match(html, /Start the guided demo/i);
-  assert.match(html, /href="\/guided-demo"[^>]*>\s*See the System/i);
+  assert.match(html, /href="\/suite-demo"[^>]*>\s*See the System/i);
   assert.match(html, /Four workflows\. One operating system\./i);
   assert.match(html, /Four operating engines\. One system your team can trust/i);
   assert.match(html, /Payment processing should strengthen the business/i);
@@ -349,6 +350,140 @@ test("validates guided-demo access without caching responses", async () => {
   assert.match(response.headers.get("cache-control") ?? "", /no-store/i);
   const result = await response.json();
   assert.match(result.message, /valid email/i);
+});
+
+test("server-renders one Linkd Suite gate with four visible tour choices", async () => {
+  const response = await render("/suite-demo");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  const sitemap = await readFile(
+    new URL("../public/sitemap.xml", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(html, /One introduction\. Four guided experiences\./i);
+  assert.match(html, /Unlock every tour once/i);
+  assert.match(html, /name="name"/i);
+  assert.match(html, /name="storeName"/i);
+  assert.match(html, /name="email"/i);
+  assert.match(html, /Unlock all four tours/i);
+  assert.match(html, /Linkd/i);
+  assert.match(html, /JewelLink/i);
+  assert.match(html, /CountRetail/i);
+  assert.match(html, /JewelHire/i);
+  assert.match(html, /Works independently/i);
+  assert.match(html, /Connected advantage/i);
+  assert.match(html, /Choose your guided tour/i);
+  assert.match(html, /noindex/i);
+  assert.doesNotMatch(sitemap, /\/suite-demo/);
+});
+
+test("validates suite-demo leads and keeps responses uncached", async () => {
+  const response = await request("/api/suite-demo-access", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      name: "Val Jones",
+      storeName: "Linkd Demo Jewelers",
+      email: "invalid",
+    }),
+  });
+  assert.equal(response.status, 400);
+  assert.match(response.headers.get("cache-control") ?? "", /no-store/i);
+  const result = await response.json();
+  assert.equal(result.ok, false);
+  assert.match(result.message, /valid work email/i);
+});
+
+test("one suite submission launches and verifies every product without PII in URLs", async () => {
+  const originalFetch = globalThis.fetch;
+  let postmarkMessage;
+  globalThis.fetch = async (input, init) => {
+    if (String(input) !== "https://api.postmarkapp.com/email") {
+      return originalFetch(input, init);
+    }
+    postmarkMessage = JSON.parse(init.body);
+    return Response.json({ MessageID: "test-message" });
+  };
+
+  const env = {
+    POSTMARK_SERVER_TOKEN: "test-postmark-token",
+    POSTMARK_FROM_EMAIL: "Linkd <no-reply@linkd.com>",
+    POSTMARK_MESSAGE_STREAM: "outbound",
+    SUITE_DEMO_SIGNING_SECRET: "linkd-suite-test-secret-that-is-long-enough-for-aes",
+  };
+  const previousEnv = Object.fromEntries(
+    Object.keys(env).map((key) => [key, process.env[key]]),
+  );
+  Object.assign(process.env, env);
+
+  try {
+    const access = await request("/api/suite-demo-access", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        name: "Val Jones",
+        storeName: "Linkd Demo Jewelers",
+        email: "val@example.com",
+        sourcePath: "/suite-demo",
+      }),
+    }, env);
+
+    assert.equal(access.status, 200);
+    assert.match(postmarkMessage.Subject, /Linkd Suite \(all systems\) demo: Linkd Demo Jewelers/);
+    assert.equal(postmarkMessage.To, "support@jewellink.com");
+    const cookie = access.headers.get("set-cookie");
+    assert.match(cookie, /linkd_suite_demo_access=/);
+    assert.match(cookie, /HttpOnly/i);
+    assert.match(cookie, /SameSite=Lax/i);
+    const cookiePair = cookie.split(";", 1)[0];
+
+    const restored = await request("/api/suite-demo-session", {
+      headers: { cookie: cookiePair },
+    }, env);
+    assert.deepEqual(await restored.json(), {
+      ok: true,
+      profile: { name: "Val Jones", storeName: "Linkd Demo Jewelers" },
+    });
+
+    const direct = await request("/api/suite-demo-launch?target=linkd", {
+      headers: { cookie: cookiePair },
+      redirect: "manual",
+    }, env);
+    assert.equal(direct.status, 303);
+    assert.match(direct.headers.get("location"), /\/guided-demo$/);
+
+    for (const target of ["jewellink", "countretail", "jewelhire"]) {
+      const launch = await request(`/api/suite-demo-launch?target=${target}`, {
+        headers: { cookie: cookiePair },
+        redirect: "manual",
+      }, env);
+      assert.equal(launch.status, 303);
+      const location = new URL(launch.headers.get("location"));
+      assert.equal(location.searchParams.has("name"), false);
+      assert.equal(location.searchParams.has("storeName"), false);
+      assert.equal(location.searchParams.has("email"), false);
+      const pass = location.searchParams.get("pass");
+      assert.ok(pass);
+
+      const verification = await request("/api/suite-demo-verify", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ pass, target }),
+      }, env);
+      assert.equal(verification.status, 200);
+      assert.deepEqual(await verification.json(), {
+        ok: true,
+        profile: { name: "Val Jones", storeName: "Linkd Demo Jewelers" },
+      });
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const [key, value] of Object.entries(previousEnv)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
 });
 
 test("keeps the guided sale deterministic and connected", async () => {
@@ -740,6 +875,7 @@ test("keeps Postmark configuration documented in code", async () => {
   assert.match(envExample, /^POSTMARK_FROM_EMAIL=/m);
   assert.doesNotMatch(envExample, /^LINKD_ALERT_TO_EMAIL=/m);
   assert.match(envExample, /^POSTMARK_MESSAGE_STREAM=outbound/m);
+  assert.match(envExample, /^SUITE_DEMO_SIGNING_SECRET=/m);
 });
 
 test("keeps inquiry API responses uncached", async () => {

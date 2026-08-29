@@ -451,7 +451,7 @@ export default function Home() {
             <Link className="button button-primary" href="#early-access">
               Book a Demo
             </Link>
-            <Link className="button button-secondary" href="/guided-demo">
+            <Link className="button button-secondary" href="/suite-demo">
               See the System
             </Link>
           </div>
@@ -501,7 +501,7 @@ export default function Home() {
             Choose a real jewelry-store workflow and click through the same
             decisions your team makes at the counter, bench, case, and office.
           </p>
-          <Link className="button button-primary" href="/guided-demo">
+          <Link className="button button-primary" href="/suite-demo">
             Start the guided demo
           </Link>
           <small>No installation. About three minutes per story.</small>

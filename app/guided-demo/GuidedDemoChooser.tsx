@@ -16,7 +16,12 @@ import styles from "./guided-demo.module.css";
 type DemoProfile = {
   name: string;
   storeName: string;
-  email: string;
+  email?: string;
+};
+
+type GuidedDemoChooserProps = {
+  initialProfile?: DemoProfile | null;
+  suiteAccess?: boolean;
 };
 
 type Workflow = {
@@ -149,8 +154,11 @@ function firstName(name: string) {
   return name.trim().split(/\s+/)[0] || "there";
 }
 
-export default function GuidedDemoChooser() {
-  const [profile, setProfile] = useState<DemoProfile | null>(null);
+export default function GuidedDemoChooser({
+  initialProfile = null,
+  suiteAccess = false,
+}: GuidedDemoChooserProps) {
+  const [profile, setProfile] = useState<DemoProfile | null>(initialProfile);
   const [selectedId, setSelectedId] = useState(workflows[0].id);
   const [confirmedId, setConfirmedId] = useState<string | null>(null);
   const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
@@ -378,13 +386,19 @@ export default function GuidedDemoChooser() {
               </div>
             </div>
             <p className={styles.leadStatus} aria-live="polite">{leadStatus}</p>
-            <button
-              className={styles.outlineButton}
-              type="button"
-              onClick={changeProfile}
-            >
-              Change demo details
-            </button>
+            {suiteAccess ? (
+              <Link className={styles.outlineButton} href="/suite-demo#tour-heading">
+                Back to all suite tours
+              </Link>
+            ) : (
+              <button
+                className={styles.outlineButton}
+                type="button"
+                onClick={changeProfile}
+              >
+                Change demo details
+              </button>
+            )}
             <div className={styles.divider} />
             <div className={styles.progressHeading}>
               <span>WORKFLOWS EXPLORED</span>

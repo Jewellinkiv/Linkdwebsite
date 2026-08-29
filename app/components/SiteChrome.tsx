@@ -99,7 +99,7 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ demoHref = "#early-access" }: { demoHref?: string } = {}) {
   return (
     <footer className="site-footer premier-footer">
       <div className="footer-top">
@@ -107,7 +107,7 @@ export function SiteFooter() {
           <span className="footer-mark">Linkd</span>
           <p>The connected business system for luxury jewelry retail.</p>
         </div>
-        <Link className="button footer-demo-button" href="#early-access">
+        <Link className="button footer-demo-button" href={demoHref}>
           See Linkd in Action
         </Link>
       </div>
