@@ -849,6 +849,25 @@ test("gives every guided action a visible purple focus ring", async () => {
   assert.match(demoCss, /@keyframes guidedPulse/);
 });
 
+test("keeps every guided workflow touch-friendly on phones", async () => {
+  const demoCss = await readFile(
+    new URL("../app/guided-demo/guided-demo.module.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(demoCss, /Mobile guided workflows: readable cards and touch-first controls/);
+  assert.match(demoCss, /@media \(max-width: 760px\)/);
+  assert.match(demoCss, /\.invoiceInventoryRow:first-of-type\s*\{[\s\S]*display: none/);
+  assert.match(demoCss, /\.invoiceInventoryRow\s*\{[\s\S]*min-width: 0/);
+  assert.match(demoCss, /\.invoiceDraftMain\s*\{[\s\S]*grid-template-columns: 1fr/);
+  assert.match(demoCss, /\.repairIntakeModal\s*\{[\s\S]*height: 100dvh/);
+  assert.match(demoCss, /\.repairSuggestedTask\s*\{[\s\S]*grid-template-columns: 1fr/);
+  assert.match(demoCss, /\.securityScanList > div\s*\{[\s\S]*min-width: 0/);
+  assert.match(demoCss, /\.customerTimeline > div\s*\{[\s\S]*min-width: 0/);
+  assert.match(demoCss, /min-height: 44px/);
+  assert.match(demoCss, /@media \(max-width: 430px\)/);
+});
+
 test("keeps Postmark configuration documented in code", async () => {
   const route = await readFile(
     new URL("../app/api/inquiry/route.ts", import.meta.url),

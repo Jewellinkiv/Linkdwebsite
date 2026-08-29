@@ -5941,6 +5941,1035 @@
   .securityComplete header > strong { grid-column: 2; justify-self: start; }
 }
 
+/* Mobile guided workflows: readable cards and touch-first controls, not scaled desktop screens. */
+@media (max-width: 760px) {
+  .demoPage {
+    overflow-x: clip;
+  }
+
+  .exitButton,
+  .outlineButton,
+  .saleGuideActions button,
+  .repairIntakeActions button,
+  .invoiceHeader > button,
+  .invoicePrimaryButton,
+  .inventoryFormButton,
+  .securityPrimaryButton,
+  .customerPrimaryButton,
+  .ownerNextButton {
+    min-height: 44px;
+  }
+
+  .saleGuide {
+    gap: 9px 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 0;
+    padding: 12px;
+  }
+
+  .saleGuideProgress {
+    align-self: center;
+  }
+
+  .saleGuideProgress > span {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+
+  .saleGuideCopy {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .saleGuideCopy strong {
+    font-size: 0.92rem;
+  }
+
+  .saleGuideCopy p,
+  .repairStory .saleGuideCopy p {
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+
+  .saleGuideActions {
+    align-items: stretch;
+    flex-direction: row;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .saleGuideActions > span,
+  .saleGuideActions button:last-child,
+  .repairStory .saleGuideActions button:last-child {
+    display: none;
+  }
+
+  .saleGuideActions button {
+    font-size: 0.72rem;
+    padding-inline: 12px;
+  }
+
+  .repairServicesNav nav {
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .repairServicesNav nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .repairServicesNav nav > span {
+    align-items: center;
+    display: inline-flex;
+    font-size: 0.75rem;
+    min-height: 40px;
+    scroll-snap-align: start;
+  }
+
+  .repairServicesMain {
+    padding: 12px;
+  }
+
+  .repairServicesHeader,
+  .invoiceHeader,
+  .securityHeader,
+  .customerHeader,
+  .ownerHeader {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .repairServicesHeader h1,
+  .invoiceHeader h1,
+  .securityHeader h1,
+  .customerHeader h1,
+  .ownerHeader h1 {
+    font-size: 1.35rem;
+  }
+
+  .repairServicesHeader span,
+  .invoiceHeader span,
+  .securityHeader > div > span,
+  .customerHeader > div > span,
+  .ownerHeader > div > span {
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .invoiceHeader > button,
+  .invoiceHeader > .invoiceSamplePill,
+  .invoiceHeader > .inventoryReceivedPill,
+  .securityHeader > span,
+  .customerHeader > span,
+  .ownerHeader > span {
+    align-self: stretch;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Sale */
+  .saleWorkspace {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .saleCartPanel {
+    min-height: 0;
+  }
+
+  .saleClientPanel,
+  .saleCartBody,
+  .saleQuickActions,
+  .salePayment {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .saleCartHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .saleCartHeader > div:last-child {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .saleCartHeader button {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .saleLines article {
+    gap: 8px 10px;
+  }
+
+  .saleEmptyCart {
+    min-height: 260px;
+  }
+
+  .saleQuickActions button,
+  .salePrimaryAction,
+  .saleSecondaryAction,
+  .salePayment > button {
+    min-height: 44px;
+  }
+
+  /* Repair and custom intake */
+  .repairIntakeBackdrop {
+    inset: 0;
+    position: fixed;
+    z-index: 80;
+  }
+
+  .repairIntakeModal {
+    border: 0;
+    border-radius: 0;
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  .repairIntakeHeader {
+    min-height: 64px;
+    padding: 12px;
+  }
+
+  .repairIntakeHeader h2 {
+    font-size: 1.1rem;
+  }
+
+  .repairIntakeHeader button {
+    height: 44px;
+    width: 44px;
+  }
+
+  .repairIntakeBody {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .repairFormSection {
+    padding: 12px;
+  }
+
+  .repairFormLabel,
+  .repairField > span,
+  .repairTaskHeading > small {
+    font-size: 0.68rem;
+  }
+
+  .repairFormHeading > div:first-child > span,
+  .repairTaskHeading > div > span,
+  .repairHelperCopy,
+  .repairAiNotice p {
+    font-size: 0.72rem;
+  }
+
+  .repairServiceTypes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .repairServiceTypes button,
+  .repairFormHeading > button,
+  .repairRequestActions button {
+    font-size: 0.72rem;
+    min-height: 44px;
+  }
+
+  .repairPhotoSlots figure {
+    min-height: 118px;
+  }
+
+  .repairPhotoSlots figcaption,
+  .repairPhotoSlots small {
+    font-size: 0.66rem;
+  }
+
+  .repairField input,
+  .repairFormSection textarea {
+    font-size: 0.78rem;
+    min-height: 44px;
+  }
+
+  .repairPriority button {
+    font-size: 0.68rem;
+    min-height: 44px;
+  }
+
+  .repairCustody,
+  .repairDeclaredValue > div strong,
+  .repairDeclaredValue > div span,
+  .repairDeclaredValue > p span,
+  .repairDeclaredValue > p strong,
+  .repairDeclaredValue > p small {
+    font-size: 0.7rem;
+  }
+
+  .repairDeclaredValue > p {
+    align-items: start;
+    grid-template-columns: 1fr auto;
+  }
+
+  .repairDeclaredValue > p small {
+    grid-column: 1 / -1;
+  }
+
+  .repairSuggestedTask {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+    padding: 11px;
+  }
+
+  .repairSuggestedTask > span,
+  .repairSuggestedTask > strong,
+  .repairSkuDecision {
+    grid-column: auto;
+  }
+
+  .repairSuggestedTask > span {
+    justify-self: start;
+  }
+
+  .repairSuggestedTask p strong,
+  .repairSuggestedTask > strong {
+    font-size: 0.78rem;
+  }
+
+  .repairSuggestedTask small {
+    font-size: 0.7rem;
+  }
+
+  .repairSkuDecision {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .repairSuggestedTask button {
+    font-size: 0.72rem;
+    min-height: 44px;
+  }
+
+  .repairIntakeFooter {
+    max-height: 42dvh;
+    overflow-y: auto;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .repairIntakeTotals {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .repairIntakeTotals small {
+    font-size: 0.62rem;
+  }
+
+  .repairIntakeTotals strong {
+    font-size: 0.78rem;
+  }
+
+  .repairIntakeActions {
+    grid-template-columns: 1fr;
+  }
+
+  .repairIntakeActions button {
+    font-size: 0.74rem;
+  }
+
+  .repairBenchCard {
+    padding: 15px;
+  }
+
+  .repairBenchTopline {
+    align-items: start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .repairBenchCard > p,
+  .repairTimeline p,
+  .repairPickupBalance span {
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+
+  .repairBenchMeta span,
+  .repairBenchMeta small,
+  .repairTimeline p > span {
+    font-size: 0.66rem;
+  }
+
+  .repairBenchMeta strong,
+  .repairTimeline p > strong {
+    font-size: 0.76rem;
+  }
+
+  .repairReadyButton {
+    min-height: 44px;
+    width: 100%;
+  }
+
+  /* AI invoice import and inventory entry */
+  .invoiceChoiceCard,
+  .invoiceUploadCard,
+  .invoiceConfirmCard,
+  .invoiceCompleteCard,
+  .inventoryFormCard,
+  .inventoryRecord,
+  .securityPanel,
+  .securityComplete,
+  .customerComplete,
+  .ownerComplete {
+    padding: 16px;
+  }
+
+  .invoiceSectionHeading h2,
+  .invoiceReviewHeader h2,
+  .invoiceConfirmCard h2,
+  .invoiceCompleteCard header h1 {
+    font-size: 1.2rem;
+  }
+
+  .invoiceSectionHeading > span,
+  .invoiceReviewHeader span,
+  .invoiceConfirmCard > span:not(.invoiceConfirmMark),
+  .invoiceTableHeading span {
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .invoiceChoiceGrid button {
+    min-height: 0;
+    padding: 15px;
+  }
+
+  .invoiceChoiceGrid strong {
+    font-size: 0.86rem;
+  }
+
+  .invoiceChoiceGrid span,
+  .invoiceChoiceGrid em {
+    font-size: 0.74rem;
+  }
+
+  .invoiceDropZone {
+    padding: 22px 14px;
+  }
+
+  .invoiceDropZone > strong {
+    font-size: 0.9rem;
+  }
+
+  .invoiceDropZone > span,
+  .invoiceDropZone > small {
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+
+  .invoiceDropZone > button {
+    font-size: 0.74rem;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .invoicePrivacyNote p,
+  .invoiceAiBanner p,
+  .inventoryFormNote p,
+  .inventoryMovementMini p {
+    font-size: 0.72rem;
+  }
+
+  .invoicePrivacyNote strong,
+  .invoiceAiBanner strong,
+  .inventoryFormNote strong,
+  .inventoryMovementMini strong {
+    font-size: 0.74rem;
+  }
+
+  .invoiceFileCard {
+    align-items: start;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .invoiceFileCard em {
+    grid-column: 2;
+  }
+
+  .invoiceFileCard strong {
+    font-size: 0.78rem;
+  }
+
+  .invoiceFileCard small,
+  .invoiceFileCard em {
+    font-size: 0.69rem;
+  }
+
+  .invoicePreview dl {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .invoicePreview dt,
+  .invoiceConfirmCard dt {
+    font-size: 0.64rem;
+  }
+
+  .invoicePreview dd,
+  .invoiceConfirmCard dd {
+    font-size: 0.78rem;
+  }
+
+  .invoiceReviewHeader {
+    flex-direction: column;
+  }
+
+  .invoiceReviewHeader > div:last-child {
+    text-align: left;
+  }
+
+  .invoiceDraftTopline {
+    align-items: start;
+    gap: 8px;
+  }
+
+  .invoiceDraftTopline span,
+  .invoiceDraftTopline strong {
+    font-size: 0.64rem;
+  }
+
+  .invoiceDraftMain {
+    grid-template-columns: 1fr;
+  }
+
+  .invoiceDraftMain > div:nth-child(2) {
+    grid-column: auto;
+  }
+
+  .invoiceDraftMain > div {
+    border-top: 1px solid #e1e9f0;
+    padding-top: 8px;
+  }
+
+  .invoiceDraftMain small {
+    font-size: 0.62rem;
+  }
+
+  .invoiceDraftMain strong {
+    font-size: 0.78rem;
+  }
+
+  .invoiceDraftMain span,
+  .invoiceException p,
+  .invoiceOutcomeList p {
+    font-size: 0.7rem;
+  }
+
+  .invoiceDraft > button,
+  .invoiceException button,
+  .invoiceReviewFooter button {
+    font-size: 0.72rem;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .invoiceReviewFooter {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .invoiceReviewFooter > div:last-of-type {
+    grid-column: 1 / -1;
+  }
+
+  .invoiceReviewFooter span {
+    font-size: 0.61rem;
+  }
+
+  .invoiceReviewFooter strong {
+    font-size: 0.78rem;
+  }
+
+  .invoiceConfirmCard dl {
+    grid-template-columns: 1fr;
+  }
+
+  .invoiceCompleteCard header {
+    align-items: start;
+  }
+
+  .invoiceCompleteCard header > strong {
+    justify-self: start;
+  }
+
+  .invoiceOutcomeList strong {
+    font-size: 0.76rem;
+  }
+
+  /* Turn inventory tables into labeled mobile cards. */
+  .invoiceTableCard {
+    background: transparent;
+    border: 0;
+    overflow: visible;
+  }
+
+  .invoiceTableHeading {
+    background: #fff;
+    border: 1px solid #cbdce9;
+    border-radius: 8px;
+    margin-bottom: 9px;
+  }
+
+  .invoiceTableHeading strong {
+    font-size: 0.82rem;
+  }
+
+  .invoiceInventoryRow:first-of-type {
+    display: none;
+  }
+
+  .invoiceInventoryRow {
+    background: #fff;
+    border: 1px solid #d1dfe9;
+    border-radius: 8px;
+    font-size: 0.76rem;
+    gap: 10px 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin-bottom: 9px;
+    min-width: 0;
+    padding: 13px;
+  }
+
+  .invoiceInventoryRow > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .invoiceInventoryRow > :nth-child(2) {
+    font-weight: 800;
+    grid-column: 1 / -1;
+  }
+
+  .invoiceInventoryRow > :nth-child(3),
+  .invoiceInventoryRow > :nth-child(4),
+  .invoiceInventoryRow > :nth-child(5) {
+    grid-column: 1 / -1;
+  }
+
+  .invoiceInventoryRow > :nth-child(6) {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .invoiceInventoryRow > *::before {
+    color: #748197;
+    display: block;
+    font-size: 0.59rem;
+    font-weight: 900;
+    margin-bottom: 2px;
+  }
+
+  .invoiceInventoryRow > :nth-child(1)::before { content: "ITEM"; }
+  .invoiceInventoryRow > :nth-child(2)::before { content: "DESCRIPTION"; }
+  .invoiceInventoryRow > :nth-child(3)::before { content: "VENDOR"; }
+  .invoiceInventoryRow > :nth-child(4)::before { content: "LOCATION"; }
+  .invoiceInventoryRow > :nth-child(5)::before { content: "RETAIL"; }
+  .invoiceInventoryRow > :nth-child(6)::before { content: "STATUS"; }
+
+  .inventoryNewRow > button {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    justify-self: stretch !important;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .inventoryNewRow > button::before {
+    content: none;
+  }
+
+  .inventoryListSummary {
+    align-items: start;
+    flex-direction: column;
+    font-size: 0.7rem;
+    gap: 5px;
+    line-height: 1.4;
+  }
+
+  .inventoryFormCard,
+  .inventoryRecord {
+    overflow: hidden;
+  }
+
+  .inventoryItemPhoto,
+  .inventoryRecordPhoto {
+    min-height: 160px;
+  }
+
+  .inventoryFieldGrid label > span,
+  .inventoryPlacementGrid label > span,
+  .inventoryIdPreview span,
+  .inventoryTagDetails span,
+  .inventoryMovementRoute span,
+  .inventoryRecordDetails span {
+    font-size: 0.64rem;
+  }
+
+  .inventoryFieldGrid input,
+  .inventoryPlacementGrid input {
+    font-size: 0.78rem;
+    min-height: 44px;
+  }
+
+  .inventoryIdPreview strong,
+  .inventoryTagDetails strong,
+  .inventoryRecordDetails strong,
+  .inventoryRecordHero dd {
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
+  }
+
+  .inventoryIdPreview small,
+  .inventoryMovementRoute small,
+  .inventoryRecordHero > p,
+  .inventoryHistory li p {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .inventoryTagPreview {
+    padding: 13px;
+  }
+
+  .inventoryTagPreview > div:first-child {
+    align-items: start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .inventoryTagPreview p,
+  .inventoryTagPreview small {
+    font-size: 0.7rem;
+    overflow-wrap: anywhere;
+  }
+
+  .inventoryHistory li > span {
+    font-size: 0.62rem;
+  }
+
+  .inventoryHistory li strong {
+    font-size: 0.76rem;
+  }
+
+  /* Security count */
+  .securityKpis span,
+  .securityProgressCards span,
+  .securityCompleteKpis span,
+  .securityCloseSummary span,
+  .securityItemSummary > div:last-child span {
+    font-size: 0.62rem;
+  }
+
+  .securityKpis small,
+  .securityProgressCards small,
+  .securityCompleteKpis small,
+  .securityCloseSummary small,
+  .securityScheduleCard small,
+  .securityExceptionAlert small,
+  .securityEvidenceTimeline p,
+  .securityEvidenceCallout > p,
+  .securitySnapshotNote p,
+  .securityCloseChecklist p,
+  .securityComplete > ul p {
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+
+  .securityScheduleCard strong,
+  .securityItemSummary > div:nth-child(2) strong,
+  .securityEvidenceTimeline p > strong,
+  .securityAuditTrail p > strong,
+  .securityCloseChecklist p > strong,
+  .securityComplete > ul strong {
+    font-size: 0.76rem;
+  }
+
+  .securityScheduleCard button,
+  .securityScanner button {
+    font-size: 0.74rem;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .securityExceptionAlert {
+    grid-template-columns: 34px minmax(0, 1fr);
+    padding: 12px;
+  }
+
+  .securityExceptionAlert h3 {
+    font-size: 0.9rem;
+  }
+
+  .securityExceptionAlert strong {
+    font-size: 0.74rem;
+    overflow-wrap: anywhere;
+  }
+
+  .securityScanList {
+    border: 0;
+    overflow: visible;
+  }
+
+  .securityScanList > .securityMissingQueueHeading,
+  .securityScanList > .securityScanHeading {
+    display: none;
+  }
+
+  .securityScanList > div {
+    background: #fff;
+    border: 1px solid #d0dee9;
+    border-radius: 8px;
+    font-size: 0.74rem;
+    gap: 10px;
+    grid-template-columns: 1fr;
+    margin-bottom: 9px;
+    min-width: 0;
+    padding: 13px;
+  }
+
+  .securityScanList > div > * {
+    overflow-wrap: anywhere;
+  }
+
+  .securityScanList em {
+    justify-self: start;
+  }
+
+  .securityScanList .securityMissingRow small {
+    font-size: 0.66rem;
+  }
+
+  .securityItemSummary {
+    grid-template-columns: 46px minmax(0, 1fr);
+  }
+
+  .securityItemMark {
+    height: 46px;
+    width: 46px;
+  }
+
+  .securityEvidenceCallout {
+    padding: 13px;
+  }
+
+  .securityEvidenceCallout h3 {
+    font-size: 0.88rem;
+  }
+
+  .securityEvidenceCallout dt,
+  .securityEvidenceTimeline p > span,
+  .securityAuditTrail p > span {
+    font-size: 0.62rem;
+  }
+
+  .securityEvidenceCallout dd {
+    font-size: 0.74rem;
+  }
+
+  .securityCaptureMethods strong,
+  .securityCaptureMethods span {
+    font-size: 0.64rem;
+  }
+
+  /* Customer and owner views */
+  .customerKpis span,
+  .customerCompleteKpis span,
+  .customerPanel header p,
+  .customerOpportunity header p,
+  .customerComplete header p,
+  .ownerMoneyCards span,
+  .ownerReportMetrics span {
+    font-size: 0.64rem;
+  }
+
+  .customerKpis small,
+  .customerCompleteKpis small,
+  .customerPanel header > span,
+  .customerRow small,
+  .customerResultRow p,
+  .customerIdentity p,
+  .customerActivity p,
+  .customerWishlistItem small,
+  .customerTimeline p small,
+  .customerEvidenceGrid p,
+  .customerAiNote,
+  .ownerPanel p,
+  .ownerTableWrap td {
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+
+  .customerPanel header h2,
+  .customerResultRow > div > strong,
+  .customerIdentity h2,
+  .customerOpportunity header h2 {
+    font-size: 0.9rem;
+  }
+
+  .customerSearchBar input,
+  .customerSearchBar button,
+  .customerInsightBanner button {
+    font-size: 0.78rem;
+    min-height: 44px;
+  }
+
+  .customerResultRow dl,
+  .customerResultRow button {
+    grid-column: 1 / -1;
+  }
+
+  .customerResultRow button {
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .customerTimeline {
+    overflow: visible;
+  }
+
+  .customerTimeline > div {
+    align-items: start;
+    grid-template-columns: auto 1fr;
+    min-width: 0;
+  }
+
+  .customerTimeline > div > em {
+    grid-column: 1;
+  }
+
+  .customerTimeline > div > p {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+
+  .customerTimeline > div > b {
+    grid-column: 2;
+  }
+
+  .customerWishlistItem,
+  .customerActivity {
+    align-items: start;
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .customerWishlistItem > div,
+  .customerActivity > em {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .customerInsightBanner {
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .customerInsightBanner button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .customerOpportunity > .customerPrimaryButton {
+    margin: 0 18px 12px;
+    width: calc(100% - 36px);
+  }
+
+  .ownerQuickReports {
+    grid-template-columns: 1fr;
+  }
+
+  .ownerQuickReports > button {
+    min-height: 108px;
+  }
+
+  .ownerMoneyCards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ownerMoneyCards strong,
+  .ownerReportMetrics strong {
+    font-size: 0.85rem;
+  }
+
+  .ownerTableWrap {
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid #d8e3ec;
+  }
+
+  .ownerTableWrap::after {
+    color: #6b788c;
+    content: "Swipe to see the full report →";
+    display: block;
+    font-size: 0.68rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 430px) {
+  .logo,
+  .logoCrop {
+    width: 108px;
+  }
+
+  .exitButton {
+    font-size: 0.68rem;
+    padding-inline: 10px;
+  }
+
+  .saleGuideActions button {
+    max-width: 132px;
+  }
+
+  .repairServiceTypes,
+  .repairPhotoSlots,
+  .repairIntakeTotals,
+  .ownerMoneyCards {
+    grid-template-columns: 1fr;
+  }
+
+  .invoiceChoiceCard,
+  .invoiceUploadCard,
+  .invoiceConfirmCard,
+  .invoiceCompleteCard,
+  .inventoryFormCard,
+  .inventoryRecord,
+  .securityPanel,
+  .securityComplete,
+  .customerComplete,
+  .ownerComplete {
+    padding: 13px;
+  }
+
+  .invoiceReviewFooter {
+    grid-template-columns: 1fr;
+  }
+
+  .invoiceReviewFooter > div:last-of-type {
+    grid-column: auto;
+  }
+
+  .securityItemSummary,
+  .securityComplete header,
+  .customerComplete > header,
+  .ownerComplete > header {
+    grid-template-columns: 1fr;
+  }
+
+  .securityItemSummary > div:last-child,
+  .securityComplete header > strong,
+  .customerComplete header > strong,
+  .ownerComplete header > strong {
+    grid-column: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .workflowCard {
     transition: none;
