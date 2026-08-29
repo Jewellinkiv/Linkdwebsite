@@ -2,20 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useRef, useState } from "react";
 
 type SiteHeaderProps = {
   current?: string;
   demoHref?: string;
 };
-
-const primaryLinks = [
-  { href: "/jewelry-pos", label: "Platform", key: "platform" },
-  { href: "/payments", label: "Payments", key: "payments" },
-  { href: "/ecosystem", label: "Ecosystem", key: "ecosystem" },
-  { href: "/integrations", label: "Integrations", key: "integrations" },
-  { href: "/#migration", label: "Switch to Linkd", key: "migration" },
-];
 
 const platformLinks = [
   { href: "/jewelry-pos", label: "POS & checkout" },
@@ -26,8 +19,46 @@ const platformLinks = [
   { href: "/security", label: "Security & controls" },
 ];
 
+const primaryLinks = [
+  { href: "/jewelry-pos", label: "Platform", key: "platform", children: platformLinks },
+  {
+    href: "/payments",
+    label: "Payments",
+    key: "payments",
+    children: [
+      { href: "/payments", label: "Payment processing" },
+      { href: "/accounting", label: "Receivables & finance" },
+    ],
+  },
+  {
+    href: "/ecosystem",
+    label: "Ecosystem",
+    key: "ecosystem",
+    children: [
+      { href: "/ecosystem", label: "Linkd Ecosystem" },
+      { href: "https://www.jewellink.com/", label: "JewelLink", external: true },
+      { href: "https://www.countretail.com/", label: "CountRetail", external: true },
+      { href: "https://jewelhire.com/", label: "JewelHire", external: true },
+    ],
+  },
+  {
+    href: "/integrations",
+    label: "Integrations",
+    key: "integrations",
+    children: [
+      { href: "/integrations", label: "Integration overview" },
+      { href: "/accounting", label: "Accounting connections" },
+      { href: "/security", label: "Security & controls" },
+      { href: "/#migration", label: "Migration services" },
+    ],
+  },
+  { href: "/#migration", label: "Switch to Linkd", key: "migration" },
+] as const;
+
 export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderProps) {
+  const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const closeMobileMenu = () => mobileMenuRef.current?.removeAttribute("open");
 
   return (
@@ -47,15 +78,63 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
       </Link>
 
       <nav className="premier-nav" aria-label="Primary navigation">
-        {primaryLinks.map((item) => (
-          <Link
-            aria-current={current === item.key ? "page" : undefined}
-            href={item.href}
-            key={item.key}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {primaryLinks.map((item) => {
+          const children = "children" in item ? item.children : undefined;
+
+          return (
+            <div
+              className={`premier-nav-group ${openMenu === item.key ? "is-open" : ""}`}
+              key={item.key}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setOpenMenu(null);
+              }}
+              onMouseEnter={() => children && setOpenMenu(item.key)}
+              onMouseLeave={() => children && setOpenMenu(null)}
+            >
+              <span className="premier-nav-trigger">
+                <Link
+                  aria-current={current === item.key ? "page" : undefined}
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+                {children ? (
+                  <button
+                    aria-expanded={openMenu === item.key}
+                    aria-label={`Open ${item.label} menu`}
+                    onClick={() => setOpenMenu((value) => value === item.key ? null : item.key)}
+                    type="button"
+                  >
+                    <span aria-hidden="true">⌄</span>
+                  </button>
+                ) : null}
+              </span>
+              {children ? (
+                <div className="premier-nav-dropdown">
+                  <span>{item.label}</span>
+                  {children.map((child) => {
+                    const active = !child.href.startsWith("http")
+                      && child.href.split("#")[0] === pathname;
+                    return child.href.startsWith("http") ? (
+                      <a href={child.href} key={child.href} rel="noreferrer" target="_blank">
+                        {child.label}<span aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      <Link
+                        aria-current={active ? "page" : undefined}
+                        href={child.href}
+                        key={child.href}
+                        onClick={() => setOpenMenu(null)}
+                      >
+                        {child.label}{active ? <span aria-hidden="true">✓</span> : null}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
       </nav>
 
       <div className="premier-header-actions">
@@ -85,7 +164,12 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
           <div className="premier-mobile-platform">
             <span>Platform workflows</span>
             {platformLinks.map((item) => (
-              <Link href={item.href} key={item.href} onClick={closeMobileMenu}>
+              <Link
+                aria-current={pathname === item.href ? "page" : undefined}
+                href={item.href}
+                key={item.href}
+                onClick={closeMobileMenu}
+              >
                 {item.label}
               </Link>
             ))}

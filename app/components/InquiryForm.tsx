@@ -143,13 +143,15 @@ export default function InquiryForm() {
         </p>
       </div>
 
+      <p className="required-legend"><span className="required-mark">*</span> Required field</p>
+
       <div className="form-grid essential-form-grid">
         <label>
-          Name
+          <span>Name<span className="required-mark" aria-hidden="true">*</span></span>
           <input name="name" autoComplete="name" required />
         </label>
         <label>
-          Work email
+          <span>Work email<span className="required-mark" aria-hidden="true">*</span></span>
           <input
             name="email"
             type="email"
@@ -159,7 +161,7 @@ export default function InquiryForm() {
           />
         </label>
         <label>
-          Phone
+          <span>Phone<span className="required-mark" aria-hidden="true">*</span></span>
           <input
             name="phone"
             type="tel"
@@ -169,11 +171,11 @@ export default function InquiryForm() {
           />
         </label>
         <label>
-          Store or company
+          <span>Store or company<span className="required-mark" aria-hidden="true">*</span></span>
           <input name="company" autoComplete="organization" required />
         </label>
         <label>
-          Locations
+          <span>Locations<span className="required-mark" aria-hidden="true">*</span></span>
           <select name="locations" defaultValue="" required>
             <option value="" disabled>
               Select

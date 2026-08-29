@@ -421,6 +421,15 @@
   padding: 5px 7px;
 }
 
+.startedTag {
+  background: #e5effc;
+  border-radius: 99px;
+  color: #245f9e;
+  font-size: 0.54rem;
+  margin-left: auto;
+  padding: 5px 7px;
+}
+
 .workflowCode,
 .miniCode,
 .selectedCode {

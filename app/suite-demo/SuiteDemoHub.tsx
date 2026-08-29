@@ -233,7 +233,7 @@ export default function SuiteDemoHub() {
 
   return (
     <main className={`premier-page ${styles.suitePage}`}>
-      <SiteHeader current="ecosystem" demoHref="#suite-access" />
+      <SiteHeader demoHref="#suite-access" />
 
       <section className={`${styles.hero} ${unlocked ? styles.heroUnlocked : ""}`}>
         <aside

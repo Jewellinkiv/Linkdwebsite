@@ -209,6 +209,8 @@
 }
 
 .storyCopy {
+  display: flex;
+  flex-direction: column;
   min-height: 525px;
   position: relative;
   z-index: 1;
@@ -288,11 +290,11 @@
 
 .storyControls {
   align-items: center;
-  bottom: 0;
   display: flex;
   gap: 14px;
-  left: 0;
-  position: absolute;
+  margin-top: auto;
+  padding-top: 32px;
+  position: static;
 }
 
 .storyControls > button {

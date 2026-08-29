@@ -311,6 +311,10 @@ test("server-renders the guided Linkd workflow chooser", async () => {
   assert.equal(response.status, 200);
 
   const html = await response.text();
+  const chooser = await readFile(
+    new URL("../app/guided-demo/GuidedDemoChooser.tsx", import.meta.url),
+    "utf8",
+  );
   const sitemap = await readFile(
     new URL("../public/sitemap.xml", import.meta.url),
     "utf8",
@@ -331,6 +335,11 @@ test("server-renders the guided Linkd workflow chooser", async () => {
   assert.match(html, /name="email"/i);
   assert.doesNotMatch(html, /name="phone"|name="locations"/i);
   assert.doesNotMatch(html, /Open with sample demo details/i);
+  assert.match(chooser, /linkd-guided-demo-progress-v1/);
+  assert.match(chooser, /window\.localStorage\.setItem/);
+  assert.match(chooser, /Continue guided tour/);
+  assert.match(chooser, /Review guided tour/);
+  assert.match(chooser, /In progress/);
   assert.match(html, /noindex/i);
   assert.doesNotMatch(sitemap, /\/guided-demo/);
 });
@@ -387,6 +396,7 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
   assert.match(source, /Welcome, \{profile\.name\}/);
   assert.match(source, /Linkd POS, JewelLink CRM/);
   assert.match(source, /CountRetail Analytics, or JewelHire Hiring/);
+  assert.doesNotMatch(source, /<SiteHeader current="ecosystem"/);
   assert.doesNotMatch(source, /Suite access unlocked/);
   assert.doesNotMatch(source, /unlockMark/);
   assert.match(source, /accessPanelUnlocked/);
@@ -955,6 +965,8 @@ test("keeps the early-access form accessible and mobile-friendly", async () => {
   assert.match(form, /inputMode="email"/);
   assert.match(form, /inputMode="tel"/);
   assert.match(form, /name="interests"/);
+  assert.match(form, /Required field/);
+  assert.equal((form.match(/className="required-mark" aria-hidden="true"/g) ?? []).length, 5);
   assert.match(form, /role=\{submitState === "error" \? "alert" : "status"\}/);
 });
 
@@ -1100,10 +1112,13 @@ test("keeps mobile navigation available without crowding the hero", async () => 
 
   assert.match(chrome, /const primaryLinks/);
   assert.match(chrome, /href: "\/jewelry-pos", label: "Platform"/);
-  assert.match(chrome, /href: "\/payments", label: "Payments"/);
-  assert.match(chrome, /href: "\/ecosystem", label: "Ecosystem"/);
-  assert.match(chrome, /href: "\/integrations", label: "Integrations"/);
+  assert.match(chrome, /href: "\/payments",\s*label: "Payments"/);
+  assert.match(chrome, /href: "\/ecosystem",\s*label: "Ecosystem"/);
+  assert.match(chrome, /href: "\/integrations",\s*label: "Integrations"/);
   assert.match(chrome, /href: "\/#migration", label: "Switch to Linkd"/);
+  assert.match(chrome, /className="premier-nav-dropdown"/);
+  assert.match(chrome, /aria-expanded=\{openMenu === item\.key\}/);
+  assert.match(chrome, /usePathname/);
   assert.match(chrome, /<details className="premier-mobile-menu"/);
   assert.match(chrome, /<summary aria-label="Open site navigation">/);
   assert.match(chrome, /closeMobileMenu/);
@@ -1127,6 +1142,7 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(baseCss, /animation-duration: 0\.01ms !important/);
   assert.match(premierCss, /@media \(max-width: 900px\)/);
   assert.match(premierCss, /\.premier-nav\s*\{\s*display: none/);
+  assert.match(premierCss, /\.premier-nav-group:focus-within \.premier-nav-dropdown/);
   assert.match(premierCss, /\.premier-mobile-menu\s*\{[\s\S]*display: block/);
   assert.match(premierCss, /overflow: visible !important/);
   assert.match(premierCss, /max-height: calc\(100vh - 102px\)/);

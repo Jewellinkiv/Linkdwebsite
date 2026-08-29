@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import CustomStory from "./CustomStory";
 import CustomerStory from "./CustomerStory";
 import InvoiceAiStory from "./InvoiceAiStory";
@@ -150,6 +150,8 @@ const liveWorkflowIds = new Set([
   "owner-story",
 ]);
 
+const PROGRESS_STORAGE_KEY = "linkd-guided-demo-progress-v1";
+
 function firstName(name: string) {
   return name.trim().split(/\s+/)[0] || "there";
 }
@@ -164,7 +166,9 @@ export default function GuidedDemoChooser({
   const [activeWorkflow, setActiveWorkflow] = useState<string | null>(null);
   const [serviceWorkspaceActive, setServiceWorkspaceActive] = useState(false);
   const [ownerArea, setOwnerArea] = useState<"Office" | "Reports">("Reports");
+  const [exploredIds, setExploredIds] = useState<string[]>([]);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
+  const [progressLoaded, setProgressLoaded] = useState(false);
   const [leadStatus, setLeadStatus] = useState("");
 
   const selectedWorkflow = useMemo(
@@ -182,6 +186,37 @@ export default function GuidedDemoChooser({
     : serviceWorkspaceActive
       ? "Services"
       : "POS";
+
+  useEffect(() => {
+    const restoreProgress = window.setTimeout(() => {
+      try {
+        const saved = JSON.parse(window.localStorage.getItem(PROGRESS_STORAGE_KEY) || "{}") as {
+          exploredIds?: unknown;
+          completedIds?: unknown;
+        };
+        const validIds = new Set(workflows.map((workflow) => workflow.id));
+        const readIds = (value: unknown) => Array.isArray(value)
+          ? value.filter((id): id is string => typeof id === "string" && validIds.has(id))
+          : [];
+        setExploredIds(readIds(saved.exploredIds));
+        setCompletedIds(readIds(saved.completedIds));
+      } catch {
+        window.localStorage.removeItem(PROGRESS_STORAGE_KEY);
+      } finally {
+        setProgressLoaded(true);
+      }
+    }, 0);
+
+    return () => window.clearTimeout(restoreProgress);
+  }, []);
+
+  useEffect(() => {
+    if (!progressLoaded) return;
+    window.localStorage.setItem(
+      PROGRESS_STORAGE_KEY,
+      JSON.stringify({ exploredIds, completedIds }),
+    );
+  }, [completedIds, exploredIds, progressLoaded]);
 
   async function enterDemo(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -223,10 +258,16 @@ export default function GuidedDemoChooser({
     setActiveWorkflow(null);
     setServiceWorkspaceActive(false);
     setOwnerArea("Reports");
+    setExploredIds([]);
     setCompletedIds([]);
     setSelectedId(workflows[0].id);
     setConfirmedId(null);
     setLeadStatus("");
+    window.localStorage.removeItem(PROGRESS_STORAGE_KEY);
+  }
+
+  function markExplored(workflowId: string) {
+    setExploredIds((current) => current.includes(workflowId) ? current : [...current, workflowId]);
   }
 
   function selectWorkflow(workflow: Workflow) {
@@ -234,6 +275,7 @@ export default function GuidedDemoChooser({
     setConfirmedId(null);
 
     if (liveWorkflowIds.has(workflow.id)) {
+      markExplored(workflow.id);
       if (workflow.area === "Services") setServiceWorkspaceActive(false);
       setActiveWorkflow(workflow.id);
     }
@@ -241,6 +283,7 @@ export default function GuidedDemoChooser({
 
   function launchSelectedWorkflow() {
     if (liveWorkflowIds.has(selectedWorkflow.id)) {
+      markExplored(selectedWorkflow.id);
       if (selectedWorkflow.area === "Services") setServiceWorkspaceActive(false);
       setActiveWorkflow(selectedWorkflow.id);
       return;
@@ -250,6 +293,7 @@ export default function GuidedDemoChooser({
   }
 
   function completeWorkflow(workflowId: string) {
+    markExplored(workflowId);
     setCompletedIds((current) =>
       current.includes(workflowId) ? current : [...current, workflowId],
     );
@@ -458,6 +502,8 @@ export default function GuidedDemoChooser({
                   ) : null}
                   {completedIds.includes(workflow.id) ? (
                     <span className={styles.completedTag}>Completed</span>
+                  ) : exploredIds.includes(workflow.id) ? (
+                    <span className={styles.startedTag}>In progress</span>
                   ) : null}
                 </span>
                 <strong>{workflow.title}</strong>
@@ -495,7 +541,11 @@ export default function GuidedDemoChooser({
               type="button"
               onClick={launchSelectedWorkflow}
             >
-              {selectedWorkflow.id === "make-a-sale"
+              {completedIds.includes(selectedWorkflow.id)
+                ? "Review guided tour"
+                : exploredIds.includes(selectedWorkflow.id)
+                  ? "Continue guided tour"
+                : selectedWorkflow.id === "make-a-sale"
                 ? "Start guided sale"
                 : selectedWorkflow.id === "repair-management"
                   ? "Start guided repair"
