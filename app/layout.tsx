@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Linkd",
   },
   description:
-    "POS + ERP for luxury jewelers with payment processing, receivables, service management, inventory flow, rapid migration, white-glove support, and the connected Linkd Ecosystem.",
+    "The operational center of the Linkd Ecosystem for luxury jewelers, connecting payments, receivables, services, inventory, customers, store intelligence, and teams.",
   keywords: [
     "jewelry POS",
     "jewelry store payment processing",

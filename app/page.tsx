@@ -438,14 +438,14 @@ export default function Home() {
 
       <section className="hero-section" id="top">
         <div className="hero-copy">
-          <p className="eyebrow">POS + ERP for luxury jewelers</p>
+          <p className="eyebrow">The operating center of the Linkd Ecosystem</p>
           <h1>
-            Run the whole store. Keep more of <em>every sale.</em>
+            Run the whole store. Connect the <em>entire ecosystem.</em>
           </h1>
           <p className="hero-subtitle">
-            Linkd combines best-in-class payment processing, receivables,
-            service management, and inventory flow—with rapid migration,
-            white-glove onboarding, and one connected ecosystem.
+            Linkd is the operational core for luxury jewelry retail—connecting
+            best-in-class payments, receivables, services, and inventory with
+            your customers, store intelligence, and team.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
@@ -488,36 +488,36 @@ export default function Home() {
             </div>
           </div>
           <p className="hero-scene-caption">
-            <span aria-hidden="true" /> Every piece, payment, and promise—connected.
+            <span aria-hidden="true" /> Every piece, payment, person, and promise—connected through Linkd.
           </p>
         </div>
       </section>
 
       <section className="guided-demo-band" aria-labelledby="guided-demo-title">
         <div className="guided-demo-band-copy">
-          <p className="eyebrow">Interactive product tour</p>
-          <h2 id="guided-demo-title">Step inside Linkd before the sales call.</h2>
+          <p className="eyebrow">One suite. Four guided tours.</p>
+          <h2 id="guided-demo-title">See the ecosystem from its operational center.</h2>
           <p>
-            Choose a real jewelry-store workflow and click through the same
-            decisions your team makes at the counter, bench, case, and office.
+            Enter once, then explore Linkd, JewelLink, CountRetail, and
+            JewelHire at your own pace—individually or as one connected system.
           </p>
           <Link className="button button-primary" href="/suite-demo">
-            Start the guided demo
+            Explore the Linkd Suite
           </Link>
-          <small>No installation. About three minutes per story.</small>
+          <small>One introduction unlocks every guided experience.</small>
         </div>
-        <div className="guided-demo-band-console" aria-label="Available guided Linkd workflows">
+        <div className="guided-demo-band-console" aria-label="Available Linkd Suite guided tours">
           <header>
-            <span>LINKD GUIDED DEMO</span>
-            <strong>Choose a workflow</strong>
+            <span>LINKD SUITE GUIDED TOURS</span>
+            <strong>Choose a system</strong>
           </header>
           <div className="guided-demo-band-grid">
-            <span><b>POS</b> Make a sale</span>
-            <span><b>SVC</b> Repair intake</span>
-            <span><b>INV</b> Receive inventory</span>
-            <span><b>SEC</b> Resolve an exception</span>
+            <span><b>LD</b> Linkd · Operations</span>
+            <span><b>JL</b> JewelLink · Relationships</span>
+            <span><b>CR</b> CountRetail · Intelligence</span>
+            <span><b>JH</b> JewelHire · People</span>
           </div>
-          <footer><i /> Guided actions show you exactly where to click</footer>
+          <footer><i /> Start with one product—or see how all four connect</footer>
         </div>
       </section>
 
