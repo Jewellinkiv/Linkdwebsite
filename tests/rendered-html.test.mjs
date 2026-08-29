@@ -56,6 +56,7 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Step inside Linkd before the sales call/i);
   assert.match(html, /href="\/guided-demo"/i);
   assert.match(html, /Start the guided demo/i);
+  assert.match(html, /href="\/guided-demo"[^>]*>\s*See the System/i);
   assert.match(html, /Four workflows\. One operating system\./i);
   assert.match(html, /Four operating engines\. One system your team can trust/i);
   assert.match(html, /Payment processing should strengthen the business/i);

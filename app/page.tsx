@@ -451,7 +451,7 @@ export default function Home() {
             <Link className="button button-primary" href="#early-access">
               Book a Demo
             </Link>
-            <Link className="button button-secondary" href="#platform">
+            <Link className="button button-secondary" href="/guided-demo">
               See the System
             </Link>
           </div>
