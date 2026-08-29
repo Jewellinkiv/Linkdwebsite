@@ -278,7 +278,7 @@ export default function SuiteDemoHub() {
                 <fieldset disabled={submitting}>
                   <label>
                     <span>Your name</span>
-                    <input name="name" autoComplete="name" placeholder="Val Jones" required />
+                    <input name="name" autoComplete="name" placeholder="John Jones" required />
                   </label>
                   <label>
                     <span>Jewelry store</span>
@@ -296,7 +296,7 @@ export default function SuiteDemoHub() {
                       type="email"
                       autoComplete="email"
                       inputMode="email"
-                      placeholder="val@yourstore.com"
+                      placeholder="John@yourstore.com"
                       required
                     />
                   </label>
