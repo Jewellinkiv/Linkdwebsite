@@ -360,8 +360,16 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
     new URL("../public/sitemap.xml", import.meta.url),
     "utf8",
   );
+  const source = await readFile(
+    new URL("../app/suite-demo/SuiteDemoHub.tsx", import.meta.url),
+    "utf8",
+  );
+  const styles = await readFile(
+    new URL("../app/suite-demo/suite-demo.module.css", import.meta.url),
+    "utf8",
+  );
 
-  assert.match(html, /One introduction\. Four guided experiences\./i);
+  assert.doesNotMatch(html, /One introduction\. Four guided experiences\./i);
   assert.match(html, /Unlock every tour once/i);
   assert.match(html, /name="name"/i);
   assert.match(html, /name="storeName"/i);
@@ -371,9 +379,16 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
   assert.match(html, /JewelLink/i);
   assert.match(html, /CountRetail/i);
   assert.match(html, /JewelHire/i);
+  assert.match(html, /Cloud POS and ERP/i);
   assert.match(html, /Works independently/i);
   assert.match(html, /Connected advantage/i);
   assert.match(html, /Choose your guided tour/i);
+  assert.ok(html.indexOf("Choose your guided tour") < html.indexOf("Ecosystem story"));
+  assert.match(source, /Welcome, \{profile\.name\}/);
+  assert.match(source, /Linkd POS, JewelLink CRM/);
+  assert.match(source, /CountRetail Analytics, or JewelHire Hiring/);
+  assert.match(styles, /border: 2px solid var\(--card-border\)/);
+  assert.match(styles, /border-radius: 999px/);
   assert.match(html, /noindex/i);
   assert.doesNotMatch(sitemap, /\/suite-demo/);
 });

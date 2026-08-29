@@ -14,7 +14,7 @@ const products = [
   {
     target: "linkd",
     name: "Linkd",
-    role: "Operations",
+    role: "Cloud POS and ERP",
     description:
       "Run sales, payments, receivables, services, inventory, and owner workflows.",
     image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
@@ -115,10 +115,6 @@ const storySlides = [
     active: ["linkd", "jewellink", "countretail", "jewelhire"],
   },
 ] as const;
-
-function firstName(name: string) {
-  return name.trim().split(/\s+/)[0] || "there";
-}
 
 export default function SuiteDemoHub() {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -240,29 +236,15 @@ export default function SuiteDemoHub() {
       <SiteHeader current="ecosystem" demoHref="#suite-access" />
 
       <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <p className="eyebrow">The Linkd Suite guided experience</p>
-          <h1>One introduction. Four guided experiences.</h1>
-          <p className={styles.heroLead}>
-            See how Linkd, JewelLink, CountRetail, and JewelHire work on their
-            own—or together as one connected ecosystem for luxury jewelry retail.
-          </p>
-          <div className={styles.heroSignals} aria-label="Suite benefits">
-            <span>Enter once</span>
-            <span>Explore at your pace</span>
-            <span>Use one or use them all</span>
-          </div>
-        </div>
-
         <aside className={styles.accessPanel} id="suite-access">
           {unlocked ? (
             <div className={styles.unlockedPanel}>
               <span className={styles.unlockMark} aria-hidden="true">✓</span>
               <p className={styles.panelEyebrow}>Suite access unlocked</p>
-              <h2>Welcome, {firstName(profile.name)}.</h2>
+              <h2>Welcome, {profile.name}.</h2>
               <p>
-                All four guided experiences are ready for {profile.storeName}.
-                Choose any tour below—there are no more lead forms.
+                Choose the system you wish to demo below: Linkd POS, JewelLink CRM,
+                CountRetail Analytics, or JewelHire Hiring.
               </p>
               <a className="button button-primary" href="#tour-heading">
                 Choose a guided tour
@@ -316,6 +298,58 @@ export default function SuiteDemoHub() {
             </>
           )}
         </aside>
+      </section>
+
+      <section className={styles.toursSection} aria-labelledby="tour-heading">
+        <div className={styles.sectionHeading}>
+          <p className="eyebrow">Four systems. Your starting point.</p>
+          <h2 id="tour-heading">Choose your guided tour.</h2>
+          <p>
+            {unlocked
+              ? "Your single introduction unlocked every system. Start anywhere and return for the others."
+              : "Preview all four now. Their launch buttons activate together after your single introduction."}
+          </p>
+        </div>
+
+        <div className={styles.tourGrid}>
+          {products.map((product) => (
+            <article
+              className={`${styles.tourCard} ${styles[product.accent]} ${unlocked ? styles.tourCardUnlocked : ""}`}
+              key={product.name}
+            >
+              <div className={styles.cardVisual}>
+                <Image
+                  src={product.image}
+                  alt={product.imageAlt}
+                  width={product.width}
+                  height={product.height}
+                  sizes="(max-width: 760px) 92vw, 44vw"
+                  unoptimized
+                />
+                <span>{product.role}</span>
+              </div>
+              <div className={styles.cardBody}>
+                <div>
+                  <p>{product.role}</p>
+                  <h3>{product.name}</h3>
+                </div>
+                <p>{product.description}</p>
+                <footer>
+                  <span>{product.detail}</span>
+                  {unlocked ? (
+                    <a href={`/api/suite-demo-launch?target=${product.target}`}>
+                      Start guided tour <span aria-hidden="true">→</span>
+                    </a>
+                  ) : (
+                    <button type="button" onClick={focusAccessForm}>
+                      Unlock to start <span aria-hidden="true">→</span>
+                    </button>
+                  )}
+                </footer>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section
@@ -383,58 +417,6 @@ export default function SuiteDemoHub() {
               <span>{product.role}</span>
               <strong>{product.name}</strong>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.toursSection} aria-labelledby="tour-heading">
-        <div className={styles.sectionHeading}>
-          <p className="eyebrow">Four systems. Your starting point.</p>
-          <h2 id="tour-heading">Choose your guided tour.</h2>
-          <p>
-            {unlocked
-              ? "Your single introduction unlocked every system. Start anywhere and return for the others."
-              : "Preview all four now. Their launch buttons activate together after your single introduction."}
-          </p>
-        </div>
-
-        <div className={styles.tourGrid}>
-          {products.map((product) => (
-            <article
-              className={`${styles.tourCard} ${styles[product.accent]} ${unlocked ? styles.tourCardUnlocked : ""}`}
-              key={product.name}
-            >
-              <div className={styles.cardVisual}>
-                <Image
-                  src={product.image}
-                  alt={product.imageAlt}
-                  width={product.width}
-                  height={product.height}
-                  sizes="(max-width: 760px) 92vw, 44vw"
-                  unoptimized
-                />
-                <span>{product.role}</span>
-              </div>
-              <div className={styles.cardBody}>
-                <div>
-                  <p>{product.role}</p>
-                  <h3>{product.name}</h3>
-                </div>
-                <p>{product.description}</p>
-                <footer>
-                  <span>{product.detail}</span>
-                  {unlocked ? (
-                    <a href={`/api/suite-demo-launch?target=${product.target}`}>
-                      Start guided tour <span aria-hidden="true">→</span>
-                    </a>
-                  ) : (
-                    <button type="button" onClick={focusAccessForm}>
-                      Unlock to start <span aria-hidden="true">→</span>
-                    </button>
-                  )}
-                </footer>
-              </div>
-            </article>
           ))}
         </div>
       </section>
