@@ -7,41 +7,41 @@ import Link from "next/link";
 const heroProofs = [
   {
     value: "PAY",
-    label: "Payment economics",
+    label: "Checkout payments",
   },
   {
     value: "AR",
-    label: "Receivables control",
+    label: "Balances and layaway",
   },
   {
     value: "SVC",
-    label: "Service workflows",
+    label: "Repairs and services",
   },
   {
     value: "INV",
-    label: "Inventory movement",
+    label: "Serialized inventory",
   },
 ];
 
 const operatingSignals = [
   {
     label: "Payments",
-    title: "Keep more of every sale",
-    copy: "A better payment strategy, clean tender controls, and a reconciliation trail that starts at the counter.",
+    title: "Keep payment details with the sale",
+    copy: "Tender type, approvals, balances, and settlement review start from the sale record.",
   },
   {
     label: "Receivables",
-    title: "Know what is owed",
-    copy: "Deposits, layaway schedules, house accounts, aging, and follow-up stay on one accountable record.",
+    title: "See every open balance",
+    copy: "Review deposits, layaway schedules, house accounts, aging, and follow-up from the customer record.",
   },
   {
     label: "Services",
-    title: "Move every promise forward",
+    title: "Track work from intake to pickup",
     copy: "Repairs, appraisals, and custom jobs move from intake to bench to pickup without a second system.",
   },
   {
     label: "Inventory",
-    title: "See every piece in motion",
+    title: "Track each piece by location and status",
     copy: "Receiving, serialization, transfers, aging, audits, and RFID-ready events share a complete movement history.",
   },
 ];
@@ -61,8 +61,8 @@ const workflowProofs = [
 const productScenes = [
   {
     label: "Counter workspace",
-    title: "One calm counter view for clients, pieces, services, and tender.",
-    copy: "A live sale keeps the customer, the jewelry, service work, and payment decisions together.",
+    title: "Keep clients, items, services, and tender in one counter view.",
+    copy: "The sale record keeps the customer, jewelry, service work, and payment details together.",
     image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     alt: "Linkd POS showing Val Jones, jewelry items, a service line, and payment totals",
     href: "/jewelry-pos",
@@ -70,8 +70,8 @@ const productScenes = [
   },
   {
     label: "Inventory control",
-    title: "Every piece visible—from the case to the vault.",
-    copy: "Searchable, serialized inventory with location, status, value, and RFID-ready context.",
+    title: "See each piece by location, status, and value.",
+    copy: "Search serialized inventory and review its movement history, including RFID-ready events.",
     image: "/assets/screenshots/linkd-inventory.webp",
     alt: "Linkd inventory workspace showing serialized jewelry, location, status, and retail value",
     href: "/inventory",
@@ -79,8 +79,8 @@ const productScenes = [
   },
   {
     label: "Service bench",
-    title: "Repairs and custom work move with the same discipline as a sale.",
-    copy: "A purposeful service board keeps every job, owner, due date, and pickup status in sight.",
+    title: "Track repairs and custom work from intake through pickup.",
+    copy: "The service board shows each job, owner, due date, and current status.",
     image: "/assets/screenshots/linkd-services-repairs.webp",
     alt: "Linkd repairs and services workspace with intake, bench, ready, and turnaround data",
     href: "/repairs",
@@ -232,7 +232,7 @@ const faqItems = [
   {
     question: "What is Linkd?",
     answer:
-      "Linkd is a POS and ERP system for luxury jewelry retailers, connecting payments, receivables, inventory, services, reporting, and accounting handoff.",
+      "Linkd is jewelry-specific POS and store-management software for sales, payments, balances, inventory, services, reporting, and accounting preparation.",
   },
   {
     question: "How is Linkd different from JewelLink?",
@@ -242,12 +242,12 @@ const faqItems = [
   {
     question: "How quickly can we move to Linkd?",
     answer:
-      "Linkd is designed around a rapid, guided migration: discover the source, prepare and map the data, validate it with your team, then launch with white-glove support.",
+      "Migration starts with a review of your current system and data. We then map, validate, and launch the records your store needs. Timing depends on the source system and data quality.",
   },
   {
     question: "What is included in the Linkd Ecosystem?",
     answer:
-      "Linkd runs operations, JewelLink grows customer relationships, CountRetail turns store signals into intelligence, and JewelHire helps build the team.",
+      "Linkd covers POS and store management, JewelLink covers CRM and clienteling, CountRetail provides store analytics, and JewelHire covers hiring and onboarding.",
   },
 ];
 
@@ -280,7 +280,7 @@ const seoPageMap = [
     name: "Linkd, JewelLink, CountRetail, and JewelHire Ecosystem",
     url: "https://linkd.com/ecosystem",
     description:
-      "Compare the Linkd operational core, JewelLink relationship layer, CountRetail intelligence layer, and JewelHire people layer.",
+      "Compare Linkd store management, JewelLink CRM, CountRetail analytics, and JewelHire hiring software.",
   },
 ];
 
@@ -301,7 +301,7 @@ const relatedRetailSystems = [
     applicationCategory: "CRM",
     url: "https://www.jewellink.com/",
     description:
-      "Relationship layer for CRM, clienteling, texting, training, follow-up, and team workflows.",
+      "CRM software for clienteling, texting, training, follow-up, and team workflows in jewelry retail.",
   },
   {
     "@type": "SoftwareApplication",
@@ -309,7 +309,7 @@ const relatedRetailSystems = [
     applicationCategory: "BusinessIntelligenceApplication",
     url: "https://www.countretail.com/",
     description:
-      "Intelligence layer for traffic, Vision AI, marketing, inventory signals, and owner reporting.",
+      "Store analytics software for traffic, marketing, inventory signals, and owner reporting.",
   },
   {
     "@type": "SoftwareApplication",
@@ -317,7 +317,7 @@ const relatedRetailSystems = [
     applicationCategory: "BusinessApplication",
     url: "https://jewelhire.com/",
     description:
-      "People layer for jewelry retail hiring, assessment, onboarding, and talent.",
+      "Hiring, assessment, and onboarding software built for jewelry retail teams.",
   },
 ];
 
@@ -438,14 +438,14 @@ export default function Home() {
 
       <section className="hero-section" id="top">
         <div className="hero-copy">
-          <p className="eyebrow">The operating center of the Linkd Ecosystem</p>
+          <p className="eyebrow">Jewelry POS and store management</p>
           <h1>
             Run the whole store. Connect the <em>entire ecosystem.</em>
           </h1>
           <p className="hero-subtitle">
-            Linkd is the operational core for luxury jewelry retail—connecting
-            best-in-class payments, receivables, services, and inventory with
-            your customers, store intelligence, and team.
+            Linkd is jewelry-specific POS and store-management software for
+            sales, payments, balances, services, inventory, and reporting. Use
+            it on its own or connect the rest of the Linkd Ecosystem as needed.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
@@ -495,16 +495,16 @@ export default function Home() {
 
       <section className="guided-demo-band" aria-labelledby="guided-demo-title">
         <div className="guided-demo-band-copy">
-          <p className="eyebrow">One suite. Four guided tours.</p>
-          <h2 id="guided-demo-title">See the ecosystem from its operational center.</h2>
+          <p className="eyebrow">Four products. One place to explore.</p>
+          <h2 id="guided-demo-title">Choose the part of your business you want to see.</h2>
           <p>
-            Enter once, then explore Linkd, JewelLink, CountRetail, and
-            JewelHire at your own pace—individually or as one connected system.
+            Tell us about your store once, then explore Linkd, JewelLink,
+            CountRetail, and JewelHire at your own pace.
           </p>
           <Link className="button button-primary" href="/suite-demo">
             Explore the Linkd Suite
           </Link>
-          <small>One introduction unlocks every guided experience.</small>
+          <small>One short form opens all four guided tours.</small>
         </div>
         <div className="guided-demo-band-console" aria-label="Available Linkd Suite guided tours">
           <header>
@@ -512,19 +512,19 @@ export default function Home() {
             <strong>Choose a system</strong>
           </header>
           <div className="guided-demo-band-grid">
-            <span><b>LD</b> Linkd · Operations</span>
-            <span><b>JL</b> JewelLink · Relationships</span>
-            <span><b>CR</b> CountRetail · Intelligence</span>
-            <span><b>JH</b> JewelHire · People</span>
+            <span><b>LD</b> Linkd · POS + store management</span>
+            <span><b>JL</b> JewelLink · CRM + clienteling</span>
+            <span><b>CR</b> CountRetail · Store analytics</span>
+            <span><b>JH</b> JewelHire · Hiring + onboarding</span>
           </div>
           <footer><i /> Start with one product—or see how all four connect</footer>
         </div>
       </section>
 
       <section className="section-light manifesto-band" aria-labelledby="manifesto-title">
-        <p className="eyebrow">Where Linkd leads</p>
+        <p className="eyebrow">Built around daily store work</p>
           <h2 className="manifesto-statement" id="manifesto-title">
-            Four operating engines. One system your team can trust from
+            Sell, collect, service, and track in one system from
             {" "}<em>open to close.</em>
           </h2>
         <div className="manifesto-practices" aria-label="Linkd operating practices">
@@ -534,21 +534,22 @@ export default function Home() {
 
       <section className="section-white core-section" id="workflows">
         <div className="core-copy">
-          <p className="eyebrow">One operating record</p>
-          <h2>Every part of the store, one core.</h2>
+          <p className="eyebrow">How Linkd works</p>
+          <h2>One sale updates the rest of the store.</h2>
           <p>
-            Payments, services, inventory, and receivables write to one
-            record—ready for the rest of the Linkd Ecosystem.
+            An associate finds the customer, adds a serialized piece or
+            service, takes payment, and finishes the sale. Linkd then updates
+            customer history, item or service status, open balances, and daily reporting.
           </p>
           <Link className="button button-secondary" href="/jewelry-pos">
-            Explore workflows
+            See the POS workflow
           </Link>
         </div>
-        <div className="core-orbit" aria-label="Linkd operational core modules">
+        <div className="core-orbit" aria-label="Linkd store-management modules">
           <div className="core-orbit-rings" aria-hidden="true"></div>
           <div className="core-hub">
             <strong>Linkd</strong>
-            <span>Operational core</span>
+            <span>POS + store management</span>
           </div>
           {coreModules.map((module) => (
             <div
@@ -564,8 +565,8 @@ export default function Home() {
 
       <section className="section-light platform-section" id="platform">
         <div className="section-copy">
-          <p className="eyebrow">Platform</p>
-          <h2>Four workflows. One operating system.</h2>
+          <p className="eyebrow">What Linkd brings together</p>
+          <h2>The daily work behind every jewelry sale.</h2>
         </div>
         <div className="operating-grid">
           {operatingSignals.map((signal, index) => (
@@ -582,12 +583,12 @@ export default function Home() {
 
       <section className="section-white economics-section" aria-labelledby="economics-title">
         <div className="economics-copy">
-          <p className="eyebrow">The Linkd advantage</p>
-          <h2 id="economics-title">Payment processing should strengthen the business—not quietly tax it.</h2>
+          <p className="eyebrow">Payments in Linkd</p>
+          <h2 id="economics-title">Keep payment processing tied to the sale.</h2>
           <p>
-            Linkd connects the payment decision to the sale, the customer,
-            the balance, and the books. That gives jewelers a clearer path to
-            better economics and cleaner daily control.
+            Linkd records the tender with the sale, customer, and any remaining
+            balance. Your team can review checkout activity and settlement
+            details from the same trail.
           </p>
           <Link className="button button-secondary" href="/payments">
             Explore Payments
@@ -596,7 +597,7 @@ export default function Home() {
         <div className="economics-proof" aria-label="Connected payment workflow">
           <article>
             <span>01</span>
-            <strong>Tender with context</strong>
+            <strong>Record the tender</strong>
             <p>Every payment stays tied to the client, sale, service, or account.</p>
           </article>
           <article>
@@ -606,8 +607,8 @@ export default function Home() {
           </article>
           <article>
             <span>03</span>
-            <strong>Reconcile with confidence</strong>
-            <p>Counter activity and settlement review share one operational trail.</p>
+            <strong>Review settlement</strong>
+            <p>Use checkout activity and settlement details to investigate mismatches.</p>
           </article>
         </div>
       </section>
@@ -650,11 +651,12 @@ export default function Home() {
 
       <section className="section-light family-section" id="ecosystem">
         <div className="section-copy">
-          <p className="eyebrow">One family of products</p>
-          <h2>Operations, relationships, intelligence, and people.</h2>
+          <p className="eyebrow">The Linkd Ecosystem</p>
+          <h2>Four products, each with one clear job.</h2>
           <p>
-            Linkd records the operation. JewelLink grows the relationship.
-            CountRetail explains the store. JewelHire helps build the team.
+            Linkd runs POS and store operations. JewelLink supports customer
+            relationships. CountRetail adds store analytics. JewelHire helps
+            build the team. Use them separately or connect them as needed.
           </p>
         </div>
         <div className="ecosystem-grid">
@@ -704,19 +706,19 @@ export default function Home() {
         </div>
         <div className="section-actions">
           <Link className="button button-secondary" href="/ecosystem">
-            Compare the Stack
+            Explore the Linkd Ecosystem
           </Link>
         </div>
       </section>
 
       <section className="section-white migration-section" id="migration" aria-labelledby="migration-title">
         <div className="migration-intro">
-          <p className="eyebrow">Switch without the stall</p>
-          <h2 id="migration-title">Your history comes with you. Your momentum never leaves.</h2>
+          <p className="eyebrow">Moving to Linkd</p>
+          <h2 id="migration-title">A guided move from your current system.</h2>
           <p>
-            Linkd pairs a rapid migration path with a white-glove launch team,
-            so moving systems feels controlled from the first data review to
-            the first live sale.
+            We review your current workflows and data, map the records your
+            store needs, validate them with your team, and support the first
+            live sale. Timing and scope depend on the source system and data.
           </p>
         </div>
         <ol className="migration-steps">

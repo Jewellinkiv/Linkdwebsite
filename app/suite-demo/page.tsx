@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Explore the Linkd Suite",
     description:
-      "One introduction unlocks guided tours across operations, relationships, intelligence, and people.",
+      "Use one short form to explore Linkd POS, JewelLink CRM, CountRetail analytics, and JewelHire hiring software.",
     url: "/suite-demo",
     images: [
       {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Explore the Linkd Suite",
-    description: "Enter once and explore four connected guided experiences.",
+    description: "Enter once and explore four guided product tours.",
     images: ["/og-linkd-v2.png"],
   },
   robots: {

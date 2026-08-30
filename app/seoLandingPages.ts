@@ -11,17 +11,28 @@ export type SeoLandingPage = {
   visualProofs: {
     label: string;
     title: string;
+    copy: string;
     image: string;
     alt: string;
   }[];
+  tourEyebrow: string;
+  tourTitle: string;
   outcomes: {
     label: string;
     title: string;
     copy: string;
   }[];
+  outcomesEyebrow: string;
+  outcomesTitle: string;
   stackTitle: string;
   stackCopy: string;
   stackItems: string[];
+  connectionEyebrow: string;
+  connectionSteps: {
+    label: string;
+    title: string;
+    copy: string;
+  }[];
   faq: {
     question: string;
     answer: string;
@@ -35,68 +46,93 @@ export const seoLandingPages = {
   payments: {
     slug: "payments",
     eyebrow: "Payment processing for jewelers",
-    title: "Better payment economics, built into the sale.",
+    title: "Take payments, track balances, and close with a clear trail.",
     description:
-      "Linkd connects tender, deposits, receivables, settlement review, and accounting handoff so luxury jewelers can protect margin without breaking the customer experience.",
+      "Linkd keeps each payment with the sale, customer, deposit, layaway, or house account so your team can review what happened before it reaches the books.",
     image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     imageAlt: "Linkd checkout workspace with customer, jewelry items, services, and tender context",
-    proof: ["Tender control", "Receivables", "Settlement review", "Clean handoff"],
+    proof: ["Checkout payments", "Deposits and balances", "Settlement review", "Accounting records"],
+    tourEyebrow: "From tender to settlement",
+    tourTitle: "Follow a payment from checkout to daily close.",
     visualProofs: [
       {
-        label: "Counter",
-        title: "Tender decisions beside the sale",
+        label: "Checkout",
+        title: "Take payment without leaving the sale",
+        copy: "The associate sees the customer, items, services, and amount due in the same register view.",
         image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd jewelry POS checkout and tender workflow",
       },
       {
-        label: "Balance",
-        title: "Deposits and receivables stay visible",
+        label: "Customer",
+        title: "Keep deposits and balances with the customer",
+        copy: "Customer details and account information remain available after the register closes.",
         image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer account and balance context",
       },
       {
-        label: "Close",
-        title: "Daily review with an operational trail",
+        label: "Daily close",
+        title: "Review sales and tenders before handoff",
+        copy: "Managers can review daily activity before preparing records for accounting.",
         image: "/assets/screenshots/linkd-reporting.webp",
         alt: "Linkd reporting workspace for sales and payment review",
       },
     ],
+    outcomesEyebrow: "What changes for your team",
+    outcomesTitle: "Keep payment, balance, and daily-close details on the same records.",
     outcomes: [
       {
-        label: "Protect",
-        title: "Payment economics",
-        copy: "Put processing strategy in the same conversation as checkout, instead of treating fees as an invisible cost after the sale.",
+        label: "Take payment",
+        title: "Tender stays with the sale",
+        copy: "Keep the payment method, customer, items, services, and amount due together at checkout.",
       },
       {
-        label: "Control",
-        title: "Receivables management",
+        label: "Track balances",
+        title: "Deposits remain easy to find",
         copy: "Keep deposits, layaway, house accounts, and open balances connected to the customer and the original transaction.",
       },
       {
-        label: "Reconcile",
-        title: "A cleaner close",
-        copy: "Give operators a consistent trail from tender activity to settlement review and accounting handoff.",
+        label: "Close the day",
+        title: "Review before it reaches the books",
+        copy: "See the day's tender activity in one place before settlement review and accounting preparation.",
       },
     ],
-    stackTitle: "Payments are strongest when the whole store agrees.",
+    connectionEyebrow: "From counter to close",
+    stackTitle: "How payment information moves through Linkd.",
     stackCopy:
-      "Linkd connects tender activity to the operational record, receivables, reporting, and accounting paths without losing the customer context.",
+      "A payment starts at checkout, stays tied to any open balance, and remains available for end-of-day review. Accounting setup is planned around the systems your store uses.",
     stackItems: ["Linkd POS", "Receivables", "Sage", "QuickBooks", "Reporting", "Open API"],
+    connectionSteps: [
+      {
+        label: "Checkout",
+        title: "The associate records the payment",
+        copy: "Tender is saved with the customer, sale, service, or account it belongs to.",
+      },
+      {
+        label: "Balance",
+        title: "Open amounts remain visible",
+        copy: "Deposits, layaway schedules, and house-account balances stay attached to the original transaction.",
+      },
+      {
+        label: "Review",
+        title: "Managers verify the day",
+        copy: "Tender activity can be reviewed before settlement and the store's configured accounting process.",
+      },
+    ],
     faq: [
       {
         question: "Does Linkd separate payment processing from the POS?",
         answer:
-          "No. Linkd is designed to keep tender decisions, the sale, customer context, balances, and reporting in one connected operational workflow.",
+          "No. Linkd keeps the payment with the sale, customer, balance, and daily review instead of treating it as a separate step.",
       },
       {
         question: "Can Linkd help with layaway and house accounts?",
         answer:
-          "Yes. Deposits, schedules, payments, balances, and aging are designed to remain connected to the customer and original transaction.",
+          "Yes. Deposits, payment schedules, balances, and aging remain connected to the customer and original transaction.",
       },
       {
         question: "How does payment activity reach accounting?",
         answer:
-          "Linkd creates a consistent operational record for review and handoff. The exact integration path is mapped around your accounting system and workflow.",
+          "Your team reviews payment activity in Linkd first. The exact export or integration path is mapped around your accounting system during implementation.",
       },
     ],
     metaTitle: "Payment Processing for Jewelry Stores",
@@ -120,57 +156,82 @@ export const seoLandingPages = {
     image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     imageAlt: "Linkd jewelry POS register on a MacBook screen",
     proof: ["Checkout", "Repair intake", "Layaway", "Tender controls"],
+    tourEyebrow: "At the counter",
+    tourTitle: "See a sale from cart to close.",
     visualProofs: [
       {
         label: "Register",
-        title: "Checkout and service intake",
+        title: "Build the sale around the customer",
+        copy: "Add serialized pieces, services, and payment details without losing sight of who you are serving.",
         image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd jewelry POS register workflow",
       },
       {
         label: "Customer",
-        title: "POS context beside the relationship",
+        title: "Keep purchase and account details close",
+        copy: "Associates can see the information they need to continue the relationship after checkout.",
         image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer context and CRM-ready record",
       },
       {
         label: "Review",
-        title: "Tender, sales, and owner reporting",
+        title: "Review the day after the sale",
+        copy: "Managers can scan sales and store activity from the reporting workspace.",
         image: "/assets/screenshots/linkd-reporting.webp",
         alt: "Linkd reports dashboard for jewelry store operators",
       },
     ],
+    outcomesEyebrow: "What your team can do",
+    outcomesTitle: "Handle the whole sale without switching systems.",
     outcomes: [
       {
         label: "Sell",
         title: "Counter checkout",
-        copy: "Every sale written the same way — client, items, services, and tender in one register view, parked and resumed without losing the thread.",
+        copy: "Build each sale from the customer, serialized items, services, and tender. Park or resume it without starting over.",
       },
       {
         label: "Service",
         title: "Repairs and appraisals",
-        copy: "Repairs, appraisals, custom work, and special orders captured at the counter — never on a separate pad that gets lost.",
+        copy: "Start repairs, appraisals, custom work, and special orders at the counter with the customer and item records attached.",
       },
       {
         label: "Account",
         title: "Layaway and balances",
-        copy: "Deposits, layaway schedules, house accounts, and balances handled by the book — no spreadsheet drift, no forgotten terms.",
+        copy: "Record deposits, layaway schedules, house accounts, and remaining balances on the customer and sale records.",
       },
     ],
-    stackTitle: "Designed to feed the rest of the store.",
+    connectionEyebrow: "After the receipt",
+    stackTitle: "What happens after a sale.",
     stackCopy:
-      "Clean POS activity becomes useful context for JewelLink clienteling, CountRetail analytics, accounting, and owner reporting.",
+      "The same sale can update inventory, customer history, open balances, and reporting. Optional connections can carry the right information into CRM, analytics, and accounting tools.",
     stackItems: ["JewelLink CRM", "CountRetail AI", "QuickBooks", "Xero", "Striven", "Open API"],
+    connectionSteps: [
+      {
+        label: "Sell",
+        title: "Complete the transaction",
+        copy: "The associate adds the customer, serialized items, services, and tender in the register.",
+      },
+      {
+        label: "Update",
+        title: "The store records change together",
+        copy: "Inventory status, customer history, and any remaining balance reflect the sale.",
+      },
+      {
+        label: "Continue",
+        title: "The next team has the details",
+        copy: "Reporting, accounting, CRM, and analytics connections can use the information your store has configured.",
+      },
+    ],
     faq: [
       {
         question: "Is Linkd a jewelry POS?",
         answer:
-          "Yes. Linkd is being built as a luxury jewelry POS and store operations platform for checkout, services, inventory, accounts, and reporting.",
+          "Yes. Linkd is jewelry-specific POS and store-management software for checkout, services, inventory, accounts, and reporting.",
       },
       {
         question: "Can Linkd support layaway and house accounts?",
         answer:
-          "Linkd is designed around jewelry workflows that include layaway schedules, deposits, customer balances, house accounts, and accounting handoff.",
+          "Yes. Linkd keeps layaway schedules, deposits, customer balances, and house accounts with the original sale and customer.",
       },
     ],
     metaTitle: "Jewelry POS Software for Luxury Retailers",
@@ -188,63 +249,88 @@ export const seoLandingPages = {
   repairs: {
     slug: "repairs",
     eyebrow: "Jewelry repair intake",
-    title: "Repairs, appraisals, and services connected to the sale.",
+    title: "Take a repair in at the counter and track it through pickup.",
     description:
-      "Linkd keeps repair intake, service work, appraisals, custom jobs, deposits, customer context, and POS history in the same operational workspace.",
+      "Document the piece, collect a deposit, assign the work, and keep the customer informed without moving the job to a separate system.",
     image: "/assets/screenshots/linkd-services-repairs.webp",
     imageAlt: "Linkd jewelry repair bench board from intake to pickup",
     proof: ["Repair intake", "Appraisals", "Service history", "Customer context"],
+    tourEyebrow: "From intake to pickup",
+    tourTitle: "Follow a repair through the store.",
     visualProofs: [
       {
         label: "Bench",
-        title: "Repair bench, intake to pickup",
+        title: "See every job and its next step",
+        copy: "The service board shows which jobs are at intake, on the bench, ready, or waiting for pickup.",
         image: "/assets/screenshots/linkd-services-repairs.webp",
         alt: "Linkd jewelry repair board tracking jobs from intake to pickup",
       },
       {
         label: "Customer",
-        title: "Repair history tied to the relationship",
+        title: "Keep the job with the customer",
+        copy: "Associates can return to the customer record when they need contact, account, or service details.",
         image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer record with repair and service history",
       },
       {
         label: "Review",
-        title: "Service reporting owners can scan",
+        title: "Review store activity in one place",
+        copy: "Managers can use Linkd reporting alongside the service board to review the day.",
         image: "/assets/screenshots/linkd-reporting.webp",
         alt: "Linkd reports dashboard for jewelry service review",
       },
     ],
+    outcomesEyebrow: "What changes for your team",
+    outcomesTitle: "Everyone can see what the job needs and what happens next.",
     outcomes: [
       {
         label: "Capture",
         title: "Counter repair intake",
-        copy: "Every repair, appraisal, and custom job started from the counter workflow associates already use — nothing written on a tag that walks off.",
+        copy: "Start repairs, appraisals, and custom jobs at the counter with the customer and piece already attached.",
       },
       {
         label: "Track",
         title: "Service history",
-        copy: "Status, deposits, item references, and notes kept on the operational record, so any associate can pick the job up.",
+        copy: "Keep status, deposits, item references, due dates, and notes together so another associate can pick up the job.",
       },
       {
         label: "Follow up",
         title: "CRM-ready service context",
-        copy: "Ready jobs flow to JewelLink for follow-up — the client hears from you the moment a piece is done.",
+        copy: "When JewelLink is connected, ready-job details can support timely client follow-up.",
       },
     ],
-    stackTitle: "Service work should not live outside the store record.",
+    connectionEyebrow: "One job record",
+    stackTitle: "Keep the repair with the customer and the piece.",
     stackCopy:
-      "When repair and appraisal activity stays close to POS, inventory, and customer context, associates and managers can see the full relationship.",
+      "The repair starts at the counter, moves through the service board, and remains easy to find when the customer calls or returns.",
     stackItems: ["Repair intake", "Appraisals", "Custom work", "Customer history", "JewelLink CRM", "Owner reporting", "Deposits", "Open API"],
+    connectionSteps: [
+      {
+        label: "Intake",
+        title: "Document the piece and the request",
+        copy: "Add photos, notes, due dates, customer details, and any deposit at the counter.",
+      },
+      {
+        label: "Service",
+        title: "Move the job through the bench",
+        copy: "The team can see the current status, owner, and next step without asking for the intake details again.",
+      },
+      {
+        label: "Pickup",
+        title: "Finish with the history intact",
+        copy: "Completion, payment, and pickup stay available on the customer and service records.",
+      },
+    ],
     faq: [
       {
         question: "Can Linkd support jewelry repair intake?",
         answer:
-          "Linkd is designed to keep repair intake, appraisals, custom work, deposits, notes, status, and customer context close to the POS workflow.",
+          "Yes. Linkd keeps repair intake, appraisals, custom work, deposits, notes, and status close to the customer and POS record.",
       },
       {
         question: "How can repair history connect to CRM?",
         answer:
-          "Service activity can become useful customer context for JewelLink clienteling, reminders, follow-up, and associate workflows.",
+          "When JewelLink is connected, service status and customer details can support reminders, follow-up, and associate outreach.",
       },
     ],
     metaTitle: "Jewelry Repair Intake, Appraisals, Services, and POS History",
@@ -262,63 +348,88 @@ export const seoLandingPages = {
   inventory: {
     slug: "inventory",
     eyebrow: "Jewelry inventory management",
-    title: "Inventory control from case to vault.",
+    title: "Know where every piece is—and where it has been.",
     description:
-      "Track serialized items, receiving, transfers, aging, vendor context, and RFID-ready inventory events in the same operational record.",
+      "Find serialized items, record receiving and transfers, review aging, and keep movement history with each piece.",
     image: "/assets/screenshots/linkd-inventory.webp",
     imageAlt: "Linkd jewelry inventory search on a MacBook screen",
     proof: ["Serialized items", "Transfers", "Aging views", "RFID-ready events"],
+    tourEyebrow: "From receiving to the case",
+    tourTitle: "Find a piece and see where it has been.",
     visualProofs: [
       {
         label: "Search",
-        title: "Serialized inventory lookup",
+        title: "Find the exact piece",
+        copy: "Search serialized inventory and check its location, status, vendor, and value.",
         image: "/assets/screenshots/linkd-inventory.webp",
         alt: "Linkd serialized jewelry inventory search workflow",
       },
       {
-        label: "Account",
-        title: "Customer history tied to items",
+        label: "Customer",
+        title: "Return to the related customer record",
+        copy: "When a piece is tied to a sale, the customer workspace keeps the relationship easy to find.",
         image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer history connected to store operations",
       },
       {
         label: "Report",
-        title: "Aging and exception review",
+        title: "Review aging and store activity",
+        copy: "Use reporting to identify inventory questions that need a closer look.",
         image: "/assets/screenshots/linkd-reporting.webp",
         alt: "Linkd reporting views for jewelry inventory review",
       },
     ],
+    outcomesEyebrow: "What your team can do",
+    outcomesTitle: "Track movement as it happens, not after the fact.",
     outcomes: [
       {
         label: "Track",
         title: "Serialized item records",
-        copy: "Every item given a searchable record — location, movement, vendor, and status — so nothing sits untracked.",
+        copy: "Give each serialized item a searchable record with its location, movement, vendor, and status.",
       },
       {
         label: "Move",
         title: "Receiving and transfers",
-        copy: "Receiving, multi-store transfers, and vault movement logged as they happen, not reconciled after the fact.",
+        copy: "Log receiving, multi-store transfers, and vault movement when each action happens.",
       },
       {
         label: "Review",
         title: "Aging and exceptions",
-        copy: "Aging pressure and movement gaps surfaced early — caught before they become a reporting or security problem.",
+        copy: "Use aging and movement history to spot records that need attention before review time.",
       },
     ],
-    stackTitle: "Inventory data ready for intelligence.",
+    connectionEyebrow: "When an item moves",
+    stackTitle: "What Linkd updates with each inventory action.",
     stackCopy:
-      "When Linkd keeps item movement clean, CountRetail can compare inventory pressure with traffic, demand, and store performance.",
+      "Receiving, transfers, location changes, and sales stay with the serialized item. Optional analytics connections can use that history alongside store performance data.",
     stackItems: ["RFID readiness", "CountRetail AI", "Vendor context", "Multi-store movement", "Owner reporting", "Open API"],
+    connectionSteps: [
+      {
+        label: "Receive",
+        title: "Create the item record",
+        copy: "Capture the serial number, vendor, cost, price, and starting location when the piece arrives.",
+      },
+      {
+        label: "Move",
+        title: "Record each location change",
+        copy: "Transfers and vault or case movement add to the item's history instead of replacing it.",
+      },
+      {
+        label: "Review",
+        title: "Use the history to answer questions",
+        copy: "Managers can review location, aging, status, and movement when a piece needs attention.",
+      },
+    ],
     faq: [
       {
         question: "Does Linkd support serialized jewelry inventory?",
         answer:
-          "Linkd is designed for serialized jewelry inventory, including item lookup, movement history, transfers, receiving, aging, and vendor context.",
+          "Yes. Linkd supports serialized item lookup, movement history, transfers, receiving, aging, and vendor details.",
       },
       {
         question: "How does Linkd connect inventory with security?",
         answer:
-          "Linkd can align inventory movement, employee permissions, register actions, and CountRetail camera context for reviewable exception workflows.",
+          "Linkd keeps item movement and register activity available for review. When CountRetail is connected, store intelligence can add another source of context.",
       },
     ],
     metaTitle: "Jewelry Inventory Management and RFID-Ready Operations",
@@ -336,68 +447,93 @@ export const seoLandingPages = {
   integrations: {
     slug: "integrations",
     eyebrow: "Jewelry retail integrations",
-    title: "One operational record. Every essential connection.",
+    title: "Connect Linkd to the tools your store already uses.",
     description:
-      "Linkd is designed as the operational hub for payments, Sage, QuickBooks, the Linkd Ecosystem, e-commerce, RFID, tax, and custom API paths.",
+      "Connect Linkd with payment, accounting, commerce, tax, RFID, CRM, and analytics tools. Exact availability and setup are confirmed during integration planning.",
     image: "/assets/screenshots/linkd-integrations.webp",
     imageAlt: "Linkd integrations settings on a MacBook screen",
     proof: ["Payment processing", "Sage", "QuickBooks", "Open API"],
+    tourEyebrow: "Connection setup",
+    tourTitle: "See what is connected and when it last synced.",
     visualProofs: [
       {
         label: "Status",
-        title: "Integration health at a glance",
+        title: "Check provider and sync status",
+        copy: "The integrations workspace shows configured providers and their current connection state.",
         image: "/assets/screenshots/linkd-integrations.webp",
         alt: "Linkd integration settings and provider status workflow",
       },
       {
-        label: "Source",
-        title: "POS activity stays the record",
+        label: "Linkd",
+        title: "Capture the store activity first",
+        copy: "The sale begins with the customer, items, services, and tender in Linkd.",
         image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd POS register as the operational source of truth",
       },
       {
-        label: "Context",
-        title: "CRM-ready customer activity",
+        label: "Customer",
+        title: "Keep the related customer details available",
+        copy: "The customer workspace shows the store information a configured CRM connection may use.",
         image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer activity ready for CRM workflows",
       },
     ],
+    outcomesEyebrow: "What connections do",
+    outcomesTitle: "Document which systems receive each configured record.",
     outcomes: [
       {
-        label: "Ecosystem",
-        title: "Connected product context",
-        copy: "The integration model keeps Linkd operations ready for JewelLink relationships, CountRetail intelligence, and JewelHire people workflows.",
+        label: "Customer tools",
+        title: "CRM and analytics connections",
+        copy: "Configure the information JewelLink or CountRetail needs around the way your store works.",
       },
       {
         label: "Payments",
-        title: "Processing beside the transaction",
-        copy: "Payment activity stays connected to the sale, the balance, settlement review, and the daily operational trail.",
+        title: "Processing stays with the transaction",
+        copy: "Keep payment activity connected to the sale, customer balance, and daily review.",
       },
       {
         label: "Back office",
-        title: "Accounting and commerce paths",
-        copy: "Map Sage, QuickBooks, commerce, tax, and custom API paths around the way your back office actually closes the day.",
+        title: "Accounting, commerce, and tax",
+        copy: "Map each supported connection around the records your back office needs and the systems it already uses.",
       },
     ],
-    stackTitle: "A connected stack without hiding the source of truth.",
+    connectionEyebrow: "What connects and why",
+    stackTitle: "Linkd runs the store. Connections move the right data.",
     stackCopy:
-      "Linkd remains the daily operational record while accounting, payment, commerce, and ecosystem connections carry clean context to the next workflow.",
+      "Each connection has a specific job. Its exact scope, direction, and setup depend on the provider and the way your store works.",
     stackItems: ["Payment processing", "Sage", "QuickBooks", "JewelLink CRM", "CountRetail AI", "JewelHire", "TrackTech RFID", "Shopify", "Avalara", "Open API"],
+    connectionSteps: [
+      {
+        label: "Record",
+        title: "Work starts in Linkd",
+        copy: "Sales, customers, items, services, payments, and balances are recorded where the team completes the work.",
+      },
+      {
+        label: "Connect",
+        title: "Define what each provider needs",
+        copy: "During planning, the team confirms which records move, in which direction, and how often.",
+      },
+      {
+        label: "Monitor",
+        title: "Check connection health",
+        copy: "The integrations workspace gives operators a place to review configured provider status.",
+      },
+    ],
     faq: [
       {
         question: "How do Linkd, JewelLink, and CountRetail work together?",
         answer:
-          "Linkd manages store operations, JewelLink adds relationship workflows, CountRetail adds retail intelligence, and JewelHire supports recruiting and talent.",
+          "Linkd manages store operations. JewelLink, CountRetail, and JewelHire are separate products that can connect when your store needs them.",
       },
       {
         question: "Does Linkd replace the other ecosystem products?",
         answer:
-          "No. Linkd is the POS and operations layer. JewelLink handles relationships, CountRetail handles intelligence, and JewelHire supports the people layer.",
+          "No. Linkd works on its own as the POS and store-management system. The other products add customer, analytics, or hiring tools.",
       },
       {
         question: "Can Linkd connect to accounting and e-commerce?",
         answer:
-          "Linkd is designed for accounting, tax, e-commerce, RFID, and custom API paths, including Sage, QuickBooks, Shopify, and Avalara. Exact scope is confirmed during integration planning.",
+          "Linkd supports planned connections for accounting, tax, e-commerce, RFID, and custom APIs. Exact provider availability and scope are confirmed during integration planning.",
       },
     ],
     metaTitle: "Jewelry POS Integrations and Luxury Management Ecosystem",
@@ -418,63 +554,88 @@ export const seoLandingPages = {
   accounting: {
     slug: "accounting",
     eyebrow: "Jewelry store finance",
-    title: "House accounts, layaway, and accounting handoff without drift.",
+    title: "Keep deposits, layaway, and house accounts tied to the sale.",
     description:
-      "Linkd brings deposits, balances, layaway schedules, house accounts, tender activity, and accounting paths closer to the POS record.",
+      "Review customer balances and tender activity in Linkd before preparing the records your accounting process needs.",
     image: "/assets/screenshots/linkd-reporting.webp",
     imageAlt: "Linkd finance and reporting views on a MacBook screen",
-    proof: ["House accounts", "Layaway", "Tender review", "Accounting handoff"],
+    proof: ["House accounts", "Layaway", "Tender review", "Accounting preparation"],
+    tourEyebrow: "From sale to books",
+    tourTitle: "Follow the numbers from checkout to review.",
     visualProofs: [
       {
         label: "Register",
-        title: "Deposits and tender context",
+        title: "Record the sale and selected tender",
+        copy: "The register keeps the customer, items, services, amount due, and payment choice together.",
         image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
         alt: "Linkd POS register with tender and sale context",
       },
       {
         label: "Customer",
-        title: "Balances beside the customer record",
+        title: "Check balances beside the customer",
+        copy: "Return to the customer workspace when you need account or transaction details.",
         image: "/assets/screenshots/linkd-customer-overview-demo-v2.webp",
         alt: "Linkd customer record with operational account context",
       },
       {
         label: "Report",
-        title: "Accounting-ready review",
+        title: "Review sales before accounting preparation",
+        copy: "Managers can scan sales, margin, and transaction activity before the next back-office step.",
         image: "/assets/screenshots/linkd-reporting.webp",
         alt: "Linkd reporting dashboard for finance review",
       },
     ],
+    outcomesEyebrow: "For the back office",
+    outcomesTitle: "Give accounting a cleaner starting point.",
     outcomes: [
       {
         label: "Account",
         title: "House account control",
-        copy: "Balances, account aging, and finance status kept on the record — never reconstructed from a spreadsheet.",
+        copy: "Keep balances, account aging, and finance status with the customer instead of rebuilding them later.",
       },
       {
         label: "Schedule",
         title: "Layaway and deposits",
-        copy: "Layaway schedules, deposits, and split tenders tied to the sale and the customer, every time.",
+        copy: "Keep layaway schedules, deposits, and split tenders tied to the sale and customer.",
       },
       {
         label: "Handoff",
-        title: "Cleaner accounting paths",
-        copy: "Reviewable activity prepared for QuickBooks, Xero, Striven, and tax — the month-end close without the scramble.",
+        title: "Prepared accounting records",
+        copy: "Review store activity before it moves through the accounting setup configured during implementation.",
       },
     ],
-    stackTitle: "Finance works better when POS is the record.",
+    connectionEyebrow: "Before the books",
+    stackTitle: "How store activity reaches accounting.",
     stackCopy:
-      "Linkd keeps store finance activity close to customer, inventory, and tender context so reporting and accounting handoff stay easier to trust.",
+      "Linkd keeps the sale, tender, deposit, and customer balance together. The export or integration path is mapped around your accounting system during implementation.",
     stackItems: ["House accounts", "Layaway schedules", "Tender reporting", "QuickBooks", "Xero", "Striven", "Avalara", "Owner reporting"],
+    connectionSteps: [
+      {
+        label: "Record",
+        title: "Capture the transaction once",
+        copy: "The sale, tender, deposit, and any remaining balance stay with the customer record.",
+      },
+      {
+        label: "Review",
+        title: "Check the day in Linkd",
+        copy: "Managers review sales and transaction activity before it moves to the next system.",
+      },
+      {
+        label: "Prepare",
+        title: "Follow the configured accounting path",
+        copy: "The exact export, sync, or review process is agreed during implementation.",
+      },
+    ],
     faq: [
       {
         question: "Can Linkd support jewelry store house accounts?",
         answer:
-          "Linkd is designed for jewelry store finance workflows that include customer balances, account aging, house accounts, specialty financing, and reporting review.",
+          "Yes. Linkd keeps customer balances, account aging, house accounts, specialty financing, and review details with the store record.",
       },
       {
         question: "How does Linkd help with accounting handoff?",
         answer:
-          "Linkd keeps POS, tender, customer, layaway, and account activity closer together so accounting exports and review paths can be cleaner.",
+          "Linkd keeps POS, tender, customer, layaway, and account activity together for review. The exact export or integration is mapped during implementation.",
       },
     ],
     metaTitle: "Jewelry Store House Accounts, Layaway, and Accounting Handoff",
@@ -492,63 +653,88 @@ export const seoLandingPages = {
   multiStore: {
     slug: "multi-store",
     eyebrow: "Multi-store jewelry operations",
-    title: "One operating record across every location.",
+    title: "Run every location from the same set of records.",
     description:
-      "Linkd helps multi-location jewelers connect store transfers, employee permissions, inventory movement, reporting, customer context, and accounting handoff.",
+      "Move inventory between stores, set access by role, and compare location activity from one Linkd workspace.",
     image: "/assets/screenshots/linkd-inventory.webp",
     imageAlt: "Linkd multi-store inventory and operations view on a MacBook screen",
     proof: ["Transfers", "Locations", "Permissions", "Owner reporting"],
+    tourEyebrow: "Across locations",
+    tourTitle: "Check inventory and sales across your stores.",
     visualProofs: [
       {
-        label: "Move",
-        title: "Controlled store transfers",
+        label: "Inventory",
+        title: "Find each item's store and location",
+        copy: "Search inventory and check where a serialized piece is currently recorded.",
         image: "/assets/screenshots/linkd-inventory.webp",
         alt: "Linkd inventory movement and multi-store transfer workflow",
       },
       {
-        label: "Control",
-        title: "Permissions by location",
+        label: "Connections",
+        title: "Check provider and sync status",
+        copy: "The integrations view shows configured providers and their current connection state.",
         image: "/assets/screenshots/linkd-integrations.webp",
-        alt: "Linkd provider and permission settings for multi-store control",
+        alt: "Linkd provider and integration status for multi-store operations",
       },
       {
         label: "Report",
-        title: "Owner views across stores",
+        title: "Compare sales across locations",
+        copy: "Owners can use the all-store reporting view to compare sales and store activity.",
         image: "/assets/screenshots/linkd-reporting.webp",
         alt: "Linkd reporting dashboard for multi-location jewelry operators",
       },
     ],
+    outcomesEyebrow: "For owners and managers",
+    outcomesTitle: "Use the same process at every location.",
     outcomes: [
       {
         label: "Transfer",
         title: "Item movement history",
-        copy: "Receiving, vault movement, and inter-store transfers tracked on one operating record across every location.",
+        copy: "Keep receiving, vault movement, and inter-store transfers in the item's movement history.",
       },
       {
         label: "Control",
         title: "Permissions by role and location",
-        copy: "Register controls, approvals, and access set to how each store runs — the standard travels with the role.",
+        copy: "Set register controls, approvals, and access around each employee's role and location.",
       },
       {
         label: "Compare",
         title: "Reporting owners can scan",
-        copy: "One clean view across locations for sales, tenders, inventory pressure, and integration health.",
+        copy: "Compare sales, tenders, inventory, and connection status without combining separate store reports by hand.",
       },
     ],
-    stackTitle: "Multi-store data needs one source of truth.",
+    connectionEyebrow: "One shared process",
+    stackTitle: "How location activity stays connected.",
     stackCopy:
-      "When Linkd keeps each location's sales, inventory, permissions, and transfers clean, JewelLink and CountRetail can make relationship and intelligence workflows more useful.",
+      "Linkd ties inventory, transfers, permissions, and sales to each location. JewelLink and CountRetail are optional additions for customer and store-performance information.",
     stackItems: ["Store transfers", "Role permissions", "Inventory movement", "JewelLink CRM", "CountRetail AI", "Accounting handoff", "Owner reporting", "Open API"],
+    connectionSteps: [
+      {
+        label: "Locate",
+        title: "Know which store has the piece",
+        copy: "Each serialized item keeps its current location and movement history.",
+      },
+      {
+        label: "Move",
+        title: "Record transfers between stores",
+        copy: "The sending and receiving locations use the same transfer record and item history.",
+      },
+      {
+        label: "Compare",
+        title: "Review locations together",
+        copy: "Owners can compare store activity while managers continue working in their own location.",
+      },
+    ],
     faq: [
       {
         question: "Can Linkd support multi-location jewelry retailers?",
         answer:
-          "Linkd is designed for multi-location jewelry operations, including inventory movement, inter-store transfers, role permissions, reporting, and accounting handoff.",
+          "Yes. Linkd supports inventory movement, inter-store transfers, role permissions, and reporting across locations.",
       },
       {
         question: "How does multi-store Linkd data help JewelLink and CountRetail?",
         answer:
-          "Cleaner location-level POS, customer, inventory, and transfer data gives JewelLink better relationship context and CountRetail better store intelligence signals.",
+          "When connected, JewelLink can use customer and POS details while CountRetail can add traffic and store-performance information by location.",
       },
     ],
     metaTitle: "Multi-Store Jewelry POS, Transfers, Inventory, and Reporting",
@@ -566,63 +752,88 @@ export const seoLandingPages = {
   security: {
     slug: "security",
     eyebrow: "Jewelry store security and audits",
-    title: "Controls for the counter, the case, and the back office.",
+    title: "Review sensitive actions with the records behind them.",
     description:
-      "Linkd connects item movement, register actions, employee permissions, RFID-ready events, and CountRetail camera context into reviewable operating evidence.",
+      "Review register activity, serialized-item movement, and employee access, with optional CountRetail camera details when an exception needs investigation.",
     image: "/assets/screenshots/linkd-reporting.webp",
     imageAlt: "Linkd reporting and security audit views on a MacBook screen",
     proof: ["Permissions", "RFID-ready events", "Exception review", "Camera context"],
+    tourEyebrow: "What you can review",
+    tourTitle: "See the records behind an exception.",
     visualProofs: [
       {
-        label: "Audit",
-        title: "Reports for sensitive review",
+        label: "Reporting",
+        title: "Review sales and team activity",
+        copy: "The reporting workspace gives managers a starting point for questions about store activity.",
         image: "/assets/screenshots/linkd-reporting.webp",
         alt: "Linkd reports and audit review workflow",
       },
       {
-        label: "Movement",
-        title: "Item history from case to vault",
+        label: "Inventory",
+        title: "Check an item's location and status",
+        copy: "Search serialized inventory when a piece or movement record needs a closer look.",
         image: "/assets/screenshots/linkd-inventory.webp",
         alt: "Linkd inventory movement and serialized item review",
       },
       {
-        label: "Control",
-        title: "Provider and permission signals",
+        label: "Connections",
+        title: "Confirm connected systems are available",
+        copy: "The integrations workspace shows provider and sync status during an investigation.",
         image: "/assets/screenshots/linkd-integrations.webp",
-        alt: "Linkd provider and integration control settings",
+        alt: "Linkd provider and integration status settings",
       },
     ],
+    outcomesEyebrow: "When something needs review",
+    outcomesTitle: "Check the records involved in the exception.",
     outcomes: [
       {
         label: "Control",
         title: "Permissioned POS actions",
-        copy: "Register events, approvals, and sensitive actions reviewable by role — held to the standard, not to memory.",
+        copy: "Keep register events, approvals, and sensitive actions available for review by role.",
       },
       {
         label: "Audit",
         title: "Item movement evidence",
-        copy: "Inventory movement, transfers, receiving, and RFID-ready events kept on one clean timeline.",
+        copy: "Keep inventory movement, transfers, receiving, and RFID-ready events with the item history.",
       },
       {
         label: "Review",
         title: "Exception workflows",
-        copy: "One place to review exceptions across POS, inventory, staff, and CountRetail camera context.",
+        copy: "Bring together POS, inventory, employee, and optional CountRetail details when an exception needs attention.",
       },
     ],
-    stackTitle: "Security gets stronger when systems agree.",
+    connectionEyebrow: "From event to review",
+    stackTitle: "Put the records behind an exception in one place.",
     stackCopy:
-      "Linkd can connect the operational record with CountRetail store intelligence so owners can understand what happened, where, and why.",
+      "Linkd keeps role, register, transfer, and inventory records available for review. CountRetail can add camera and traffic details when connected.",
     stackItems: ["Role permissions", "Register logs", "RFID readiness", "CountRetail AI", "Transfer history", "Exception review"],
+    connectionSteps: [
+      {
+        label: "Record",
+        title: "Linkd keeps the store event",
+        copy: "Register actions, employee roles, and serialized-item movement remain available for review.",
+      },
+      {
+        label: "Investigate",
+        title: "A manager checks the related records",
+        copy: "Use reporting, inventory status, transfer history, and connection status to narrow the question.",
+      },
+      {
+        label: "CountRetail",
+        title: "Add optional camera and traffic details",
+        copy: "When CountRetail is connected, camera, zone, and traffic details can support the review.",
+      },
+    ],
     faq: [
       {
         question: "How can Linkd help with jewelry store audit workflows?",
         answer:
-          "Linkd is designed to keep POS actions, inventory movement, employee permissions, transfers, and exceptions in reviewable operational records.",
+          "Linkd keeps POS actions, inventory movement, employee permissions, transfers, and related records available for manager review.",
       },
       {
         question: "How does Linkd connect with CountRetail for security?",
         answer:
-          "Linkd can provide operational context while CountRetail contributes traffic, camera, zone, and store intelligence for stronger exception review.",
+          "Linkd provides register and inventory records. When CountRetail is connected, traffic, camera, and zone details can add context to an exception review.",
       },
     ],
     metaTitle: "Jewelry Store Security, POS Permissions, and Inventory Audit Workflows",

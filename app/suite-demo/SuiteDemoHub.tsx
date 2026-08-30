@@ -22,9 +22,9 @@ const products = [
   {
     target: "linkd",
     name: "Linkd",
-    role: "Cloud POS and ERP",
+    role: "POS and store management",
     description:
-      "Run sales, payments, receivables, services, inventory, and owner workflows.",
+      "Run sales, payments, balances, services, inventory, and owner reporting.",
     image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     imageAlt: "Linkd populated jewelry point of sale walkthrough",
     width: 1800,
@@ -35,9 +35,9 @@ const products = [
   {
     target: "jewellink",
     name: "JewelLink",
-    role: "Relationships",
+    role: "Customer relationships",
     description:
-      "Turn customer context into clienteling, bridal, conversation, training, and follow-up workflows.",
+      "Help associates manage clienteling, bridal, conversations, training, and follow-up.",
     image: "/assets/screenshots/jewellink-app.webp",
     imageAlt: "JewelLink clienteling and customer relationship walkthrough",
     width: 1800,
@@ -48,9 +48,9 @@ const products = [
   {
     target: "countretail",
     name: "CountRetail",
-    role: "Intelligence",
+    role: "Store analytics",
     description:
-      "Connect traffic, sales, marketing, inventory, predictive signals, diamonds, and Bill AI.",
+      "Review traffic, sales, marketing, inventory, predictive signals, diamonds, and Bill AI.",
     image: "/assets/screenshots/countretail-app.webp",
     imageAlt: "CountRetail retail intelligence walkthrough",
     width: 1800,
@@ -61,9 +61,9 @@ const products = [
   {
     target: "jewelhire",
     name: "JewelHire",
-    role: "People",
+    role: "Hiring and onboarding",
     description:
-      "Recruit, assess, hire, and onboard jewelry-store teams with confidence.",
+      "Recruit, assess, hire, and onboard jewelry-store teams in one hiring process.",
     image: "/assets/screenshots/jewelhire-recruiting-pipeline.webp",
     imageAlt: "JewelHire recruiting and onboarding walkthrough",
     width: 1271,
@@ -79,47 +79,47 @@ const storySlides = [
     title: "Start with what your store needs now.",
     copy: "Each system solves a clear jewelry-retail problem on its own. Add the others when the business is ready—without replacing the foundation you already chose.",
     standalone: "Adopt one product without committing to the entire suite.",
-    connected: "Shared direction makes every future connection feel natural.",
+    connected: "Connect another product only when shared information will help.",
     active: ["linkd", "jewellink", "countretail", "jewelhire"],
   },
   {
     label: "Operations · Linkd",
-    title: "Run the whole store from one operational record.",
-    copy: "Linkd connects the counter and back office across sales, payments, receivables, services, inventory, permissions, reporting, and accounting handoff.",
-    standalone: "A complete POS and ERP foundation for luxury jewelers.",
-    connected: "Feeds reliable activity into relationship and intelligence workflows.",
+    title: "Run sales and store work in Linkd.",
+    copy: "Linkd brings the counter and back office together across sales, payments, balances, services, inventory, permissions, and reporting.",
+    standalone: "Use Linkd on its own as your jewelry POS and store-management system.",
+    connected: "Share selected customer or store information with other products when configured.",
     active: ["linkd"],
   },
   {
     label: "Relationships · JewelLink",
-    title: "Turn every store interaction into lifetime value.",
-    copy: "JewelLink gives associates one relationship layer for CRM, clienteling, conversations, bridal, follow-up, training, and AI-assisted selling.",
-    standalone: "Strengthens selling teams and customer follow-through immediately.",
-    connected: "Uses operational context to make outreach timely and personal.",
+    title: "Give associates a clearer next step with each customer.",
+    copy: "JewelLink supports CRM, clienteling, conversations, bridal, follow-up, training, and assisted selling.",
+    standalone: "Use JewelLink as a jewelry-focused customer and clienteling system.",
+    connected: "Use selected Linkd customer and sales details to support follow-up when configured.",
     active: ["jewellink"],
   },
   {
-    label: "Intelligence · CountRetail",
-    title: "See what the store is telling you.",
-    copy: "CountRetail brings traffic, sales, marketing, inventory, predictive aging, diamonds, and Bill AI into an owner-level decision surface.",
-    standalone: "Creates useful intelligence from the signals you connect today.",
-    connected: "Explains what operational and customer activity means next.",
+    label: "Analytics · CountRetail",
+    title: "See traffic, sales, marketing, and inventory together.",
+    copy: "CountRetail helps owners review traffic, sales, marketing, inventory, predictive aging, diamonds, and Bill AI.",
+    standalone: "Use CountRetail with the store data sources you choose to connect.",
+    connected: "Add selected Linkd activity to the store-performance view when configured.",
     active: ["countretail"],
   },
   {
-    label: "People · JewelHire",
+    label: "Hiring · JewelHire",
     title: "Build the team behind the customer experience.",
     copy: "JewelHire helps jewelry retailers attract, assess, hire, and onboard people around the specialized realities of the industry.",
     standalone: "Modernizes recruiting and onboarding for jewelry roles.",
-    connected: "Completes the loop between people, execution, and growth.",
+    connected: "Keep hiring separate or connect team information when a shared process will help.",
     active: ["jewelhire"],
   },
   {
-    label: "The connected advantage",
-    title: "One business loop—not four disconnected tools.",
-    copy: "The team operates in Linkd, grows relationships in JewelLink, learns from CountRetail, and expands through JewelHire—with each system keeping its own clear job.",
+    label: "Use one or connect several",
+    title: "Choose the products your store needs.",
+    copy: "Linkd runs store operations, JewelLink supports relationships, CountRetail provides analytics, and JewelHire supports hiring. Each keeps its own clear job.",
     standalone: "Every product remains valuable and understandable on its own.",
-    connected: "Together they connect people, operations, customers, and decisions.",
+    connected: "Connect only the customer, store, or team information that supports your process.",
     active: ["linkd", "jewellink", "countretail", "jewelhire"],
   },
 ] as const;
@@ -184,7 +184,7 @@ export default function SuiteDemoHub() {
         if (result.ok && result.profile) {
           setProfile(result.profile);
         } else if (accessRequired) {
-          setStatus("Enter your details once to unlock all four guided tours.");
+          setStatus("Enter your details once to open all four guided tours.");
         }
       })
       .catch(() => undefined)
@@ -234,7 +234,7 @@ export default function SuiteDemoHub() {
       }
 
       setProfile(result.profile);
-      setStatus("All four guided tours are unlocked.");
+      setStatus("All four guided tours are open.");
       window.history.replaceState({}, "", window.location.pathname);
     } catch {
       setStatus("Suite access is temporarily unavailable. Please try again.");
@@ -288,7 +288,7 @@ export default function SuiteDemoHub() {
         >
           {unlocked ? (
             <div className={styles.unlockedPanel}>
-              <h1>Welcome, {profile.name}.</h1>
+              <h1>Welcome, {profile?.name}.</h1>
               <p>
                 Choose the system you wish to demo below: Linkd POS, JewelLink CRM,
                 CountRetail Analytics, or JewelHire Hiring.
@@ -302,9 +302,9 @@ export default function SuiteDemoHub() {
             </div>
           ) : (
             <>
-              <p className={styles.panelEyebrow}>Suite access</p>
-              <h1 ref={formHeadingRef} tabIndex={-1}>Unlock every tour once.</h1>
-              <p>Tell us who you are, then choose any walkthrough without another form.</p>
+              <p className={styles.panelEyebrow}>Guided tour access</p>
+              <h1 ref={formHeadingRef} tabIndex={-1}>Open all four guided tours.</h1>
+              <p>Enter your details once, then choose any walkthrough without another form.</p>
               <form className={styles.accessForm} onSubmit={unlockTours}>
                 <fieldset disabled={submitting}>
                   <label>
@@ -336,7 +336,7 @@ export default function SuiteDemoHub() {
                     <input name="website" tabIndex={-1} autoComplete="off" />
                   </label>
                   <button className="button button-primary" type="submit">
-                    {submitting ? "Unlocking your tours…" : "Unlock all four tours"}
+                    {submitting ? "Opening your tours…" : "Open all four tours"}
                   </button>
                 </fieldset>
               </form>
@@ -351,12 +351,12 @@ export default function SuiteDemoHub() {
 
       <section className={styles.toursSection} aria-labelledby="tour-heading">
         <div className={styles.sectionHeading}>
-          <p className="eyebrow">Four systems. Your starting point.</p>
+          <p className="eyebrow">Four products. Choose where to start.</p>
           <h2 id="tour-heading">Choose your guided tour.</h2>
           <p>
             {unlocked
-              ? "Your single introduction unlocked every system. Start anywhere and return for the others."
-              : "Preview all four now. Their launch buttons activate together after your single introduction."}
+              ? "All four tours are open. Start anywhere and return for the others."
+              : "Preview all four now. Enter your details once to start any tour."}
           </p>
         </div>
 
@@ -409,7 +409,7 @@ export default function SuiteDemoHub() {
                     </a>
                   ) : (
                     <button type="button" onClick={focusAccessForm}>
-                      Unlock to start <span aria-hidden="true">→</span>
+                      Enter details to start <span aria-hidden="true">→</span>
                     </button>
                   )}
                 </footer>
@@ -442,7 +442,7 @@ export default function SuiteDemoHub() {
                 <p>{activeStory.standalone}</p>
               </div>
               <div>
-                <span>Connected advantage</span>
+                <span>When connected</span>
                 <p>{activeStory.connected}</p>
               </div>
             </div>
@@ -478,7 +478,7 @@ export default function SuiteDemoHub() {
           {products.map((product, index) => (
             <div
               className={`${styles.mapNode} ${styles[`mapNode${index + 1}`]} ${
-                activeStory.active.includes(product.target) ? styles.mapNodeActive : ""
+                (activeStory.active as readonly string[]).includes(product.target) ? styles.mapNodeActive : ""
               }`}
               key={product.target}
             >
@@ -490,14 +490,14 @@ export default function SuiteDemoHub() {
       </section>
 
       <section className={styles.finalCta}>
-        <p className="eyebrow">One lead capture. Every guided system.</p>
-        <h2>{unlocked ? "All four tours are waiting." : "See the entire ecosystem without starting over."}</h2>
+        <p className="eyebrow">One short form. Four guided tours.</p>
+        <h2>{unlocked ? "All four tours are waiting." : "Explore every product without starting over."}</h2>
         <p>
-          Explore the operational core, relationship layer, retail intelligence,
-          and people platform at your own pace.
+          Explore POS and store management, customer relationships, store
+          analytics, and hiring at your own pace.
         </p>
         <a className="button button-primary" href={unlocked ? "#tour-heading" : "#suite-access"}>
-          {unlocked ? "Choose a tour" : "Unlock the Linkd Suite"}
+          {unlocked ? "Choose a tour" : "Open the guided tours"}
         </a>
       </section>
 

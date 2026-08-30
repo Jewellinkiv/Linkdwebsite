@@ -10,26 +10,7 @@ type SiteHeaderProps = {
   demoHref?: string;
 };
 
-const platformLinks = [
-  { href: "/jewelry-pos", label: "POS & checkout" },
-  { href: "/accounting", label: "Receivables & finance" },
-  { href: "/repairs", label: "Repairs & services" },
-  { href: "/inventory", label: "Inventory flow" },
-  { href: "/multi-store", label: "Multi-store operations" },
-  { href: "/security", label: "Security & controls" },
-];
-
 const primaryLinks = [
-  { href: "/jewelry-pos", label: "Platform", key: "platform", children: platformLinks },
-  {
-    href: "/payments",
-    label: "Payments",
-    key: "payments",
-    children: [
-      { href: "/payments", label: "Payment processing" },
-      { href: "/accounting", label: "Receivables & finance" },
-    ],
-  },
   {
     href: "/ecosystem",
     label: "Ecosystem",
@@ -58,6 +39,10 @@ const primaryLinks = [
 
 function usesNativeNavigation(href: string) {
   return href.startsWith("http");
+}
+
+function matchesCurrentPath(href: string, pathname: string) {
+  return !usesNativeNavigation(href) && !href.includes("#") && href === pathname;
 }
 
 function scrollCurrentPageHash(
@@ -187,8 +172,7 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
                 <div className="premier-nav-dropdown">
                   <span>{item.label}</span>
                   {children.map((child) => {
-                    const active = !child.href.startsWith("http")
-                      && child.href.split("#")[0] === pathname;
+                    const active = matchesCurrentPath(child.href, pathname);
                     return usesNativeNavigation(child.href) ? (
                       <a
                         href={child.href}
@@ -279,19 +263,18 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
               }
 
               const childIsActive = children.some((child) =>
-                !child.href.startsWith("http") && child.href.split("#")[0] === pathname
+                matchesCurrentPath(child.href, pathname)
               );
 
               return (
-                <details className="premier-mobile-group" defaultOpen={childIsActive} key={item.key}>
+                <details className="premier-mobile-group" open={childIsActive || undefined} key={item.key}>
                   <summary>
                     <span>{item.label}</span>
                     <i aria-hidden="true">⌄</i>
                   </summary>
                   <div>
                     {children.map((child) => {
-                      const active = !child.href.startsWith("http")
-                        && child.href.split("#")[0] === pathname;
+                      const active = matchesCurrentPath(child.href, pathname);
                       return usesNativeNavigation(child.href) ? (
                         <a
                           href={child.href}
@@ -328,15 +311,6 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
           <div className="premier-mobile-quicklinks">
             <span>Quick links</span>
             <Link href="/suite-demo" onClick={closeMobileMenu}>Guided Tours</Link>
-            <Link
-              href="/#early-access"
-              onClick={(event) => {
-                scrollCurrentPageHash(event, "/#early-access", pathname);
-                closeMobileMenu();
-              }}
-            >
-              Book a Demo
-            </Link>
           </div>
           <Link className="button button-primary" href={demoHref} onClick={closeMobileMenu}>
             Book a Demo
@@ -355,7 +329,7 @@ export function SiteFooter({ demoHref = "#early-access" }: { demoHref?: string }
       <div className="footer-top">
         <div>
           <span className="footer-mark">Linkd</span>
-          <p>The connected business system for luxury jewelry retail.</p>
+          <p>Jewelry POS and store-management software.</p>
         </div>
         <Link className="button footer-demo-button" href={demoHref}>
           See Linkd in Action

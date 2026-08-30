@@ -20,17 +20,17 @@ export default function NotFound() {
         </Link>
         <div>
           <p className="eyebrow">Page not found</p>
-          <h1>Back to the operational core.</h1>
+          <h1>Let’s get you back to Linkd.</h1>
           <p>
-            The page you requested is not part of the Linkd launch site. Return
-            to the luxury jewelry POS overview or request early release access.
+            We could not find that page. Return to the Linkd overview or book
+            a jewelry POS demo.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="/">
               Return to Linkd
             </Link>
             <Link className="button button-secondary" href="/#early-access">
-              Request Access
+              Book a Demo
             </Link>
           </div>
         </div>

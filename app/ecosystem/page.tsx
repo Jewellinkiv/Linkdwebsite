@@ -7,45 +7,45 @@ import Link from "next/link";
 const ecosystemRoles = [
   {
     name: "Linkd",
-    role: "Operational core",
+    role: "POS and store operations",
     logo: "/assets/brand/linkd-logo-main.webp",
     alt: "Linkd",
     width: 1200,
     height: 721,
-    proof: "Payments, receivables, inventory, services, permissions, reporting, and accounting handoff.",
+    proof: "Checkout, payments, balances, repairs, inventory, reporting, and accounting preparation.",
     examples: ["Payments", "Receivables", "Services", "Inventory"],
     href: null,
   },
   {
     name: "JewelLink",
-    role: "Relationship layer",
+    role: "Customer relationships",
     logo: "/assets/brand/jewellink-logo-main.webp",
     alt: "JewelLink",
     width: 1600,
     height: 800,
-    proof: "CRM, clienteling, texting, training, bridal workflows, follow-up, and AI-assisted selling.",
+    proof: "Customer profiles, clienteling, texting, bridal follow-up, training, and assisted selling.",
     examples: ["Clienteling", "Training", "Texting", "Follow-up"],
     href: "https://www.jewellink.com/",
   },
   {
     name: "CountRetail",
-    role: "Intelligence layer",
+    role: "Store analytics",
     logo: "/assets/brand/countretail-logo-main.webp",
     alt: "CountRetail",
     width: 1400,
     height: 199,
-    proof: "Vision AI traffic, marketing attribution, predictive aging, inventory signals, and owner decisions.",
+    proof: "Traffic, marketing attribution, inventory analytics, and owner reporting.",
     examples: ["Traffic", "Vision AI", "Inventory signals", "Owner cockpit"],
     href: "https://www.countretail.com/",
   },
   {
     name: "JewelHire",
-    role: "People layer",
+    role: "Hiring and onboarding",
     logo: null,
     alt: "",
     width: 1,
     height: 1,
-    proof: "Recruiting and talent built around the realities of jewelry retail.",
+    proof: "Recruiting, assessment, hiring, and onboarding for jewelry retail teams.",
     examples: ["Recruiting", "Talent", "Jewelry roles", "Team growth"],
     href: "https://jewelhire.com/",
   },
@@ -53,33 +53,33 @@ const ecosystemRoles = [
 
 const handoffSteps = [
   {
-    label: "1",
-    title: "Linkd records the store",
-    copy: "Sales, items, services, balances, register actions, and permissions become the operational record.",
+    label: "POS",
+    title: "Linkd runs the daily store work",
+    copy: "Associates complete sales, payments, repairs, inventory tasks, and account work in the POS and back office.",
   },
   {
-    label: "2",
-    title: "JewelLink activates the relationship",
-    copy: "Customer context supports clienteling, texting, bridal follow-up, training, and associate workflows.",
+    label: "CRM",
+    title: "JewelLink helps associates follow up",
+    copy: "Customer history supports clienteling, texting, bridal follow-up, training, and the next conversation.",
   },
   {
-    label: "3",
-    title: "CountRetail explains the signals",
-    copy: "Traffic, camera, marketing, aging, inventory, and sales signals become owner-level decisions.",
+    label: "Analytics",
+    title: "CountRetail helps owners read the store",
+    copy: "Traffic, camera, marketing, inventory, and sales information support store-performance analysis.",
   },
   {
-    label: "4",
-    title: "JewelHire builds the team",
-    copy: "Jewelry-specific recruiting and talent support the people who carry every other workflow forward.",
+    label: "Hiring",
+    title: "JewelHire helps build the team",
+    copy: "Jewelry-specific recruiting, assessment, hiring, and onboarding support each role in the store.",
   },
 ];
 
 const ecosystemProofs = [
   {
     name: "Linkd",
-    label: "Operations",
-    question: "What happened at the counter?",
-    proof: "Sales, items, services, balances, permissions.",
+    label: "POS and store management",
+    question: "What records the sale and daily store work?",
+    proof: "Sales, items, services, balances, permissions, and reports.",
     image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     alt: "Linkd POS showing Val Jones, jewelry items, a service line, and payment totals",
     width: 1800,
@@ -88,7 +88,7 @@ const ecosystemProofs = [
   },
   {
     name: "JewelLink",
-    label: "Relationships",
+    label: "CRM and clienteling",
     question: "Who needs follow-up?",
     proof: "CRM, clienteling, texting, training, bridal workflows.",
     image: "/assets/brand/jewellink-logo-main.webp",
@@ -99,9 +99,9 @@ const ecosystemProofs = [
   },
   {
     name: "CountRetail",
-    label: "Intelligence",
-    question: "What is the store telling us?",
-    proof: "Traffic, marketing, Vision AI, aging, owner insight.",
+    label: "Store analytics",
+    question: "How are traffic, sales, and inventory changing?",
+    proof: "Traffic, marketing, Vision AI, aging, and owner reports.",
     image: "/assets/brand/countretail-logo-main.webp",
     alt: "CountRetail logo",
     width: 1400,
@@ -110,9 +110,9 @@ const ecosystemProofs = [
   },
   {
     name: "JewelHire",
-    label: "People",
-    question: "Who will carry the store forward?",
-    proof: "Hiring, assessment, onboarding, and team growth.",
+    label: "Hiring and onboarding",
+    question: "Who is moving through the hiring pipeline?",
+    proof: "Recruiting, assessment, hiring, and onboarding.",
     image: "/assets/screenshots/jewelhire-recruiting-pipeline.webp",
     alt: "JewelHire recruiting pipeline for jewelry stores",
     width: 1271,
@@ -124,7 +124,7 @@ const ecosystemProofs = [
 const ecosystemHeroCards = [
   {
     name: "Linkd",
-    label: "Operations",
+    label: "POS + store management",
     proof: "POS / inventory / accounts",
     image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
     alt: "Linkd populated jewelry POS cart with demo customer and payment totals",
@@ -134,7 +134,7 @@ const ecosystemHeroCards = [
   },
   {
     name: "JewelLink",
-    label: "Relationships",
+    label: "CRM + clienteling",
     proof: "CRM / clienteling / training",
     image: "/assets/screenshots/jewellink-app.webp",
     alt: "JewelLink clienteling CRM dashboard",
@@ -144,7 +144,7 @@ const ecosystemHeroCards = [
   },
   {
     name: "CountRetail",
-    label: "Intelligence",
+    label: "Store analytics",
     proof: "Traffic / Vision AI / analytics",
     image: "/assets/screenshots/countretail-app.webp",
     alt: "CountRetail store analytics dashboard",
@@ -154,7 +154,7 @@ const ecosystemHeroCards = [
   },
   {
     name: "JewelHire",
-    label: "People",
+    label: "Hiring + onboarding",
     proof: "Hiring / assessment / onboarding",
     image: "/assets/screenshots/jewelhire-recruiting-pipeline.webp",
     alt: "JewelHire recruiting pipeline for jewelry stores",
@@ -168,17 +168,17 @@ const faqItems = [
   {
     question: "How are the four Linkd Ecosystem products different?",
     answer:
-      "Linkd runs operations, JewelLink grows customer relationships, CountRetail turns store signals into intelligence, and JewelHire supports recruiting and talent.",
+      "Linkd runs POS and store operations. JewelLink supports customer relationships, CountRetail provides store analytics, and JewelHire supports hiring and onboarding.",
   },
   {
     question: "Does Linkd replace the other ecosystem products?",
     answer:
-      "No. Linkd stands on its own as the operational record while the other products each solve a distinct relationship, intelligence, or people need.",
+      "No. Linkd works on its own as the POS and store-management system. The other products are separate and can be added when your store needs them.",
   },
   {
-    question: "Why connect the full ecosystem?",
+    question: "Do we need all four products?",
     answer:
-      "The connected ecosystem gives operators a clearer view of what happened, who needs attention, what the store is signaling, and where the team needs to grow.",
+      "No. Start with the product that solves today's problem. Connect additional products when shared customer, store, or team information will help.",
   },
 ];
 
@@ -196,7 +196,7 @@ const relatedRetailSystems = [
     applicationCategory: "BusinessApplication",
     url: "https://linkd.com/",
     description:
-      "Operational core for jewelry POS, inventory, services, accounts, audits, reporting, and integrations.",
+      "Jewelry POS and store-management software for sales, inventory, services, accounts, audits, and reporting.",
   },
   {
     "@type": "SoftwareApplication",
@@ -204,7 +204,7 @@ const relatedRetailSystems = [
     applicationCategory: "BusinessApplication",
     url: "https://jewelhire.com/",
     description:
-      "People layer for jewelry retail hiring, assessment, onboarding, and talent.",
+      "Hiring, assessment, and onboarding software built for jewelry retail teams.",
   },
   {
     "@type": "SoftwareApplication",
@@ -212,7 +212,7 @@ const relatedRetailSystems = [
     applicationCategory: "CRM",
     url: "https://www.jewellink.com/",
     description:
-      "Relationship layer for CRM, clienteling, texting, training, follow-up, and team workflows.",
+      "CRM software for clienteling, texting, training, follow-up, and team workflows in jewelry retail.",
   },
   {
     "@type": "SoftwareApplication",
@@ -220,7 +220,7 @@ const relatedRetailSystems = [
     applicationCategory: "BusinessIntelligenceApplication",
     url: "https://www.countretail.com/",
     description:
-      "Intelligence layer for traffic, Vision AI, marketing, inventory signals, and owner reporting.",
+      "Store analytics software for traffic, marketing, inventory signals, and owner reporting.",
   },
 ];
 
@@ -231,7 +231,7 @@ const structuredData = [
     name: "Linkd, JewelLink, CountRetail, and JewelHire Jewelry Retail Ecosystem",
     url: "https://linkd.com/ecosystem",
     description:
-      "See how Linkd, JewelLink, CountRetail, and JewelHire work together across operations, relationships, intelligence, and people for jewelry retailers.",
+      "Compare Linkd store management, JewelLink CRM, CountRetail analytics, and JewelHire hiring software for jewelry retailers.",
     image: [
       "https://linkd.com/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
       "https://linkd.com/assets/brand/jewellink-logo-main.webp",
@@ -298,7 +298,7 @@ const structuredData = [
 export const metadata = {
   title: "Linkd Ecosystem for Luxury Jewelry Retail",
   description:
-    "Compare Linkd, JewelLink, CountRetail, and JewelHire across store operations, CRM and clienteling, retail intelligence, recruiting, and talent.",
+    "Compare Linkd store management, JewelLink CRM, CountRetail analytics, and JewelHire hiring software for jewelry retailers.",
   keywords: [
     "Linkd JewelLink CountRetail",
     "jewelry retail ecosystem",
@@ -315,7 +315,7 @@ export const metadata = {
   openGraph: {
     title: "Linkd Ecosystem for Luxury Jewelry Retail",
     description:
-      "Four clear products for operations, relationships, intelligence, and people.",
+      "Four jewelry-retail products for POS, CRM, analytics, and hiring.",
     url: "/ecosystem",
     images: [socialImage],
   },
@@ -323,7 +323,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Linkd Ecosystem for Luxury Jewelry Retail",
     description:
-      "Compare the four connected roles in the Linkd Ecosystem.",
+      "Compare four jewelry-retail products for POS, CRM, analytics, and hiring.",
     images: [socialImage],
   },
 };
@@ -339,19 +339,19 @@ export default function EcosystemPage() {
 
       <section className="ecosystem-hero">
         <div className="section-copy">
-          <p className="eyebrow">Jewelry retail ecosystem</p>
+          <p className="eyebrow">Four products for jewelry retail</p>
           <h1>Four systems. One jewelry business.</h1>
           <p>
-            Linkd keeps the operational record. JewelLink turns customer context
-            into relationship workflows. CountRetail turns store signals into
-            decisions. JewelHire helps build the team.
+            Linkd is the POS and store-management system. JewelLink,
+            CountRetail, and JewelHire are separate products. Each works on its
+            own, and each can connect when your store needs it.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
               Book a Demo
             </Link>
             <Link className="button button-secondary" href="/integrations">
-              View Integrations
+              See How Products Connect
             </Link>
           </div>
         </div>
@@ -433,8 +433,8 @@ export default function EcosystemPage() {
 
       <section className="section-light handoff-section">
         <div className="section-copy">
-          <p className="eyebrow">How the ecosystem works</p>
-          <h2>Every product has one clear job—and one shared direction.</h2>
+          <p className="eyebrow">How the products differ</p>
+          <h2>Start with what you need. Connect more when it helps.</h2>
         </div>
         <div className="handoff-grid">
           {handoffSteps.map((step) => (
@@ -449,8 +449,8 @@ export default function EcosystemPage() {
 
       <section className="section-white landing-stack-section">
         <div className="section-copy">
-          <p className="eyebrow">Simple positioning</p>
-          <h2>One stack that agrees with itself.</h2>
+          <p className="eyebrow">At a glance</p>
+          <h2>Connect only what your store needs.</h2>
         </div>
         <div className="integration-cloud integration-strip" aria-label="Ecosystem keywords">
           <span>POS operations</span>
@@ -466,7 +466,7 @@ export default function EcosystemPage() {
       <section className="section-white faq-section">
         <div className="section-copy">
           <p className="eyebrow">Quick answers</p>
-          <h2>Four clear jobs. One connected business.</h2>
+          <h2>What to know before choosing a product.</h2>
         </div>
         <div className="faq-grid">
           {faqItems.map((item) => (
@@ -482,17 +482,17 @@ export default function EcosystemPage() {
         <div className="release-panel">
           <div className="release-copy">
             <p className="eyebrow">Book a demo</p>
-            <h2>See the connected stack in one demo.</h2>
+            <h2>See the products your store is considering.</h2>
             <p>
-              Tell us about your store. We will show how the four products
-              work together.
+              Tell us what your store needs. We will show the relevant
+              products and explain which connections are available.
             </p>
             <div className="release-signals">
               <span>POS operations</span>
               <span>JewelLink CRM</span>
               <span>CountRetail AI</span>
               <span>JewelHire talent</span>
-              <span>Connected stack</span>
+              <span>Optional connections</span>
             </div>
           </div>
           <InquiryForm />

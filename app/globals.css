@@ -4380,8 +4380,19 @@ textarea:focus-visible {
   }
 
   .linkd-home .hero-scene-caption {
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     margin-left: 0;
+  }
+
+  .linkd-home .manifesto-practices {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    text-align: center;
+    width: 100%;
+  }
+
+  .linkd-home .manifesto-practices b {
+    display: none;
   }
 
   .linkd-home .section-light,

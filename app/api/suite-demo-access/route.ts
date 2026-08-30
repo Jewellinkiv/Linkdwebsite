@@ -38,7 +38,7 @@ export async function POST(request: Request) {
   }
 
   if (field(payload.website)) {
-    return jsonResponse({ ok: true, message: "All four tours are unlocked." });
+    return jsonResponse({ ok: true, message: "All four tours are open." });
   }
 
   const lead = {
@@ -134,7 +134,7 @@ async function unlockedResponse(
   });
   const response = jsonResponse({
     ok: true,
-    message: "All four tours are unlocked.",
+    message: "All four tours are open.",
     profile: { name: lead.name, storeName: lead.storeName },
   });
   response.cookies.set({

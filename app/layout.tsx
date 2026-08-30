@@ -26,11 +26,11 @@ export const metadata: Metadata = {
   category: "Jewelry POS software",
   manifest: "/site.webmanifest",
   title: {
-    default: "Linkd | POS + ERP for Luxury Jewelry Retail",
+    default: "Linkd | Jewelry POS and Store Management",
     template: "%s | Linkd",
   },
   description:
-    "The operational center of the Linkd Ecosystem for luxury jewelers, connecting payments, receivables, services, inventory, customers, store intelligence, and teams.",
+    "Jewelry-specific POS and store-management software for sales, payments, balances, repairs, inventory, and reporting.",
   keywords: [
     "jewelry POS",
     "jewelry store payment processing",
@@ -88,9 +88,9 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Linkd | Run the Whole Store. Keep More of Every Sale.",
+    title: "Linkd | Jewelry POS and Store Management",
     description:
-      "Best-in-class payments, receivables, services, and inventory flow—built for luxury jewelry retail.",
+      "Sales, payments, balances, repairs, inventory, and reporting in one jewelry-specific system.",
     type: "website",
     url: "/",
     images: [
@@ -104,9 +104,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Linkd | Run the Whole Store. Keep More of Every Sale.",
+    title: "Linkd | Jewelry POS and Store Management",
     description:
-      "Best-in-class payments, receivables, services, and inventory flow—built for luxury jewelry retail.",
+      "Sales, payments, balances, repairs, inventory, and reporting in one jewelry-specific system.",
     images: ["/og-linkd-v2.png"],
   },
   alternates: {

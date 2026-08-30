@@ -1,6 +1,5 @@
 import type { SeoLandingPage as SeoLandingPageData } from "../seoLandingPages";
 import InquiryForm from "./InquiryForm";
-import JewelHireBrand from "./JewelHireBrand";
 import { SiteFooter, SiteHeader } from "./SiteChrome";
 import Image from "next/image";
 import Link from "next/link";
@@ -81,49 +80,6 @@ const relatedWorkflowMap: Record<string, string[]> = {
   integrations: ["jewelry-pos", "inventory", "accounting"],
 };
 
-const ecosystemFitCards = [
-  {
-    name: "Linkd",
-    label: "Operational core",
-    proof: "POS, inventory, accounts, audits",
-    image: "",
-    alt: "",
-    width: 1800,
-    height: 1200,
-    kind: "screen",
-  },
-  {
-    name: "JewelLink",
-    label: "Relationship layer",
-    proof: "CRM, clienteling, team follow-up",
-    image: "/assets/screenshots/jewellink-app.webp",
-    alt: "JewelLink clienteling CRM dashboard",
-    width: 1800,
-    height: 1200,
-    kind: "screen",
-  },
-  {
-    name: "CountRetail",
-    label: "Intelligence layer",
-    proof: "Traffic, Vision AI, owner insight",
-    image: "/assets/screenshots/countretail-app.webp",
-    alt: "CountRetail store analytics dashboard",
-    width: 1800,
-    height: 1200,
-    kind: "screen",
-  },
-  {
-    name: "JewelHire",
-    label: "People layer",
-    proof: "Hiring, assessment, and onboarding",
-    image: "/assets/screenshots/jewelhire-recruiting-pipeline.webp",
-    alt: "JewelHire recruiting pipeline for jewelry stores",
-    width: 1271,
-    height: 715,
-    kind: "screen",
-  },
-];
-
 const relatedRetailSystems = [
   {
     "@type": "SoftwareApplication",
@@ -131,7 +87,7 @@ const relatedRetailSystems = [
     applicationCategory: "CRM",
     url: "https://www.jewellink.com/",
     description:
-      "Relationship layer for CRM, clienteling, texting, training, follow-up, and team workflows.",
+      "CRM software for clienteling, texting, training, follow-up, and team workflows in jewelry retail.",
   },
   {
     "@type": "SoftwareApplication",
@@ -139,7 +95,7 @@ const relatedRetailSystems = [
     applicationCategory: "BusinessApplication",
     url: "https://jewelhire.com/",
     description:
-      "People layer for jewelry retail hiring, assessment, onboarding, and talent.",
+      "Hiring, assessment, and onboarding software built for jewelry retail teams.",
   },
   {
     "@type": "SoftwareApplication",
@@ -147,17 +103,12 @@ const relatedRetailSystems = [
     applicationCategory: "BusinessIntelligenceApplication",
     url: "https://www.countretail.com/",
     description:
-      "Intelligence layer for traffic, Vision AI, marketing, inventory signals, and owner reporting.",
+      "Store analytics software for traffic, marketing, inventory signals, and owner reporting.",
   },
 ];
 
 export default function SeoLandingPage({ page }: SeoLandingPageProps) {
   const pageUrl = `https://linkd.com/${page.slug}`;
-  const fitCards = ecosystemFitCards.map((card) =>
-    card.name === "Linkd"
-      ? { ...card, image: page.image, alt: page.imageAlt }
-      : card,
-  );
   const pageImages = [
     `https://linkd.com${page.image}`,
     ...page.visualProofs.map((proof) => `https://linkd.com${proof.image}`),
@@ -293,8 +244,8 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
 
       <section className="section-white landing-proof-rail-section" id="product-screens">
         <div className="section-copy">
-          <p className="eyebrow">Screen proof</p>
-          <h2>See the workflow before the paragraph.</h2>
+          <p className="eyebrow">{page.tourEyebrow}</p>
+          <h2>{page.tourTitle}</h2>
         </div>
         <div className="landing-proof-rail">
           {page.visualProofs.map((proof, index) => (
@@ -310,6 +261,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
               <div>
                 <span>{String(index + 1).padStart(2, "0")} / {proof.label}</span>
                 <h3>{proof.title}</h3>
+                <p>{proof.copy}</p>
               </div>
             </article>
           ))}
@@ -318,8 +270,8 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
 
       <section className="section-light landing-outcomes-section">
         <div className="section-copy">
-          <p className="eyebrow">Workflow outcomes</p>
-          <h2>Less explanation. More operational proof.</h2>
+          <p className="eyebrow">{page.outcomesEyebrow}</p>
+          <h2>{page.outcomesTitle}</h2>
         </div>
         <div className="landing-outcomes">
           {page.outcomes.map((outcome) => (
@@ -334,36 +286,16 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
 
       <section className="section-white landing-fit-section">
         <div className="section-copy">
-          <p className="eyebrow">Where Linkd fits</p>
+          <p className="eyebrow">{page.connectionEyebrow}</p>
           <h2>{page.stackTitle}</h2>
           <p>{page.stackCopy}</p>
         </div>
-        <div
-          className="landing-fit-board"
-          aria-label="Linkd Ecosystem product roles"
-        >
-          {fitCards.map((card) => (
-            <article
-              className={`landing-fit-card landing-fit-card-${card.name.toLowerCase()}`}
-              key={card.name}
-            >
-              <div className={`landing-fit-visual landing-fit-visual-${card.kind}`}>
-                {card.image ? (
-                  <Image
-                    src={card.image}
-                    alt={card.alt}
-                    width={card.width}
-                    height={card.height}
-                    sizes="(max-width: 860px) 90vw, (max-width: 1180px) 44vw, 22vw"
-                    unoptimized
-                  />
-                ) : (
-                  <JewelHireBrand />
-                )}
-              </div>
-              <span>{card.label}</span>
-              <h3>{card.name}</h3>
-              <p>{card.proof}</p>
+        <div className="landing-connection-grid" aria-label={`${page.eyebrow} connection steps`}>
+          {page.connectionSteps.map((step, index) => (
+            <article key={step.title}>
+              <span>{String(index + 1).padStart(2, "0")} / {step.label}</span>
+              <h3>{step.title}</h3>
+              <p>{step.copy}</p>
             </article>
           ))}
         </div>
@@ -387,15 +319,15 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
         </div>
         <div className="section-actions">
           <Link className="button button-secondary" href="/ecosystem">
-            Compare the Stack
+            Explore the Linkd Ecosystem
           </Link>
         </div>
       </section>
 
       <section className="section-light related-workflow-section">
         <div className="section-copy">
-          <p className="eyebrow">Related workflows</p>
-          <h2>Jump to the next operating question.</h2>
+          <p className="eyebrow">Keep exploring</p>
+          <h2>Explore related workflows.</h2>
         </div>
         <div
           className="related-workflow-grid"

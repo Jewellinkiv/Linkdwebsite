@@ -624,7 +624,7 @@ export default function GuidedDemoChooser({
             <p className={styles.gateEyebrow}>GUIDED DEMO ACCESS</p>
             <h2 id="demo-gate-title">Create your demo store.</h2>
             <p className={styles.gateIntro}>
-              Enter your details to unlock interactive Linkd workflows using sample data.
+              Enter your details to open interactive Linkd workflows using sample data.
             </p>
 
             <form onSubmit={enterDemo}>

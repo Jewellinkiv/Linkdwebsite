@@ -48,24 +48,24 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /tabindex="-1"/i);
   assert.match(html, /Skip to content/i);
   assert.match(html, /Book a Demo/i);
-  assert.match(html, /operating center of the Linkd Ecosystem/i);
+  assert.match(html, /jewelry-specific POS and store-management software/i);
   assert.match(html, /JewelLink CRM/i);
   assert.match(html, /linkd-pos-cart-demo-v2\.webp/i);
   assert.match(html, /Linkd POS showing Val Jones, four jewelry and service lines/i);
   assert.match(html, /app\.linkd\.com\/pos/i);
   assert.match(html, /Run the whole store\. Connect the/i);
-  assert.match(html, /See the ecosystem from its operational center/i);
+  assert.match(html, /Use it on its own or connect the rest of the Linkd Ecosystem as needed/i);
   assert.match(html, /href="\/suite-demo"/i);
   assert.match(html, /Explore the Linkd Suite/i);
   assert.match(html, /href="\/suite-demo"[^>]*>\s*See the System/i);
-  assert.match(html, /Four workflows\. One operating system\./i);
-  assert.match(html, /Four operating engines\. One system your team can trust/i);
-  assert.match(html, /Payment processing should strengthen the business/i);
+  assert.match(html, /Four products\. One place to explore\./i);
+  assert.match(html, /One sale updates the rest of the store/i);
+  assert.match(html, /Keep payment processing tied to the sale/i);
   assert.match(html, /Receivables/i);
   assert.match(html, /Service workflows/i);
   assert.match(html, /Inventory movement/i);
-  assert.match(html, /Every part of the store, one core/i);
-  assert.match(html, /Operational core/i);
+  assert.match(html, /The daily work behind every jewelry sale/i);
+  assert.match(html, /POS \+ store management/i);
   assert.match(html, /Payments/i);
   assert.match(html, /Services &amp; Repairs|Services & Repairs/i);
   assert.match(html, /Every screen is built around the work your team actually does/i);
@@ -73,11 +73,10 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /Linkd inventory workspace showing serialized jewelry, location, status, and retail value/i);
   assert.match(html, /Linkd repairs and services workspace with intake, bench, ready, and turnaround data/i);
   assert.match(html, /CountRetail/i);
-  assert.match(html, /One family of products/i);
-  assert.match(html, /Operations, relationships, intelligence, and people\./i);
-  assert.match(html, /Linkd records the operation/i);
-  assert.match(html, /JewelLink grows the relationship/i);
-  assert.match(html, /CountRetail explains the store/i);
+  assert.match(html, /Four products, each with one clear job/i);
+  assert.match(html, /Linkd runs POS and store operations/i);
+  assert.match(html, /JewelLink supports customer relationships/i);
+  assert.match(html, /CountRetail adds store analytics/i);
   assert.match(html, /JewelHire helps build the team/i);
   assert.match(html, /jewelhire-recruiting-pipeline\.webp/i);
   assert.match(html, /href="https:\/\/www\.jewellink\.com\/"/i);
@@ -85,20 +84,20 @@ test("server-renders the Linkd landing page", async () => {
   assert.match(html, /href="https:\/\/jewelhire\.com\/"/i);
   assert.doesNotMatch(html, /jewelhire\.ai/i);
   assert.match(html, /POS, services, inventory, and accounts\./i);
-  assert.match(html, /Compare the Stack/i);
+  assert.match(html, /Explore the Linkd Ecosystem/i);
   assert.match(html, /QuickBooks/i);
   assert.match(html, /Sage/i);
   assert.match(html, /Open API/i);
   assert.match(html, /See Linkd run a real day at the counter/i);
-  assert.match(html, /Your history comes with you\. Your momentum never leaves\./i);
-  assert.match(html, /Start with the essentials/i);
+  assert.match(html, /A guided move from your current system/i);
+  assert.match(html, /Timing and scope depend on the source system and data/i);
   assert.match(html, /How is Linkd different from JewelLink/i);
   assert.match(html, /application\/ld\+json/i);
   assert.match(html, /SoftwareApplication/i);
   assert.match(html, /isRelatedTo/i);
   assert.match(html, /knowsAbout/i);
-  assert.match(html, /Relationship layer for CRM/i);
-  assert.match(html, /Intelligence layer for traffic/i);
+  assert.match(html, /CRM software for clienteling/i);
+  assert.match(html, /Store analytics software for traffic/i);
   assert.match(html, /Jewelry point of sale/i);
   assert.match(html, /Linkd product and ecosystem pages/i);
   assert.match(html, /https:\/\/linkd\.com\/jewelry-pos/i);
@@ -123,56 +122,56 @@ test("server-renders focused SEO landing pages", async () => {
   const cases = [
     [
       "/payments",
-      /Better payment economics, built into the sale/i,
-      /Tender decisions beside the sale/i,
+      /Take payments, track balances, and close with a clear trail/i,
+      /Follow a payment from checkout to daily close/i,
       /jewelry store payment processing/i,
     ],
     [
       "/jewelry-pos",
       /POS built around the way jewelers actually sell/i,
-      /Checkout and service intake/i,
+      /See a sale from cart to close/i,
       /luxury jewelry point of sale/i,
     ],
     [
       "/inventory",
-      /Inventory control from case to vault/i,
-      /Serialized inventory lookup/i,
+      /Know where every piece is/i,
+      /Find a piece and see where it has been/i,
       /RFID jewelry inventory/i,
     ],
     [
       "/repairs",
-      /Repairs, appraisals, and services connected to the sale/i,
-      /Repair bench, intake to pickup/i,
+      /Take a repair in at the counter and track it through pickup/i,
+      /Follow a repair through the store/i,
       /jewelry repair intake software/i,
     ],
     [
       "/security",
-      /Controls for the counter, the case, and the back office/i,
-      /Reports for sensitive review/i,
+      /Review sensitive actions with the records behind them/i,
+      /See the records behind an exception/i,
       /jewelry POS permissions/i,
     ],
     [
       "/ecosystem",
       /Four systems\. One jewelry business/i,
-      /One stack that agrees with itself/i,
+      /Start with what you need\. Connect more when it helps/i,
       /jewelry retail ecosystem/i,
     ],
     [
       "/integrations",
-      /One operational record\. Every essential connection/i,
-      /Integration health at a glance/i,
+      /Connect Linkd to the tools your store already uses/i,
+      /See what is connected and when it last synced/i,
       /jewelry POS integrations/i,
     ],
     [
       "/accounting",
-      /House accounts, layaway, and accounting handoff without drift/i,
-      /Accounting-ready review/i,
+      /Keep deposits, layaway, and house accounts tied to the sale/i,
+      /Follow the numbers from checkout to review/i,
       /jewelry store accounting/i,
     ],
     [
       "/multi-store",
-      /One operating record across every location/i,
-      /Controlled store transfers/i,
+      /Run every location from the same set of records/i,
+      /Check inventory and sales across your stores/i,
       /multi-store jewelry POS/i,
     ],
   ];
@@ -189,7 +188,7 @@ test("server-renders focused SEO landing pages", async () => {
     assert.match(html, /Book a Demo/i);
     assert.match(html, /href="#early-access"/);
     assert.match(html, /id="early-access"/);
-    assert.match(html, /Start with the essentials/i);
+    assert.match(html, /Quick answers/i);
     assert.match(html, /FAQPage/i);
     assert.match(html, /BreadcrumbList/i);
     assert.match(html, /WebPage/i);
@@ -199,31 +198,18 @@ test("server-renders focused SEO landing pages", async () => {
     assert.match(html, /og:image:height/i);
     assert.match(html, path === "/ecosystem" ? /630/ : /1200/);
     if (path !== "/ecosystem") {
-      const currentHref = path === "/integrations"
-        ? "/integrations"
-        : path === "/payments"
-          ? "/payments"
-          : "/jewelry-pos";
-      assert.match(
-        html,
-        new RegExp(
-          `<a(?=[^>]*aria-current="page")(?=[^>]*href="${currentHref.replace("/", "\\/")}")`,
-        ),
-      );
-      assert.match(html, /Screen proof/i);
-      assert.match(html, /See the workflow before the paragraph/i);
+      if (path === "/integrations") {
+        assert.match(
+          html,
+          /<a(?=[^>]*aria-current="page")(?=[^>]*href="\/integrations")/,
+        );
+      }
       assert.match(html, /href="#product-screens"/);
       assert.match(html, /id="product-screens"/);
-      assert.match(html, /Workflow outcomes/i);
-      assert.match(html, /Less explanation\. More operational proof\./i);
-      assert.match(html, /Where Linkd fits/i);
-      assert.match(html, /POS, inventory, accounts, audits/i);
-      assert.match(html, /CRM, clienteling, team follow-up/i);
-      assert.match(html, /Traffic, Vision AI, owner insight/i);
-      assert.match(html, /Hiring, assessment, and onboarding/i);
-      assert.match(html, /Compare the Stack/i);
-      assert.match(html, /Related workflows/i);
-      assert.match(html, /Jump to the next operating question/i);
+      assert.match(html, /landing-proof-tile/i);
+      assert.match(html, /landing-outcomes/i);
+      assert.match(html, /landing-connection-grid/i);
+      assert.match(html, /Explore related workflows/i);
       assert.match(html, /related Linkd workflows/i);
       assert.match(html, /significantLink/i);
       assert.match(html, /related-workflow-card/i);
@@ -238,8 +224,8 @@ test("server-renders focused SEO landing pages", async () => {
       assert.match(html, /ContactAction/i);
       assert.match(html, /isRelatedTo/i);
       assert.match(html, /BusinessIntelligenceApplication/i);
-      assert.match(html, /Relationship layer for CRM/i);
-      assert.match(html, /Intelligence layer for traffic/i);
+      assert.match(html, /CRM software for clienteling/i);
+      assert.match(html, /Store analytics software for traffic/i);
       assert.match(html, /https:\/\/www\.jewellink\.com\//i);
       assert.match(html, /https:\/\/www\.countretail\.com\//i);
       assert.match(html, /https:\/\/jewelhire\.com\//i);
@@ -251,10 +237,10 @@ test("server-renders focused SEO landing pages", async () => {
       assert.match(html, /Luxury jewelry retailers/i);
       assert.match(html, /linkd-customer-overview-demo-v2\.webp|linkd-integrations\.webp/);
     } else {
-      assert.match(html, /What happened at the counter/i);
+      assert.match(html, /What records the sale and daily store work/i);
       assert.match(html, /Who needs follow-up/i);
-      assert.match(html, /What is the store telling us/i);
-      assert.match(html, /Who will carry the store forward/i);
+      assert.match(html, /How are traffic, sales, and inventory changing/i);
+      assert.match(html, /Who is moving through the hiring pipeline/i);
       assert.match(
         html,
         /<a(?=[^>]*aria-current="page")(?=[^>]*href="\/ecosystem")/,
@@ -273,9 +259,9 @@ test("server-renders focused SEO landing pages", async () => {
       assert.match(html, /href="\/repairs"/);
       assert.match(html, /href="\/accounting"/);
       assert.match(html, /href="\/multi-store"/);
-      assert.match(html, /Operational core for jewelry POS/i);
-      assert.match(html, /Relationship layer for CRM/i);
-      assert.match(html, /Intelligence layer for traffic/i);
+      assert.match(html, /Jewelry POS and store-management software/i);
+      assert.match(html, /CRM software for clienteling/i);
+      assert.match(html, /Store analytics software for traffic/i);
       assert.match(html, /linkd-pos-cart-demo-card-v2\.webp/);
       assert.match(html, /https:\/\/linkd\.com\/ecosystem#early-access/i);
     }
@@ -287,7 +273,7 @@ test("renders a branded not-found page", async () => {
   assert.equal(response.status, 404);
 
   const html = await response.text();
-  assert.match(html, /Back to the operational core/i);
+  assert.match(html, /Let’s get you back to Linkd/i);
   assert.match(html, /Return to Linkd/i);
 });
 
@@ -380,22 +366,22 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
   );
 
   assert.doesNotMatch(html, /One introduction\. Four guided experiences\./i);
-  assert.match(html, /Unlock every tour once/i);
-  assert.match(html, /<h1[^>]*>Unlock every tour once\.<\/h1>/i);
+  assert.match(html, /Open all four guided tours/i);
+  assert.match(html, /<h1[^>]*>Open all four guided tours\.<\/h1>/i);
   assert.match(html, /name="name"/i);
   assert.match(html, /name="storeName"/i);
   assert.match(html, /name="email"/i);
-  assert.match(html, /Unlock all four tours/i);
+  assert.match(html, /Open all four tours/i);
   assert.match(html, /Linkd/i);
   assert.match(html, /JewelLink/i);
   assert.match(html, /CountRetail/i);
   assert.match(html, /JewelHire/i);
-  assert.match(html, /Cloud POS and ERP/i);
+  assert.match(html, /POS and store management/i);
   assert.match(html, /Works independently/i);
-  assert.match(html, /Connected advantage/i);
+  assert.match(html, /When connected/i);
   assert.match(html, /Choose your guided tour/i);
   assert.ok(html.indexOf("Choose your guided tour") < html.indexOf("Ecosystem story"));
-  assert.match(source, /Welcome, \{profile\.name\}/);
+  assert.match(source, /Welcome, \{profile\?\.name\}/);
   assert.match(source, /Linkd POS, JewelLink CRM/);
   assert.match(source, /CountRetail Analytics, or JewelHire Hiring/);
   assert.doesNotMatch(source, /<SiteHeader current="ecosystem"/);
@@ -1115,8 +1101,8 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   );
 
   assert.match(chrome, /const primaryLinks/);
-  assert.match(chrome, /href: "\/jewelry-pos", label: "Platform"/);
-  assert.match(chrome, /href: "\/payments",\s*label: "Payments"/);
+  assert.doesNotMatch(chrome, /href: "\/jewelry-pos", label: "Platform"/);
+  assert.doesNotMatch(chrome, /href: "\/payments",\s*label: "Payments"/);
   assert.match(chrome, /href: "\/ecosystem",\s*label: "Ecosystem"/);
   assert.match(chrome, /href: "\/suite-demo", label: "Guided Tours"/);
   assert.match(chrome, /href: "\/integrations",\s*label: "Integrations"/);
@@ -1156,7 +1142,8 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(premierCss, /\.premier-nav-group\.is-open \.premier-nav-dropdown/);
   assert.match(premierCss, /\.premier-mobile-menu\s*\{[\s\S]*display: block/);
   assert.match(premierCss, /overflow: visible !important/);
-  assert.match(premierCss, /max-height: calc\(100vh - 102px\)/);
+  assert.match(premierCss, /max-height: calc\(100dvh - 102px\)/);
+  assert.match(premierCss, /overscroll-behavior: contain/);
   assert.match(premierCss, /min-width: min\(360px, calc\(100vw - 36px\)\)/);
   assert.match(premierCss, /@media \(max-width: 640px\)/);
   assert.match(premierCss, /\.premier-header-actions\s*\{\s*display: none/);
@@ -1241,7 +1228,7 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(landingData, /jewelry POS integrations/);
   assert.match(landingData, /jewelry store payment processing/);
   assert.match(landingData, /Luxury Management Ecosystem/);
-  assert.match(landingData, /Linkd Ecosystem/);
+  assert.match(landingData, /Connect Linkd to the tools your store already uses/);
   assert.match(landingData, /Does Linkd replace the other ecosystem products/);
   assert.match(proxy, /export function proxy/);
   assert.match(proxy, /NextResponse\.next/);
@@ -1257,12 +1244,12 @@ test("keeps deployable metadata branded and search-current", async () => {
   assert.match(robots, /Sitemap: https:\/\/linkd\.com\/sitemap\.xml/);
   assert.match(robots, /LLMs: https:\/\/linkd\.com\/llms\.txt/);
   assert.match(llms, /^# Linkd/m);
-  assert.match(llms, /POS and ERP system for luxury retail jewelers/i);
-  assert.match(llms, /Linkd: operational core/i);
-  assert.match(llms, /JewelLink: relationship layer/i);
-  assert.match(llms, /CountRetail: intelligence layer/i);
-  assert.match(llms, /JewelHire: people layer/i);
-  assert.match(llms, /Linkd\s+Ecosystem/i);
+  assert.match(llms, /jewelry-specific POS and store-management software/i);
+  assert.match(llms, /Linkd: POS and store management/i);
+  assert.match(llms, /JewelLink: CRM software/i);
+  assert.match(llms, /CountRetail: store analytics/i);
+  assert.match(llms, /JewelHire: hiring, assessment, and onboarding software/i);
+  assert.match(llms, /Each product can be used on its own or connected/i);
   assert.match(llms, /https:\/\/linkd\.com\/payments/);
   assert.match(llms, /https:\/\/linkd\.com\/repairs/);
   assert.match(llms, /https:\/\/linkd\.com\/accounting/);
