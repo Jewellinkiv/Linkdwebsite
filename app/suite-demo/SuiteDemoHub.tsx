@@ -288,7 +288,7 @@ export default function SuiteDemoHub() {
         >
           {unlocked ? (
             <div className={styles.unlockedPanel}>
-              <h2>Welcome, {profile.name}.</h2>
+              <h1>Welcome, {profile.name}.</h1>
               <p>
                 Choose the system you wish to demo below: Linkd POS, JewelLink CRM,
                 CountRetail Analytics, or JewelHire Hiring.
@@ -303,7 +303,7 @@ export default function SuiteDemoHub() {
           ) : (
             <>
               <p className={styles.panelEyebrow}>Suite access</p>
-              <h2 ref={formHeadingRef} tabIndex={-1}>Unlock every tour once.</h2>
+              <h1 ref={formHeadingRef} tabIndex={-1}>Unlock every tour once.</h1>
               <p>Tell us who you are, then choose any walkthrough without another form.</p>
               <form className={styles.accessForm} onSubmit={unlockTours}>
                 <fieldset disabled={submitting}>

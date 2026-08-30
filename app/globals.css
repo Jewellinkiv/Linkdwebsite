@@ -3009,6 +3009,10 @@ textarea:focus-visible {
   }
 }
 
+#migration {
+  scroll-margin-top: 96px;
+}
+
 @media (max-width: 1180px) {
   .hero-section,
   .landing-hero,

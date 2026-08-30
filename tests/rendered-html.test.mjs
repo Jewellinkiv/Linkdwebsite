@@ -381,6 +381,7 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
 
   assert.doesNotMatch(html, /One introduction\. Four guided experiences\./i);
   assert.match(html, /Unlock every tour once/i);
+  assert.match(html, /<h1[^>]*>Unlock every tour once\.<\/h1>/i);
   assert.match(html, /name="name"/i);
   assert.match(html, /name="storeName"/i);
   assert.match(html, /name="email"/i);
@@ -1123,11 +1124,14 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(chrome, /className="premier-nav-dropdown"/);
   assert.match(chrome, /aria-expanded=\{openMenuKey === item\.key\}/);
   assert.match(chrome, /usePathname/);
-  assert.match(chrome, /<details className="premier-mobile-menu"/);
+  assert.match(chrome, /<details\s+[\s\S]*?className="premier-mobile-menu"/);
   assert.match(chrome, /<summary aria-label="Open site navigation">/);
   assert.match(chrome, /closeMobileMenu/);
   assert.match(chrome, /removeAttribute\("open"\)/);
   assert.match(chrome, /className="premier-mobile-group"/);
+  assert.match(chrome, /document\.body\.style\.position = "fixed"/);
+  assert.match(chrome, /window\.scrollTo\(0, scrollPosition\)/);
+  assert.match(chrome, /usesNativeNavigation/);
   assert.doesNotMatch(chrome, />Login</);
 
   assert.match(homePage, /href: "\/repairs"/);
@@ -1143,6 +1147,7 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(homePage, /sizes="\(max-width: 860px\)/);
 
   assert.match(baseCss, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(baseCss, /#migration\s*\{[^}]*scroll-margin-top: 96px/s);
   assert.match(baseCss, /scroll-behavior: auto/);
   assert.match(baseCss, /animation-duration: 0\.01ms !important/);
   assert.match(premierCss, /@media \(max-width: 900px\)/);

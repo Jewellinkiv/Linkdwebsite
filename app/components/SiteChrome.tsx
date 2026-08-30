@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef, useState } from "react";
+import { MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from "react";
 
 type SiteHeaderProps = {
   current?: string;
@@ -56,12 +56,60 @@ const primaryLinks = [
   { href: "/#migration", label: "Switch to Linkd", key: "migration" },
 ] as const;
 
+function usesNativeNavigation(href: string) {
+  return href.startsWith("http");
+}
+
+function scrollCurrentPageHash(
+  event: ReactMouseEvent<HTMLAnchorElement>,
+  href: string,
+  pathname: string,
+) {
+  if (pathname !== "/" || !href.startsWith("/#")) return;
+  const target = document.getElementById(href.slice(2));
+  if (!target) return;
+  event.preventDefault();
+  window.history.pushState({}, "", href);
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderProps) {
   const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<{ key: string; pathname: string } | null>(null);
   const openMenuKey = openMenu?.pathname === pathname ? openMenu.key : null;
-  const closeMobileMenu = () => mobileMenuRef.current?.removeAttribute("open");
+  const closeMobileMenu = () => {
+    mobileMenuRef.current?.removeAttribute("open");
+    setMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const scrollPosition = window.scrollY;
+    const previous = {
+      bodyOverflow: document.body.style.overflow,
+      bodyPosition: document.body.style.position,
+      bodyTop: document.body.style.top,
+      bodyWidth: document.body.style.width,
+      htmlOverflow: document.documentElement.style.overflow,
+    };
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.style.width = "100%";
+
+    return () => {
+      document.documentElement.style.overflow = previous.htmlOverflow;
+      document.body.style.overflow = previous.bodyOverflow;
+      document.body.style.position = previous.bodyPosition;
+      document.body.style.top = previous.bodyTop;
+      document.body.style.width = previous.bodyWidth;
+      window.scrollTo(0, scrollPosition);
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <header className="site-header premier-header">
@@ -95,16 +143,31 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
               onMouseLeave={() => children && setOpenMenu(null)}
             >
               <span className="premier-nav-trigger">
-                <Link
-                  aria-current={current === item.key ? "page" : undefined}
-                  href={item.href}
-                  onClick={(event) => {
-                    event.currentTarget.blur();
-                    setOpenMenu(null);
-                  }}
-                >
-                  {item.label}
-                </Link>
+                {usesNativeNavigation(item.href) ? (
+                  <a
+                    aria-current={current === item.key ? "page" : undefined}
+                    href={item.href}
+                    onClick={(event) => {
+                      scrollCurrentPageHash(event, item.href, pathname);
+                      event.currentTarget.blur();
+                      setOpenMenu(null);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    aria-current={current === item.key ? "page" : undefined}
+                    href={item.href}
+                    onClick={(event) => {
+                      scrollCurrentPageHash(event, item.href, pathname);
+                      event.currentTarget.blur();
+                      setOpenMenu(null);
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                )}
                 {children ? (
                   <button
                     aria-expanded={openMenuKey === item.key}
@@ -126,18 +189,20 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
                   {children.map((child) => {
                     const active = !child.href.startsWith("http")
                       && child.href.split("#")[0] === pathname;
-                    return child.href.startsWith("http") ? (
+                    return usesNativeNavigation(child.href) ? (
                       <a
                         href={child.href}
                         key={child.href}
                         onClick={(event) => {
+                          scrollCurrentPageHash(event, child.href, pathname);
                           event.currentTarget.blur();
                           setOpenMenu(null);
                         }}
-                        rel="noreferrer"
-                        target="_blank"
+                        rel={child.href.startsWith("http") ? "noreferrer" : undefined}
+                        target={child.href.startsWith("http") ? "_blank" : undefined}
                       >
-                        {child.label}<span aria-hidden="true">↗</span>
+                        {child.label}
+                        {child.href.startsWith("http") ? <span aria-hidden="true">↗</span> : null}
                       </a>
                     ) : (
                       <Link
@@ -145,6 +210,7 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
                         href={child.href}
                         key={child.href}
                         onClick={(event) => {
+                          scrollCurrentPageHash(event, child.href, pathname);
                           event.currentTarget.blur();
                           setOpenMenu(null);
                         }}
@@ -166,7 +232,15 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
         </Link>
       </div>
 
-      <details className="premier-mobile-menu" ref={mobileMenuRef}>
+      <details
+        className="premier-mobile-menu"
+        onToggle={(event) => {
+          if (event.target === event.currentTarget) {
+            setMobileMenuOpen(event.currentTarget.open);
+          }
+        }}
+        ref={mobileMenuRef}
+      >
         <summary aria-label="Open site navigation">
           <span>Menu</span>
           <i aria-hidden="true" />
@@ -177,12 +251,27 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
               const children = "children" in item ? item.children : undefined;
 
               if (!children) {
-                return (
+                return usesNativeNavigation(item.href) ? (
+                  <a
+                    aria-current={current === item.key ? "page" : undefined}
+                    href={item.href}
+                    key={item.key}
+                    onClick={(event) => {
+                      scrollCurrentPageHash(event, item.href, pathname);
+                      closeMobileMenu();
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
                   <Link
                     aria-current={current === item.key ? "page" : undefined}
                     href={item.href}
                     key={item.key}
-                    onClick={closeMobileMenu}
+                    onClick={(event) => {
+                      scrollCurrentPageHash(event, item.href, pathname);
+                      closeMobileMenu();
+                    }}
                   >
                     {item.label}
                   </Link>
@@ -203,22 +292,29 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
                     {children.map((child) => {
                       const active = !child.href.startsWith("http")
                         && child.href.split("#")[0] === pathname;
-                      return child.href.startsWith("http") ? (
+                      return usesNativeNavigation(child.href) ? (
                         <a
                           href={child.href}
                           key={child.href}
-                          onClick={closeMobileMenu}
-                          rel="noreferrer"
-                          target="_blank"
+                          onClick={(event) => {
+                            scrollCurrentPageHash(event, child.href, pathname);
+                            closeMobileMenu();
+                          }}
+                          rel={child.href.startsWith("http") ? "noreferrer" : undefined}
+                          target={child.href.startsWith("http") ? "_blank" : undefined}
                         >
-                          {child.label}<span aria-hidden="true">↗</span>
+                          {child.label}
+                          {child.href.startsWith("http") ? <span aria-hidden="true">↗</span> : null}
                         </a>
                       ) : (
                         <Link
                           aria-current={active ? "page" : undefined}
                           href={child.href}
                           key={child.href}
-                          onClick={closeMobileMenu}
+                          onClick={(event) => {
+                            scrollCurrentPageHash(event, child.href, pathname);
+                            closeMobileMenu();
+                          }}
                         >
                           {child.label}
                         </Link>
@@ -232,7 +328,15 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
           <div className="premier-mobile-quicklinks">
             <span>Quick links</span>
             <Link href="/suite-demo" onClick={closeMobileMenu}>Guided Tours</Link>
-            <Link href="/#early-access" onClick={closeMobileMenu}>Book a Demo</Link>
+            <Link
+              href="/#early-access"
+              onClick={(event) => {
+                scrollCurrentPageHash(event, "/#early-access", pathname);
+                closeMobileMenu();
+              }}
+            >
+              Book a Demo
+            </Link>
           </div>
           <Link className="button button-primary" href={demoHref} onClick={closeMobileMenu}>
             Book a Demo
@@ -244,6 +348,8 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
 }
 
 export function SiteFooter({ demoHref = "#early-access" }: { demoHref?: string } = {}) {
+  const pathname = usePathname();
+
   return (
     <footer className="site-footer premier-footer">
       <div className="footer-top">
@@ -269,8 +375,18 @@ export function SiteFooter({ demoHref = "#early-access" }: { demoHref?: string }
           <Link href="/jewelry-pos">POS + ERP</Link>
           <Link href="/integrations">Integrations</Link>
           <Link href="/security">Security</Link>
-          <Link href="/#migration">Migration</Link>
-          <Link href="/#early-access">Book a Demo</Link>
+          <Link
+            href="/#migration"
+            onClick={(event) => scrollCurrentPageHash(event, "/#migration", pathname)}
+          >
+            Migration
+          </Link>
+          <Link
+            href="/#early-access"
+            onClick={(event) => scrollCurrentPageHash(event, "/#early-access", pathname)}
+          >
+            Book a Demo
+          </Link>
         </nav>
         <nav aria-label="Ecosystem">
           <strong>Ecosystem</strong>

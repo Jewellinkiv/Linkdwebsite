@@ -12,13 +12,13 @@
 .hero {
   margin: 0 auto;
   max-width: 920px;
-  padding: clamp(62px, 7vw, 104px) clamp(24px, 5vw, 82px) 18px;
+  padding: clamp(118px, 9vw, 140px) clamp(24px, 5vw, 82px) 18px;
 }
 
 .heroUnlocked {
   max-width: 850px;
   padding-bottom: 8px;
-  padding-top: clamp(36px, 4vw, 56px);
+  padding-top: clamp(108px, 8vw, 126px);
 }
 
 .accessPanel {
@@ -46,7 +46,7 @@
   text-transform: uppercase;
 }
 
-.accessPanel h2 {
+.accessPanel h1 {
   font-size: clamp(2rem, 3vw, 3rem);
   letter-spacing: -0.05em;
   line-height: 1.02;
@@ -135,7 +135,7 @@
   text-align: left;
 }
 
-.unlockedPanel h2 {
+.unlockedPanel h1 {
   font-size: clamp(1.85rem, 2.4vw, 2.4rem);
 }
 
@@ -746,7 +746,7 @@
   }
 
   .heroUnlocked {
-    padding-top: 80px;
+    padding-top: 96px;
   }
 
   .storySection {
