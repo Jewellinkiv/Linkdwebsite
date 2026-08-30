@@ -5161,16 +5161,20 @@
 .customerSearchBar button,
 .customerPrimaryButton,
 .customerInsightBanner button {
+  align-items: center;
   background: #3476ba;
   border: 0;
   border-radius: 7px;
   color: #fff;
   cursor: pointer;
+  display: inline-flex;
   font: inherit;
   font-size: 0.66rem;
   font-weight: 850;
-  min-height: 42px;
-  padding: 0 15px;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 44px;
+  padding: 0 16px;
 }
 
 .customerRow {
@@ -5280,15 +5284,19 @@
 }
 
 .customerResultRow button {
+  align-items: center;
   background: #3476ba;
   border: 0;
   border-radius: 7px;
   color: #fff;
+  display: inline-flex;
   font: inherit;
   font-size: 0.64rem;
   font-weight: 850;
-  min-height: 38px;
-  padding: 0 13px;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 44px;
+  padding: 0 16px;
 }
 
 .customerIdentity {
@@ -5837,16 +5845,20 @@
 }
 
 .customerComplete > button {
+  align-items: center;
   background: #3476ba;
   border: 0;
   border-radius: 7px;
   color: #fff;
   cursor: pointer;
+  display: inline-flex;
   font: inherit;
   font-size: 0.68rem;
   font-weight: 850;
   justify-self: end;
-  min-height: 40px;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 44px;
   padding: 0 16px;
 }
 

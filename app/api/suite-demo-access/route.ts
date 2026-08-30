@@ -5,6 +5,7 @@ import {
   readCookie,
   sealSuiteDemoToken,
   SUITE_DEMO_COOKIE,
+  SUITE_RESUME_AUDIENCE,
   SUITE_SESSION_AUDIENCE,
 } from "../../lib/suiteDemoAccess";
 
@@ -12,6 +13,7 @@ const POSTMARK_ENDPOINT = "https://api.postmarkapp.com/email";
 const LEAD_RECIPIENT = "support@jewellink.com";
 const MAX_FIELD_LENGTH = 600;
 const SESSION_TTL_SECONDS = 60 * 60 * 4;
+const RESUME_TTL_SECONDS = 60 * 60 * 24 * 365 * 5;
 const JSON_HEADERS = { "cache-control": "no-store" };
 
 type SuiteAccessPayload = {
@@ -132,10 +134,17 @@ async function unlockedResponse(
     secret,
     ttlSeconds: SESSION_TTL_SECONDS,
   });
+  const resumeToken = await sealSuiteDemoToken({
+    audience: SUITE_RESUME_AUDIENCE,
+    profile: lead,
+    secret,
+    ttlSeconds: RESUME_TTL_SECONDS,
+  });
   const response = jsonResponse({
     ok: true,
     message: "All four tours are open.",
-    profile: { name: lead.name, storeName: lead.storeName },
+    profile: { name: lead.name, storeName: lead.storeName, email: lead.email },
+    resumeToken,
   });
   response.cookies.set({
     name: SUITE_DEMO_COOKIE,

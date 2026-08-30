@@ -396,6 +396,12 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
   assert.match(sitemap, /https:\/\/linkd\.com\/suite-demo/);
   assert.match(source, /linkd-guided-demo-progress-v1/);
   assert.match(source, /Continue guided tour/);
+  assert.match(source, /linkd-suite-demo-access-v1/);
+  assert.match(source, /linkd-suite-product-progress-v1/);
+  assert.match(source, /rememberTourLaunch/);
+  assert.match(source, /productProgress\.complete/);
+  assert.match(source, /resumeToken/);
+  assert.match(source, /stay available in this browser when you return/);
 });
 
 test("validates suite-demo leads and keeps responses uncached", async () => {
@@ -450,6 +456,10 @@ test("one suite submission launches and verifies every product without PII in UR
     }, env);
 
     assert.equal(access.status, 200);
+    const accessResult = await access.json();
+    assert.equal(accessResult.ok, true);
+    assert.equal(accessResult.profile.email, "val@example.com");
+    assert.ok(accessResult.resumeToken);
     assert.match(postmarkMessage.Subject, /Linkd Suite \(all systems\) demo: Linkd Demo Jewelers/);
     assert.equal(postmarkMessage.To, "support@jewellink.com");
     const cookie = access.headers.get("set-cookie");
@@ -463,7 +473,19 @@ test("one suite submission launches and verifies every product without PII in UR
     }, env);
     assert.deepEqual(await restored.json(), {
       ok: true,
-      profile: { name: "Val Jones", storeName: "Linkd Demo Jewelers" },
+      profile: { name: "Val Jones", storeName: "Linkd Demo Jewelers", email: "val@example.com" },
+    });
+
+    const resumed = await request("/api/suite-demo-session", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ resumeToken: accessResult.resumeToken }),
+    }, env);
+    assert.equal(resumed.status, 200);
+    assert.match(resumed.headers.get("set-cookie") ?? "", /linkd_suite_demo_access=/);
+    assert.deepEqual(await resumed.json(), {
+      ok: true,
+      profile: { name: "Val Jones", storeName: "Linkd Demo Jewelers", email: "val@example.com" },
     });
 
     const direct = await request("/api/suite-demo-launch?target=linkd", {

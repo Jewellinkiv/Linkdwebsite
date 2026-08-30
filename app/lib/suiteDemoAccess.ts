@@ -1,5 +1,6 @@
 export const SUITE_DEMO_COOKIE = "linkd_suite_demo_access";
 export const SUITE_SESSION_AUDIENCE = "linkd-suite-session";
+export const SUITE_RESUME_AUDIENCE = "linkd-suite-resume";
 export const SUITE_DEMO_TARGETS = [
   "linkd",
   "jewellink",

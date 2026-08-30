@@ -6,8 +6,14 @@ import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 import styles from "./suite-demo.module.css";
 
 type Profile = {
+  email: string;
   name: string;
   storeName: string;
+};
+
+type DurableAccess = {
+  profile: Profile;
+  resumeToken: string;
 };
 
 type LinkdProgress = {
@@ -15,7 +21,17 @@ type LinkdProgress = {
   exploredIds: string[];
 };
 
+type ProductProgress = {
+  complete: boolean;
+  progress: number;
+  total: number;
+};
+
+type SuiteProgress = Partial<Record<"jewellink" | "countretail" | "jewelhire", ProductProgress>>;
+
 const LINKD_PROGRESS_STORAGE_KEY = "linkd-guided-demo-progress-v1";
+const SUITE_ACCESS_STORAGE_KEY = "linkd-suite-demo-access-v1";
+const SUITE_PROGRESS_STORAGE_KEY = "linkd-suite-product-progress-v1";
 const LINKD_WORKFLOW_COUNT = 8;
 
 const products = [
@@ -134,6 +150,7 @@ export default function SuiteDemoHub() {
     completedIds: [],
     exploredIds: [],
   });
+  const [suiteProgress, setSuiteProgress] = useState<SuiteProgress>({});
   const touchStart = useRef<number | null>(null);
   const formHeadingRef = useRef<HTMLHeadingElement>(null);
   const activeStory = storySlides[activeSlide];
@@ -174,16 +191,107 @@ export default function SuiteDemoHub() {
   }, []);
 
   useEffect(() => {
+    const readSuiteProgress = () => {
+      try {
+        const saved = JSON.parse(
+          window.localStorage.getItem(SUITE_PROGRESS_STORAGE_KEY) || "{}",
+        ) as SuiteProgress;
+        setSuiteProgress(saved && typeof saved === "object" ? saved : {});
+      } catch {
+        window.localStorage.removeItem(SUITE_PROGRESS_STORAGE_KEY);
+        setSuiteProgress({});
+      }
+    };
+
+    readSuiteProgress();
+    const params = new URLSearchParams(window.location.search);
+    const tour = params.get("tour");
+    if (tour === "jewellink" || tour === "countretail" || tour === "jewelhire") {
+      const current = (() => {
+        try {
+          return JSON.parse(
+            window.localStorage.getItem(SUITE_PROGRESS_STORAGE_KEY) || "{}",
+          ) as SuiteProgress;
+        } catch {
+          return {};
+        }
+      })();
+      const progress = Math.max(1, Number.parseInt(params.get("progress") || "1", 10) || 1);
+      const total = Math.max(progress, Number.parseInt(params.get("total") || "1", 10) || 1);
+      const next = {
+        ...current,
+        [tour]: {
+          complete: params.get("complete") === "1" || progress >= total,
+          progress,
+          total,
+        },
+      };
+      window.localStorage.setItem(SUITE_PROGRESS_STORAGE_KEY, JSON.stringify(next));
+      queueMicrotask(() => setSuiteProgress(next));
+      window.history.replaceState({}, "", `${window.location.pathname}#tour-heading`);
+    }
+
+    const handleFocus = () => readSuiteProgress();
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("pageshow", handleFocus);
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("pageshow", handleFocus);
+    };
+  }, []);
+
+  const rememberTourLaunch = (target: typeof products[number]["target"]) => {
+    if (target === "linkd") return;
+    const previous = suiteProgress[target];
+    const next = {
+      ...suiteProgress,
+      [target]: previous || { complete: false, progress: 1, total: 1 },
+    };
+    window.localStorage.setItem(SUITE_PROGRESS_STORAGE_KEY, JSON.stringify(next));
+    setSuiteProgress(next);
+  };
+
+  useEffect(() => {
     let cancelled = false;
     const accessRequired = new URLSearchParams(window.location.search).get("access") === "required";
 
+    const readDurableAccess = () => {
+      try {
+        const saved = JSON.parse(
+          window.localStorage.getItem(SUITE_ACCESS_STORAGE_KEY) || "null",
+        ) as DurableAccess | null;
+        return saved?.profile?.email && saved.resumeToken ? saved : null;
+      } catch {
+        window.localStorage.removeItem(SUITE_ACCESS_STORAGE_KEY);
+        return null;
+      }
+    };
+
+    const restoreDurableAccess = async () => {
+      const saved = readDurableAccess();
+      if (!saved) return false;
+      const response = await fetch("/api/suite-demo-session", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ resumeToken: saved.resumeToken }),
+        cache: "no-store",
+      });
+      const result = await response.json() as { ok?: boolean; profile?: Profile };
+      if (!response.ok || !result.ok || !result.profile) {
+        window.localStorage.removeItem(SUITE_ACCESS_STORAGE_KEY);
+        return false;
+      }
+      if (!cancelled) setProfile(result.profile);
+      return true;
+    };
+
     fetch("/api/suite-demo-session", { cache: "no-store" })
       .then(async (response) => response.json() as Promise<{ ok?: boolean; profile?: Profile }>)
-      .then((result) => {
+      .then(async (result) => {
         if (cancelled) return;
         if (result.ok && result.profile) {
           setProfile(result.profile);
-        } else if (accessRequired) {
+        } else if (!(await restoreDurableAccess()) && accessRequired) {
           setStatus("Enter your details once to open all four guided tours.");
         }
       })
@@ -226,14 +334,19 @@ export default function SuiteDemoHub() {
         ok?: boolean;
         message?: string;
         profile?: Profile;
+        resumeToken?: string;
       };
 
-      if (!response.ok || !result.ok || !result.profile) {
+      if (!response.ok || !result.ok || !result.profile || !result.resumeToken) {
         setStatus(result.message || "Please check your details and try again.");
         return;
       }
 
       setProfile(result.profile);
+      window.localStorage.setItem(
+        SUITE_ACCESS_STORAGE_KEY,
+        JSON.stringify({ profile: result.profile, resumeToken: result.resumeToken }),
+      );
       setStatus("All four guided tours are open.");
       window.history.replaceState({}, "", window.location.pathname);
     } catch {
@@ -297,7 +410,7 @@ export default function SuiteDemoHub() {
                 <a className="button button-primary" href="#tour-heading">
                   Choose a guided tour
                 </a>
-                <small>Your access stays available in this browser for four hours.</small>
+                <small>Your access and progress stay available in this browser when you return.</small>
               </div>
             </div>
           ) : (
@@ -363,6 +476,7 @@ export default function SuiteDemoHub() {
         <div className={styles.tourGrid}>
           {products.map((product) => {
             const isLinkd = product.target === "linkd";
+            const productProgress = isLinkd ? null : suiteProgress[product.target];
             const exploredCount = new Set([
               ...linkdProgress.exploredIds,
               ...linkdProgress.completedIds,
@@ -372,11 +486,21 @@ export default function SuiteDemoHub() {
               ? completedCount === LINKD_WORKFLOW_COUNT
                 ? `${LINKD_WORKFLOW_COUNT} of ${LINKD_WORKFLOW_COUNT} workflows completed`
                 : `${exploredCount} of ${LINKD_WORKFLOW_COUNT} workflows explored`
+              : productProgress
+                ? productProgress.complete
+                  ? `${productProgress.total} of ${productProgress.total} guided steps completed`
+                  : productProgress.total > 1
+                    ? `${Math.min(productProgress.progress, productProgress.total)} of ${productProgress.total} guided steps explored`
+                    : "Guided tour started"
               : product.detail;
             const tourAction = isLinkd && exploredCount > 0
               ? completedCount === LINKD_WORKFLOW_COUNT
                 ? "Review guided tour"
                 : "Continue guided tour"
+              : productProgress
+                ? productProgress.complete
+                  ? "Review guided tour"
+                  : "Continue guided tour"
               : "Start guided tour";
 
             return (
@@ -404,7 +528,10 @@ export default function SuiteDemoHub() {
                 <footer>
                   <span>{detail}</span>
                   {unlocked ? (
-                    <a href={`/api/suite-demo-launch?target=${product.target}`}>
+                    <a
+                      href={`/api/suite-demo-launch?target=${product.target}`}
+                      onClick={() => rememberTourLaunch(product.target)}
+                    >
                       {tourAction} <span aria-hidden="true">→</span>
                     </a>
                   ) : (
