@@ -877,6 +877,12 @@ test("keeps every guided workflow touch-friendly on phones", async () => {
 
   assert.match(demoCss, /Mobile guided workflows: readable cards and touch-first controls/);
   assert.match(demoCss, /@media \(max-width: 760px\)/);
+  assert.match(demoCss, /\.repairServicesWorkspace,[\s\S]*?\.securityLanding\s*\{[\s\S]*?min-width: 0;[\s\S]*?width: 100%/);
+  assert.match(demoCss, /\.repairServicesMain > \*,[\s\S]*?\.customerMain > \*\s*\{[\s\S]*?max-width: 100%;[\s\S]*?min-width: 0/);
+  assert.match(demoCss, /\.repairServicesWorkspace,[\s\S]*?\.repairServicesMain\s*\{[\s\S]*?overflow-x: clip/);
+  assert.match(demoCss, /\.saleGuide\s*\{[\s\S]*?bottom: 0;[\s\S]*?position: fixed;[\s\S]*?z-index: 60/);
+  assert.match(demoCss, /padding-bottom: calc\(168px \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(demoCss, /\.salePostingBackdrop\s*\{[\s\S]*?position: fixed;[\s\S]*?z-index: 80/);
   assert.match(demoCss, /\.invoiceInventoryRow:first-of-type\s*\{[\s\S]*display: none/);
   assert.match(demoCss, /\.invoiceInventoryRow\s*\{[\s\S]*min-width: 0/);
   assert.match(demoCss, /\.invoiceDraftMain\s*\{[\s\S]*grid-template-columns: 1fr/);

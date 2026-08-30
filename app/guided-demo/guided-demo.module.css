@@ -5953,7 +5953,71 @@
 /* Mobile guided workflows: readable cards and touch-first controls, not scaled desktop screens. */
 @media (max-width: 760px) {
   .demoPage {
+    max-width: 100vw;
+    min-width: 0;
     overflow-x: clip;
+    width: 100%;
+  }
+
+  .saleStory,
+  .repairStory,
+  .invoiceStory,
+  .ownerStory,
+  .customerStory {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+    padding-bottom: calc(168px + env(safe-area-inset-bottom));
+    width: 100%;
+  }
+
+  /* The navigation rail used to contribute its desktop min-content width to
+     the grid, making every workflow wider than an iPhone viewport. Keep the
+     shell and each grid item shrinkable; only purpose-built table wrappers
+     may scroll horizontally. */
+  .repairServicesWorkspace,
+  .repairServicesNav,
+  .repairServicesNav nav,
+  .repairServicesMain,
+  .invoiceMain,
+  .ownerMain,
+  .customerMain,
+  .ownerPage,
+  .customerDirectory,
+  .customerProfile,
+  .securityLanding {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .repairServicesWorkspace,
+  .repairServicesMain {
+    overflow-x: clip;
+  }
+
+  .repairServicesMain > *,
+  .invoiceMain > *,
+  .ownerMain > *,
+  .customerMain > * {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .repairServicesNav nav {
+    overscroll-behavior-x: contain;
+  }
+
+  .repairServicesMain button,
+  .repairServicesMain input,
+  .repairServicesMain textarea,
+  .repairServicesMain select {
+    max-width: 100%;
+  }
+
+  .repairServicesMain button {
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .exitButton,
@@ -5970,10 +6034,24 @@
   }
 
   .saleGuide {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 0;
+    border-top: 1px solid #c9dcec;
+    bottom: 0;
+    box-shadow: 0 -12px 28px rgba(31, 61, 97, 0.16);
     gap: 9px 12px;
     grid-template-columns: minmax(0, 1fr) auto;
+    left: 0;
+    max-height: 44dvh;
+    max-width: 100vw;
     min-height: 0;
-    padding: 12px;
+    overflow-y: auto;
+    padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+    position: fixed;
+    right: 0;
+    top: auto;
+    width: 100%;
+    z-index: 60;
   }
 
   .saleGuideProgress {
@@ -5992,6 +6070,7 @@
 
   .saleGuideCopy strong {
     font-size: 0.92rem;
+    overflow-wrap: anywhere;
   }
 
   .saleGuideCopy p,
@@ -5999,6 +6078,7 @@
     display: block;
     font-size: 0.75rem;
     line-height: 1.45;
+    overflow-wrap: anywhere;
   }
 
   .saleGuideActions {
@@ -6016,7 +6096,14 @@
 
   .saleGuideActions button {
     font-size: 0.72rem;
+    max-width: min(132px, 36vw);
     padding-inline: 12px;
+    white-space: normal;
+  }
+
+  .salePostingBackdrop {
+    position: fixed;
+    z-index: 80;
   }
 
   .repairServicesNav nav {
