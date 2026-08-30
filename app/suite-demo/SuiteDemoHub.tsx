@@ -10,6 +10,14 @@ type Profile = {
   storeName: string;
 };
 
+type LinkdProgress = {
+  completedIds: string[];
+  exploredIds: string[];
+};
+
+const LINKD_PROGRESS_STORAGE_KEY = "linkd-guided-demo-progress-v1";
+const LINKD_WORKFLOW_COUNT = 8;
+
 const products = [
   {
     target: "linkd",
@@ -122,10 +130,48 @@ export default function SuiteDemoHub() {
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState("");
   const [activeSlide, setActiveSlide] = useState(0);
+  const [linkdProgress, setLinkdProgress] = useState<LinkdProgress>({
+    completedIds: [],
+    exploredIds: [],
+  });
   const touchStart = useRef<number | null>(null);
   const formHeadingRef = useRef<HTMLHeadingElement>(null);
   const activeStory = storySlides[activeSlide];
   const unlocked = Boolean(profile);
+
+  useEffect(() => {
+    const readLinkdProgress = () => {
+      try {
+        const saved = JSON.parse(
+          window.localStorage.getItem(LINKD_PROGRESS_STORAGE_KEY) || "{}",
+        ) as Partial<LinkdProgress>;
+        const readIds = (value: unknown) => Array.isArray(value)
+          ? [...new Set(value.filter((id): id is string => typeof id === "string"))]
+          : [];
+        setLinkdProgress({
+          completedIds: readIds(saved.completedIds),
+          exploredIds: readIds(saved.exploredIds),
+        });
+      } catch {
+        setLinkdProgress({ completedIds: [], exploredIds: [] });
+      }
+    };
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") readLinkdProgress();
+    };
+
+    readLinkdProgress();
+    window.addEventListener("focus", readLinkdProgress);
+    window.addEventListener("pageshow", readLinkdProgress);
+    window.addEventListener("storage", readLinkdProgress);
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      window.removeEventListener("focus", readLinkdProgress);
+      window.removeEventListener("pageshow", readLinkdProgress);
+      window.removeEventListener("storage", readLinkdProgress);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -315,7 +361,25 @@ export default function SuiteDemoHub() {
         </div>
 
         <div className={styles.tourGrid}>
-          {products.map((product) => (
+          {products.map((product) => {
+            const isLinkd = product.target === "linkd";
+            const exploredCount = new Set([
+              ...linkdProgress.exploredIds,
+              ...linkdProgress.completedIds,
+            ]).size;
+            const completedCount = linkdProgress.completedIds.length;
+            const detail = isLinkd && exploredCount > 0
+              ? completedCount === LINKD_WORKFLOW_COUNT
+                ? `${LINKD_WORKFLOW_COUNT} of ${LINKD_WORKFLOW_COUNT} workflows completed`
+                : `${exploredCount} of ${LINKD_WORKFLOW_COUNT} workflows explored`
+              : product.detail;
+            const tourAction = isLinkd && exploredCount > 0
+              ? completedCount === LINKD_WORKFLOW_COUNT
+                ? "Review guided tour"
+                : "Continue guided tour"
+              : "Start guided tour";
+
+            return (
             <article
               className={`${styles.tourCard} ${styles[product.accent]} ${unlocked ? styles.tourCardUnlocked : ""}`}
               key={product.name}
@@ -338,10 +402,10 @@ export default function SuiteDemoHub() {
                 </div>
                 <p>{product.description}</p>
                 <footer>
-                  <span>{product.detail}</span>
+                  <span>{detail}</span>
                   {unlocked ? (
                     <a href={`/api/suite-demo-launch?target=${product.target}`}>
-                      Start guided tour <span aria-hidden="true">→</span>
+                      {tourAction} <span aria-hidden="true">→</span>
                     </a>
                   ) : (
                     <button type="button" onClick={focusAccessForm}>
@@ -351,7 +415,8 @@ export default function SuiteDemoHub() {
                 </footer>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </section>
 

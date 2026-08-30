@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     images: ["/og-linkd-v2.png"],
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 

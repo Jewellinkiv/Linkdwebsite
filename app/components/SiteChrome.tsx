@@ -36,6 +36,7 @@ const primaryLinks = [
     key: "ecosystem",
     children: [
       { href: "/ecosystem", label: "Linkd Ecosystem" },
+      { href: "/suite-demo", label: "Guided Tours" },
       { href: "https://www.jewellink.com/", label: "JewelLink", external: true },
       { href: "https://www.countretail.com/", label: "CountRetail", external: true },
       { href: "https://jewelhire.com/", label: "JewelHire", external: true },
@@ -58,7 +59,8 @@ const primaryLinks = [
 export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderProps) {
   const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [openMenu, setOpenMenu] = useState<{ key: string; pathname: string } | null>(null);
+  const openMenuKey = openMenu?.pathname === pathname ? openMenu.key : null;
   const closeMobileMenu = () => mobileMenuRef.current?.removeAttribute("open");
 
   return (
@@ -83,26 +85,35 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
 
           return (
             <div
-              className={`premier-nav-group ${openMenu === item.key ? "is-open" : ""}`}
+              className={`premier-nav-group ${openMenuKey === item.key ? "is-open" : ""}`}
               key={item.key}
               onBlur={(event) => {
                 if (!event.currentTarget.contains(event.relatedTarget)) setOpenMenu(null);
               }}
-              onMouseEnter={() => children && setOpenMenu(item.key)}
+              onFocus={() => children && setOpenMenu({ key: item.key, pathname })}
+              onMouseEnter={() => children && setOpenMenu({ key: item.key, pathname })}
               onMouseLeave={() => children && setOpenMenu(null)}
             >
               <span className="premier-nav-trigger">
                 <Link
                   aria-current={current === item.key ? "page" : undefined}
                   href={item.href}
+                  onClick={(event) => {
+                    event.currentTarget.blur();
+                    setOpenMenu(null);
+                  }}
                 >
                   {item.label}
                 </Link>
                 {children ? (
                   <button
-                    aria-expanded={openMenu === item.key}
+                    aria-expanded={openMenuKey === item.key}
                     aria-label={`Open ${item.label} menu`}
-                    onClick={() => setOpenMenu((value) => value === item.key ? null : item.key)}
+                    onClick={() => setOpenMenu((value) =>
+                      value?.key === item.key && value.pathname === pathname
+                        ? null
+                        : { key: item.key, pathname }
+                    )}
                     type="button"
                   >
                     <span aria-hidden="true">⌄</span>
@@ -116,7 +127,16 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
                     const active = !child.href.startsWith("http")
                       && child.href.split("#")[0] === pathname;
                     return child.href.startsWith("http") ? (
-                      <a href={child.href} key={child.href} rel="noreferrer" target="_blank">
+                      <a
+                        href={child.href}
+                        key={child.href}
+                        onClick={(event) => {
+                          event.currentTarget.blur();
+                          setOpenMenu(null);
+                        }}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
                         {child.label}<span aria-hidden="true">↗</span>
                       </a>
                     ) : (
@@ -124,7 +144,10 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
                         aria-current={active ? "page" : undefined}
                         href={child.href}
                         key={child.href}
-                        onClick={() => setOpenMenu(null)}
+                        onClick={(event) => {
+                          event.currentTarget.blur();
+                          setOpenMenu(null);
+                        }}
                       >
                         {child.label}{active ? <span aria-hidden="true">✓</span> : null}
                       </Link>
@@ -149,30 +172,67 @@ export function SiteHeader({ current, demoHref = "#early-access" }: SiteHeaderPr
           <i aria-hidden="true" />
         </summary>
         <div className="premier-mobile-panel">
-          <nav aria-label="Mobile primary navigation">
-            {primaryLinks.map((item) => (
-              <Link
-                aria-current={current === item.key ? "page" : undefined}
-                href={item.href}
-                key={item.key}
-                onClick={closeMobileMenu}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="premier-mobile-sections" aria-label="Mobile primary navigation">
+            {primaryLinks.map((item) => {
+              const children = "children" in item ? item.children : undefined;
+
+              if (!children) {
+                return (
+                  <Link
+                    aria-current={current === item.key ? "page" : undefined}
+                    href={item.href}
+                    key={item.key}
+                    onClick={closeMobileMenu}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+
+              const childIsActive = children.some((child) =>
+                !child.href.startsWith("http") && child.href.split("#")[0] === pathname
+              );
+
+              return (
+                <details className="premier-mobile-group" defaultOpen={childIsActive} key={item.key}>
+                  <summary>
+                    <span>{item.label}</span>
+                    <i aria-hidden="true">⌄</i>
+                  </summary>
+                  <div>
+                    {children.map((child) => {
+                      const active = !child.href.startsWith("http")
+                        && child.href.split("#")[0] === pathname;
+                      return child.href.startsWith("http") ? (
+                        <a
+                          href={child.href}
+                          key={child.href}
+                          onClick={closeMobileMenu}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {child.label}<span aria-hidden="true">↗</span>
+                        </a>
+                      ) : (
+                        <Link
+                          aria-current={active ? "page" : undefined}
+                          href={child.href}
+                          key={child.href}
+                          onClick={closeMobileMenu}
+                        >
+                          {child.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </details>
+              );
+            })}
           </nav>
-          <div className="premier-mobile-platform">
-            <span>Platform workflows</span>
-            {platformLinks.map((item) => (
-              <Link
-                aria-current={pathname === item.href ? "page" : undefined}
-                href={item.href}
-                key={item.href}
-                onClick={closeMobileMenu}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="premier-mobile-quicklinks">
+            <span>Quick links</span>
+            <Link href="/suite-demo" onClick={closeMobileMenu}>Guided Tours</Link>
+            <Link href="/#early-access" onClick={closeMobileMenu}>Book a Demo</Link>
           </div>
           <Link className="button button-primary" href={demoHref} onClick={closeMobileMenu}>
             Book a Demo
@@ -215,6 +275,7 @@ export function SiteFooter({ demoHref = "#early-access" }: { demoHref?: string }
         <nav aria-label="Ecosystem">
           <strong>Ecosystem</strong>
           <Link href="/ecosystem">Linkd Ecosystem</Link>
+          <Link href="/suite-demo">Guided Tours</Link>
           <a href="https://www.jewellink.com/" target="_blank" rel="noreferrer">JewelLink</a>
           <a href="https://www.countretail.com/" target="_blank" rel="noreferrer">CountRetail</a>
           <a href="https://jewelhire.com/" target="_blank" rel="noreferrer">JewelHire</a>

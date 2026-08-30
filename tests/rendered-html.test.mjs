@@ -340,6 +340,7 @@ test("server-renders the guided Linkd workflow chooser", async () => {
   assert.match(chooser, /Continue guided tour/);
   assert.match(chooser, /Review guided tour/);
   assert.match(chooser, /In progress/);
+  assert.match(chooser, /exploredIds\.length\} \/ \{workflows\.length/);
   assert.match(html, /noindex/i);
   assert.doesNotMatch(sitemap, /\/guided-demo/);
 });
@@ -404,8 +405,10 @@ test("server-renders one Linkd Suite gate with four visible tour choices", async
   assert.match(styles, /\.unlockedActions > a\s*\{[^}]*width: auto/s);
   assert.match(styles, /border: 2px solid var\(--card-border\)/);
   assert.match(styles, /border-radius: 999px/);
-  assert.match(html, /noindex/i);
-  assert.doesNotMatch(sitemap, /\/suite-demo/);
+  assert.doesNotMatch(html, /noindex/i);
+  assert.match(sitemap, /https:\/\/linkd\.com\/suite-demo/);
+  assert.match(source, /linkd-guided-demo-progress-v1/);
+  assert.match(source, /Continue guided tour/);
 });
 
 test("validates suite-demo leads and keeps responses uncached", async () => {
@@ -1114,15 +1117,17 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(chrome, /href: "\/jewelry-pos", label: "Platform"/);
   assert.match(chrome, /href: "\/payments",\s*label: "Payments"/);
   assert.match(chrome, /href: "\/ecosystem",\s*label: "Ecosystem"/);
+  assert.match(chrome, /href: "\/suite-demo", label: "Guided Tours"/);
   assert.match(chrome, /href: "\/integrations",\s*label: "Integrations"/);
   assert.match(chrome, /href: "\/#migration", label: "Switch to Linkd"/);
   assert.match(chrome, /className="premier-nav-dropdown"/);
-  assert.match(chrome, /aria-expanded=\{openMenu === item\.key\}/);
+  assert.match(chrome, /aria-expanded=\{openMenuKey === item\.key\}/);
   assert.match(chrome, /usePathname/);
   assert.match(chrome, /<details className="premier-mobile-menu"/);
   assert.match(chrome, /<summary aria-label="Open site navigation">/);
   assert.match(chrome, /closeMobileMenu/);
   assert.match(chrome, /removeAttribute\("open"\)/);
+  assert.match(chrome, /className="premier-mobile-group"/);
   assert.doesNotMatch(chrome, />Login</);
 
   assert.match(homePage, /href: "\/repairs"/);
@@ -1142,7 +1147,8 @@ test("keeps mobile navigation available without crowding the hero", async () => 
   assert.match(baseCss, /animation-duration: 0\.01ms !important/);
   assert.match(premierCss, /@media \(max-width: 900px\)/);
   assert.match(premierCss, /\.premier-nav\s*\{\s*display: none/);
-  assert.match(premierCss, /\.premier-nav-group:focus-within \.premier-nav-dropdown/);
+  assert.doesNotMatch(premierCss, /\.premier-nav-group:focus-within \.premier-nav-dropdown/);
+  assert.match(premierCss, /\.premier-nav-group\.is-open \.premier-nav-dropdown/);
   assert.match(premierCss, /\.premier-mobile-menu\s*\{[\s\S]*display: block/);
   assert.match(premierCss, /overflow: visible !important/);
   assert.match(premierCss, /max-height: calc\(100vh - 102px\)/);

@@ -446,13 +446,13 @@ export default function GuidedDemoChooser({
             <div className={styles.divider} />
             <div className={styles.progressHeading}>
               <span>WORKFLOWS EXPLORED</span>
-              <strong>{completedIds.length} / {workflows.length}</strong>
+              <strong>{exploredIds.length} / {workflows.length}</strong>
             </div>
             <div
               className={styles.progressTrack}
-              aria-label={`${completedIds.length} workflows completed`}
+              aria-label={`${exploredIds.length} workflows explored`}
             >
-              <span style={{ width: `${Math.max(4, (completedIds.length / workflows.length) * 100)}%` }} />
+              <span style={{ width: `${Math.max(4, (exploredIds.length / workflows.length) * 100)}%` }} />
             </div>
           </section>
 
