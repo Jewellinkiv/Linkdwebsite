@@ -526,7 +526,7 @@ export const seoLandingPages = {
           "Linkd manages store operations. JewelLink, CountRetail, and JewelHire are separate products that can connect when your store needs them.",
       },
       {
-        question: "Does Linkd replace the other ecosystem products?",
+        question: "Does Linkd replace JewelLink System products?",
         answer:
           "No. Linkd works on its own as the POS and store-management system. The other products add customer, analytics, or hiring tools.",
       },
@@ -536,13 +536,13 @@ export const seoLandingPages = {
           "Linkd supports planned connections for accounting, tax, e-commerce, RFID, and custom APIs. Exact provider availability and scope are confirmed during integration planning.",
       },
     ],
-    metaTitle: "Jewelry POS Integrations and Luxury Management Ecosystem",
+    metaTitle: "Jewelry POS Integrations for Luxury Retail",
     metaDescription:
       "Linkd connects jewelry POS operations with payment processing, Sage, QuickBooks, JewelLink, CountRetail, JewelHire, Shopify, Avalara, RFID, and open API paths.",
     keywords: [
       "jewelry POS integrations",
       "luxury jewelry management software",
-      "full jewelry management ecosystem",
+      "JewelLink System integration",
       "JewelLink CRM integration",
       "CountRetail AI integration",
       "QuickBooks jewelry POS",

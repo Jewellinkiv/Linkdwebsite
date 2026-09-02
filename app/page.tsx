@@ -165,7 +165,7 @@ const seoPathCards = [
   },
 ];
 
-const ecosystemCards = [
+const jewelLinkSystemCards = [
   {
     name: "JewelLink",
     role: "Relationships",
@@ -175,16 +175,6 @@ const ecosystemCards = [
     height: 1200,
     copy: "CRM, clienteling, and follow-up.",
     href: "https://www.jewellink.com/",
-  },
-  {
-    name: "Linkd",
-    role: "Operations",
-    image: "/assets/screenshots/linkd-pos-cart-demo-card-v2.webp",
-    alt: "Linkd POS with a populated jewelry cart and demo customer",
-    width: 1800,
-    height: 1200,
-    copy: "POS, services, inventory, and accounts.",
-    href: "#early-access",
   },
   {
     name: "CountRetail",
@@ -245,9 +235,9 @@ const faqItems = [
       "Migration starts with a review of your current system and data. We then map, validate, and launch the records your store needs. Timing depends on the source system and data quality.",
   },
   {
-    question: "What is included in the Linkd Ecosystem?",
+    question: "What is the JewelLink System?",
     answer:
-      "Linkd covers POS and store management, JewelLink covers CRM and clienteling, CountRetail provides store analytics, and JewelHire covers hiring and onboarding.",
+      "The JewelLink System brings together JewelLink CRM and clienteling, CountRetail store analytics, and JewelHire hiring and onboarding. Linkd is a separate POS and ERP product that can integrate with them.",
   },
 ];
 
@@ -267,7 +257,7 @@ const softwareFeatures = [
   "Customer profiles and segments",
   "Jewelry repair and appraisal intake",
   "Report catalog for sales, inventory, KPI, commission, payroll, customer, and operations reporting",
-  "Full luxury jewelry management ecosystem with Linkd, JewelLink, CountRetail, and JewelHire",
+  "Optional integrations with the JewelLink System",
 ];
 
 const seoPageMap = [
@@ -277,10 +267,10 @@ const seoPageMap = [
     description: card.copy,
   })),
   {
-    name: "Linkd, JewelLink, CountRetail, and JewelHire Ecosystem",
+    name: "JewelLink System for Jewelry Retail",
     url: "https://linkd.com/ecosystem",
     description:
-      "Compare Linkd store management, JewelLink CRM, CountRetail analytics, and JewelHire hiring software.",
+      "Explore the JewelLink System: JewelLink CRM, CountRetail analytics, and JewelHire hiring software, with optional Linkd integration.",
   },
 ];
 
@@ -440,12 +430,12 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">Jewelry POS and store management</p>
           <h1>
-            Run the whole store. Connect the <em>entire ecosystem.</em>
+            Run the whole store. Keep every <em>sale connected.</em>
           </h1>
           <p className="hero-subtitle">
             Linkd is jewelry-specific POS and store-management software for
-            sales, payments, balances, services, inventory, and reporting. Use
-            it on its own or connect the rest of the Linkd Ecosystem as needed.
+            sales, payments, balances, services, inventory, and reporting—one
+            operating system from the counter through the back office.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="#early-access">
@@ -495,29 +485,29 @@ export default function Home() {
 
       <section className="guided-demo-band" aria-labelledby="guided-demo-title">
         <div className="guided-demo-band-copy">
-          <p className="eyebrow">Four products. One place to explore.</p>
-          <h2 id="guided-demo-title">Choose the part of your business you want to see.</h2>
+          <p className="eyebrow">See Linkd in action</p>
+          <h2 id="guided-demo-title">Walk through the work your store does every day.</h2>
           <p>
-            Tell us about your store once, then explore Linkd, JewelLink,
-            CountRetail, and JewelHire at your own pace.
+            Explore Linkd sales, payments, receivables, services, inventory,
+            security, and owner workflows with guided sample data.
           </p>
           <Link className="button button-primary" href="/suite-demo">
-            Explore the Linkd Suite
+            Start the Linkd guided demo
           </Link>
-          <small>One short form opens all four guided tours.</small>
+          <small>The same demo hub also includes the JewelLink System.</small>
         </div>
-        <div className="guided-demo-band-console" aria-label="Available Linkd Suite guided tours">
+        <div className="guided-demo-band-console" aria-label="Available guided product tours">
           <header>
-            <span>LINKD SUITE GUIDED TOURS</span>
-            <strong>Choose a system</strong>
+            <span>LINKD GUIDED DEMO</span>
+            <strong>Eight real store workflows</strong>
           </header>
           <div className="guided-demo-band-grid">
-            <span><b>LD</b> Linkd · POS + store management</span>
-            <span><b>JL</b> JewelLink · CRM + clienteling</span>
-            <span><b>CR</b> CountRetail · Store analytics</span>
-            <span><b>JH</b> JewelHire · Hiring + onboarding</span>
+            <span><b>POS</b> Sales + payment processing</span>
+            <span><b>AR</b> Receivables + layaway</span>
+            <span><b>SVC</b> Repairs + custom work</span>
+            <span><b>INV</b> Serialized inventory</span>
           </div>
-          <footer><i /> Start with one product—or see how all four connect</footer>
+          <footer><i /> Built for luxury jewelry retail from open to close</footer>
         </div>
       </section>
 
@@ -651,16 +641,17 @@ export default function Home() {
 
       <section className="section-light family-section" id="ecosystem">
         <div className="section-copy">
-          <p className="eyebrow">The Linkd Ecosystem</p>
-          <h2>Four products, each with one clear job.</h2>
+          <p className="eyebrow">The JewelLink System</p>
+          <h2>Three connected systems beyond the register.</h2>
           <p>
-            Linkd runs POS and store operations. JewelLink supports customer
-            relationships. CountRetail adds store analytics. JewelHire helps
-            build the team. Use them separately or connect them as needed.
+            JewelLink supports customer relationships, CountRetail adds store
+            intelligence, and JewelHire helps build the team. Each works on its
+            own or together as the JewelLink System. Linkd remains your separate
+            POS and ERP, with optional connections when they help.
           </p>
         </div>
         <div className="ecosystem-grid">
-          {ecosystemCards.map((card) => (
+          {jewelLinkSystemCards.map((card) => (
             <a
               className={`ecosystem-card family-card family-card-${card.name.toLowerCase()}`}
               href={card.href}
@@ -706,7 +697,7 @@ export default function Home() {
         </div>
         <div className="section-actions">
           <Link className="button button-secondary" href="/ecosystem">
-            Explore the Linkd Ecosystem
+            Explore the JewelLink System
           </Link>
         </div>
       </section>

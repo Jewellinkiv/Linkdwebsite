@@ -319,7 +319,7 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
         </div>
         <div className="section-actions">
           <Link className="button button-secondary" href="/ecosystem">
-            Explore the Linkd Ecosystem
+            Explore the JewelLink System
           </Link>
         </div>
       </section>

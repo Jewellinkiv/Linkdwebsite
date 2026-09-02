@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   }
 
   if (field(payload.website)) {
-    return jsonResponse({ ok: true, message: "All four tours are open." });
+    return jsonResponse({ ok: true, message: "Your guided product tours are open." });
   }
 
   const lead = {
@@ -105,7 +105,7 @@ export async function POST(request: Request) {
       From: fromEmail,
       To: LEAD_RECIPIENT,
       ReplyTo: lead.email,
-      Subject: `Linkd Suite (all systems) demo: ${lead.storeName}`,
+      Subject: `Linkd + JewelLink System guided demos: ${lead.storeName}`,
       TextBody: buildTextEmail(lead),
       HtmlBody: buildHtmlEmail(lead),
       MessageStream: messageStream,
@@ -142,7 +142,7 @@ async function unlockedResponse(
   });
   const response = jsonResponse({
     ok: true,
-    message: "All four tours are open.",
+    message: "Your guided product tours are open.",
     profile: { name: lead.name, storeName: lead.storeName, email: lead.email },
     resumeToken,
   });
@@ -185,7 +185,7 @@ async function loadRuntimeEnv() {
 
 function buildTextEmail(lead: Record<string, string>) {
   return [
-    "New Linkd Suite (all systems) guided demo visitor",
+    "New Linkd + JewelLink System guided demo visitor",
     "",
     `Name: ${lead.name}`,
     `Store: ${lead.storeName}`,
@@ -218,8 +218,8 @@ function buildHtmlEmail(lead: Record<string, string>) {
 
   return `
     <div style="font-family:Arial,sans-serif;color:#121826;line-height:1.5">
-      <h1 style="font-size:22px;margin:0 0 6px">New Linkd Suite demo visitor</h1>
-      <p style="margin:0 0 18px;color:#52617a">One lead requested access to all four guided systems.</p>
+      <h1 style="font-size:22px;margin:0 0 6px">New guided product demo visitor</h1>
+      <p style="margin:0 0 18px;color:#52617a">One lead requested access to Linkd and the JewelLink System guided tours.</p>
       <table style="border-collapse:collapse;width:100%;max-width:680px">
         ${rows
           .map(

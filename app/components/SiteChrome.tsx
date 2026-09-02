@@ -13,11 +13,11 @@ type SiteHeaderProps = {
 const primaryLinks = [
   {
     href: "/ecosystem",
-    label: "Ecosystem",
+    label: "JewelLink System",
     key: "ecosystem",
     children: [
-      { href: "/ecosystem", label: "Linkd Ecosystem" },
-      { href: "/suite-demo", label: "Guided Tours" },
+      { href: "/ecosystem", label: "JewelLink System overview" },
+      { href: "/suite-demo", label: "All guided product tours" },
       { href: "https://www.jewellink.com/", label: "JewelLink", external: true },
       { href: "https://www.countretail.com/", label: "CountRetail", external: true },
       { href: "https://jewelhire.com/", label: "JewelHire", external: true },
@@ -362,9 +362,9 @@ export function SiteFooter({ demoHref = "#early-access" }: { demoHref?: string }
             Book a Demo
           </Link>
         </nav>
-        <nav aria-label="Ecosystem">
-          <strong>Ecosystem</strong>
-          <Link href="/ecosystem">Linkd Ecosystem</Link>
+        <nav aria-label="JewelLink System">
+          <strong>JewelLink System</strong>
+          <Link href="/ecosystem">JewelLink System</Link>
           <Link href="/suite-demo">Guided Tours</Link>
           <a href="https://www.jewellink.com/" target="_blank" rel="noreferrer">JewelLink</a>
           <a href="https://www.countretail.com/" target="_blank" rel="noreferrer">CountRetail</a>

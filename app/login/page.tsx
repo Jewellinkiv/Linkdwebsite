@@ -47,7 +47,7 @@ export default function LoginPage() {
           </Link>
           <div className="login-links">
             <Link href="/">Return to site</Link>
-            <Link href="/ecosystem">Explore the Ecosystem</Link>
+            <Link href="/ecosystem">Explore the JewelLink System</Link>
           </div>
         </div>
       </section>

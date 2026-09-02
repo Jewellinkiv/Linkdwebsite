@@ -517,6 +517,48 @@
   margin-top: 52px;
 }
 
+.tourGroupHeading {
+  border-top: 1px solid #c7d9ed;
+  grid-column: 1 / -1;
+  margin-top: 20px;
+  padding-top: 26px;
+}
+
+.tourGroupHeading:first-child {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.tourGroupHeading span {
+  color: #286fd1;
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.tourGroupHeading h3 {
+  font-size: clamp(1.65rem, 3vw, 2.45rem);
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.tourGroupHeading p {
+  color: var(--suite-muted);
+  margin: 8px 0 0;
+}
+
+.linkdTourCard {
+  grid-column: 1 / -1;
+}
+
+.linkdTourCard .cardVisual {
+  min-height: 330px;
+}
+
 .tourCard {
   --card-accent: #286fd1;
   --card-accent-dark: #154fa5;
@@ -784,6 +826,10 @@
   .cardVisual {
     min-height: 220px;
   }
+
+  .linkdTourCard .cardVisual {
+    min-height: 220px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -865,7 +911,7 @@
     right: 12px;
   }
 
-  .mapNode span {
+.mapNode span {
     display: none;
   }
 
@@ -883,6 +929,16 @@
   .cardBody footer button {
     width: 100%;
   }
+}
+
+.mapNode em {
+  color: #76d9e3;
+  font-size: 0.5rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+  text-transform: uppercase;
 }
 
 @media (max-width: 359px) {

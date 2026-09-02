@@ -4,12 +4,19 @@ Linkd is jewelry-specific POS and store-management software. It covers payment
 processing, customer balances, serialized inventory, services, reporting, and
 accounting preparation.
 
-## Product Positioning
+## Linkd Positioning
 
 - Linkd: POS and store management for payments, balances, services, inventory, reporting, and integrations.
+
+## JewelLink System
+
 - JewelLink: CRM software for clienteling, texting, training, follow-up, and team workflows.
 - CountRetail: store analytics for traffic, Vision AI, marketing, inventory, and owner reporting.
 - JewelHire: hiring, assessment, and onboarding software for jewelry retail teams.
+
+Linkd is a separate POS and ERP product. JewelLink, CountRetail, and JewelHire
+make up the JewelLink System. Linkd can integrate with those products when a
+retailer chooses to connect them.
 
 ## Priority Pages
 
@@ -22,10 +29,10 @@ accounting preparation.
 - Multi-store operations: https://linkd.com/multi-store
 - Security: https://linkd.com/security
 - Integrations: https://linkd.com/integrations
-- Ecosystem comparison: https://linkd.com/ecosystem
+- JewelLink System overview: https://linkd.com/ecosystem
 
 ## Summary
 
-Linkd handles POS and store management. JewelLink handles CRM and clienteling.
-CountRetail provides store analytics. JewelHire handles hiring and onboarding.
-Each product can be used on its own or connected when the store needs it.
+Linkd handles POS and store management as its own product. The JewelLink System
+includes JewelLink for CRM and clienteling, CountRetail for store analytics, and
+JewelHire for hiring and onboarding. Each can be used on its own or connected.

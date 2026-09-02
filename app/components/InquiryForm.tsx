@@ -9,7 +9,7 @@ const interestOptions = [
   "Inventory flow and control",
   "Rapid data migration",
   "Sage and QuickBooks",
-  "Linkd Ecosystem",
+  "JewelLink System",
   "Open API or custom integrations",
 ];
 
@@ -18,7 +18,7 @@ const demoFocusOptions = [
   "Payment processing",
   "Receivables management",
   "Services and inventory",
-  "Linkd Ecosystem",
+  "JewelLink System",
   "Migration planning",
 ];
 

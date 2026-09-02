@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, KeyboardEvent, TouchEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, Fragment, KeyboardEvent, TouchEvent, useEffect, useRef, useState } from "react";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 import styles from "./suite-demo.module.css";
 
@@ -91,27 +91,19 @@ const products = [
 
 const storySlides = [
   {
-    label: "Build your suite",
-    title: "Start with what your store needs now.",
-    copy: "Each system solves a clear jewelry-retail problem on its own. Add the others when the business is ready—without replacing the foundation you already chose.",
-    standalone: "Adopt one product without committing to the entire suite.",
-    connected: "Connect another product only when shared information will help.",
-    active: ["linkd", "jewellink", "countretail", "jewelhire"],
-  },
-  {
-    label: "Operations · Linkd",
-    title: "Run sales and store work in Linkd.",
-    copy: "Linkd brings the counter and back office together across sales, payments, balances, services, inventory, permissions, and reporting.",
-    standalone: "Use Linkd on its own as your jewelry POS and store-management system.",
-    connected: "Share selected customer or store information with other products when configured.",
-    active: ["linkd"],
+    label: "The JewelLink System",
+    title: "Three focused products. One connected view of the business.",
+    copy: "JewelLink supports customer relationships, CountRetail adds store intelligence, and JewelHire helps build the team. Start with one or connect all three.",
+    standalone: "Each JewelLink System product solves a clear jewelry-retail need on its own.",
+    connected: "Together they connect relationships, performance, and people.",
+    active: ["jewellink", "countretail", "jewelhire"],
   },
   {
     label: "Relationships · JewelLink",
     title: "Give associates a clearer next step with each customer.",
     copy: "JewelLink supports CRM, clienteling, conversations, bridal, follow-up, training, and assisted selling.",
     standalone: "Use JewelLink as a jewelry-focused customer and clienteling system.",
-    connected: "Use selected Linkd customer and sales details to support follow-up when configured.",
+    connected: "Share selected customer and sales context with Linkd when configured.",
     active: ["jewellink"],
   },
   {
@@ -119,7 +111,7 @@ const storySlides = [
     title: "See traffic, sales, marketing, and inventory together.",
     copy: "CountRetail helps owners review traffic, sales, marketing, inventory, predictive aging, diamonds, and Bill AI.",
     standalone: "Use CountRetail with the store data sources you choose to connect.",
-    connected: "Add selected Linkd activity to the store-performance view when configured.",
+    connected: "Add selected Linkd activity to store-performance views when configured.",
     active: ["countretail"],
   },
   {
@@ -131,11 +123,11 @@ const storySlides = [
     active: ["jewelhire"],
   },
   {
-    label: "Use one or connect several",
-    title: "Choose the products your store needs.",
-    copy: "Linkd runs store operations, JewelLink supports relationships, CountRetail provides analytics, and JewelHire supports hiring. Each keeps its own clear job.",
-    standalone: "Every product remains valuable and understandable on its own.",
-    connected: "Connect only the customer, store, or team information that supports your process.",
+    label: "Optional Linkd connection",
+    title: "Linkd stays focused on POS and ERP.",
+    copy: "Linkd is a separate operating platform for sales, payments, balances, services, inventory, and reporting. It can connect to JewelLink System products without becoming one of them.",
+    standalone: "Use Linkd independently as your jewelry POS and store-management system.",
+    connected: "Connect selected store and customer information only when it supports the process.",
     active: ["linkd", "jewellink", "countretail", "jewelhire"],
   },
 ] as const;
@@ -292,7 +284,7 @@ export default function SuiteDemoHub() {
         if (result.ok && result.profile) {
           setProfile(result.profile);
         } else if (!(await restoreDurableAccess()) && accessRequired) {
-          setStatus("Enter your details once to open all four guided tours.");
+          setStatus("Enter your details once to open every guided product tour.");
         }
       })
       .catch(() => undefined)
@@ -347,7 +339,7 @@ export default function SuiteDemoHub() {
         SUITE_ACCESS_STORAGE_KEY,
         JSON.stringify({ profile: result.profile, resumeToken: result.resumeToken }),
       );
-      setStatus("All four guided tours are open.");
+      setStatus("Your guided product tours are open.");
       window.history.replaceState({}, "", window.location.pathname);
     } catch {
       setStatus("Suite access is temporarily unavailable. Please try again.");
@@ -403,8 +395,8 @@ export default function SuiteDemoHub() {
             <div className={styles.unlockedPanel}>
               <h1>Welcome, {profile?.name}.</h1>
               <p>
-                Choose the system you wish to demo below: Linkd POS, JewelLink CRM,
-                CountRetail Analytics, or JewelHire Hiring.
+                Choose Linkd POS and ERP, or explore JewelLink CRM, CountRetail
+                Analytics, and JewelHire Hiring in the JewelLink System.
               </p>
               <div className={styles.unlockedActions}>
                 <a className="button button-primary" href="#tour-heading">
@@ -416,8 +408,8 @@ export default function SuiteDemoHub() {
           ) : (
             <>
               <p className={styles.panelEyebrow}>Guided tour access</p>
-              <h1 ref={formHeadingRef} tabIndex={-1}>Open all four guided tours.</h1>
-              <p>Enter your details once, then choose any walkthrough without another form.</p>
+              <h1 ref={formHeadingRef} tabIndex={-1}>Choose the product you want to see.</h1>
+              <p>Enter your details once, then explore Linkd or any JewelLink System walkthrough without another form.</p>
               <form className={styles.accessForm} onSubmit={unlockTours}>
                 <fieldset disabled={submitting}>
                   <label>
@@ -449,13 +441,13 @@ export default function SuiteDemoHub() {
                     <input name="website" tabIndex={-1} autoComplete="off" />
                   </label>
                   <button className="button button-primary" type="submit">
-                    {submitting ? "Opening your tours…" : "Open all four tours"}
+                    {submitting ? "Opening your tours…" : "Open the guided tours"}
                   </button>
                 </fieldset>
               </form>
               <p className={styles.formStatus} aria-live="polite">{status}</p>
               <small>
-                {sessionChecked ? "One submission. No installation. Guided sample data only." : "Checking existing suite access…"}
+                {sessionChecked ? "One submission. No installation. Guided sample data only." : "Checking existing tour access…"}
               </small>
             </>
           )}
@@ -464,12 +456,12 @@ export default function SuiteDemoHub() {
 
       <section className={styles.toursSection} aria-labelledby="tour-heading">
         <div className={styles.sectionHeading}>
-          <p className="eyebrow">Four products. Choose where to start.</p>
-          <h2 id="tour-heading">Choose your guided tour.</h2>
+          <p className="eyebrow">One introduction. Choose your product.</p>
+          <h2 id="tour-heading">Explore Linkd or the JewelLink System.</h2>
           <p>
             {unlocked
-              ? "All four tours are open. Start anywhere and return for the others."
-              : "Preview all four now. Enter your details once to start any tour."}
+              ? "Every tour is open. Start anywhere and return for the others."
+              : "Preview every product now. Enter your details once to start any tour."}
           </p>
         </div>
 
@@ -504,9 +496,22 @@ export default function SuiteDemoHub() {
               : "Start guided tour";
 
             return (
+            <Fragment key={product.name}>
+              {product.target === "linkd" ? (
+                <div className={`${styles.tourGroupHeading} ${styles.linkdGroupHeading}`}>
+                  <span>Linkd</span>
+                  <h3>Cloud POS and ERP</h3>
+                  <p>A focused operating platform for the counter and back office.</p>
+                </div>
+              ) : product.target === "jewellink" ? (
+                <div className={styles.tourGroupHeading}>
+                  <span>The JewelLink System</span>
+                  <h3>Relationships, intelligence, and people</h3>
+                  <p>Choose one product or explore how all three work together.</p>
+                </div>
+              ) : null}
             <article
-              className={`${styles.tourCard} ${styles[product.accent]} ${unlocked ? styles.tourCardUnlocked : ""}`}
-              key={product.name}
+              className={`${styles.tourCard} ${product.target === "linkd" ? styles.linkdTourCard : ""} ${styles[product.accent]} ${unlocked ? styles.tourCardUnlocked : ""}`}
             >
               <div className={styles.cardVisual}>
                 <Image
@@ -542,6 +547,7 @@ export default function SuiteDemoHub() {
                 </footer>
               </div>
             </article>
+            </Fragment>
             );
           })}
         </div>
@@ -557,7 +563,7 @@ export default function SuiteDemoHub() {
       >
         <div className={styles.storyCopy}>
           <p className={styles.storyStep}>
-            Ecosystem story <span>{activeSlide + 1} / {storySlides.length}</span>
+            JewelLink System story <span>{activeSlide + 1} / {storySlides.length}</span>
           </p>
           <div className={styles.storyText} key={activeStory.label} aria-live="polite">
             <p className={styles.storyLabel}>{activeStory.label}</p>
@@ -596,11 +602,11 @@ export default function SuiteDemoHub() {
           </div>
         </div>
 
-        <div className={styles.storyMap} aria-label="Four connected Linkd Suite systems">
+        <div className={styles.storyMap} aria-label="JewelLink System with an optional Linkd connection">
           <div className={styles.mapCenter}>
-            <span>One jewelry business</span>
-            <strong>LINKD SUITE</strong>
-            <small>Use one · connect any · grow together</small>
+            <span>Three focused products</span>
+            <strong>JEWELLINK SYSTEM</strong>
+            <small>Relationships · intelligence · people</small>
           </div>
           {products.map((product, index) => (
             <div
@@ -609,6 +615,7 @@ export default function SuiteDemoHub() {
               }`}
               key={product.target}
             >
+              {product.target === "linkd" ? <em>Separate platform</em> : null}
               <span>{product.role}</span>
               <strong>{product.name}</strong>
             </div>
@@ -617,8 +624,8 @@ export default function SuiteDemoHub() {
       </section>
 
       <section className={styles.finalCta}>
-        <p className="eyebrow">One short form. Four guided tours.</p>
-        <h2>{unlocked ? "All four tours are waiting." : "Explore every product without starting over."}</h2>
+        <p className="eyebrow">One short form. Every guided tour.</p>
+        <h2>{unlocked ? "Your guided tours are waiting." : "Explore every product without starting over."}</h2>
         <p>
           Explore POS and store management, customer relationships, store
           analytics, and hiring at your own pace.
