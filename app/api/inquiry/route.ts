@@ -1,3 +1,4 @@
+import { withSalesForce } from "../../../integrations/sales-force.mjs";
 import { NextResponse } from "next/server";
 
 const POSTMARK_ENDPOINT = "https://api.postmarkapp.com/email";
@@ -42,7 +43,7 @@ type SanitizedInquiry = {
   interests: string[];
 };
 
-export async function POST(request: Request) {
+async function originalPOST(request: Request) {
   let payload: InquiryPayload;
 
   try {
@@ -233,3 +234,5 @@ function escapeHtml(value: string) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+export const POST = withSalesForce(originalPOST, {brand:"linkd", form:"Demo request", page:"/demo/", getEnv:async () => ({...process.env,...await loadRuntimeEnv()})});

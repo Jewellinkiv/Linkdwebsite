@@ -1,3 +1,4 @@
+import { withSalesForce } from "../../../integrations/sales-force.mjs";
 import { NextResponse } from "next/server";
 
 const POSTMARK_ENDPOINT = "https://api.postmarkapp.com/email";
@@ -15,7 +16,7 @@ type DemoAccessPayload = {
   referrer?: unknown;
 };
 
-export async function POST(request: Request) {
+async function originalPOST(request: Request) {
   let payload: DemoAccessPayload;
 
   try {
@@ -170,3 +171,5 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
+export const POST = withSalesForce(originalPOST, {brand:"linkd", form:"Guided demo access", page:"/guided-demo/", getEnv:async () => ({...process.env,...await loadRuntimeEnv()})});

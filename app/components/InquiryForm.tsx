@@ -25,6 +25,7 @@ const demoFocusOptions = [
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
 export default function InquiryForm() {
+  const salesForceId = useRef<string | null>(null);
   const [selected, setSelected] = useState<string[]>([
     "Payment processing",
     "Inventory flow and control",
@@ -95,7 +96,7 @@ export default function InquiryForm() {
       const response = await fetch("/api/inquiry", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({...payload, submissionId: salesForceId.current ||= crypto.randomUUID()}),
       });
       const result = (await response.json()) as { message?: string };
 
@@ -106,6 +107,7 @@ export default function InquiryForm() {
       form.reset();
       setSourcePath();
       setSelected(["Payment processing", "Inventory flow and control"]);
+      salesForceId.current = null;
       setSubmitState("success");
       setMessage(result.message || "Your request was sent.");
     } catch (error) {
