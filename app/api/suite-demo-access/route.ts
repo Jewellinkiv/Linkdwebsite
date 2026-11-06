@@ -1,3 +1,4 @@
+import { withSalesForce } from "../../../integrations/sales-force.mjs";
 import { NextResponse } from "next/server";
 import {
   getSuiteDemoSecret,
@@ -30,7 +31,7 @@ type SuiteAccessPayload = {
   utmContent?: unknown;
 };
 
-export async function POST(request: Request) {
+async function originalPOST(request: Request) {
   let payload: SuiteAccessPayload;
 
   try {
@@ -244,3 +245,5 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
+export const POST = withSalesForce(originalPOST, {brand:"linkd", form:"Suite demo access", page:"/suite-demo/", getEnv:async () => ({...process.env,...await loadRuntimeEnv()})});

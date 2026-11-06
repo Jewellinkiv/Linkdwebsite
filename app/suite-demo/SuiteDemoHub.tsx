@@ -133,6 +133,7 @@ const storySlides = [
 ] as const;
 
 export default function SuiteDemoHub() {
+  const salesForceId = useRef<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [sessionChecked, setSessionChecked] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -282,7 +283,8 @@ export default function SuiteDemoHub() {
       .then(async (result) => {
         if (cancelled) return;
         if (result.ok && result.profile) {
-          setProfile(result.profile);
+          salesForceId.current = null;
+      setProfile(result.profile);
         } else if (!(await restoreDurableAccess()) && accessRequired) {
           setStatus("Enter your details once to open every guided product tour.");
         }
@@ -309,6 +311,7 @@ export default function SuiteDemoHub() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          submissionId: salesForceId.current ||= crypto.randomUUID(),
           name: String(form.get("name") || "").trim(),
           storeName: String(form.get("storeName") || "").trim(),
           email: String(form.get("email") || "").trim(),
@@ -334,6 +337,7 @@ export default function SuiteDemoHub() {
         return;
       }
 
+      salesForceId.current = null;
       setProfile(result.profile);
       window.localStorage.setItem(
         SUITE_ACCESS_STORAGE_KEY,

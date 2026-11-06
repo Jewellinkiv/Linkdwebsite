@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import CustomStory from "./CustomStory";
 import CustomerStory from "./CustomerStory";
 import InvoiceAiStory from "./InvoiceAiStory";
@@ -160,6 +160,7 @@ export default function GuidedDemoChooser({
   initialProfile = null,
   suiteAccess = false,
 }: GuidedDemoChooserProps) {
+  const salesForceId = useRef<string | null>(null);
   const [profile, setProfile] = useState<DemoProfile | null>(initialProfile);
   const [selectedId, setSelectedId] = useState(workflows[0].id);
   const [confirmedId, setConfirmedId] = useState<string | null>(null);
@@ -229,13 +230,12 @@ export default function GuidedDemoChooser({
 
     if (!nextProfile.name || !nextProfile.storeName || !nextProfile.email) return;
 
-    setProfile(nextProfile);
-
     try {
       const response = await fetch("/api/demo-access", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          submissionId: salesForceId.current ||= crypto.randomUUID(),
           ...nextProfile,
           website: String(form.get("website") || ""),
           sourcePath: `${window.location.pathname}${window.location.search}`,
@@ -246,10 +246,13 @@ export default function GuidedDemoChooser({
       });
 
       if (!response.ok) {
-        setLeadStatus("Your demo is open. Contact delivery is temporarily unavailable.");
+        setLeadStatus("Please retry. Your details could not be confirmed.");
+        return;
       }
+      salesForceId.current = null;
+      setProfile(nextProfile);
     } catch {
-      setLeadStatus("Your demo is open. Contact delivery is temporarily unavailable.");
+      setLeadStatus("Please retry. Your details could not be confirmed.");
     }
   }
 
